@@ -1,0 +1,162 @@
+[
+  {
+    "model": "courses.subject",
+    "pk": 5,
+    "fields": {
+      "title": "Biology",
+      "slug": "biology"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 6,
+    "fields": {
+      "title": "Chemistry",
+      "slug": "chemistry"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 7,
+    "fields": {
+      "title": "History",
+      "slug": "history"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 8,
+    "fields": {
+      "title": "Geography",
+      "slug": "geography"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 9,
+    "fields": {
+      "title": "Literature",
+      "slug": "literature"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 10,
+    "fields": {
+      "title": "Art",
+      "slug": "art"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 11,
+    "fields": {
+      "title": "Economics",
+      "slug": "economics"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 12,
+    "fields": {
+      "title": "Psychology",
+      "slug": "psychology"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 13,
+    "fields": {
+      "title": "Sociology",
+      "slug": "sociology"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 14,
+    "fields": {
+      "title": "Philosophy",
+      "slug": "philosophy"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 15,
+    "fields": {
+      "title": "Computer Science",
+      "slug": "computer-science"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 16,
+    "fields": {
+      "title": "Data Science",
+      "slug": "data-science"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 17,
+    "fields": {
+      "title": "Artificial Intelligence",
+      "slug": "artificial-intelligence"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 18,
+    "fields": {
+      "title": "Environmental Science",
+      "slug": "environmental-science"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 19,
+    "fields": {
+      "title": "Political Science",
+      "slug": "political-science"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 20,
+    "fields": {
+      "title": "Business Administration",
+      "slug": "business-administration"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 21,
+    "fields": {
+      "title": "Marketing",
+      "slug": "marketing"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 22,
+    "fields": {
+      "title": "Finance",
+      "slug": "finance"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 23,
+    "fields": {
+      "title": "Statistics",
+      "slug": "statistics"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 24,
+    "fields": {
+      "title": "Engineering",
+      "slug": "engineering"
+    }
+  }
+]
