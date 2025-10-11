@@ -1,7 +1,7 @@
 from django.contrib.auth.models import Group, Permission
 from django.core.management.base import BaseCommand
 
-from users.constants import STUDENT_GROUP_NAME, INSTRUCTOR_GROUP_NAME
+from users.constants import STUDENT_GROUP_NAME, INSTRUCTOR_GROUP_NAME, STAFF_GROUP_NAME
 
 
 class Command(BaseCommand):
@@ -13,6 +13,7 @@ class Command(BaseCommand):
         # Create Groups
         student_group, _ = Group.objects.get_or_create(name=STUDENT_GROUP_NAME)
         instructor_group, _ = Group.objects.get_or_create(name=INSTRUCTOR_GROUP_NAME)
+        staff_group, _ = Group.objects.get_or_create(name=STAFF_GROUP_NAME)
 
         # Setup permissions
         self.setup_student_permissions(student_group)
@@ -20,6 +21,9 @@ class Command(BaseCommand):
 
         self.setup_instructor_permissions(instructor_group)
         self.stdout.write(self.style.SUCCESS('✓ Instructor permissions configured'))
+
+        self.setup_staff_permissions(staff_group)
+        self.stdout.write(self.style.SUCCESS('✓ Staff permissions configured'))
 
         self.stdout.write(self.style.SUCCESS('\n✓ All permissions setup complete!'))
 
@@ -119,5 +123,31 @@ class Command(BaseCommand):
         permissions = self.get_permissions(permission_strings)
         group.permissions.set(permissions)
         self.stdout.write('Instructor permissions:')
+        for perm in permissions:
+            self.stdout.write(f'  - {perm.content_type.app_label}.{perm.codename}')
+
+    def setup_staff_permissions(self, group):
+        """Staff can manage users and view all courses and content"""
+        permission_strings = [
+            # View permissions for all courses and content
+            'courses.view_course',
+            'courses.view_module',
+            'courses.view_content',
+            'courses.view_subject',
+            'courses.view_text',
+            'courses.view_file',
+            'courses.view_image',
+            'courses.view_video',
+
+            # User management permissions
+            'users.view_user',
+            'users.add_user',
+            'users.change_user',
+            'users.delete_user',
+        ]
+
+        permissions = self.get_permissions(permission_strings)
+        group.permissions.set(permissions)
+        self.stdout.write('Staff permissions:')
         for perm in permissions:
             self.stdout.write(f'  - {perm.content_type.app_label}.{perm.codename}')

@@ -8,10 +8,12 @@ class User(AbstractUser):
 
     STUDENT = 'student'
     INSTRUCTOR = 'instructor'
+    STAFF = 'staff'
 
     ROLE_CHOICES = [
         (STUDENT, 'Student'),
         (INSTRUCTOR, 'Instructor'),
+        (STAFF, 'Staff'),
     ]
 
     role = models.CharField(
@@ -20,6 +22,8 @@ class User(AbstractUser):
         default=STUDENT,
         help_text='User role in the LMS'
     )
+
+    is_active = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
@@ -56,6 +60,10 @@ class User(AbstractUser):
 
     def is_staff_member(self):
         return self.is_staff
+
+    def save(self, *args, **kwargs):
+        self.is_staff = (self.role == self.STAFF)
+        return super().save(*args, **kwargs)
 
     def get_profile(self):
         """Get role-specific profile"""
