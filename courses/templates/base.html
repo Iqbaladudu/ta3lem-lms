@@ -12,7 +12,9 @@
     <ul class="menu">
         {% if request.user.is_authenticated %}
             <li>
+
                 <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
             </li>
@@ -27,6 +29,8 @@
     {% block content %}
     {% endblock %}
 </div>
+{% block include_js %}
+{% endblock %}
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
         {% block domready %}
