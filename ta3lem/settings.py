@@ -21,6 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+gdddxtl)^fib#1+ffnch4^u)0dw02_r5zeep%g2zlohgj9(bt'
 
+AUTH_USER_MODEL = 'users.User'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -42,10 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
     'students.apps.StudentsConfig',
     'embed_video',
     'debug_toolbar',
+    'redisboard'
 ]
 
 INTERNAL_IPS = [
@@ -65,8 +69,8 @@ MIDDLEWARE = [
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-        'LOCATION': '127.0.0.1:11211',
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
     }
 }
 

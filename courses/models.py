@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.loader import render_to_string
 
+from users.models import User
 from .fields import OrderField
 
 

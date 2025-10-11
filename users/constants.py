@@ -1,0 +1,7 @@
+STUDENT_GROUP_NAME = 'LMS Students'
+INSTRUCTOR_GROUP_NAME = 'LMS Instructors'
+
+ROLE_TO_GROUP = {
+    'student': STUDENT_GROUP_NAME,
+    'instructor': INSTRUCTOR_GROUP_NAME,
+}
