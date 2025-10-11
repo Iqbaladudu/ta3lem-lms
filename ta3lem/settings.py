@@ -26,6 +26,8 @@ AUTH_USER_MODEL = 'users.User'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TAILWIND_APP_NAME = 'theme'
+
 ALLOWED_HOSTS = []
 
 MEDIA_URL = '/media/'
@@ -49,7 +51,9 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
     'embed_video',
     'debug_toolbar',
-    'redisboard'
+    'redisboard',
+    'tailwind',
+    'theme'
 ]
 
 INTERNAL_IPS = [
@@ -66,6 +70,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ['django_browser_reload']
+    MIDDLEWARE += [
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
+    ]
 
 CACHES = {
     'default': {

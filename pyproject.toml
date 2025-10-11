@@ -13,4 +13,7 @@ dependencies = [
     "redis>=6.4.0",
     "django-redisboard>=9.0.0",
     "pillow>=11.3.0",
+    "django-tailwind[reload]>=4.2.0",
+    "cookiecutter>=2.6.0",
+    "honcho>=2.0.0",
 ]
