@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load course %}
+
+{% block title %}{{ object.title }} - Pembelajaran - Ta3lem{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .content-area {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .module-list {
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .content-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Hide default navbar padding for this page */
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block navbar %}
+    <!-- Custom minimal navbar for learning page -->
+    <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="w-full px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center space-x-4 flex-1 min-w-0">
+                    <a href="{% url 'student_course_list' %}"
+                       class="text-gray-600 hover:text-gray-900 flex-shrink-0 px-3 py-2 rounded-lg hover:bg-gray-100 transition">
+                        <i class="fas fa-arrow-left text-xl"></i>
+                    </a>
+                    <div class="min-w-0 flex-1">
+                        <h1 class="text-lg font-bold text-gray-900 truncate">{{ object.title }}</h1>
+                        <p class="text-xs text-gray-600">{{ object.subject.title }}</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 ml-4">
+                    <div class="hidden md:flex items-center bg-blue-50 px-4 py-2 rounded-lg">
+                        <i class="fas fa-chart-line text-blue-600 mr-2"></i>
+                        <span class="text-sm font-medium text-gray-700">Progress: <strong
+                                class="text-blue-600">0%</strong></span>
+                    </div>
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
+                                {{ user.username.0|upper }}
+                            </div>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden group-hover:block z-50">
+                            <div class="px-4 py-2 border-b border-gray-100">
+                                <p class="text-sm font-medium text-gray-900">{{ user.username }}</p>
+                                <p class="text-xs text-gray-500">{{ user.email }}</p>
+                            </div>
+                            <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="flex h-[calc(100vh-4rem)] bg-gray-50">
+        <!-- Sidebar - Module List -->
+        <aside class="w-80 lg:w-96 bg-white border-r border-gray-200 flex-shrink-0 overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-blue-50 to-purple-50">
+                <h2 class="text-base font-bold text-gray-900 flex items-center">
+                    <i class="fas fa-list-ul mr-2 text-blue-600"></i>
+                    Kurikulum Kursus
+                </h2>
+                <p class="text-xs text-gray-600 mt-1">
+                    {{ object.modules.count }} modul • {{ module.order }}/{{ object.modules.count }}
+                </p>
+            </div>
+
+            <div class="module-list flex-1 overflow-y-auto">
+                {% for m in object.modules.all %}
+                    <div class="border-b border-gray-100 last:border-b-0">
+                        <div class="p-3 hover:bg-gray-50 transition {% if m.id == module.id %}bg-blue-50 border-l-4 border-blue-600{% endif %}">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-7 h-7 {% if m.id == module.id %}bg-blue-600{% else %}bg-gray-200{% endif %} rounded-full flex items-center justify-center mr-3">
+                                    <span class="text-xs font-bold {% if m.id == module.id %}text-white{% else %}text-gray-600{% endif %}">{{ forloop.counter }}</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-semibold text-gray-900 text-sm mb-1 leading-tight">{{ m.title }}</h3>
+                                    {% if m.description %}
+                                        <p class="text-xs text-gray-600 mb-2 line-clamp-2">{{ m.description }}</p>
+                                    {% endif %}
+
+                                    <!-- Content List -->
+                                    {% with contents=m.contents.all %}
+                                        {% if contents %}
+                                            <div class="mt-2 space-y-1">
+                                                {% for content in contents %}
+                                                    <a href="{% url 'student_course_detail_module' object.id m.id %}"
+                                                       class="content-item flex items-center text-xs py-2 px-2 rounded-md transition {% if m.id == module.id %}bg-gradient-to-r from-blue-500 to-purple-600 text-white{% else %}text-gray-600 hover:bg-gray-100{% endif %}">
+                                                        {% with item=content.item %}
+                                                            <i class="fas fa-{% if item.class_name == 'video' %}video{% elif item.class_name == 'text' %}file-alt{% elif item.class_name == 'image' %}image{% else %}file{% endif %} mr-2 flex-shrink-0"></i>
+                                                            <span class="truncate">{{ item.title }}</span>
+                                                        {% endwith %}
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <p class="text-xs text-gray-500 italic mt-1">Belum ada konten</p>
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-hidden flex flex-col">
+            <!-- Module Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex-shrink-0">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                        <span class="font-bold">{{ module.order }}</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h2 class="text-xl font-bold truncate">{{ module.title }}</h2>
+                        {% if module.description %}
+                            <p class="text-blue-100 text-sm line-clamp-1">{{ module.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Display -->
+            <div class="content-area flex-1 overflow-y-auto p-6 bg-gray-50">
+                {% if module.contents.all %}
+                    <div class="max-w-5xl mx-auto space-y-6">
+                        {% for content in module.contents.all %}
+                            <div class="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition">
+                                <div class="bg-gray-50 px-5 py-3 border-b border-gray-200">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="font-semibold text-gray-900 flex items-center">
+                                            {% with item=content.item %}
+                                                <i class="fas fa-{% if item.class_name == 'video' %}video{% elif item.class_name == 'text' %}file-alt{% elif item.class_name == 'image' %}image{% else %}file{% endif %} text-blue-600 mr-2"></i>
+                                                {{ item.title }}
+                                            {% endwith %}
+                                        </h3>
+                                        <span class="text-xs text-gray-500 uppercase font-medium bg-gray-200 px-2 py-1 rounded">{{ content.item.class_name }}</span>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    {{ content.item.render }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="flex items-center justify-center h-full">
+                        <div class="text-center">
+                            <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Belum ada konten</h3>
+                            <p class="text-gray-600">Instruktur belum menambahkan konten untuk modul ini.</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Navigation Footer -->
+            {% if module.contents.all %}
+                <div class="bg-white border-t border-gray-200 px-6 py-3 flex-shrink-0">
+                    <div class="max-w-5xl mx-auto flex items-center justify-between">
+                        <div>
+                            {% if module.get_previous_in_order %}
+                                <a href="{% url 'student_course_detail_module' object.id module.get_previous_in_order.id %}"
+                                   class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm px-4 py-2 rounded-lg hover:bg-blue-50 transition">
+                                    <i class="fas fa-arrow-left mr-2"></i>
+                                    Modul Sebelumnya
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div>
+                            {% if module.get_next_in_order %}
+                                <a href="{% url 'student_course_detail_module' object.id module.get_next_in_order.id %}"
+                                   class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2.5 rounded-lg transition shadow-sm hover:shadow">
+                                    Modul Selanjutnya
+                                    <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                            {% else %}
+                                <button class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white font-medium px-6 py-2.5 rounded-lg transition shadow-sm hover:shadow">
+                                    <i class="fas fa-check-circle mr-2"></i>
+                                    Selesai
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% load static tailwind_tags django_htmx %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Ta3lem - Learning Management System{% endblock %}</title>
+    {% tailwind_css %}
+    {% htmx_script %}
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-white to-purple-50 min-h-screen font-sans antialiased"
+      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
+<!-- Background Pattern -->
+<div class="absolute inset-0 z-0 opacity-40">
+    <div class="absolute inset-0"
+         style="background-image: radial-gradient(circle at 1px 1px, rgb(203 213 225 / 0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+
+<!-- Main Content -->
+<div class="relative z-10 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+
+    <!-- Logo/Brand -->
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="flex justify-center">
+            <a href="/" class="inline-flex items-center space-x-2 group">
+                <div class="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl shadow-lg transform transition group-hover:scale-105">
+                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <span class="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Ta3lem</span>
+            </a>
+        </div>
+        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            {% block heading %}{% endblock %}
+        </h2>
+        <p class="mt-2 text-center text-sm text-gray-600">
+            {% block subheading %}{% endblock %}
+        </p>
+    </div>
+
+    <!-- Form Container -->
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="bg-white/80 backdrop-blur-sm py-8 px-4 shadow-2xl shadow-indigo-200/50 sm:rounded-2xl sm:px-10 border border-gray-100">
+            {% block content %}{% endblock %}
+        </div>
+
+        <!-- Footer Links -->
+        <div class="mt-6">
+            {% block footer_links %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification Container -->
+<div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-white rounded-lg shadow-lg border-l-4 {% if message.tags == 'error' %}border-red-500{% elif message.tags == 'success' %}border-green-500{% elif message.tags == 'warning' %}border-yellow-500{% else %}border-blue-500{% endif %} p-4 max-w-sm animate-slide-in">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        {% if message.tags == 'error' %}
+                            <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        {% elif message.tags == 'success' %}
+                            <svg class="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        {% else %}
+                            <svg class="h-5 w-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        {% endif %}
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-medium text-gray-900">{{ message }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<style>
+    @keyframes slide-in {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-slide-in {
+        animation: slide-in 0.3s ease-out;
+    }
+</style>
+</body>
+</html>
+

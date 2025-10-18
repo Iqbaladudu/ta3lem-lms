@@ -11,34 +11,46 @@ from django.views.generic.base import TemplateResponseMixin, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
-from students.forms import CourseEnrollForm
+from users.forms import CourseEnrollForm
 from .forms import ModuleFormSets
 from .models import Course, Module, Content, Subject
 
 
-class CourseListView(TemplateResponseMixin, View):
+class CourseListView(ListView):
     model = Course
     template_name = 'courses/course/list.html'
+    paginate_by = 6  # Show 6 courses per page
+    context_object_name = 'courses'
 
-    def get(self, request, subject=None):
+    def get_queryset(self):
+        queryset = Course.objects.annotate(total_modules=Count('modules'))
+
+        # Check if subject filter is applied
+        subject_slug = self.kwargs.get('subject')
+        if subject_slug:
+            subject = get_object_or_404(Subject, slug=subject_slug)
+            queryset = queryset.filter(subject=subject)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get all subjects for sidebar
         subjects = cache.get('all_subjects')
         if not subjects:
             subjects = Subject.objects.annotate(total_courses=Count('courses'))
             cache.set('all_subjects', subjects)
-        all_courses = Course.objects.annotate(total_modules=Count('modules'))
-        if subject:
-            subject = get_object_or_404(Subject, slug=subject)
-            key = f'subject_{subject.id}_courses'
-            courses = cache.get(key)
-            if not courses:
-                courses = all_courses.filter(subject=subject)
-                cache.set(key, courses)
+        context['subjects'] = subjects
+
+        # Get current subject if filtering
+        subject_slug = self.kwargs.get('subject')
+        if subject_slug:
+            context['subject'] = get_object_or_404(Subject, slug=subject_slug)
         else:
-            courses = cache.get('all_courses')
-            if not courses:
-                courses = all_courses
-                cache.set('all_courses', courses)
-        return self.render_to_response({'subjects': subject, 'courses': courses, 'subject': subjects})
+            context['subject'] = None
+
+        return context
 
 
 class CourseDetailView(DetailView):

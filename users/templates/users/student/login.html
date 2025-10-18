@@ -1,4 +1,4 @@
-{% extends "students/auth_base.html" %}
+{% extends "users/auth_base.html" %}
 {% load django_htmx %}
 
 {% block title %}Sign In - Ta3lem{% endblock %}
@@ -11,9 +11,9 @@
 
 {% block content %}
     <form method="post"
-          action="{% url 'login' %}"
-          hx-post="{% url 'login' %}"
-          hx-swap="outerHTML"
+          hx-post="{% url 'student_login' %}"
+          hx-swap="innerHTML"
+          hx-select="form"
           hx-indicator="#loading-indicator"
           class="space-y-6">
         {% csrf_token %}
@@ -46,12 +46,14 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <h3 class="text-sm font-medium text-red-800">Authentication Failed</h3>
+                        <h3 class="text-sm font-medium text-red-800">Login Failed</h3>
                         <div class="mt-2 text-sm text-red-700">
                             {% if form.non_field_errors %}
-                                {{ form.non_field_errors.0 }}
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
                             {% else %}
-                                Your username and password didn't match. Please try again.
+                                <p>The username and password you entered don't match our records. Please try again.</p>
                             {% endif %}
                         </div>
                     </div>
@@ -72,15 +74,7 @@
                               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                     </svg>
                 </div>
-                <input type="text"
-                       name="username"
-                       id="id_username"
-                       value="{{ form.username.value|default:'' }}"
-                       class="block w-full pl-10 pr-3 py-3 border {% if form.username.errors %}border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500{% else %}border-gray-300 focus:ring-indigo-500 focus:border-indigo-500{% endif %} rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150"
-                       placeholder="Enter your username"
-                       required
-                       autocomplete="username"
-                       autofocus>
+                {{ form.username }}
             </div>
             {% if form.username.errors %}
                 <p class="mt-2 text-sm text-red-600 flex items-center">
@@ -107,13 +101,7 @@
                               d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                     </svg>
                 </div>
-                <input type="password"
-                       name="password"
-                       id="id_password"
-                       class="block w-full pl-10 pr-10 py-3 border {% if form.password.errors %}border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500{% else %}border-gray-300 focus:ring-indigo-500 focus:border-indigo-500{% endif %} rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150"
-                       placeholder="Enter your password"
-                       required
-                       autocomplete="current-password">
+                {{ form.password }}
                 <button type="button"
                         onclick="togglePassword('id_password', 'eye-icon')"
                         class="absolute inset-y-0 right-0 pr-3 flex items-center">

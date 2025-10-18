@@ -1,52 +1,146 @@
 {% extends "base.html" %}
-{% block title %}
-    {% if subject %}
-        {{ subject.title }} courses
-    {% else %}
-        All courses
-    {% endif %}
-{% endblock %}
+
+{% block title %}Katalog Kursus - Ta3lem{% endblock %}
+
 {% block content %}
-    <h1>
-        {% if subject %}
-            {{ subject.title }} courses
-        {% else %}
-            All courses
-        {% endif %}
-    </h1>
-    <div class="contents">
-        <h3>Subjects</h3>
-        <ul id="modules">
-            <li {% if not subject %}class="selected"{% endif %}>
-                <a href="{% url "course_list" %}">All</a>
-            </li>
-            {% for s in subjects %}
-                <li {% if subject == s %}class="selected"{% endif %}>
-                    <a href="{% url "course_list_subject" s.slug %}">
-                        {{ s.title }}
-                        <br>
-                        <span>
-              {{ s.total_courses }} course{{ s.total_courses|pluralize }}
-            </span>
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Mulai Belajar Hari Ini</h1>
+            <p class="text-xl text-blue-100 max-w-2xl">Temukan kursus terbaik untuk mengembangkan keterampilan Anda dan
+                raih tujuan pembelajaran Anda.</p>
+        </div>
     </div>
-    <div class="module">
-        {% for course in courses %}
-            {% with subject=course.subject %}
-                <h3>
-                    <a href="{% url "course_detail" course.slug %}">
-                        {{ course.title }}
-                    </a>
-                </h3>
-                <p>
-                    <a href="{% url "course_list_subject" subject.slug %}">{{ subject }}</a>.
-                    {{ course.total_modules }} modules.
-                    Instructor: {{ course.owner.get_full_name }}
-                </p>
-            {% endwith %}
-        {% endfor %}
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Kategori -->
+            <aside class="lg:w-64 flex-shrink-0">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                        <i class="fas fa-filter mr-2 text-blue-600"></i>Kategori
+                    </h2>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="{% url 'course_list' %}"
+                               class="flex items-center justify-between px-3 py-2 rounded-lg transition {% if not subject %}bg-blue-50 text-blue-700 font-medium{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
+                                <span>Semua Kursus</span>
+                                <span class="text-sm {% if not subject %}text-blue-600{% else %}text-gray-500{% endif %}">
+                                {{ courses.paginator.count }}
+                            </span>
+                            </a>
+                        </li>
+                        {% for s in subjects %}
+                            <li>
+                                <a href="{% url 'course_list_subject' s.slug %}"
+                                   class="flex items-center justify-between px-3 py-2 rounded-lg transition {% if subject.slug == s.slug %}bg-blue-50 text-blue-700 font-medium{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
+                                    <span>{{ s.title }}</span>
+                                    <span class="text-sm {% if subject.slug == s.slug %}text-blue-600{% else %}text-gray-500{% endif %}">
+                                {{ s.total_courses }}
+                            </span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1">
+                {% if subject %}
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">{{ subject.title }}</h2>
+                        <p class="text-gray-600">{{ courses.paginator.count }} kursus tersedia</p>
+                    </div>
+                {% endif %}
+
+                {% if courses %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for course in courses %}
+                            <article
+                                    class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
+                                <!-- Course Thumbnail -->
+                                <div class="relative h-48 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
+                                    <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <i class="fas fa-book-open text-6xl text-white opacity-20"></i>
+                                    </div>
+                                    <div class="absolute top-4 right-4">
+                            <span class="bg-white bg-opacity-90 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                {{ course.subject.title }}
+                            </span>
+                                    </div>
+                                </div>
+
+                                <!-- Course Info -->
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition line-clamp-2">
+                                        <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
+                                    </h3>
+                                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ course.overview|truncatewords:15 }}</p>
+
+                                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                                        <i class="fas fa-user-circle mr-2"></i>
+                                        <span>{{ course.owner.username }}</span>
+                                    </div>
+
+                                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                                        <div class="flex items-center text-sm text-gray-600">
+                                            <i class="fas fa-book mr-2 text-blue-600"></i>
+                                            <span>{{ course.total_modules }} modul</span>
+                                        </div>
+                                        <a href="{% url 'course_detail' course.slug %}"
+                                           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition">
+                                            Lihat Detail
+                                            <i class="fas fa-arrow-right ml-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Pagination -->
+                    {% if is_paginated %}
+                        <div class="mt-12 flex justify-center">
+                            <nav class="inline-flex rounded-lg shadow-sm" aria-label="Pagination">
+                                {% if page_obj.has_previous %}
+                                    <a href="?page=1"
+                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-50">
+                                        <i class="fas fa-angle-double-left"></i>
+                                    </a>
+                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
+                                        <i class="fas fa-angle-left"></i>
+                                    </a>
+                                {% endif %}
+
+                                <span class="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 border border-gray-300">
+                        Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}
+                    </span>
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}"
+                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}"
+                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-50">
+                                        <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                {% endif %}
+                            </nav>
+                        </div>
+                    {% endif %}
+
+                {% else %}
+                    <div class="text-center py-12">
+                        <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Tidak ada kursus</h3>
+                        <p class="text-gray-600">Belum ada kursus tersedia untuk kategori ini.</p>
+                    </div>
+                {% endif %}
+            </main>
+        </div>
     </div>
 {% endblock %}
+

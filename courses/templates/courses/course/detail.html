@@ -1,32 +1,180 @@
 {% extends "base.html" %}
-{% block title %}
-    {{ object.title }}
-{% endblock %}
+
+{% block title %}{{ course.title }} - Ta3lem{% endblock %}
+
 {% block content %}
-    {% with subject=object.subject %}
-        <h1>
-            {{ object.title }}
-        </h1>
-        <div class="module">
-            <h2>Overview</h2>
-            <p>
-                <a href="{% url "course_list_subject" subject.slug %}">
-                    {{ subject.title }}</a>.
-                {{ object.modules.count }} modules.
-                Instructor: {{ object.owner.get_full_name }}
-            </p>
-            {{ object.overview|linebreaks }}
-            {% if request.user.is_authenticated %}
-                <form action="{% url "student_enroll_course" %}" method="post">
-                    {{ enroll_form }}
-                    {% csrf_token %}
-                    <input type="submit" value="Enroll now">
-                </form>
-            {% else %}
-                <a href="{% url "student_registration" %}" class="button">
-                    Register to enroll
-                </a>
-            {% endif %}
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-start lg:gap-8">
+                <div class="flex-1">
+                    <div class="mb-4">
+                        <a href="{% url 'course_list_subject' course.subject.slug %}"
+                           class="inline-flex items-center text-blue-200 hover:text-white text-sm font-medium mb-4">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Kembali ke {{ course.subject.title }}
+                        </a>
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ course.title }}</h1>
+                    <p class="text-xl text-blue-100 mb-6 leading-relaxed">{{ course.overview }}</p>
+
+                    <div class="flex flex-wrap items-center gap-6 text-blue-100">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-circle text-2xl mr-2"></i>
+                            <div>
+                                <p class="text-xs opacity-80">Instruktur</p>
+                                <p class="font-semibold">{{ course.owner.username }}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-2xl mr-2"></i>
+                            <div>
+                                <p class="text-xs opacity-80">Siswa</p>
+                                <p class="font-semibold">{{ course.students.count }} terdaftar</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-book text-2xl mr-2"></i>
+                            <div>
+                                <p class="text-xs opacity-80">Modul</p>
+                                <p class="font-semibold">{{ course.modules.count }} modul</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endwith %}
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="lg:flex lg:gap-8">
+            <!-- Main Content -->
+            <div class="flex-1 mb-8 lg:mb-0">
+                <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                        <i class="fas fa-list-ul mr-2 text-blue-600"></i>
+                        Kurikulum Kursus
+                    </h2>
+
+                    {% if course.modules.all %}
+                        <div class="space-y-4">
+                            {% for module in course.modules.all %}
+                                <div class="border border-gray-200 rounded-lg overflow-hidden hover:border-blue-300 transition">
+                                    <div class="bg-gray-50 px-6 py-4 flex items-start justify-between">
+                                        <div class="flex items-start flex-1">
+                                            <div class="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                                <span class="text-blue-600 font-bold">{{ forloop.counter }}</span>
+                                            </div>
+                                            <div class="flex-1">
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ module.title }}</h3>
+                                                {% if module.description %}
+                                                    <p class="text-sm text-gray-600">{{ module.description }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="ml-4 flex items-center text-sm text-gray-500">
+                                            <i class="fas fa-file-alt mr-2"></i>
+                                            <span>{{ module.contents.count }} konten</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-8 text-gray-500">
+                            <i class="fas fa-inbox text-4xl mb-3"></i>
+                            <p>Belum ada modul untuk kursus ini.</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Tentang Instruktur -->
+                <div class="bg-white rounded-xl shadow-sm p-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">
+                        <i class="fas fa-chalkboard-teacher mr-2 text-blue-600"></i>
+                        Tentang Instruktur
+                    </h2>
+                    <div class="flex items-start gap-4">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold flex-shrink-0">
+                            {{ course.owner.username.0|upper }}
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ course.owner.username }}</h3>
+                            <p class="text-gray-600">Instruktur di Ta3lem</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Enrollment -->
+            <aside class="lg:w-96 flex-shrink-0">
+                <div class="bg-white rounded-xl shadow-lg p-8 sticky top-4">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4">
+                            <i class="fas fa-graduation-cap text-4xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mulai Belajar Sekarang</h3>
+                        <p class="text-gray-600">Daftar ke kursus ini dan mulai perjalanan pembelajaran Anda</p>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                        {% if user in course.students.all %}
+                            <a href="{% url 'student_course_detail' course.id %}"
+                               class="block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-lg text-center transition mb-4">
+                                <i class="fas fa-play-circle mr-2"></i>
+                                Lanjutkan Belajar
+                            </a>
+                            <p class="text-center text-sm text-green-600 font-medium">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                Anda sudah terdaftar di kursus ini
+                            </p>
+                        {% else %}
+                            <form action="{% url 'student_enroll_course' %}" method="post">
+                                {% csrf_token %}
+                                {{ enroll_form.as_p }}
+                                <button type="submit"
+                                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition shadow-lg hover:shadow-xl">
+                                    <i class="fas fa-user-plus mr-2"></i>
+                                    Daftar Kursus Gratis
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'student_login' %}?next={{ request.path }}"
+                           class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg text-center transition shadow-lg hover:shadow-xl mb-3">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Masuk untuk Mendaftar
+                        </a>
+                        <a href="{% url 'student_registration' %}"
+                           class="block w-full bg-white hover:bg-gray-50 text-blue-600 font-semibold py-4 px-6 rounded-lg text-center border-2 border-blue-600 transition">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Buat Akun Baru
+                        </a>
+                    {% endif %}
+
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <h4 class="font-semibold text-gray-900 mb-4">Yang akan Anda dapatkan:</h4>
+                        <ul class="space-y-3 text-sm text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-3 mt-0.5"></i>
+                                <span>Akses penuh ke semua materi kursus</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-3 mt-0.5"></i>
+                                <span>{{ course.modules.count }} modul pembelajaran terstruktur</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-3 mt-0.5"></i>
+                                <span>Belajar dengan kecepatan Anda sendiri</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mr-3 mt-0.5"></i>
+                                <span>Akses seumur hidup</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
 {% endblock %}
+

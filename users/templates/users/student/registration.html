@@ -1,0 +1,279 @@
+{% extends "students/auth_base.html" %}
+{% load django_htmx %}
+
+{% block title %}Sign Up - Ta3lem{% endblock %}
+
+{% block heading %}Create Your Account{% endblock %}
+
+{% block subheading %}
+    Join thousands of learners on their journey to success
+{% endblock %}
+
+{% block content %}
+    <div id="registration-form-container">
+        <form method="post"
+              hx-post="{% url 'student_registration' %}"
+              hx-target="#registration-form-container"
+              hx-swap="innerHTML"
+              hx-select="form"
+              hx-indicator="#loading-indicator"
+              class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="htmx-indicator">
+                <div class="absolute inset-0 bg-white/50 backdrop-blur-sm flex items-center justify-center rounded-lg z-10">
+                    <div class="flex items-center space-x-2">
+                        <svg class="animate-spin h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor"
+                                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="text-sm font-medium text-gray-700">Processing...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Errors -->
+            {% if form.non_field_errors %}
+                <div class="rounded-lg bg-red-50 border border-red-200 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                      clip-rule="evenodd"/>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-sm font-medium text-red-800">Registration Error</h3>
+                            <div class="mt-2 text-sm text-red-700">
+                                {% for error in form.non_field_errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Username Field -->
+            <div>
+                <label for="id_username" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Username
+                    <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                    </div>
+                    <input type="text"
+                           name="username"
+                           id="id_username"
+                           value="{{ form.username.value|default:'' }}"
+                           class="block w-full pl-10 pr-3 py-3 border {% if form.username.errors %}border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500{% else %}border-gray-300 focus:ring-indigo-500 focus:border-indigo-500{% endif %} rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150"
+                           placeholder="Choose a unique username"
+                           required
+                           autocomplete="username">
+                </div>
+                {% if form.username.errors %}
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ form.username.errors.0 }}
+                    </p>
+                {% else %}
+                    <p class="mt-2 text-xs text-gray-500">Choose a unique username for your account</p>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div>
+                <label for="id_email" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Email Address
+                    <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <input type="email"
+                           name="email"
+                           id="id_email"
+                           value="{{ form.email.value|default:'' }}"
+                           class="block w-full pl-10 pr-3 py-3 border {% if form.email.errors %}border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500{% else %}border-gray-300 focus:ring-indigo-500 focus:border-indigo-500{% endif %} rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150"
+                           placeholder="your.email@example.com"
+                           required
+                           autocomplete="email">
+                </div>
+                {% if form.email.errors %}
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ form.email.errors.0 }}
+                    </p>
+                {% else %}
+                    <p class="mt-2 text-xs text-gray-500">We'll send course updates to this email</p>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div>
+                <label for="id_password1" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Password
+                    <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <input type="password"
+                           name="password1"
+                           id="id_password1"
+                           class="block w-full pl-10 pr-10 py-3 border {% if form.password1.errors %}border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500{% else %}border-gray-300 focus:ring-indigo-500 focus:border-indigo-500{% endif %} rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150"
+                           placeholder="Create a strong password"
+                           required
+                           autocomplete="new-password">
+                    <button type="button"
+                            onclick="togglePassword('id_password1', 'eye-icon-1')"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <svg id="eye-icon-1" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none"
+                             stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </button>
+                </div>
+                {% if form.password1.errors %}
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ form.password1.errors.0 }}
+                    </p>
+                {% else %}
+                    <p class="mt-2 text-xs text-gray-500">Must be at least 8 characters with letters and numbers</p>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div>
+                <label for="id_password2" class="block text-sm font-semibold text-gray-700 mb-2">
+                    Confirm Password
+                    <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </div>
+                    <input type="password"
+                           name="password2"
+                           id="id_password2"
+                           class="block w-full pl-10 pr-10 py-3 border {% if form.password2.errors %}border-red-300 text-red-900 placeholder-red-300 focus:ring-red-500 focus:border-red-500{% else %}border-gray-300 focus:ring-indigo-500 focus:border-indigo-500{% endif %} rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150"
+                           placeholder="Re-enter your password"
+                           required
+                           autocomplete="new-password">
+                    <button type="button"
+                            onclick="togglePassword('id_password2', 'eye-icon-2')"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <svg id="eye-icon-2" class="h-5 w-5 text-gray-400 hover:text-gray-600" fill="none"
+                             stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                    </button>
+                </div>
+                {% if form.password2.errors %}
+                    <p class="mt-2 text-sm text-red-600 flex items-center">
+                        <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                        {{ form.password2.errors.0 }}
+                    </p>
+                {% endif %}
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="flex items-start">
+                <div class="flex items-center h-5">
+                    <input id="terms"
+                           name="terms"
+                           type="checkbox"
+                           required
+                           class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded cursor-pointer">
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="terms" class="font-medium text-gray-700 cursor-pointer">
+                        I agree to the
+                        <a href="#" class="text-indigo-600 hover:text-indigo-500 font-semibold">Terms of Service</a>
+                        and
+                        <a href="#" class="text-indigo-600 hover:text-indigo-500 font-semibold">Privacy Policy</a>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit"
+                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transform transition duration-150 hover:scale-[1.02] active:scale-[0.98]">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                    </svg>
+                    Create Account
+                </button>
+            </div>
+        </form>
+
+        <script>
+            function togglePassword(inputId, iconId) {
+                const input = document.getElementById(inputId);
+                const icon = document.getElementById(iconId);
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>';
+                } else {
+                    input.type = 'password';
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>';
+                }
+            }
+        </script>
+    </div>
+{% endblock %}
+
+{% block footer_links %}
+    <p class="text-center text-sm text-gray-600">
+        Already have an account?
+        <a href="{% url 'student_login' %}"
+           class="font-semibold text-indigo-600 hover:text-indigo-500 transition duration-150">
+            Sign in here
+        </a>
+    </p>
+{% endblock %}

@@ -1,0 +1,816 @@
+[
+  {
+    "model": "courses.text",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "title": "Apa itu Python?",
+      "created": "2024-01-15T10:00:00Z",
+      "updated": "2024-01-15T10:00:00Z",
+      "content": "Python adalah bahasa pemrograman tingkat tinggi yang mudah dipelajari dan powerful. Python digunakan untuk berbagai aplikasi seperti web development, data science, automation, dan AI."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2,
+    "fields": {
+      "owner": 1,
+      "title": "Instalasi Python",
+      "created": "2024-01-15T10:05:00Z",
+      "updated": "2024-01-15T10:05:00Z",
+      "content": "Untuk menginstall Python:\n1. Kunjungi python.org\n2. Download versi terbaru (3.11+)\n3. Jalankan installer\n4. Pastikan centang 'Add Python to PATH'\n5. Verifikasi instalasi dengan menjalankan 'python --version' di terminal"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 3,
+    "fields": {
+      "owner": 1,
+      "title": "Hello World Program",
+      "created": "2024-01-15T10:10:00Z",
+      "updated": "2024-01-15T10:10:00Z",
+      "content": "Program pertama kita:\n\nprint('Hello, World!')\n\nItulah cara paling sederhana untuk mencetak text di Python. Function print() digunakan untuk menampilkan output."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 4,
+    "fields": {
+      "owner": 1,
+      "title": "Tipe Data di Python",
+      "created": "2024-01-15T10:15:00Z",
+      "updated": "2024-01-15T10:15:00Z",
+      "content": "Python memiliki beberapa tipe data dasar:\n- int: Bilangan bulat (1, 2, 100)\n- float: Bilangan desimal (3.14, 2.5)\n- str: String/text ('Hello', \"World\")\n- bool: Boolean (True, False)\n- list: Daftar nilai [1, 2, 3]\n- dict: Dictionary {'key': 'value'}"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 5,
+    "fields": {
+      "owner": 1,
+      "title": "Variabel dan Assignment",
+      "created": "2024-01-15T10:20:00Z",
+      "updated": "2024-01-15T10:20:00Z",
+      "content": "Membuat variabel di Python sangat mudah:\n\nnama = 'John'\numur = 25\ntinggi = 175.5\n\nTidak perlu deklarasi tipe data, Python secara otomatis mengenalinya (dynamic typing)."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 6,
+    "fields": {
+      "owner": 1,
+      "title": "If Statement",
+      "created": "2024-01-15T10:25:00Z",
+      "updated": "2024-01-15T10:25:00Z",
+      "content": "Struktur if-else di Python:\n\nif umur >= 18:\n    print('Dewasa')\nelse:\n    print('Anak-anak')\n\nGunakan indentasi (4 spasi) untuk menandai block code."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 7,
+    "fields": {
+      "owner": 1,
+      "title": "For Loop",
+      "created": "2024-01-15T10:30:00Z",
+      "updated": "2024-01-15T10:30:00Z",
+      "content": "Loop untuk iterasi:\n\nfor i in range(5):\n    print(i)\n\nfor item in ['apel', 'jeruk', 'mangga']:\n    print(item)"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 8,
+    "fields": {
+      "owner": 1,
+      "title": "While Loop",
+      "created": "2024-01-15T10:35:00Z",
+      "updated": "2024-01-15T10:35:00Z",
+      "content": "While loop untuk iterasi berdasarkan kondisi:\n\ncount = 0\nwhile count < 5:\n    print(count)\n    count += 1\n\nHati-hati dengan infinite loop!"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 9,
+    "fields": {
+      "owner": 1,
+      "title": "Membuat Fungsi",
+      "created": "2024-01-15T10:40:00Z",
+      "updated": "2024-01-15T10:40:00Z",
+      "content": "Definisi fungsi dengan keyword 'def':\n\ndef salam(nama):\n    return f'Halo, {nama}!'\n\nresult = salam('Budi')\nprint(result)  # Output: Halo, Budi!"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 10,
+    "fields": {
+      "owner": 1,
+      "title": "Import Module",
+      "created": "2024-01-15T10:45:00Z",
+      "updated": "2024-01-15T10:45:00Z",
+      "content": "Menggunakan module di Python:\n\nimport math\nprint(math.pi)  # 3.14159...\n\nfrom datetime import datetime\nprint(datetime.now())"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 11,
+    "fields": {
+      "owner": 1,
+      "title": "Instalasi Django",
+      "created": "2024-01-20T10:00:00Z",
+      "updated": "2024-01-20T10:00:00Z",
+      "content": "Langkah instalasi Django:\n\n1. Buat virtual environment:\npython -m venv venv\n\n2. Aktivasi venv:\n- Windows: venv\\Scripts\\activate\n- Linux/Mac: source venv/bin/activate\n\n3. Install Django:\npip install django\n\n4. Verifikasi:\ndjango-admin --version"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 12,
+    "fields": {
+      "owner": 1,
+      "title": "Membuat Django Project",
+      "created": "2024-01-20T10:05:00Z",
+      "updated": "2024-01-20T10:05:00Z",
+      "content": "Membuat project Django baru:\n\ndjango-admin startproject myproject\ncd myproject\npython manage.py runserver\n\nBuka browser di http://127.0.0.1:8000"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 13,
+    "fields": {
+      "owner": 1,
+      "title": "Django Models",
+      "created": "2024-01-20T10:10:00Z",
+      "updated": "2024-01-20T10:10:00Z",
+      "content": "Membuat model di Django:\n\nfrom django.db import models\n\nclass Product(models.Model):\n    name = models.CharField(max_length=200)\n    price = models.DecimalField(max_digits=10, decimal_places=2)\n    description = models.TextField()\n    created = models.DateTimeField(auto_now_add=True)\n\n    def __str__(self):\n        return self.name"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 14,
+    "fields": {
+      "owner": 1,
+      "title": "Migrations",
+      "created": "2024-01-20T10:15:00Z",
+      "updated": "2024-01-20T10:15:00Z",
+      "content": "Menerapkan perubahan database:\n\n1. Buat migration file:\npython manage.py makemigrations\n\n2. Terapkan migrations:\npython manage.py migrate\n\n3. Lihat SQL yang akan dijalankan:\npython manage.py sqlmigrate app_name 0001"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 15,
+    "fields": {
+      "owner": 1,
+      "title": "Function-based Views",
+      "created": "2024-01-20T10:20:00Z",
+      "updated": "2024-01-20T10:20:00Z",
+      "content": "Membuat view sederhana:\n\nfrom django.shortcuts import render\nfrom django.http import HttpResponse\n\ndef home(request):\n    return HttpResponse('Hello, Django!')\n\ndef about(request):\n    context = {'title': 'About Us'}\n    return render(request, 'about.html', context)"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 16,
+    "fields": {
+      "owner": 1,
+      "title": "Templates",
+      "created": "2024-01-20T10:25:00Z",
+      "updated": "2024-01-20T10:25:00Z",
+      "content": "Django template syntax:\n\n<h1>{{ title }}</h1>\n\n{% for product in products %}\n    <p>{{ product.name }} - ${{ product.price }}</p>\n{% endfor %}\n\n{% if user.is_authenticated %}\n    <p>Welcome, {{ user.username }}!</p>\n{% endif %}"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 17,
+    "fields": {
+      "owner": 1,
+      "title": "Django Forms",
+      "created": "2024-01-20T10:30:00Z",
+      "updated": "2024-01-20T10:30:00Z",
+      "content": "Membuat form dari model:\n\nfrom django import forms\nfrom .models import Product\n\nclass ProductForm(forms.ModelForm):\n    class Meta:\n        model = Product\n        fields = ['name', 'price', 'description']"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 18,
+    "fields": {
+      "owner": 1,
+      "title": "Form Validation",
+      "created": "2024-01-20T10:35:00Z",
+      "updated": "2024-01-20T10:35:00Z",
+      "content": "Validasi custom di form:\n\nclass ProductForm(forms.ModelForm):\n    def clean_price(self):\n        price = self.cleaned_data['price']\n        if price < 0:\n            raise forms.ValidationError('Price cannot be negative')\n        return price"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 19,
+    "fields": {
+      "owner": 1,
+      "title": "JavaScript Variables",
+      "created": "2024-02-01T10:00:00Z",
+      "updated": "2024-02-01T10:00:00Z",
+      "content": "Tiga cara deklarasi variabel:\n\nlet name = 'John';  // Bisa diubah\nconst PI = 3.14;    // Tidak bisa diubah\nvar old = 'legacy'; // Hindari penggunaan var\n\nGunakan 'const' secara default, 'let' jika perlu mengubah nilai."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 20,
+    "fields": {
+      "owner": 1,
+      "title": "Arrow Functions",
+      "created": "2024-02-01T10:05:00Z",
+      "updated": "2024-02-01T10:05:00Z",
+      "content": "Sintaks arrow function:\n\n// Traditional function\nfunction add(a, b) {\n    return a + b;\n}\n\n// Arrow function\nconst add = (a, b) => a + b;\n\n// With multiple statements\nconst greet = (name) => {\n    const message = `Hello, ${name}`;\n    return message;\n};"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 21,
+    "fields": {
+      "owner": 1,
+      "title": "Destructuring",
+      "created": "2024-02-01T10:10:00Z",
+      "updated": "2024-02-01T10:10:00Z",
+      "content": "Array dan object destructuring:\n\n// Array destructuring\nconst [first, second] = [1, 2, 3];\n\n// Object destructuring\nconst {name, age} = {name: 'John', age: 25};\n\n// With default values\nconst {city = 'Jakarta'} = {};"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 22,
+    "fields": {
+      "owner": 1,
+      "title": "Selecting Elements",
+      "created": "2024-02-01T10:15:00Z",
+      "updated": "2024-02-01T10:15:00Z",
+      "content": "Memilih elemen DOM:\n\n// By ID\nconst element = document.getElementById('myId');\n\n// By class\nconst elements = document.getElementsByClassName('myClass');\n\n// Modern approach\nconst el = document.querySelector('.myClass');\nconst els = document.querySelectorAll('.myClass');"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 23,
+    "fields": {
+      "owner": 1,
+      "title": "Event Listeners",
+      "created": "2024-02-01T10:20:00Z",
+      "updated": "2024-02-01T10:20:00Z",
+      "content": "Menambahkan event listener:\n\nconst button = document.querySelector('#myButton');\n\nbutton.addEventListener('click', (event) => {\n    console.log('Button clicked!');\n    event.preventDefault();\n});"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 24,
+    "fields": {
+      "owner": 1,
+      "title": "Promises",
+      "created": "2024-02-01T10:25:00Z",
+      "updated": "2024-02-01T10:25:00Z",
+      "content": "Bekerja dengan Promises:\n\nconst fetchData = () => {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            resolve('Data loaded');\n        }, 1000);\n    });\n};\n\nfetchData()\n    .then(data => console.log(data))\n    .catch(error => console.error(error));"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 25,
+    "fields": {
+      "owner": 1,
+      "title": "Async/Await",
+      "created": "2024-02-01T10:30:00Z",
+      "updated": "2024-02-01T10:30:00Z",
+      "content": "Sintaks async/await yang lebih clean:\n\nasync function loadData() {\n    try {\n        const response = await fetch('/api/data');\n        const data = await response.json();\n        console.log(data);\n    } catch (error) {\n        console.error('Error:', error);\n    }\n}"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 26,
+    "fields": {
+      "owner": 1,
+      "title": "Konsep Limit",
+      "created": "2024-02-10T10:00:00Z",
+      "updated": "2024-02-10T10:00:00Z",
+      "content": "Limit adalah nilai yang didekati suatu fungsi saat x mendekati suatu nilai tertentu.\n\nlim(x→a) f(x) = L\n\nContoh:\nlim(x→2) (x² + 1) = 5\n\nKarena ketika x mendekati 2, nilai fungsi mendekati 5."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 27,
+    "fields": {
+      "owner": 1,
+      "title": "Kontinuitas Fungsi",
+      "created": "2024-02-10T10:05:00Z",
+      "updated": "2024-02-10T10:05:00Z",
+      "content": "Fungsi f(x) kontinu di x = a jika:\n1. f(a) terdefinisi\n2. lim(x→a) f(x) ada\n3. lim(x→a) f(x) = f(a)\n\nKetiga syarat harus terpenuhi untuk fungsi kontinu."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 28,
+    "fields": {
+      "owner": 1,
+      "title": "Definisi Turunan",
+      "created": "2024-02-10T10:10:00Z",
+      "updated": "2024-02-10T10:10:00Z",
+      "content": "Turunan adalah rate of change atau laju perubahan:\n\nf'(x) = lim(h→0) [f(x+h) - f(x)] / h\n\nTurunan memberikan gradien/kemiringan kurva di suatu titik."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 29,
+    "fields": {
+      "owner": 1,
+      "title": "Aturan Turunan Dasar",
+      "created": "2024-02-10T10:15:00Z",
+      "updated": "2024-02-10T10:15:00Z",
+      "content": "Rumus turunan dasar:\n\n- d/dx (xⁿ) = n·xⁿ⁻¹\n- d/dx (c) = 0 (c konstanta)\n- d/dx (sin x) = cos x\n- d/dx (cos x) = -sin x\n- d/dx (eˣ) = eˣ\n- d/dx (ln x) = 1/x"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 30,
+    "fields": {
+      "owner": 1,
+      "title": "Integral Tak Tentu",
+      "created": "2024-02-10T10:20:00Z",
+      "updated": "2024-02-10T10:20:00Z",
+      "content": "Integral adalah kebalikan dari turunan:\n\n∫ xⁿ dx = xⁿ⁺¹/(n+1) + C, n ≠ -1\n\n∫ 1/x dx = ln|x| + C\n\n∫ eˣ dx = eˣ + C\n\nC adalah konstanta integrasi."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 31,
+    "fields": {
+      "owner": 1,
+      "title": "Apa itu React?",
+      "created": "2024-03-10T10:00:00Z",
+      "updated": "2024-03-10T10:00:00Z",
+      "content": "React adalah library JavaScript untuk membangun user interface. Dikembangkan oleh Facebook, React menggunakan pendekatan component-based dan Virtual DOM untuk performa optimal.\n\nKeuntungan React:\n- Reusable components\n- Virtual DOM untuk performa cepat\n- Ekosistem yang besar\n- Mendukung React Native untuk mobile"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 32,
+    "fields": {
+      "owner": 1,
+      "title": "Virtual DOM",
+      "created": "2024-03-10T10:05:00Z",
+      "updated": "2024-03-10T10:05:00Z",
+      "content": "Virtual DOM adalah representasi DOM dalam memory. React menggunakannya untuk:\n\n1. Membuat copy dari real DOM\n2. Mendeteksi perubahan dengan diffing algorithm\n3. Update hanya bagian yang berubah di real DOM\n\nIni membuat React sangat efisien dan cepat."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 33,
+    "fields": {
+      "owner": 1,
+      "title": "JSX Syntax",
+      "created": "2024-03-10T10:10:00Z",
+      "updated": "2024-03-10T10:10:00Z",
+      "content": "JSX adalah syntax extension untuk JavaScript:\n\nconst element = <h1>Hello, World!</h1>;\n\n// Dengan expresi JavaScript\nconst name = 'John';\nconst element = <h1>Hello, {name}!</h1>;\n\n// Multi-line JSX\nconst element = (\n  <div>\n    <h1>Title</h1>\n    <p>Content</p>\n  </div>\n);"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 34,
+    "fields": {
+      "owner": 1,
+      "title": "Membuat Component",
+      "created": "2024-03-10T10:15:00Z",
+      "updated": "2024-03-10T10:15:00Z",
+      "content": "Functional component adalah cara modern membuat component:\n\nfunction Welcome(props) {\n  return <h1>Hello, {props.name}</h1>;\n}\n\n// Atau dengan arrow function\nconst Welcome = (props) => {\n  return <h1>Hello, {props.name}</h1>;\n};\n\n// Menggunakan component\n<Welcome name=\"Sara\" />"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 35,
+    "fields": {
+      "owner": 1,
+      "title": "Props",
+      "created": "2024-03-10T10:20:00Z",
+      "updated": "2024-03-10T10:20:00Z",
+      "content": "Props adalah properties yang dikirim ke component:\n\nfunction Card({ title, description, image }) {\n  return (\n    <div className=\"card\">\n      <img src={image} alt={title} />\n      <h2>{title}</h2>\n      <p>{description}</p>\n    </div>\n  );\n}\n\n// Menggunakan\n<Card \n  title=\"React\" \n  description=\"A JavaScript library\"\n  image=\"react.png\"\n/>"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 36,
+    "fields": {
+      "owner": 1,
+      "title": "useState Hook",
+      "created": "2024-03-10T10:25:00Z",
+      "updated": "2024-03-10T10:25:00Z",
+      "content": "useState untuk mengelola state dalam functional component:\n\nimport { useState } from 'react';\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  \n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount(count + 1)}>\n        Increment\n      </button>\n    </div>\n  );\n}"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 37,
+    "fields": {
+      "owner": 1,
+      "title": "Component Lifecycle",
+      "created": "2024-03-10T10:30:00Z",
+      "updated": "2024-03-10T10:30:00Z",
+      "content": "Lifecycle dalam functional component menggunakan useEffect:\n\n1. Mounting: Component pertama kali dirender\n2. Updating: State/props berubah\n3. Unmounting: Component dihapus dari DOM\n\nuseEffect menggantikan componentDidMount, componentDidUpdate, dan componentWillUnmount."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 38,
+    "fields": {
+      "owner": 1,
+      "title": "useEffect Hook",
+      "created": "2024-03-10T10:35:00Z",
+      "updated": "2024-03-10T10:35:00Z",
+      "content": "useEffect untuk side effects:\n\nimport { useEffect, useState } from 'react';\n\nfunction DataFetcher() {\n  const [data, setData] = useState(null);\n  \n  useEffect(() => {\n    fetch('/api/data')\n      .then(res => res.json())\n      .then(setData);\n    \n    // Cleanup function\n    return () => {\n      // Cleanup code\n    };\n  }, []); // Empty array = run once\n  \n  return <div>{data}</div>;\n}"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 39,
+    "fields": {
+      "owner": 1,
+      "title": "Custom Hooks",
+      "created": "2024-03-10T10:40:00Z",
+      "updated": "2024-03-10T10:40:00Z",
+      "content": "Membuat custom hooks untuk logic reusable:\n\nfunction useLocalStorage(key, initialValue) {\n  const [value, setValue] = useState(() => {\n    const stored = localStorage.getItem(key);\n    return stored ? JSON.parse(stored) : initialValue;\n  });\n  \n  useEffect(() => {\n    localStorage.setItem(key, JSON.stringify(value));\n  }, [key, value]);\n  \n  return [value, setValue];\n}\n\n// Penggunaan\nconst [name, setName] = useLocalStorage('name', 'John');"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 40,
+    "fields": {
+      "owner": 1,
+      "title": "Pengenalan Node.js",
+      "created": "2024-03-15T10:00:00Z",
+      "updated": "2024-03-15T10:00:00Z",
+      "content": "Node.js adalah runtime environment JavaScript yang berjalan di server-side.\n\nKeuntungan Node.js:\n- Event-driven dan non-blocking I/O\n- JavaScript di frontend dan backend\n- NPM ecosystem yang besar\n- Cocok untuk real-time applications\n- Scalable dan performant"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 41,
+    "fields": {
+      "owner": 1,
+      "title": "NPM dan Package Management",
+      "created": "2024-03-15T10:05:00Z",
+      "updated": "2024-03-15T10:05:00Z",
+      "content": "NPM (Node Package Manager) untuk mengelola dependencies:\n\n// Install package\nnpm install express\n\n// Install dev dependency\nnpm install --save-dev nodemon\n\n// package.json\n{\n  \"name\": \"my-app\",\n  \"version\": \"1.0.0\",\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 42,
+    "fields": {
+      "owner": 1,
+      "title": "Express.js Basics",
+      "created": "2024-03-15T10:10:00Z",
+      "updated": "2024-03-15T10:10:00Z",
+      "content": "Membuat server dengan Express.js:\n\nconst express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('Hello World!');\n});\n\napp.listen(3000, () => {\n  console.log('Server running on port 3000');\n});"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 43,
+    "fields": {
+      "owner": 1,
+      "title": "REST API Design",
+      "created": "2024-03-15T10:15:00Z",
+      "updated": "2024-03-15T10:15:00Z",
+      "content": "Prinsip REST API:\n\nGET /api/users - List users\nGET /api/users/:id - Get user by ID\nPOST /api/users - Create user\nPUT /api/users/:id - Update user\nDELETE /api/users/:id - Delete user\n\nGunakan status codes yang tepat:\n200 OK, 201 Created, 400 Bad Request, 404 Not Found, 500 Server Error"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 44,
+    "fields": {
+      "owner": 1,
+      "title": "MongoDB dengan Mongoose",
+      "created": "2024-03-15T10:20:00Z",
+      "updated": "2024-03-15T10:20:00Z",
+      "content": "Koneksi MongoDB dengan Mongoose:\n\nconst mongoose = require('mongoose');\n\nmongoose.connect('mongodb://localhost/myapp');\n\nconst userSchema = new mongoose.Schema({\n  name: String,\n  email: { type: String, unique: true },\n  age: Number\n});\n\nconst User = mongoose.model('User', userSchema);"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 45,
+    "fields": {
+      "owner": 1,
+      "title": "Pandas DataFrame",
+      "created": "2024-03-20T10:00:00Z",
+      "updated": "2024-03-20T10:00:00Z",
+      "content": "Membuat dan manipulasi DataFrame:\n\nimport pandas as pd\n\n# Membuat DataFrame\ndf = pd.DataFrame({\n    'name': ['John', 'Anna', 'Peter'],\n    'age': [28, 22, 35],\n    'city': ['NY', 'Paris', 'London']\n})\n\n# Filter data\ndf[df['age'] > 25]\n\n# Group by\ndf.groupby('city')['age'].mean()"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 46,
+    "fields": {
+      "owner": 1,
+      "title": "NumPy Arrays",
+      "created": "2024-03-20T10:05:00Z",
+      "updated": "2024-03-20T10:05:00Z",
+      "content": "NumPy untuk komputasi numerik:\n\nimport numpy as np\n\n# Membuat array\narr = np.array([1, 2, 3, 4, 5])\n\n# Operasi array\narr * 2  # [2, 4, 6, 8, 10]\nnp.mean(arr)  # 3.0\nnp.std(arr)  # Standard deviation\n\n# Matrix operations\nmatrix = np.array([[1, 2], [3, 4]])\nnp.linalg.inv(matrix)  # Inverse matrix"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 47,
+    "fields": {
+      "owner": 1,
+      "title": "Matplotlib Visualization",
+      "created": "2024-03-20T10:10:00Z",
+      "updated": "2024-03-20T10:10:00Z",
+      "content": "Membuat visualisasi dengan Matplotlib:\n\nimport matplotlib.pyplot as plt\n\n# Line plot\nplt.plot([1, 2, 3, 4], [1, 4, 9, 16])\nplt.xlabel('X axis')\nplt.ylabel('Y axis')\nplt.title('My Plot')\nplt.show()\n\n# Bar chart\nplt.bar(['A', 'B', 'C'], [3, 7, 5])\nplt.show()"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 48,
+    "fields": {
+      "owner": 1,
+      "title": "Machine Learning Workflow",
+      "created": "2024-03-20T10:15:00Z",
+      "updated": "2024-03-20T10:15:00Z",
+      "content": "Workflow machine learning:\n\n1. Load data\n2. Exploratory Data Analysis (EDA)\n3. Data preprocessing\n4. Split train/test data\n5. Choose model\n6. Train model\n7. Evaluate model\n8. Fine-tune hyperparameters\n9. Make predictions"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 49,
+    "fields": {
+      "owner": 1,
+      "title": "Scikit-learn Basics",
+      "created": "2024-03-20T10:20:00Z",
+      "updated": "2024-03-20T10:20:00Z",
+      "content": "Machine learning dengan scikit-learn:\n\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\n\n# Split data\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2\n)\n\n# Train model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Predict\npredictions = model.predict(X_test)"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 50,
+    "fields": {
+      "owner": 1,
+      "title": "Teori Probabilitas",
+      "created": "2024-03-25T10:00:00Z",
+      "updated": "2024-03-25T10:00:00Z",
+      "content": "Konsep dasar probabilitas:\n\nP(A) = Jumlah kejadian A / Jumlah total kemungkinan\n\nRumus penting:\n- P(A ∪ B) = P(A) + P(B) - P(A ∩ B)\n- P(A|B) = P(A ∩ B) / P(B)\n- P(A') = 1 - P(A)\n\nContoh: Probabilitas dadu = 1/6"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 51,
+    "fields": {
+      "owner": 1,
+      "title": "Distribusi Normal",
+      "created": "2024-03-25T10:05:00Z",
+      "updated": "2024-03-25T10:05:00Z",
+      "content": "Distribusi Normal (Gaussian):\n\nCiri-ciri:\n- Berbentuk lonceng simetris\n- Mean = Median = Modus\n- 68% data dalam 1 std dev\n- 95% data dalam 2 std dev\n- 99.7% data dalam 3 std dev\n\nZ-score: z = (x - μ) / σ"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 52,
+    "fields": {
+      "owner": 1,
+      "title": "Mean, Median, Modus",
+      "created": "2024-03-25T10:10:00Z",
+      "updated": "2024-03-25T10:10:00Z",
+      "content": "Ukuran tendensi sentral:\n\nMean (rata-rata): Σx / n\nMedian: Nilai tengah data terurut\nModus: Nilai yang paling sering muncul\n\nContoh data: 2, 3, 3, 5, 7, 10\nMean = 5\nMedian = 4 (antara 3 dan 5)\nModus = 3"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 53,
+    "fields": {
+      "owner": 1,
+      "title": "Hypothesis Testing",
+      "created": "2024-03-25T10:15:00Z",
+      "updated": "2024-03-25T10:15:00Z",
+      "content": "Langkah-langkah hypothesis testing:\n\n1. Tentukan H₀ (null hypothesis) dan H₁ (alternative)\n2. Pilih significance level (α = 0.05)\n3. Hitung test statistic\n4. Tentukan p-value\n5. Kesimpulan: Reject H₀ jika p-value < α"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 54,
+    "fields": {
+      "owner": 1,
+      "title": "Linear Regression",
+      "created": "2024-03-25T10:20:00Z",
+      "updated": "2024-03-25T10:20:00Z",
+      "content": "Regresi linear:\n\ny = β₀ + β₁x + ε\n\nβ₀ = intercept\nβ₁ = slope\nε = error term\n\nKorelasi (r): -1 ≤ r ≤ 1\nr² = coefficient of determination\n\nInterpretasi r²: Persentase variasi y yang dijelaskan oleh x"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 55,
+    "fields": {
+      "owner": 1,
+      "title": "Hukum Newton I",
+      "created": "2024-04-01T10:00:00Z",
+      "updated": "2024-04-01T10:00:00Z",
+      "content": "Hukum Newton I (Hukum Inersia):\n\n'Benda akan tetap diam atau bergerak lurus beraturan kecuali ada gaya eksternal yang bekerja padanya.'\n\nKonsep kunci:\n- Inersia = kecenderungan mempertahankan keadaan\n- Massa = ukuran inersia\n- Gaya seimbang → kecepatan konstan"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 56,
+    "fields": {
+      "owner": 1,
+      "title": "Hukum Newton II",
+      "created": "2024-04-01T10:05:00Z",
+      "updated": "2024-04-01T10:05:00Z",
+      "content": "Hukum Newton II:\n\nF = m × a\n\nF = Gaya (Newton)\nm = massa (kg)\na = percepatan (m/s²)\n\nContoh:\nm = 10 kg, a = 2 m/s²\nF = 10 × 2 = 20 N"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 57,
+    "fields": {
+      "owner": 1,
+      "title": "Gerak Lurus Beraturan",
+      "created": "2024-04-01T10:10:00Z",
+      "updated": "2024-04-01T10:10:00Z",
+      "content": "Gerak Lurus Beraturan (GLB):\n\nKecepatan konstan, percepatan = 0\n\nRumus:\ns = v × t\n\ns = jarak (m)\nv = kecepatan (m/s)\nt = waktu (s)\n\nContoh: v = 20 m/s, t = 5 s\ns = 20 × 5 = 100 m"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 58,
+    "fields": {
+      "owner": 1,
+      "title": "Energi Kinetik",
+      "created": "2024-04-01T10:15:00Z",
+      "updated": "2024-04-01T10:15:00Z",
+      "content": "Energi Kinetik:\n\nEk = ½mv²\n\nEk = energi kinetik (Joule)\nm = massa (kg)\nv = kecepatan (m/s)\n\nHukum kekekalan energi:\nEk₁ + Ep₁ = Ek₂ + Ep₂"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 59,
+    "fields": {
+      "owner": 1,
+      "title": "Momentum",
+      "created": "2024-04-01T10:20:00Z",
+      "updated": "2024-04-01T10:20:00Z",
+      "content": "Momentum:\n\np = m × v\n\np = momentum (kg⋅m/s)\nm = massa (kg)\nv = kecepatan (m/s)\n\nHukum kekekalan momentum:\nΣp sebelum = Σp sesudah\n\nImpuls: I = F × Δt = Δp"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 60,
+    "fields": {
+      "owner": 1,
+      "title": "Greetings and Introductions",
+      "created": "2024-04-05T10:00:00Z",
+      "updated": "2024-04-05T10:00:00Z",
+      "content": "Common greetings:\n\nFormal:\n- Good morning/afternoon/evening\n- How do you do?\n- Nice to meet you\n\nInformal:\n- Hi! / Hey!\n- How are you?\n- What's up?\n\nIntroductions:\n- My name is...\n- I'm from...\n- I work as..."
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 61,
+    "fields": {
+      "owner": 1,
+      "title": "Small Talk Topics",
+      "created": "2024-04-05T10:05:00Z",
+      "updated": "2024-04-05T10:05:00Z",
+      "content": "Common small talk topics:\n\n1. Weather: 'Nice weather today!'\n2. Weekend plans: 'Any plans for the weekend?'\n3. Hobbies: 'What do you do for fun?'\n4. Work: 'How's work going?'\n5. News: 'Did you hear about...?'\n\nAvoid: Politics, religion, personal finances"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 62,
+    "fields": {
+      "owner": 1,
+      "title": "Business Meetings",
+      "created": "2024-04-05T10:10:00Z",
+      "updated": "2024-04-05T10:10:00Z",
+      "content": "Business English phrases:\n\nMeetings:\n- 'Let's get started'\n- 'I'd like to propose...'\n- 'Could you elaborate on that?'\n- 'Let's move on to the next point'\n- 'To summarize...'\n\nEmails:\n- 'Dear Sir/Madam'\n- 'I am writing to...'\n- 'Please find attached...'\n- 'Best regards'"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 63,
+    "fields": {
+      "owner": 1,
+      "title": "Vowel Sounds",
+      "created": "2024-04-05T10:15:00Z",
+      "updated": "2024-04-05T10:15:00Z",
+      "content": "English vowel sounds:\n\nShort vowels:\n- /æ/ as in 'cat'\n- /e/ as in 'bed'\n- /ɪ/ as in 'sit'\n- /ɒ/ as in 'hot'\n- /ʌ/ as in 'cup'\n\nLong vowels:\n- /iː/ as in 'see'\n- /uː/ as in 'food'\n- /ɑː/ as in 'car'\n\nPractice minimal pairs: ship/sheep, fill/feel"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 64,
+    "fields": {
+      "owner": 1,
+      "title": "Listening Strategies",
+      "created": "2024-04-05T10:20:00Z",
+      "updated": "2024-04-05T10:20:00Z",
+      "content": "Improve listening skills:\n\n1. Listen for gist (main idea)\n2. Listen for specific information\n3. Predict what comes next\n4. Use context clues\n5. Don't translate word-by-word\n\nPractice resources:\n- Podcasts\n- News broadcasts\n- Movies/TV shows\n- Audiobooks"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 65,
+    "fields": {
+      "owner": 1,
+      "title": "Balance in Design",
+      "created": "2024-04-10T10:00:00Z",
+      "updated": "2024-04-10T10:00:00Z",
+      "content": "Prinsip Balance:\n\nTypes of balance:\n1. Symmetrical - Mirror image\n2. Asymmetrical - Different but balanced\n3. Radial - Elements radiate from center\n\nTips:\n- Distribute visual weight evenly\n- Use whitespace strategically\n- Consider color and size"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 66,
+    "fields": {
+      "owner": 1,
+      "title": "Visual Hierarchy",
+      "created": "2024-04-10T10:05:00Z",
+      "updated": "2024-04-10T10:05:00Z",
+      "content": "Creating hierarchy:\n\n1. Size - Larger = more important\n2. Color - Contrast draws attention\n3. Position - Top and left = priority\n4. Typography - Weight and style\n5. Spacing - Whitespace creates groups\n\nF-pattern and Z-pattern reading"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 67,
+    "fields": {
+      "owner": 1,
+      "title": "Font Pairing",
+      "created": "2024-04-10T10:10:00Z",
+      "updated": "2024-04-10T10:10:00Z",
+      "content": "Typography tips:\n\nFont categories:\n- Serif: Traditional, readable (Times, Georgia)\n- Sans-serif: Modern, clean (Helvetica, Arial)\n- Script: Decorative (Brush Script)\n- Monospace: Code (Courier)\n\nPairing rules:\n- Contrast serif with sans-serif\n- Limit to 2-3 fonts\n- Maintain hierarchy"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 68,
+    "fields": {
+      "owner": 1,
+      "title": "Color Psychology",
+      "created": "2024-04-10T10:15:00Z",
+      "updated": "2024-04-10T10:15:00Z",
+      "content": "Arti warna:\n\nRed: Energy, passion, danger\nBlue: Trust, calm, professional\nGreen: Nature, growth, health\nYellow: Happiness, optimism, caution\nPurple: Luxury, creativity, wisdom\nOrange: Enthusiasm, warmth, action\n\nColor schemes:\n- Monochromatic\n- Complementary\n- Analogous\n- Triadic"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 69,
+    "fields": {
+      "owner": 1,
+      "title": "Photoshop Layers",
+      "created": "2024-04-10T10:20:00Z",
+      "updated": "2024-04-10T10:20:00Z",
+      "content": "Working with layers:\n\nLayer types:\n- Normal layer\n- Adjustment layer\n- Text layer\n- Shape layer\n- Smart object\n\nBlending modes:\n- Multiply: Darken\n- Screen: Lighten\n- Overlay: Contrast\n\nShortcuts:\nCtrl+J: Duplicate layer\nCtrl+G: Group layers"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 70,
+    "fields": {
+      "owner": 1,
+      "title": "SELECT Statement",
+      "created": "2024-04-15T10:00:00Z",
+      "updated": "2024-04-15T10:00:00Z",
+      "content": "SQL SELECT basics:\n\n-- Select all columns\nSELECT * FROM users;\n\n-- Select specific columns\nSELECT name, email FROM users;\n\n-- With WHERE clause\nSELECT * FROM users WHERE age > 25;\n\n-- Order results\nSELECT * FROM users ORDER BY name ASC;\n\n-- Limit results\nSELECT * FROM users LIMIT 10;"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 71,
+    "fields": {
+      "owner": 1,
+      "title": "INSERT, UPDATE, DELETE",
+      "created": "2024-04-15T10:05:00Z",
+      "updated": "2024-04-15T10:05:00Z",
+      "content": "Data manipulation:\n\n-- INSERT\nINSERT INTO users (name, email, age)\nVALUES ('John', 'john@email.com', 30);\n\n-- UPDATE\nUPDATE users\nSET age = 31\nWHERE name = 'John';\n\n-- DELETE\nDELETE FROM users\nWHERE age < 18;"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 72,
+    "fields": {
+      "owner": 1,
+      "title": "Database Normalization",
+      "created": "2024-04-15T10:10:00Z",
+      "updated": "2024-04-15T10:10:00Z",
+      "content": "Normal Forms:\n\n1NF: Atomic values, no repeating groups\n2NF: 1NF + No partial dependencies\n3NF: 2NF + No transitive dependencies\nBCNF: 3NF + Every determinant is a candidate key\n\nBenefits:\n- Reduce redundancy\n- Improve data integrity\n- Easier maintenance"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 73,
+    "fields": {
+      "owner": 1,
+      "title": "SQL JOINs",
+      "created": "2024-04-15T10:15:00Z",
+      "updated": "2024-04-15T10:15:00Z",
+      "content": "Types of JOINs:\n\n-- INNER JOIN\nSELECT * FROM orders o\nINNER JOIN users u ON o.user_id = u.id;\n\n-- LEFT JOIN\nSELECT * FROM users u\nLEFT JOIN orders o ON u.id = o.user_id;\n\n-- RIGHT JOIN\nSELECT * FROM orders o\nRIGHT JOIN users u ON o.user_id = u.id;\n\n-- FULL OUTER JOIN\nSELECT * FROM users u\nFULL OUTER JOIN orders o ON u.id = o.user_id;"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 74,
+    "fields": {
+      "owner": 1,
+      "title": "Database Indexes",
+      "created": "2024-04-15T10:20:00Z",
+      "updated": "2024-04-15T10:20:00Z",
+      "content": "Indexing for performance:\n\n-- Create index\nCREATE INDEX idx_email ON users(email);\n\n-- Composite index\nCREATE INDEX idx_name_age ON users(name, age);\n\n-- Unique index\nCREATE UNIQUE INDEX idx_unique_email ON users(email);\n\nWhen to index:\n- Frequently searched columns\n- Foreign keys\n- JOIN columns\n\nAvoid over-indexing (slows INSERT/UPDATE)"
+    }
+  }
+]

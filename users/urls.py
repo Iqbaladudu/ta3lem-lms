@@ -5,7 +5,12 @@ from django.views.decorators.cache import cache_page
 from . import views
 
 urlpatterns = [
-    path("register/", views.StudentRegistrationView.as_view(), name="student_registration"),
+    # Authentication URLs
+    path('login/', views.StudentLoginView.as_view(), name='student_login'),
+    path('register/', views.StudentRegistrationView.as_view(), name='student_registration'),
+    path('instructor/', views.InstructorLoginView.as_view(), name='instructor_login'),
+
+    # Student Course URLs
     path("enroll/", views.StudentEnrollCourseView.as_view(), name="student_enroll_course"),
     path(
         'courses/',

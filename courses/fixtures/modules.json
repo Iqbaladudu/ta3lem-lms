@@ -1,0 +1,542 @@
+[
+  {
+    "model": "courses.module",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "title": "Pengenalan Python",
+      "description": "Modul pengenalan untuk memahami dasar-dasar Python",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 2,
+    "fields": {
+      "course": 1,
+      "title": "Tipe Data dan Variabel",
+      "description": "Mempelajari berbagai tipe data dan cara menggunakan variabel",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3,
+    "fields": {
+      "course": 1,
+      "title": "Struktur Kontrol",
+      "description": "Belajar tentang if-else, loops, dan flow control",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 4,
+    "fields": {
+      "course": 1,
+      "title": "Fungsi dan Module",
+      "description": "Memahami cara membuat dan menggunakan fungsi serta module",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 5,
+    "fields": {
+      "course": 2,
+      "title": "Setup Django Project",
+      "description": "Instalasi dan konfigurasi awal Django project",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 6,
+    "fields": {
+      "course": 2,
+      "title": "Models dan Database",
+      "description": "Membuat models dan bekerja dengan database",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 7,
+    "fields": {
+      "course": 2,
+      "title": "Views dan Templates",
+      "description": "Membuat views dan rendering templates",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 8,
+    "fields": {
+      "course": 2,
+      "title": "Forms dan Validasi",
+      "description": "Bekerja dengan forms dan validasi data",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 9,
+    "fields": {
+      "course": 3,
+      "title": "JavaScript Basics",
+      "description": "Fundamental JavaScript: variabel, tipe data, dan operator",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 10,
+    "fields": {
+      "course": 3,
+      "title": "ES6+ Features",
+      "description": "Arrow functions, destructuring, spread operator, dan fitur modern lainnya",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 11,
+    "fields": {
+      "course": 3,
+      "title": "DOM Manipulation",
+      "description": "Memanipulasi Document Object Model untuk membuat halaman interaktif",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 12,
+    "fields": {
+      "course": 3,
+      "title": "Async JavaScript",
+      "description": "Promises, async/await, dan fetch API",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 13,
+    "fields": {
+      "course": 4,
+      "title": "Limit dan Kontinuitas",
+      "description": "Memahami konsep limit dan kontinuitas fungsi",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 14,
+    "fields": {
+      "course": 4,
+      "title": "Turunan",
+      "description": "Definisi dan aplikasi turunan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 15,
+    "fields": {
+      "course": 4,
+      "title": "Integral",
+      "description": "Integral tak tentu dan integral tentu",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 16,
+    "fields": {
+      "course": 5,
+      "title": "Vektor dan Matriks",
+      "description": "Pengenalan vektor dan operasi matriks dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 17,
+    "fields": {
+      "course": 5,
+      "title": "Sistem Persamaan Linear",
+      "description": "Menyelesaikan sistem persamaan linear dengan berbagai metode",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 18,
+    "fields": {
+      "course": 5,
+      "title": "Eigenvalue dan Eigenvector",
+      "description": "Konsep dan aplikasi eigenvalue dan eigenvector",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 19,
+    "fields": {
+      "course": 6,
+      "title": "Prinsip Desain",
+      "description": "Dasar-dasar prinsip desain: hierarchy, contrast, balance",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 20,
+    "fields": {
+      "course": 6,
+      "title": "User Research",
+      "description": "Metode riset pengguna dan analisis kebutuhan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 21,
+    "fields": {
+      "course": 6,
+      "title": "Wireframing dan Prototyping",
+      "description": "Membuat wireframe dan prototype interaktif",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 22,
+    "fields": {
+      "course": 6,
+      "title": "Usability Testing",
+      "description": "Melakukan testing dan iterasi desain",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 23,
+    "fields": {
+      "course": 7,
+      "title": "Pengenalan React",
+      "description": "Memahami konsep dasar React dan Virtual DOM",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 24,
+    "fields": {
+      "course": 7,
+      "title": "Components dan Props",
+      "description": "Membuat dan menggunakan React components dengan props",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 25,
+    "fields": {
+      "course": 7,
+      "title": "State dan Lifecycle",
+      "description": "Mengelola state dan memahami component lifecycle",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 26,
+    "fields": {
+      "course": 7,
+      "title": "Hooks",
+      "description": "Menggunakan React Hooks: useState, useEffect, dan lainnya",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 27,
+    "fields": {
+      "course": 8,
+      "title": "Node.js Fundamentals",
+      "description": "Pengenalan Node.js dan JavaScript di server-side",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 28,
+    "fields": {
+      "course": 8,
+      "title": "Express.js Framework",
+      "description": "Membangun web server dengan Express.js",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 29,
+    "fields": {
+      "course": 8,
+      "title": "REST API Development",
+      "description": "Membuat REST API yang scalable dan maintainable",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 30,
+    "fields": {
+      "course": 8,
+      "title": "Database Integration",
+      "description": "Koneksi dengan MongoDB dan PostgreSQL",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 31,
+    "fields": {
+      "course": 9,
+      "title": "Pandas dan NumPy",
+      "description": "Manipulasi dan analisis data dengan Pandas dan NumPy",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 32,
+    "fields": {
+      "course": 9,
+      "title": "Data Visualization",
+      "description": "Visualisasi data dengan Matplotlib dan Seaborn",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 33,
+    "fields": {
+      "course": 9,
+      "title": "Machine Learning Basics",
+      "description": "Pengenalan machine learning dengan scikit-learn",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 34,
+    "fields": {
+      "course": 9,
+      "title": "Data Projects",
+      "description": "Studi kasus dan project analisis data real-world",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 35,
+    "fields": {
+      "course": 10,
+      "title": "Konsep Probabilitas",
+      "description": "Dasar-dasar teori probabilitas dan distribusi",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 36,
+    "fields": {
+      "course": 10,
+      "title": "Statistika Deskriptif",
+      "description": "Mean, median, modus, dan ukuran dispersi",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 37,
+    "fields": {
+      "course": 10,
+      "title": "Statistika Inferensial",
+      "description": "Hypothesis testing dan confidence intervals",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 38,
+    "fields": {
+      "course": 10,
+      "title": "Regresi dan Korelasi",
+      "description": "Analisis hubungan antar variabel",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 39,
+    "fields": {
+      "course": 11,
+      "title": "Hukum Newton",
+      "description": "Tiga hukum Newton tentang gerak",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 40,
+    "fields": {
+      "course": 11,
+      "title": "Kinematika",
+      "description": "Gerak lurus dan gerak melingkar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 41,
+    "fields": {
+      "course": 11,
+      "title": "Energi dan Usaha",
+      "description": "Konsep energi kinetik, potensial, dan usaha",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 42,
+    "fields": {
+      "course": 11,
+      "title": "Momentum dan Impuls",
+      "description": "Hukum kekekalan momentum dan tumbukan",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 43,
+    "fields": {
+      "course": 12,
+      "title": "Daily Conversation",
+      "description": "Percakapan sehari-hari dalam bahasa Inggris",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 44,
+    "fields": {
+      "course": 12,
+      "title": "Business English",
+      "description": "Bahasa Inggris untuk lingkungan profesional",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 45,
+    "fields": {
+      "course": 12,
+      "title": "Pronunciation Practice",
+      "description": "Latihan pelafalan dan intonasi",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 46,
+    "fields": {
+      "course": 12,
+      "title": "Listening Comprehension",
+      "description": "Meningkatkan kemampuan mendengar dan memahami",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 47,
+    "fields": {
+      "course": 13,
+      "title": "Design Principles",
+      "description": "Prinsip dasar desain: balance, contrast, hierarchy",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 48,
+    "fields": {
+      "course": 13,
+      "title": "Typography",
+      "description": "Seni memilih dan mengatur typeface",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 49,
+    "fields": {
+      "course": 13,
+      "title": "Color Theory",
+      "description": "Teori warna dan aplikasinya dalam desain",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 50,
+    "fields": {
+      "course": 13,
+      "title": "Adobe Tools Mastery",
+      "description": "Menguasai Photoshop dan Illustrator",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 51,
+    "fields": {
+      "course": 14,
+      "title": "SQL Basics",
+      "description": "SELECT, INSERT, UPDATE, DELETE statements",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 52,
+    "fields": {
+      "course": 14,
+      "title": "Database Design",
+      "description": "Normalisasi dan relational database design",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 53,
+    "fields": {
+      "course": 14,
+      "title": "Advanced Queries",
+      "description": "JOINs, subqueries, dan window functions",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 54,
+    "fields": {
+      "course": 14,
+      "title": "Performance Optimization",
+      "description": "Indexing, query optimization, dan best practices",
+      "order": 3
+    }
+  }
+]

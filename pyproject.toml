@@ -16,4 +16,5 @@ dependencies = [
     "django-tailwind[reload]>=4.2.0",
     "cookiecutter>=2.6.0",
     "honcho>=2.0.0",
+    "django-htmx>=1.26.0",
 ]

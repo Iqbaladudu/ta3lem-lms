@@ -36,6 +36,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 from django.urls import reverse_lazy
 
 LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
+LOGOUT_REDIRECT_URL = None  # Gunakan template logged_out.html
 
 # Application definition
 
@@ -48,12 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
-    'students.apps.StudentsConfig',
     'embed_video',
     'debug_toolbar',
     'redisboard',
     'tailwind',
-    'theme'
+    'theme',
+    'django_htmx',
 ]
 
 INTERNAL_IPS = [
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 if DEBUG:

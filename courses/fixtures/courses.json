@@ -1,0 +1,184 @@
+[
+  {
+    "model": "courses.course",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "Python untuk Pemula",
+      "slug": "python-untuk-pemula",
+      "overview": "Belajar dasar-dasar pemrograman Python dari nol hingga mahir. Kursus ini cocok untuk pemula yang ingin memulai perjalanan mereka di dunia pemrograman.",
+      "created": "2024-01-15T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "Django Web Development",
+      "slug": "django-web-development",
+      "overview": "Pelajari cara membangun aplikasi web modern menggunakan Django framework. Dari konsep dasar hingga deployment aplikasi.",
+      "created": "2024-01-20T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 3,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "JavaScript Modern",
+      "slug": "javascript-modern",
+      "overview": "Kuasai JavaScript modern (ES6+) dan bangun aplikasi web interaktif yang powerful.",
+      "created": "2024-02-01T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 4,
+    "fields": {
+      "owner": 1,
+      "subject": 2,
+      "title": "Kalkulus Dasar",
+      "slug": "kalkulus-dasar",
+      "overview": "Memahami konsep dasar kalkulus termasuk limit, turunan, dan integral dengan pendekatan yang mudah dipahami.",
+      "created": "2024-02-10T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 5,
+    "fields": {
+      "owner": 1,
+      "subject": 2,
+      "title": "Aljabar Linear",
+      "slug": "aljabar-linear",
+      "overview": "Pelajari konsep matriks, vektor, dan transformasi linear yang fundamental untuk machine learning dan data science.",
+      "created": "2024-02-15T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 6,
+    "fields": {
+      "owner": 1,
+      "subject": 5,
+      "title": "UI/UX Design Fundamentals",
+      "slug": "uiux-design-fundamentals",
+      "overview": "Pelajari prinsip-prinsip desain antarmuka pengguna dan pengalaman pengguna untuk menciptakan produk digital yang menarik.",
+      "created": "2024-03-01T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 7,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "React untuk Pemula",
+      "slug": "react-untuk-pemula",
+      "overview": "Pelajari React.js dari dasar hingga mahir. Bangun aplikasi web modern dengan component-based architecture dan state management.",
+      "created": "2024-03-10T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 8,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "Node.js Backend Development",
+      "slug": "nodejs-backend-development",
+      "overview": "Belajar membangun REST API dan backend aplikasi menggunakan Node.js dan Express.js. Dari dasar hingga deployment production.",
+      "created": "2024-03-15T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 9,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "Data Science dengan Python",
+      "slug": "data-science-dengan-python",
+      "overview": "Pelajari analisis data, visualisasi, dan machine learning menggunakan Python. Termasuk pandas, numpy, matplotlib, dan scikit-learn.",
+      "created": "2024-03-20T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 10,
+    "fields": {
+      "owner": 1,
+      "subject": 2,
+      "title": "Statistika dan Probabilitas",
+      "slug": "statistika-dan-probabilitas",
+      "overview": "Memahami konsep dasar statistika dan probabilitas untuk analisis data dan pengambilan keputusan berbasis data.",
+      "created": "2024-03-25T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 11,
+    "fields": {
+      "owner": 1,
+      "subject": 3,
+      "title": "Fisika Mekanika",
+      "slug": "fisika-mekanika",
+      "overview": "Pelajari hukum-hukum Newton, energi, momentum, dan aplikasinya dalam kehidupan sehari-hari.",
+      "created": "2024-04-01T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 12,
+    "fields": {
+      "owner": 1,
+      "subject": 4,
+      "title": "Bahasa Inggris Conversation",
+      "slug": "bahasa-inggris-conversation",
+      "overview": "Tingkatkan kemampuan berbicara bahasa Inggris dengan praktik conversation sehari-hari dan situasi nyata.",
+      "created": "2024-04-05T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 13,
+    "fields": {
+      "owner": 1,
+      "subject": 5,
+      "title": "Graphic Design Essentials",
+      "slug": "graphic-design-essentials",
+      "overview": "Kuasai dasar-dasar desain grafis menggunakan Adobe Photoshop dan Illustrator. Dari tipografi hingga komposisi visual.",
+      "created": "2024-04-10T10:00:00Z",
+      "students": []
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 14,
+    "fields": {
+      "owner": 1,
+      "subject": 1,
+      "title": "SQL dan Database Management",
+      "slug": "sql-dan-database-management",
+      "overview": "Pelajari SQL dari dasar hingga advanced. Termasuk design database, query optimization, dan stored procedures.",
+      "created": "2024-04-15T10:00:00Z",
+      "students": []
+    }
+  }
+]

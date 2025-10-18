@@ -1,0 +1,552 @@
+[
+  {
+    "model": "courses.video",
+    "pk": 1,
+    "fields": {
+      "owner": 1,
+      "title": "Python Installation Tutorial",
+      "created": "2024-01-15T10:00:00Z",
+      "updated": "2024-01-15T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=example1"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2,
+    "fields": {
+      "owner": 1,
+      "title": "Python Variables Explained",
+      "created": "2024-01-15T10:05:00Z",
+      "updated": "2024-01-15T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=example2"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 3,
+    "fields": {
+      "owner": 1,
+      "title": "Control Flow in Python",
+      "created": "2024-01-15T10:10:00Z",
+      "updated": "2024-01-15T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=example3"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 4,
+    "fields": {
+      "owner": 1,
+      "title": "Python Functions Tutorial",
+      "created": "2024-01-15T10:15:00Z",
+      "updated": "2024-01-15T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=example4"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 5,
+    "fields": {
+      "owner": 1,
+      "title": "Django Setup Guide",
+      "created": "2024-01-20T10:00:00Z",
+      "updated": "2024-01-20T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=example5"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 6,
+    "fields": {
+      "owner": 1,
+      "title": "Django Models Deep Dive",
+      "created": "2024-01-20T10:05:00Z",
+      "updated": "2024-01-20T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=example6"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 7,
+    "fields": {
+      "owner": 1,
+      "title": "Django Templates Tutorial",
+      "created": "2024-01-20T10:10:00Z",
+      "updated": "2024-01-20T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=example7"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 8,
+    "fields": {
+      "owner": 1,
+      "title": "Django Forms in Practice",
+      "created": "2024-01-20T10:15:00Z",
+      "updated": "2024-01-20T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=example8"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 9,
+    "fields": {
+      "owner": 1,
+      "title": "JavaScript ES6+ Features",
+      "created": "2024-02-01T10:00:00Z",
+      "updated": "2024-02-01T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=example9"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 10,
+    "fields": {
+      "owner": 1,
+      "title": "DOM Manipulation Masterclass",
+      "created": "2024-02-01T10:05:00Z",
+      "updated": "2024-02-01T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=example10"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 11,
+    "fields": {
+      "owner": 1,
+      "title": "Async JavaScript Tutorial",
+      "created": "2024-02-01T10:10:00Z",
+      "updated": "2024-02-01T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=example11"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 12,
+    "fields": {
+      "owner": 1,
+      "title": "Calculus Limits Explained",
+      "created": "2024-02-10T10:00:00Z",
+      "updated": "2024-02-10T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=example12"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 13,
+    "fields": {
+      "owner": 1,
+      "title": "Derivatives Tutorial",
+      "created": "2024-02-10T10:05:00Z",
+      "updated": "2024-02-10T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=example13"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 14,
+    "fields": {
+      "owner": 1,
+      "title": "Integration Techniques",
+      "created": "2024-02-10T10:10:00Z",
+      "updated": "2024-02-10T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=example14"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 15,
+    "fields": {
+      "owner": 1,
+      "title": "Linear Algebra Basics",
+      "created": "2024-02-15T10:00:00Z",
+      "updated": "2024-02-15T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=example15"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 16,
+    "fields": {
+      "owner": 1,
+      "title": "UI Design Principles",
+      "created": "2024-03-01T10:00:00Z",
+      "updated": "2024-03-01T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=example16"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 17,
+    "fields": {
+      "owner": 1,
+      "title": "User Research Methods",
+      "created": "2024-03-01T10:05:00Z",
+      "updated": "2024-03-01T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=example17"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 18,
+    "fields": {
+      "owner": 1,
+      "title": "Prototyping with Figma",
+      "created": "2024-03-01T10:10:00Z",
+      "updated": "2024-03-01T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=example18"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 19,
+    "fields": {
+      "owner": 1,
+      "title": "React Basics Tutorial",
+      "created": "2024-03-10T10:00:00Z",
+      "updated": "2024-03-10T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=react-basics"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 20,
+    "fields": {
+      "owner": 1,
+      "title": "React Components and Props",
+      "created": "2024-03-10T10:05:00Z",
+      "updated": "2024-03-10T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=react-props"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 21,
+    "fields": {
+      "owner": 1,
+      "title": "React State Management",
+      "created": "2024-03-10T10:10:00Z",
+      "updated": "2024-03-10T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=react-state"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 22,
+    "fields": {
+      "owner": 1,
+      "title": "React Hooks Complete Guide",
+      "created": "2024-03-10T10:15:00Z",
+      "updated": "2024-03-10T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=react-hooks"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 23,
+    "fields": {
+      "owner": 1,
+      "title": "Node.js Tutorial for Beginners",
+      "created": "2024-03-15T10:00:00Z",
+      "updated": "2024-03-15T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=nodejs-tutorial"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 24,
+    "fields": {
+      "owner": 1,
+      "title": "Express.js Crash Course",
+      "created": "2024-03-15T10:05:00Z",
+      "updated": "2024-03-15T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=express-course"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 25,
+    "fields": {
+      "owner": 1,
+      "title": "REST API Best Practices",
+      "created": "2024-03-15T10:10:00Z",
+      "updated": "2024-03-15T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=rest-api"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 26,
+    "fields": {
+      "owner": 1,
+      "title": "MongoDB Tutorial",
+      "created": "2024-03-15T10:15:00Z",
+      "updated": "2024-03-15T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=mongodb-tutorial"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 27,
+    "fields": {
+      "owner": 1,
+      "title": "Pandas Data Analysis",
+      "created": "2024-03-20T10:00:00Z",
+      "updated": "2024-03-20T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=pandas-tutorial"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 28,
+    "fields": {
+      "owner": 1,
+      "title": "Data Visualization with Python",
+      "created": "2024-03-20T10:05:00Z",
+      "updated": "2024-03-20T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=data-viz"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 29,
+    "fields": {
+      "owner": 1,
+      "title": "Machine Learning Introduction",
+      "created": "2024-03-20T10:10:00Z",
+      "updated": "2024-03-20T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=ml-intro"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 30,
+    "fields": {
+      "owner": 1,
+      "title": "Data Science Projects",
+      "created": "2024-03-20T10:15:00Z",
+      "updated": "2024-03-20T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=ds-projects"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 31,
+    "fields": {
+      "owner": 1,
+      "title": "Probability Theory Basics",
+      "created": "2024-03-25T10:00:00Z",
+      "updated": "2024-03-25T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=probability"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 32,
+    "fields": {
+      "owner": 1,
+      "title": "Statistics Fundamentals",
+      "created": "2024-03-25T10:05:00Z",
+      "updated": "2024-03-25T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=statistics"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 33,
+    "fields": {
+      "owner": 1,
+      "title": "Hypothesis Testing Explained",
+      "created": "2024-03-25T10:10:00Z",
+      "updated": "2024-03-25T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=hypothesis-test"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 34,
+    "fields": {
+      "owner": 1,
+      "title": "Regression Analysis Tutorial",
+      "created": "2024-03-25T10:15:00Z",
+      "updated": "2024-03-25T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=regression"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 35,
+    "fields": {
+      "owner": 1,
+      "title": "Newton's Laws of Motion",
+      "created": "2024-04-01T10:00:00Z",
+      "updated": "2024-04-01T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=newton-laws"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 36,
+    "fields": {
+      "owner": 1,
+      "title": "Kinematics Physics",
+      "created": "2024-04-01T10:05:00Z",
+      "updated": "2024-04-01T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=kinematics"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 37,
+    "fields": {
+      "owner": 1,
+      "title": "Energy and Work",
+      "created": "2024-04-01T10:10:00Z",
+      "updated": "2024-04-01T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=energy-work"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 38,
+    "fields": {
+      "owner": 1,
+      "title": "Momentum and Collisions",
+      "created": "2024-04-01T10:15:00Z",
+      "updated": "2024-04-01T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=momentum"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 39,
+    "fields": {
+      "owner": 1,
+      "title": "English Conversation Practice",
+      "created": "2024-04-05T10:00:00Z",
+      "updated": "2024-04-05T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=english-conversation"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 40,
+    "fields": {
+      "owner": 1,
+      "title": "Business English Skills",
+      "created": "2024-04-05T10:05:00Z",
+      "updated": "2024-04-05T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=business-english"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 41,
+    "fields": {
+      "owner": 1,
+      "title": "English Pronunciation Guide",
+      "created": "2024-04-05T10:10:00Z",
+      "updated": "2024-04-05T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=pronunciation"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 42,
+    "fields": {
+      "owner": 1,
+      "title": "Listening Comprehension Tips",
+      "created": "2024-04-05T10:15:00Z",
+      "updated": "2024-04-05T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=listening-tips"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 43,
+    "fields": {
+      "owner": 1,
+      "title": "Graphic Design Principles",
+      "created": "2024-04-10T10:00:00Z",
+      "updated": "2024-04-10T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=design-principles"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 44,
+    "fields": {
+      "owner": 1,
+      "title": "Typography Masterclass",
+      "created": "2024-04-10T10:05:00Z",
+      "updated": "2024-04-10T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=typography"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 45,
+    "fields": {
+      "owner": 1,
+      "title": "Color Theory for Designers",
+      "created": "2024-04-10T10:10:00Z",
+      "updated": "2024-04-10T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=color-theory"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 46,
+    "fields": {
+      "owner": 1,
+      "title": "Photoshop for Beginners",
+      "created": "2024-04-10T10:15:00Z",
+      "updated": "2024-04-10T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=photoshop-tutorial"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 47,
+    "fields": {
+      "owner": 1,
+      "title": "SQL Basics Tutorial",
+      "created": "2024-04-15T10:00:00Z",
+      "updated": "2024-04-15T10:00:00Z",
+      "url": "https://www.youtube.com/watch?v=sql-basics"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 48,
+    "fields": {
+      "owner": 1,
+      "title": "Database Design Guide",
+      "created": "2024-04-15T10:05:00Z",
+      "updated": "2024-04-15T10:05:00Z",
+      "url": "https://www.youtube.com/watch?v=db-design"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 49,
+    "fields": {
+      "owner": 1,
+      "title": "Advanced SQL Queries",
+      "created": "2024-04-15T10:10:00Z",
+      "updated": "2024-04-15T10:10:00Z",
+      "url": "https://www.youtube.com/watch?v=advanced-sql"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 50,
+    "fields": {
+      "owner": 1,
+      "title": "SQL Performance Optimization",
+      "created": "2024-04-15T10:15:00Z",
+      "updated": "2024-04-15T10:15:00Z",
+      "url": "https://www.youtube.com/watch?v=sql-optimization"
+    }
+  }
+]

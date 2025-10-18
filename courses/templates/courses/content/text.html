@@ -1,1 +1,12 @@
-{{ item.content|linebreaks }}
+{% load static %}
+<div class="prose max-w-none">
+    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-4 rounded-r-lg">
+        <div class="flex items-start">
+            <i class="fas fa-file-alt text-blue-500 text-2xl mr-3 mt-1"></i>
+            <div class="flex-1">
+                <div class="text-gray-900 leading-relaxed whitespace-pre-wrap">{{ item.content }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+

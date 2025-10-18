@@ -1,3 +1,21 @@
-<p>
-    <img src="{{ item.file.url }}" alt="{{ item.title }}">
-</p>
+{% load static %}
+<div class="flex justify-center">
+    <div class="max-w-2xl">
+        <img src="{{ item.file.url }}"
+             alt="{{ item.title }}"
+             class="w-full h-auto rounded-lg shadow-lg">
+        <div class="mt-3 flex items-center justify-between text-sm text-gray-600">
+            <div class="flex items-center">
+                <i class="fas fa-image mr-2 text-blue-600"></i>
+                <span>{{ item.title }}</span>
+            </div>
+            <a href="{{ item.file.url }}"
+               download
+               class="text-blue-600 hover:text-blue-700 hover:underline flex items-center">
+                <i class="fas fa-download mr-1"></i>
+                Download
+            </a>
+        </div>
+    </div>
+</div>
+

@@ -19,6 +19,10 @@ class ItemBase(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def class_name(self):
+        return self._meta.model_name
+
     def render(self):
         return render_to_string(
             f'courses/content/{self._meta.model_name}.html',
@@ -80,6 +84,14 @@ class Module(models.Model):
 
     class Meta:
         ordering = ['order']
+
+    def get_previous_in_order(self):
+        """Get the previous module in the course by order"""
+        return self.course.modules.filter(order__lt=self.order).order_by('-order').first()
+
+    def get_next_in_order(self):
+        """Get the next module in the course by order"""
+        return self.course.modules.filter(order__gt=self.order).order_by('order').first()
 
 
 # Polymorphic content model
