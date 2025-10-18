@@ -1,12 +1,156 @@
 {% extends "base.html" %}
-{% block title %}Delete course{% endblock %}
+
+{% block title %}Hapus Kursus - {{ object.title }}{% endblock %}
+
 {% block content %}
-    <h1>Delete course "{{ object.title }}"</h1>
-    <div class="module">
-        <form action="" method="post">
-            {% csrf_token %}
-            <p>Are you sure you want to delete "{{ object }}"?</p>
-            <input type="submit" value="Confirm">
-        </form>
+    <!-- Header Section -->
+    <div class="bg-gradient-to-r from-red-600 to-pink-600 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <a href="{% url 'manage_course_list' %}"
+                   class="mr-4 w-10 h-10 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                    <i class="fas fa-arrow-left text-white"></i>
+                </a>
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>Hapus Kursus
+                    </h1>
+                    <p class="text-red-100">Konfirmasi penghapusan kursus</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Warning Card -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-red-200">
+            <!-- Course Info Preview -->
+            <div class="bg-gradient-to-r from-red-50 to-pink-50 px-8 py-6 border-b border-red-100">
+                <div class="flex items-start">
+                    <div class="w-16 h-16 bg-red-600 rounded-xl flex items-center justify-center mr-4 flex-shrink-0">
+                        <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ object.title }}</h2>
+                        <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                            <span class="flex items-center">
+                                <i class="fas fa-tag text-red-500 mr-2"></i>
+                                {{ object.subject.title }}
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-book text-red-500 mr-2"></i>
+                                {{ object.modules.count }} modul
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-users text-red-500 mr-2"></i>
+                                {{ object.students.count }} siswa
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Message -->
+            <div class="p-8">
+                <div class="bg-red-50 border-l-4 border-red-500 rounded-lg p-6 mb-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-500 text-2xl mr-4 mt-1"></i>
+                        <div>
+                            <h3 class="text-lg font-bold text-red-900 mb-2">Peringatan Penting!</h3>
+                            <p class="text-red-800 mb-4">
+                                Apakah Anda yakin ingin menghapus kursus <strong>"{{ object.title }}"</strong>?
+                            </p>
+                            <div class="space-y-2 text-sm text-red-700">
+                                <p class="flex items-start">
+                                    <i class="fas fa-times-circle mr-2 mt-1"></i>
+                                    <span>Semua modul dan konten dalam kursus ini akan dihapus secara permanen</span>
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-times-circle mr-2 mt-1"></i>
+                                    <span>{{ object.students.count }} siswa yang terdaftar akan kehilangan akses ke kursus ini</span>
+                                </p>
+                                <p class="flex items-start">
+                                    <i class="fas fa-times-circle mr-2 mt-1"></i>
+                                    <span>Tindakan ini tidak dapat dibatalkan</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Statistics -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                    <h4 class="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">Data yang akan
+                        dihapus:</h4>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gray-900 mb-1">{{ object.modules.count }}</div>
+                            <div class="text-sm text-gray-600">Modul</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gray-900 mb-1">
+                                {% with modules=object.modules.all %}
+                                    {% if modules %}
+                                        {{ modules.0.contents.count }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="text-sm text-gray-600">Konten</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gray-900 mb-1">{{ object.students.count }}</div>
+                            <div class="text-sm text-gray-600">Siswa</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confirmation Form -->
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+
+                    <!-- Confirmation Checkbox -->
+                    <div class="flex items-start">
+                        <input type="checkbox"
+                               id="confirm-delete"
+                               required
+                               class="mt-1 w-5 h-5 text-red-600 border-gray-300 rounded focus:ring-red-500">
+                        <label for="confirm-delete" class="ml-3 text-sm text-gray-700">
+                            Saya memahami bahwa tindakan ini tidak dapat dibatalkan dan semua data terkait akan dihapus
+                            secara permanen
+                        </label>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-between pt-6 border-t border-gray-200">
+                        <a href="{% url 'manage_course_list' %}"
+                           class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium transition shadow-sm">
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            Kembali ke Dashboard
+                        </a>
+                        <button type="submit"
+                                class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition shadow-lg hover:shadow-xl">
+                            <i class="fas fa-trash-alt mr-2"></i>
+                            Ya, Hapus Kursus
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="mt-6 bg-blue-50 rounded-lg p-6 border border-blue-200">
+            <div class="flex items-start">
+                <i class="fas fa-info-circle text-blue-500 text-xl mr-3 mt-1"></i>
+                <div>
+                    <h4 class="font-semibold text-blue-900 mb-1">Alternatif Penghapusan</h4>
+                    <p class="text-sm text-blue-800">
+                        Jika Anda hanya ingin menyembunyikan kursus sementara, pertimbangkan untuk menghapus semua siswa
+                        dari kursus atau mengarsipkannya.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

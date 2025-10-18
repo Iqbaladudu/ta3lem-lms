@@ -1,0 +1,113 @@
+<!-- Course Grid Partial for HTMX -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="course-grid">
+    {% for course in object_list %}
+        <article
+                class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group border border-gray-100"
+                id="course-{{ course.id }}">
+            <!-- Course Header -->
+            <div class="relative h-48 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 overflow-hidden">
+                <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-6xl text-white opacity-20"></i>
+                </div>
+                <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                    <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                        <i class="fas fa-star mr-1"></i>{{ course.subject.title }}
+                    </span>
+                    <span class="bg-white bg-opacity-90 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                        <i class="fas fa-users mr-1"></i>{{ course.students.count }}
+                    </span>
+                </div>
+                <!-- Course Stats Bar -->
+                <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 backdrop-blur-sm px-4 py-2">
+                    <div class="flex items-center justify-between text-white text-xs font-medium">
+                        <span><i class="fas fa-book mr-1"></i>{{ course.modules.count }} modul</span>
+                        <span>
+                            <i class="fas fa-file-alt mr-1"></i>
+                            {% with course.modules.all as modules %}
+                                {{ modules|length|add:"0" }}
+                                {% for module in modules %}
+                                    {% if forloop.first %}{{ module.contents.count }}{% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                            konten
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course Info -->
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition line-clamp-2 min-h-[3.5rem]">
+                    {{ course.title }}
+                </h3>
+
+                <p class="text-gray-600 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
+                    {{ course.overview|truncatewords:15 }}
+                </p>
+
+                <div class="flex items-center text-sm text-gray-500 mb-4 pb-4 border-b border-gray-100">
+                    <i class="fas fa-calendar-alt mr-2 text-indigo-500"></i>
+                    <span>Dibuat {{ course.created|date:"d M Y" }}</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <a href="{% url 'course_edit' course.id %}"
+                       class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                        <i class="fas fa-edit mr-2"></i>
+                        Edit
+                    </a>
+                    <a href="{% url 'course_module_update' course.id %}"
+                       class="flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                        <i class="fas fa-layer-group mr-2"></i>
+                        Modul
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    {% if course.modules.count > 0 %}
+                        <a href="{% url 'module_content_list' course.modules.first.id %}"
+                           class="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                            <i class="fas fa-folder-open mr-2"></i>
+                            Konten
+                        </a>
+                    {% else %}
+                        <button disabled
+                                class="flex items-center justify-center bg-gray-300 text-gray-500 text-sm font-medium py-2 px-3 rounded-lg cursor-not-allowed">
+                            <i class="fas fa-folder-open mr-2"></i>
+                            Konten
+                        </button>
+                    {% endif %}
+                    <button hx-delete="{% url 'course_delete' course.id %}"
+                            hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
+                            hx-target="#course-{{ course.id }}"
+                            hx-swap="outerHTML swap:1s"
+                            class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                        <i class="fas fa-trash-alt mr-2"></i>
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+</div>
+
+{% if not object_list %}
+    <!-- Empty State -->
+    <div class="bg-white rounded-xl shadow-sm p-12 text-center" id="empty-state">
+        <div class="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-chalkboard-teacher text-5xl text-indigo-600"></i>
+        </div>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Mulai Berbagi Ilmu Anda</h3>
+        <p class="text-gray-600 mb-8 max-w-md mx-auto">
+            Anda belum membuat kursus apapun. Mulai ciptakan pengalaman pembelajaran yang luar biasa untuk siswa Anda.
+        </p>
+        <a href="{% url 'course_create' %}"
+           class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition shadow-lg hover:shadow-xl">
+            <i class="fas fa-plus-circle mr-2"></i>
+            Buat Kursus Pertama
+        </a>
+    </div>
+{% endif %}
+

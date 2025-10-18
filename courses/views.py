@@ -2,8 +2,10 @@ from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.cache import cache
+from django.db.models import Q
 from django.db.models.aggregates import Count
 from django.forms import modelform_factory
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -133,6 +135,13 @@ class ContentDeleteView(View):
         module = content.module
         content.item.delete()
         content.delete()
+
+        # Return htmx-friendly response
+        if request.headers.get('HX-Request'):
+            response = HttpResponse(status=204)
+            response['HX-Trigger'] = 'contentDeleted'
+            return response
+
         return redirect('module_content_list', module.id)
 
 
@@ -188,6 +197,45 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
     template_name = "courses/manage/course/list.html"
     permission_required = 'courses.view_course'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search = self.request.GET.get('search', '')
+        if search:
+            queryset = queryset.filter(
+                Q(title__icontains=search) |
+                Q(overview__icontains=search) |
+                Q(subject__title__icontains=search)
+            )
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        courses = self.get_queryset()
+
+        # Calculate statistics
+        total_courses = courses.count()
+        total_modules = sum(course.modules.count() for course in courses)
+        total_students = sum(course.students.count() for course in courses)
+        total_contents = sum(
+            sum(module.contents.count() for module in course.modules.all())
+            for course in courses
+        )
+
+        # Add statistics to context
+        context['total_courses'] = total_courses
+        context['total_modules'] = total_modules
+        context['total_students'] = total_students
+        context['total_contents'] = total_contents
+        context['search'] = self.request.GET.get('search', '')
+
+        return context
+
+    def get_template_names(self):
+        # Return partial template for htmx requests
+        if self.request.headers.get('HX-Request'):
+            return ['courses/manage/course/partials/course_list_partial.html']
+        return [self.template_name]
+
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
     permission_required = 'courses.add_course'
@@ -200,3 +248,15 @@ class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
     template_name = "courses/manage/course/delete.html"
     permission_required = 'courses.delete_course'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+
+        # Return htmx-friendly response
+        if request.headers.get('HX-Request'):
+            response = HttpResponse(status=204)
+            response['HX-Trigger'] = 'courseDeleted'
+            return response
+
+        return redirect(self.success_url)

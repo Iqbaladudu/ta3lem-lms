@@ -1,25 +1,164 @@
 {% extends "base.html" %}
+
 {% block title %}
     {% if object %}
-        Edit course "{{ object.title }}"
+        Edit Kursus - {{ object.title }}
     {% else %}
-        Create a new course
+        Buat Kursus Baru
     {% endif %}
 {% endblock %}
+
 {% block content %}
-    <h1>
+    <!-- Header Section -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center">
+                <a href="{% url 'manage_course_list' %}"
+                   class="mr-4 w-10 h-10 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                    <i class="fas fa-arrow-left text-white"></i>
+                </a>
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">
+                        {% if object %}
+                            <i class="fas fa-edit mr-3"></i>Edit Kursus
+                        {% else %}
+                            <i class="fas fa-plus-circle mr-3"></i>Buat Kursus Baru
+                        {% endif %}
+                    </h1>
+                    <p class="text-indigo-100">
+                        {% if object %}
+                            Perbarui informasi kursus "{{ object.title }}"
+                        {% else %}
+                            Lengkapi informasi untuk membuat kursus baru
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Main Form Card -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-8 py-6 border-b border-indigo-100">
+                <h2 class="text-2xl font-bold text-gray-900 flex items-center">
+                    <i class="fas fa-info-circle text-indigo-600 mr-3"></i>
+                    Informasi Kursus
+                </h2>
+                <p class="text-gray-600 mt-2 text-sm">Isi semua informasi yang diperlukan untuk kursus Anda</p>
+            </div>
+
+            <form method="post" class="p-8">
+                {% csrf_token %}
+
+                <!-- Form Fields -->
+                <div class="space-y-6">
+                    {% for field in form %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}"
+                                   class="block text-sm font-semibold text-gray-900 mb-2">
+                                {{ field.label }}
+                                {% if field.field.required %}
+                                    <span class="text-red-500">*</span>
+                                {% endif %}
+                            </label>
+
+                            {% if field.name == 'overview' %}
+                                <textarea name="{{ field.name }}"
+                                          id="{{ field.id_for_label }}"
+                                          rows="6"
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition resize-none"
+                                          {% if field.field.required %}required{% endif %}
+                                          placeholder="Jelaskan secara singkat tentang kursus ini...">{{ field.value|default:'' }}</textarea>
+                            {% elif field.name == 'subject' %}
+                                <select name="{{ field.name }}"
+                                        id="{{ field.id_for_label }}"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                                        {% if field.field.required %}required{% endif %}>
+                                    <option value="">Pilih subjek...</option>
+                                    {% for choice in field.field.choices %}
+                                        {% if choice.0 %}
+                                            <option value="{{ choice.0 }}"
+                                                    {% if field.value == choice.0 %}selected{% endif %}>
+                                                {{ choice.1 }}
+                                            </option>
+                                        {% endif %}
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="text"
+                                       name="{{ field.name }}"
+                                       id="{{ field.id_for_label }}"
+                                       value="{{ field.value|default:'' }}"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+                                       {% if field.field.required %}required{% endif %}
+                                       placeholder="{{ field.label }}">
+                            {% endif %}
+
+                            {% if field.help_text %}
+                                <p class="mt-2 text-sm text-gray-500">
+                                    <i class="fas fa-info-circle mr-1"></i>{{ field.help_text }}
+                                </p>
+                            {% endif %}
+
+                            {% if field.errors %}
+                                <div class="mt-2 text-sm text-red-600">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ field.errors.0 }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 pt-6 border-t border-gray-200 flex items-center justify-between">
+                    <a href="{% url 'manage_course_list' %}"
+                       class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 font-medium transition shadow-sm">
+                        <i class="fas fa-times mr-2"></i>
+                        Batal
+                    </a>
+                    <button type="submit"
+                            class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-lg transition shadow-lg hover:shadow-xl">
+                        <i class="fas fa-save mr-2"></i>
+                        {% if object %}Simpan Perubahan{% else %}Buat Kursus{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+
         {% if object %}
-            Edit course "{{ object.title }}"
-        {% else %}
-            Create a new course
+            <!-- Additional Actions Card -->
+            <div class="mt-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-100">
+                <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                    <i class="fas fa-tools text-indigo-600 mr-2"></i>
+                    Langkah Selanjutnya
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <a href="{% url 'course_module_update' object.id %}"
+                       class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition border border-gray-200">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-layer-group text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Kelola Modul</h4>
+                            <p class="text-sm text-gray-600">Tambah atau edit modul kursus</p>
+                        </div>
+                    </a>
+                    {% if object.modules.count > 0 %}
+                        <a href="{% url 'module_content_list' object.modules.first.id %}"
+                           class="flex items-center p-4 bg-white rounded-lg hover:shadow-md transition border border-gray-200">
+                            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-folder-open text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Kelola Konten</h4>
+                                <p class="text-sm text-gray-600">Tambah materi pembelajaran</p>
+                            </div>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
-    </h1>
-    <div class="module">
-        <h2>Course info</h2>
-        <form method="post">
-            {{ form.as_p }}
-            {% csrf_token %}
-            <p><input type="submit" value="Save course"></p>
-        </form>
     </div>
 {% endblock %}

@@ -1,102 +1,247 @@
 {% extends "base.html" %}
 {% load course %}
 
-{% block title %}
-    Module {{ module.order|add:1 }}: {{ module.title }}
-{% endblock %}
+{% block title %}Kelola Konten - Modul {{ module.order|add:1 }}: {{ module.title }}{% endblock %}
+
 {% block content %}
     {% with course=module.course %}
-        <h1>Course "{{ course.title }}"</h1>
-        <div class="contents">
-            <h3>Modules</h3>
-            <ul id="modules">
-                {% for m in course.modules.all %}
-                    <li data-id="{{ m.id }}" {% if m == module %}
-                        class="selected"{% endif %}>
-                        <a href="{% url "module_content_list" m.id %}">
-            <span>
-              Module <span class="order">{{ m.order|add:1 }}</span>
-            </span>
-                            <br>
-                            {{ m.title }}
-                        </a>
-                    </li>
-                {% empty %}
-                    <li>No modules yet.</li>
-                {% endfor %}
-            </ul>
-            <p><a href="{% url "course_module_update" course.id %}">
-                Edit modules</a></p>
-        </div>
-        <div class="module">
-            <h2>Module {{ module.order|add:1 }}: {{ module.title }}</h2>
-            <h3>Module contents:</h3>
-            <div id="module-contents">
-                {% for content in module.contents.all %}
-                    <div data-id="{{ content.id }}">
-                        {% with item=content.item %}
-                            <p>{{ item }} ({{ item|model_name }})</p>
-                            <a href="{% url "module_content_update" module.id item|model_name item.id %}">Edit</a>
-                            <form action="{% url "module_content_delete" content.id %}"
-                                  method="post">
-                                <input type="submit" value="Delete">
-                                {% csrf_token %}
-                            </form>
-                        {% endwith %}
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center">
+                    <a href="{% url 'manage_course_list' %}"
+                       class="mr-4 w-10 h-10 bg-white bg-opacity-20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-opacity-30 transition">
+                        <i class="fas fa-arrow-left text-white"></i>
+                    </a>
+                    <div class="flex-1">
+                        <div class="flex items-center mb-2">
+                            <h1 class="text-4xl font-bold">
+                                <i class="fas fa-folder-open mr-3"></i>Kelola Konten
+                            </h1>
+                        </div>
+                        <p class="text-green-100">{{ course.title }}</p>
                     </div>
-                {% empty %}
-                    <p>This module has no contents yet.</p>
-                {% endfor %}
+                </div>
             </div>
-            <h3>Add new content:</h3>
-            <ul class="content-types">
-                <li>
-                    <a href="{% url "module_content_create" module.id "text" %}">
-                        Text
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url "module_content_create" module.id "image" %}">
-                        Image
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url "module_content_create" module.id "video" %}">
-                        Video
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url "module_content_create" module.id "file" %}">
-                        File
-                    </a>
-                </li>
-            </ul>
         </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Sidebar: Module List -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 sticky top-6">
+                        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-indigo-100">
+                            <h3 class="font-bold text-gray-900 flex items-center">
+                                <i class="fas fa-list text-indigo-600 mr-2"></i>
+                                Daftar Modul
+                            </h3>
+                        </div>
+                        <div class="p-4">
+                            <ul id="modules" class="space-y-2">
+                                {% for m in course.modules.all %}
+                                    <li data-id="{{ m.id }}"
+                                        class="rounded-lg transition cursor-pointer {% if m == module %}bg-green-100 border-2 border-green-500{% else %}bg-gray-50 border-2 border-transparent hover:border-gray-300{% endif %}">
+                                        <a href="{% url 'module_content_list' m.id %}"
+                                           class="block p-3">
+                                            <div class="flex items-center">
+                                                <span class="w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center mr-3 text-xs font-bold">
+                                                    <span class="order">{{ m.order|add:1 }}</span>
+                                                </span>
+                                                <div class="flex-1 min-w-0">
+                                                    <p class="text-sm font-semibold text-gray-900 truncate">
+                                                        {{ m.title }}
+                                                    </p>
+                                                    <p class="text-xs text-gray-500">
+                                                        {{ m.contents.count }} konten
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% empty %}
+                                    <li class="text-center py-4 text-gray-500 text-sm">
+                                        <i class="fas fa-inbox mb-2 text-2xl"></i>
+                                        <p>Belum ada modul</p>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'course_module_update' course.id %}"
+                               class="mt-4 block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition text-sm">
+                                <i class="fas fa-edit mr-1"></i>
+                                Edit Modul
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="lg:col-span-3">
+                    <!-- Module Info Card -->
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-6 border border-green-200">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h2 class="text-2xl font-bold text-gray-900 mb-2">
+                                    Modul {{ module.order|add:1 }}: {{ module.title }}
+                                </h2>
+                                {% if module.description %}
+                                    <p class="text-gray-700">{{ module.description }}</p>
+                                {% endif %}
+                            </div>
+                            <span class="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap ml-4">
+                                <i class="fas fa-file-alt mr-1"></i>
+                                {{ module.contents.count }} Konten
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Content List -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 mb-6">
+                        <div class="bg-gradient-to-r from-green-50 to-emerald-50 px-6 py-4 border-b border-green-100">
+                            <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                                <i class="fas fa-list-check text-green-600 mr-2"></i>
+                                Konten Modul
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <div id="module-contents" class="space-y-3">
+                                {% for content in module.contents.all %}
+                                    <div data-id="{{ content.id }}"
+                                         id="content-{{ content.id }}"
+                                         class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 hover:border-green-300 transition cursor-move">
+                                        {% with item=content.item %}
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center flex-1 min-w-0">
+                                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0
+                                                        {% if item|model_name == 'text' %}bg-blue-100 text-blue-600
+                                                        {% elif item|model_name == 'video' %}bg-red-100 text-red-600
+                                                        {% elif item|model_name == 'image' %}bg-purple-100 text-purple-600
+                                                        {% elif item|model_name == 'file' %}bg-orange-100 text-orange-600
+                                                        {% endif %}">
+                                                        {% if item|model_name == 'text' %}
+                                                            <i class="fas fa-align-left"></i>
+                                                        {% elif item|model_name == 'video' %}
+                                                            <i class="fas fa-video"></i>
+                                                        {% elif item|model_name == 'image' %}
+                                                            <i class="fas fa-image"></i>
+                                                        {% elif item|model_name == 'file' %}
+                                                            <i class="fas fa-file"></i>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="flex-1 min-w-0">
+                                                        <p class="font-semibold text-gray-900 truncate">{{ item.title }}</p>
+                                                        <p class="text-xs text-gray-500 uppercase">{{ item|model_name }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="flex items-center gap-2 ml-4">
+                                                    <i class="fas fa-grip-vertical text-gray-400 cursor-move"></i>
+                                                    <a href="{% url 'module_content_update' module.id item|model_name item.id %}"
+                                                       class="w-9 h-9 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition">
+                                                        <i class="fas fa-edit text-sm"></i>
+                                                    </a>
+                                                    <button hx-post="{% url 'module_content_delete' content.id %}"
+                                                            hx-confirm="Apakah Anda yakin ingin menghapus konten '{{ item.title }}'?"
+                                                            hx-target="#content-{{ content.id }}"
+                                                            hx-swap="outerHTML swap:300ms"
+                                                            class="w-9 h-9 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center transition">
+                                                        <i class="fas fa-trash-alt text-sm"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        {% endwith %}
+                                    </div>
+                                {% empty %}
+                                    <div class="text-center py-12" id="empty-content-state">
+                                        <i class="fas fa-inbox text-gray-300 text-5xl mb-4"></i>
+                                        <p class="text-gray-500 mb-2">Modul ini belum memiliki konten</p>
+                                        <p class="text-sm text-gray-400">Tambahkan konten pembelajaran menggunakan
+                                            tombol di bawah</p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Content Card -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                        <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 py-4 border-b border-indigo-100">
+                            <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                                <i class="fas fa-plus-circle text-indigo-600 mr-2"></i>
+                                Tambah Konten Baru
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <a href="{% url 'module_content_create' module.id 'text' %}"
+                                   class="flex flex-col items-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 rounded-xl border-2 border-blue-200 hover:border-blue-400 transition group">
+                                    <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                        <i class="fas fa-align-left text-white text-2xl"></i>
+                                    </div>
+                                    <span class="font-semibold text-gray-900">Teks</span>
+                                    <span class="text-xs text-gray-600 mt-1">Artikel & konten teks</span>
+                                </a>
+
+                                <a href="{% url 'module_content_create' module.id 'video' %}"
+                                   class="flex flex-col items-center p-6 bg-gradient-to-br from-red-50 to-red-100 hover:from-red-100 hover:to-red-200 rounded-xl border-2 border-red-200 hover:border-red-400 transition group">
+                                    <div class="w-16 h-16 bg-red-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                        <i class="fas fa-video text-white text-2xl"></i>
+                                    </div>
+                                    <span class="font-semibold text-gray-900">Video</span>
+                                    <span class="text-xs text-gray-600 mt-1">YouTube & video URL</span>
+                                </a>
+
+                                <a href="{% url 'module_content_create' module.id 'image' %}"
+                                   class="flex flex-col items-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 hover:from-purple-100 hover:to-purple-200 rounded-xl border-2 border-purple-200 hover:border-purple-400 transition group">
+                                    <div class="w-16 h-16 bg-purple-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                        <i class="fas fa-image text-white text-2xl"></i>
+                                    </div>
+                                    <span class="font-semibold text-gray-900">Gambar</span>
+                                    <span class="text-xs text-gray-600 mt-1">Upload gambar</span>
+                                </a>
+
+                                <a href="{% url 'module_content_create' module.id 'file' %}"
+                                   class="flex flex-col items-center p-6 bg-gradient-to-br from-orange-50 to-orange-100 hover:from-orange-100 hover:to-orange-200 rounded-xl border-2 border-orange-200 hover:border-orange-400 transition group">
+                                    <div class="w-16 h-16 bg-orange-600 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                                        <i class="fas fa-file text-white text-2xl"></i>
+                                    </div>
+                                    <span class="font-semibold text-gray-900">File</span>
+                                    <span class="text-xs text-gray-600 mt-1">PDF, dokumen, dll</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification Container -->
+        <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
     {% endwith %}
 {% endblock %}
-{% block include_js %}
+
+{% block extra_js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5sortable/0.13.3/html5sortable.min.js"></script>
 {% endblock %}
+
 {% block domready %}
     const options = {
-    method: 'POST', mode: 'same-origin',
+    method: 'POST',
+    mode: 'same-origin',
     }
 
-    const moduleOrderUrl = "{% url "module_order" %}";
+    const moduleOrderUrl = "{% url 'module_order' %}";
     sortable('#modules', {
-    forcePlaceholderSize: true, placeholderClass: 'placeholder'})[0].addEventListener('sortupdate', function(e) {
+    forcePlaceholderSize: true,
+    placeholderClass: 'placeholder'
+    })[0].addEventListener('sortupdate', function(e) {
     modulesOrder = {};
     let modules = document.querySelectorAll('#modules li');
     modules.forEach(function (module, index) {
-    // update module index
     modulesOrder[module.dataset.id] = index;
-    // update index in HTML element
     module.querySelector('.order').innerHTML = index + 1;
     });
-    // add new order to the HTTP request options
     options['body'] = JSON.stringify(modulesOrder);
-    // send HTTP request
     fetch(moduleOrderUrl, options)
+    .then(() => showToast('Urutan modul berhasil diperbarui!', 'success'));
     });
 
     const contentOrderUrl = '{% url "content_order" %}';
@@ -107,12 +252,88 @@
     contentOrder = {};
     var contents = document.querySelectorAll('#module-contents div');
     contents.forEach(function (content, index) {
-    // update content index
     contentOrder[content.dataset.id] = index;
     });
-    // add new order to the HTTP request options
     options['body'] = JSON.stringify(contentOrder);
-    // send HTTP request
     fetch(contentOrderUrl, options)
+    .then(() => showToast('Urutan konten berhasil diperbarui!', 'success'));
     });
+
+    // Toast notification function
+    function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+    const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+
+    toast.className = `${bgColor} text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3
+    animate-slide-in`;
+    toast.innerHTML = `
+    <i class="fas ${icon} text-xl"></i>
+    <span class="font-medium">${message}</span>
+    `;
+
+    document.getElementById('toast-container').appendChild(toast);
+
+    setTimeout(() => {
+    toast.classList.add('animate-fade-out');
+    setTimeout(() => toast.remove(), 300);
+    }, 3000);
+    }
+
+    // Listen for htmx events
+    document.body.addEventListener('contentDeleted', function(evt) {
+    showToast('Konten berhasil dihapus!', 'success');
+
+    // Check if all content is removed, show empty state
+    setTimeout(() => {
+    const contentItems = document.querySelectorAll('#module-contents > div[id^="content-"]');
+    if (contentItems.length === 0) {
+    document.getElementById('module-contents').innerHTML = `
+    <div class="text-center py-12" id="empty-content-state">
+        <i class="fas fa-inbox text-gray-300 text-5xl mb-4"></i>
+        <p class="text-gray-500 mb-2">Modul ini belum memiliki konten</p>
+        <p class="text-sm text-gray-400">Tambahkan konten pembelajaran menggunakan tombol di bawah</p>
+    </div>
+    `;
+    }
+    }, 400);
+    });
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        @keyframes slide-in {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-out {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        .animate-slide-in {
+            animation: slide-in 0.3s ease-out;
+        }
+
+        .animate-fade-out {
+            animation: fade-out 0.3s ease-out;
+        }
+
+        .placeholder {
+            background: #f0fdf4;
+            border: 2px dashed #86efac;
+            opacity: 0.5;
+        }
+    </style>
 {% endblock %}
