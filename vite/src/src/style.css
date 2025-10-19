@@ -1,3 +1,21 @@
 @import "tailwindcss";
 
 @source "../../../**/**/**/**/*.{html,py,js}";
+
+.notifyx-success {
+    @apply bg-green-500 text-white;
+}
+
+.notifyx-success::before {
+    font: var(--fa-font-solid);
+    content: "\f058";
+}
+
+.notifyx-error {
+    @apply bg-red-500 text-white;
+}
+
+.notifyx-error::before {
+    font: var(--fa-font-solid);
+    content: "\f057";
+}
