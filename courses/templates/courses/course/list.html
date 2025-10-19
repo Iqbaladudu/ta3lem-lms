@@ -3,40 +3,97 @@
 {% block title %}Katalog Kursus - Ta3lem{% endblock %}
 
 {% block content %}
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Mulai Belajar Hari Ini</h1>
-            <p class="text-xl text-blue-100 max-w-2xl">Temukan kursus terbaik untuk mengembangkan keterampilan Anda dan
-                raih tujuan pembelajaran Anda.</p>
+    <!-- Hero Section - Responsive -->
+    <div class="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white py-12 sm:py-16 lg:py-24 overflow-hidden">
+        <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight px-4">
+                    Mulai Belajar Hari Ini
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-50 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
+                    Temukan kursus terbaik untuk mengembangkan keterampilan Anda dan raih tujuan pembelajaran Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
+                    <a href="#courses"
+                       class="inline-flex items-center justify-center bg-white text-blue-600 hover:bg-blue-50 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-rocket mr-2"></i>Jelajahi Kursus
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex flex-col lg:flex-row gap-8">
-            <!-- Sidebar Kategori -->
-            <aside class="lg:w-64 flex-shrink-0">
-                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
-                    <h2 class="text-lg font-semibold text-gray-900 mb-4">
-                        <i class="fas fa-filter mr-2 text-blue-600"></i>Kategori
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+            <!-- Sidebar Kategori - Mobile: Dropdown, Desktop: Sidebar -->
+            <aside class="lg:w-72 flex-shrink-0">
+                <!-- Mobile Dropdown Version -->
+                <div class="lg:hidden mb-6">
+                    <button id="category-toggle"
+                            class="w-full bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-4 flex items-center justify-between border border-gray-100">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-filter text-white text-sm"></i>
+                            </div>
+                            <span class="font-bold text-gray-900">Kategori</span>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-500"></i>
+                    </button>
+                    <div id="category-menu"
+                         class="hidden mt-2 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-4 border border-gray-100">
+                        <ul class="space-y-1.5">
+                            <li>
+                                <a href="{% url 'course_list' %}"
+                                   class="group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 {% if not subject %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
+                                    <span class="font-semibold text-sm">Semua Kursus</span>
+                                    <span class="px-2.5 py-1 text-xs font-bold rounded-full {% if not subject %}bg-white/20{% else %}bg-gray-100 text-gray-600{% endif %}">
+                                        {{ courses.paginator.count }}
+                                    </span>
+                                </a>
+                            </li>
+                            {% for s in subjects %}
+                                <li>
+                                    <a href="{% url 'course_list_subject' s.slug %}"
+                                       class="group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 {% if subject.slug == s.slug %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
+                                        <span class="font-medium text-sm truncate mr-2">{{ s.title }}</span>
+                                        <span class="px-2.5 py-1 text-xs font-bold rounded-full flex-shrink-0 {% if subject.slug == s.slug %}bg-white/20{% else %}bg-gray-100 text-gray-600{% endif %}">
+                                            {{ s.total_courses }}
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Desktop Sidebar Version -->
+                <div class="hidden lg:block bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sticky top-24 border border-gray-100">
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-filter text-white text-sm"></i>
+                        </div>
+                        Kategori
                     </h2>
-                    <ul class="space-y-2">
+                    <ul class="space-y-1.5">
                         <li>
                             <a href="{% url 'course_list' %}"
-                               class="flex items-center justify-between px-3 py-2 rounded-lg transition {% if not subject %}bg-blue-50 text-blue-700 font-medium{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
-                                <span>Semua Kursus</span>
-                                <span class="text-sm {% if not subject %}text-blue-600{% else %}text-gray-500{% endif %}">
-                                {{ courses.paginator.count }}
-                            </span>
+                               class="group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 {% if not subject %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
+                                <span class="font-semibold">Semua Kursus</span>
+                                <span class="px-2.5 py-1 text-xs font-bold rounded-full {% if not subject %}bg-white/20{% else %}bg-gray-100 text-gray-600{% endif %}">
+                                    {{ courses.paginator.count }}
+                                </span>
                             </a>
                         </li>
                         {% for s in subjects %}
                             <li>
                                 <a href="{% url 'course_list_subject' s.slug %}"
-                                   class="flex items-center justify-between px-3 py-2 rounded-lg transition {% if subject.slug == s.slug %}bg-blue-50 text-blue-700 font-medium{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
-                                    <span>{{ s.title }}</span>
-                                    <span class="text-sm {% if subject.slug == s.slug %}text-blue-600{% else %}text-gray-500{% endif %}">
-                                {{ s.total_courses }}
-                            </span>
+                                   class="group flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 {% if subject.slug == s.slug %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
+                                    <span class="font-medium">{{ s.title }}</span>
+                                    <span class="px-2.5 py-1 text-xs font-bold rounded-full {% if subject.slug == s.slug %}bg-white/20{% else %}bg-gray-100 text-gray-600{% endif %}">
+                                        {{ s.total_courses }}
+                                    </span>
                                 </a>
                             </li>
                         {% endfor %}
@@ -45,98 +102,84 @@
             </aside>
 
             <!-- Main Content -->
-            <main class="flex-1">
+            <main class="flex-1" id="courses">
                 {% if subject %}
-                    <div class="mb-8">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-2">{{ subject.title }}</h2>
-                        <p class="text-gray-600">{{ courses.paginator.count }} kursus tersedia</p>
+                    <div class="mb-6 sm:mb-8">
+                        <div class="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-50 rounded-full mb-3 sm:mb-4">
+                            <i class="fas fa-tag text-blue-600 mr-2 text-xs sm:text-sm"></i>
+                            <span class="text-xs sm:text-sm font-semibold text-blue-700">Kategori</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-2">{{ subject.title }}</h2>
+                        <p class="text-gray-600 text-sm sm:text-base lg:text-lg">{{ courses.paginator.count }} kursus
+                            tersedia</p>
                     </div>
                 {% endif %}
 
                 {% if courses %}
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                         {% for course in courses %}
                             <article
-                                    class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
+                                    class="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-blue-200 hover:-translate-y-1">
                                 <!-- Course Thumbnail -->
-                                <div class="relative h-48 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
-                                    <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                                <div class="relative h-40 sm:h-48 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 overflow-hidden">
+                                    <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-300"></div>
                                     <div class="absolute inset-0 flex items-center justify-center">
-                                        <i class="fas fa-book-open text-6xl text-white opacity-20"></i>
+                                        <i class="fas fa-book-open text-5xl sm:text-6xl lg:text-7xl text-white/20 group-hover:scale-110 transition-transform duration-300"></i>
                                     </div>
-                                    <div class="absolute top-4 right-4">
-                            <span class="bg-white bg-opacity-90 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
-                                {{ course.subject.title }}
-                            </span>
+                                    <div class="absolute top-3 sm:top-4 right-3 sm:right-4">
+                                        <span class="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 bg-white/95 backdrop-blur-sm text-gray-800 rounded-full text-xs font-bold shadow-lg">
+                                            <i class="fas fa-bookmark mr-1 sm:mr-1.5 text-blue-600 text-[10px] sm:text-xs"></i>
+                                            <span class="truncate max-w-[80px] sm:max-w-none">{{ course.subject.title }}</span>
+                                        </span>
+                                    </div>
+                                    <div class="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
+                                        <span class="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 bg-green-500 text-white rounded-full text-xs font-bold shadow-lg">
+                                            <i class="fas fa-check-circle mr-1 sm:mr-1.5 text-[10px] sm:text-xs"></i>GRATIS
+                                        </span>
                                     </div>
                                 </div>
 
                                 <!-- Course Info -->
-                                <div class="p-6">
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition line-clamp-2">
+                                <div class="p-4 sm:p-5 lg:p-6">
+                                    <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-600 transition-colors duration-200 line-clamp-2 leading-tight">
                                         <a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a>
                                     </h3>
-                                    <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ course.overview|truncatewords:15 }}</p>
+                                    <p class="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed">{{ course.overview|truncatewords:20 }}</p>
 
-                                    <div class="flex items-center text-sm text-gray-500 mb-4">
-                                        <i class="fas fa-user-circle mr-2"></i>
-                                        <span>{{ course.owner.username }}</span>
+                                    <div class="flex items-center text-xs sm:text-sm text-gray-500 mb-4 sm:mb-5 pb-4 sm:pb-5 border-b border-gray-100">
+                                        <div class="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs mr-2">
+                                            {{ course.owner.username.0|upper }}
+                                        </div>
+                                        <span class="font-medium truncate">{{ course.owner.username }}</span>
                                     </div>
 
-                                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                                        <div class="flex items-center text-sm text-gray-600">
-                                            <i class="fas fa-book mr-2 text-blue-600"></i>
+                                    <div class="flex items-center justify-between flex-wrap gap-3">
+                                        <div class="flex items-center text-xs sm:text-sm font-semibold text-gray-700">
+                                            <i class="fas fa-layer-group mr-1.5 sm:mr-2 text-blue-600 text-xs sm:text-sm"></i>
                                             <span>{{ course.total_modules }} modul</span>
                                         </div>
                                         <a href="{% url 'course_detail' course.slug %}"
-                                           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition">
-                                            Lihat Detail
-                                            <i class="fas fa-arrow-right ml-2"></i>
+                                           class="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs sm:text-sm font-bold rounded-xl hover:from-blue-700 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
+                                            Lihat
+                                            <i class="fas fa-arrow-right ml-1.5 sm:ml-2 text-xs"></i>
                                         </a>
                                     </div>
                                 </div>
                             </article>
                         {% endfor %}
                     </div>
-
-                    <!-- Pagination -->
-                    {% if is_paginated %}
-                        <div class="mt-12 flex justify-center">
-                            <nav class="inline-flex rounded-lg shadow-sm" aria-label="Pagination">
-                                {% if page_obj.has_previous %}
-                                    <a href="?page=1"
-                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-50">
-                                        <i class="fas fa-angle-double-left"></i>
-                                    </a>
-                                    <a href="?page={{ page_obj.previous_page_number }}"
-                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
-                                        <i class="fas fa-angle-left"></i>
-                                    </a>
-                                {% endif %}
-
-                                <span class="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 border border-gray-300">
-                        Halaman {{ page_obj.number }} dari {{ page_obj.paginator.num_pages }}
-                    </span>
-
-                                {% if page_obj.has_next %}
-                                    <a href="?page={{ page_obj.next_page_number }}"
-                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border-t border-b border-gray-300 hover:bg-gray-50">
-                                        <i class="fas fa-angle-right"></i>
-                                    </a>
-                                    <a href="?page={{ page_obj.paginator.num_pages }}"
-                                       class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-50">
-                                        <i class="fas fa-angle-double-right"></i>
-                                    </a>
-                                {% endif %}
-                            </nav>
-                        </div>
-                    {% endif %}
-
                 {% else %}
-                    <div class="text-center py-12">
-                        <i class="fas fa-inbox text-6xl text-gray-300 mb-4"></i>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Tidak ada kursus</h3>
-                        <p class="text-gray-600">Belum ada kursus tersedia untuk kategori ini.</p>
+                    <div class="text-center py-12 sm:py-16 lg:py-20 px-4">
+                        <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                            <i class="fas fa-inbox text-4xl sm:text-5xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Tidak ada kursus</h3>
+                        <p class="text-gray-600 text-sm sm:text-base mb-6 sm:mb-8">Belum ada kursus dalam kategori
+                            ini.</p>
+                        <a href="{% url 'course_list' %}"
+                           class="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-sm sm:text-base">
+                            <i class="fas fa-arrow-left mr-2"></i>Kembali ke semua kursus
+                        </a>
                     </div>
                 {% endif %}
             </main>
@@ -144,3 +187,20 @@
     </div>
 {% endblock %}
 
+{% block extra_js %}
+    <script>
+        // Mobile category toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryToggle = document.getElementById('category-toggle');
+            const categoryMenu = document.getElementById('category-menu');
+
+            if (categoryToggle && categoryMenu) {
+                categoryToggle.addEventListener('click', function () {
+                    categoryMenu.classList.toggle('hidden');
+                    const icon = categoryToggle.querySelector('.fa-chevron-down');
+                    icon.classList.toggle('rotate-180');
+                });
+            }
+        });
+    </script>
+{% endblock %}

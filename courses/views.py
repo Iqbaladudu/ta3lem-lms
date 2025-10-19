@@ -230,12 +230,6 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
 
         return context
 
-    def get_template_names(self):
-        # Return partial template for htmx requests
-        if self.request.headers.get('HX-Request'):
-            return ['courses/manage/course/partials/course_list_partial.html']
-        return [self.template_name]
-
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
     permission_required = 'courses.add_course'

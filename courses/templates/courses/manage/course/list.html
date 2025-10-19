@@ -4,19 +4,21 @@
 
 {% block content %}
     <!-- Header Section -->
-    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between">
+    <div class="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white py-12 sm:py-16 overflow-hidden">
+        <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
                         <i class="fas fa-chalkboard-teacher mr-3"></i>
                         Dashboard Instruktur
                     </h1>
-                    <p class="text-xl text-indigo-100">Kelola kursus dan pantau pembelajaran siswa</p>
+                    <p class="text-xl text-indigo-50">Kelola kursus dan pantau pembelajaran siswa</p>
                 </div>
-                <div class="hidden md:block">
+                <div>
                     <a href="{% url 'course_create' %}"
-                       class="inline-flex items-center bg-white text-indigo-600 hover:bg-indigo-50 font-semibold py-3 px-6 rounded-lg transition shadow-lg hover:shadow-xl">
+                       class="inline-flex items-center bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 shadow-2xl hover:shadow-3xl hover:scale-105">
                         <i class="fas fa-plus-circle mr-2"></i>
                         Buat Kursus Baru
                     </a>
@@ -25,21 +27,21 @@
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         <!-- Statistics Overview -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" id="stats-container">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" id="stats-container">
             <!-- Total Kursus Card -->
             <div class="relative bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full -ml-12 -mb-12"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                 <div class="relative z-10">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
                             <i class="fas fa-book text-3xl text-white"></i>
                         </div>
                     </div>
                     <div>
-                        <p class="text-blue-100 text-sm font-medium mb-1">Total Kursus</p>
+                        <p class="text-blue-100 text-sm font-semibold mb-1">Total Kursus</p>
                         <p class="text-5xl font-extrabold text-white mb-1" id="total-courses">{{ total_courses }}</p>
                         <p class="text-xs text-blue-100 opacity-90">Kursus yang dibuat</p>
                     </div>
@@ -48,16 +50,16 @@
 
             <!-- Total Siswa Card -->
             <div class="relative bg-gradient-to-br from-green-500 to-green-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full -ml-12 -mb-12"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                 <div class="relative z-10">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
                             <i class="fas fa-users text-3xl text-white"></i>
                         </div>
                     </div>
                     <div>
-                        <p class="text-green-100 text-sm font-medium mb-1">Total Siswa</p>
+                        <p class="text-green-100 text-sm font-semibold mb-1">Total Siswa</p>
                         <p class="text-5xl font-extrabold text-white mb-1" id="total-students">{{ total_students }}</p>
                         <p class="text-xs text-green-100 opacity-90">Siswa terdaftar</p>
                     </div>
@@ -66,16 +68,16 @@
 
             <!-- Total Modul Card -->
             <div class="relative bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full -ml-12 -mb-12"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                 <div class="relative z-10">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
                             <i class="fas fa-list-check text-3xl text-white"></i>
                         </div>
                     </div>
                     <div>
-                        <p class="text-purple-100 text-sm font-medium mb-1">Total Modul</p>
+                        <p class="text-purple-100 text-sm font-semibold mb-1">Total Modul</p>
                         <p class="text-5xl font-extrabold text-white mb-1" id="total-modules">{{ total_modules }}</p>
                         <p class="text-xs text-purple-100 opacity-90">Modul pembelajaran</p>
                     </div>
@@ -84,16 +86,16 @@
 
             <!-- Total Konten Card -->
             <div class="relative bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full -ml-12 -mb-12"></div>
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                 <div class="relative z-10">
                     <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
                             <i class="fas fa-file-alt text-3xl text-white"></i>
                         </div>
                     </div>
                     <div>
-                        <p class="text-orange-100 text-sm font-medium mb-1">Total Konten</p>
+                        <p class="text-orange-100 text-sm font-semibold mb-1">Total Konten</p>
                         <p class="text-5xl font-extrabold text-white mb-1" id="total-contents">{{ total_contents }}</p>
                         <p class="text-xs text-orange-100 opacity-90">Materi pembelajaran</p>
                     </div>
@@ -101,208 +103,134 @@
             </div>
         </div>
 
-        {% if object_list or search %}
-            <!-- Course Management Section with Search -->
-            <div class="mb-6">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <h2 class="text-2xl font-bold text-gray-900">
-                        Kelola Kursus <span class="text-indigo-600" id="course-count">({{ total_courses }})</span>
-                    </h2>
+        <!-- Course List Section -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 sm:px-8 py-6 border-b border-indigo-100">
+                <h2 class="text-2xl font-extrabold text-gray-900 flex items-center">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mr-3">
+                        <i class="fas fa-book text-white"></i>
+                    </div>
+                    Daftar Kursus
+                </h2>
+                <p class="text-gray-600 mt-2 text-sm">Kelola semua kursus yang Anda buat</p>
+            </div>
 
-                    <!-- Search Bar with HTMX -->
-                    <div class="w-full sm:w-auto flex gap-2">
-                        <div class="relative flex-1 sm:w-64">
-                            <input type="search"
-                                   name="search"
-                                   id="search-input"
-                                   value="{{ search }}"
-                                   placeholder="Cari kursus..."
-                                   hx-get="{% url 'manage_course_list' %}"
-                                   hx-trigger="keyup changed delay:500ms, search"
-                                   hx-target="#course-container"
-                                   hx-indicator="#search-indicator"
-                                   class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
-                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                            <div id="search-indicator" class="htmx-indicator absolute right-3 top-3">
-                                <i class="fas fa-spinner fa-spin text-indigo-600"></i>
+            <div class="p-6 sm:p-8" id="course-list-container" hx-get="{% url 'manage_course_list' %}"
+                 hx-trigger="load" hx-select="#course-grid" hx-swap="innerHTML">
+                <!-- Course list will be loaded here via HTMX -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="course-grid">
+                    {% for course in object_list %}
+                        <article
+                                class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group border border-gray-100"
+                                id="course-{{ course.id }}">
+                            <!-- Course Header -->
+                            <div class="relative h-48 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 overflow-hidden">
+                                <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-6xl text-white opacity-20"></i>
+                                </div>
+                                <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
+                    <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                        <i class="fas fa-star mr-1"></i>{{ course.subject.title }}
+                    </span>
+                                    <span class="bg-white bg-opacity-90 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                        <i class="fas fa-users mr-1"></i>{{ course.students.count }}
+                    </span>
+                                </div>
+                                <!-- Course Stats Bar -->
+                                <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 backdrop-blur-sm px-4 py-2">
+                                    <div class="flex items-center justify-between text-white text-xs font-medium">
+                                        <span><i class="fas fa-book mr-1"></i>{{ course.modules.count }} modul</span>
+                                        <span>
+                            <i class="fas fa-file-alt mr-1"></i>
+                                            {% with course.modules.all as modules %}
+                                                {{ modules|length|add:"0" }}
+                                                {% for module in modules %}
+                                                    {% if forloop.first %}{{ module.contents.count }}{% endif %}
+                                                {% endfor %}
+                                            {% endwith %}
+                                            konten
+                        </span>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Course Info -->
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition line-clamp-2 min-h-[3.5rem]">
+                                    {{ course.title }}
+                                </h3>
+
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
+                                    {{ course.overview|truncatewords:15 }}
+                                </p>
+
+                                <div class="flex items-center text-sm text-gray-500 mb-4 pb-4 border-b border-gray-100">
+                                    <i class="fas fa-calendar-alt mr-2 text-indigo-500"></i>
+                                    <span>Dibuat {{ course.created|date:"d M Y" }}</span>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="grid grid-cols-2 gap-2 mb-3">
+                                    <a href="{% url 'course_edit' course.id %}"
+                                       class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                        <i class="fas fa-edit mr-2"></i>
+                                        Edit
+                                    </a>
+                                    <a href="{% url 'course_module_update' course.id %}"
+                                       class="flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                        <i class="fas fa-layer-group mr-2"></i>
+                                        Modul
+                                    </a>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    {% if course.modules.count > 0 %}
+                                        <a href="{% url 'module_content_list' course.modules.first.id %}"
+                                           class="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                            <i class="fas fa-folder-open mr-2"></i>
+                                            Konten
+                                        </a>
+                                    {% else %}
+                                        <button disabled
+                                                class="flex items-center justify-center bg-gray-300 text-gray-500 text-sm font-medium py-2 px-3 rounded-lg cursor-not-allowed">
+                                            <i class="fas fa-folder-open mr-2"></i>
+                                            Konten
+                                        </button>
+                                    {% endif %}
+                                    <button hx-delete="{% url 'course_delete' course.id %}"
+                                            hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
+                                            hx-target="#course-{{ course.id }}"
+                                            hx-swap="outerHTML swap:1s"
+                                            class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                        <i class="fas fa-trash-alt mr-2"></i>
+                                        Hapus
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+
+                {% if not object_list %}
+                    <!-- Empty State -->
+                    <div class="bg-white rounded-xl shadow-sm p-12 text-center" id="empty-state">
+                        <div class="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-chalkboard-teacher text-5xl text-indigo-600"></i>
                         </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Mulai Berbagi Ilmu Anda</h3>
+                        <p class="text-gray-600 mb-8 max-w-md mx-auto">
+                            Anda belum membuat kursus apapun. Mulai ciptakan pengalaman pembelajaran yang luar biasa
+                            untuk siswa Anda.
+                        </p>
                         <a href="{% url 'course_create' %}"
-                           class="sm:hidden flex items-center justify-center w-10 h-10 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition">
-                            <i class="fas fa-plus"></i>
+                           class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition shadow-lg hover:shadow-xl">
+                            <i class="fas fa-plus-circle mr-2"></i>
+                            Buat Kursus Pertama
                         </a>
                     </div>
-                </div>
-            </div>
-
-            <!-- Course Grid Container -->
-            <div id="course-container">
-                {% include 'courses/manage/course/partials/course_list_partial.html' %}
-            </div>
-
-        {% else %}
-            <!-- Empty State -->
-            <div class="bg-white rounded-xl shadow-sm p-12 text-center">
-                <div class="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-chalkboard-teacher text-5xl text-indigo-600"></i>
-                </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">Mulai Berbagi Ilmu Anda</h3>
-                <p class="text-gray-600 mb-8 max-w-md mx-auto">
-                    Anda belum membuat kursus apapun. Mulai ciptakan pengalaman pembelajaran yang luar biasa untuk siswa
-                    Anda.
-                </p>
-                <a href="{% url 'course_create' %}"
-                   class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition shadow-lg hover:shadow-xl">
-                    <i class="fas fa-plus-circle mr-2"></i>
-                    Buat Kursus Pertama
-                </a>
-            </div>
-        {% endif %}
-
-        <!-- Quick Tips Section -->
-        <div class="mt-12 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-8 border border-indigo-100">
-            <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
-                Tips untuk Instruktur
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="flex items-start">
-                    <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <i class="fas fa-book-open text-white"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-1">Struktur yang Jelas</h4>
-                        <p class="text-sm text-gray-600">Susun modul secara logis dan berurutan untuk memudahkan siswa
-                            memahami materi.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <i class="fas fa-video text-white"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-1">Konten Multimedia</h4>
-                        <p class="text-sm text-gray-600">Gunakan kombinasi video, teks, dan gambar untuk meningkatkan
-                            engagement.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                        <i class="fas fa-users text-white"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-900 mb-1">Interaksi Aktif</h4>
-                        <p class="text-sm text-gray-600">Pantau progress siswa dan berikan feedback untuk meningkatkan
-                            pembelajaran.</p>
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
-
-    <!-- Toast Notification Container -->
-    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
-{% endblock %}
-
-{% block extra_js %}
-    <script>
-        // Toast notification function
-        function showToast(message, type = 'success') {
-            const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
-            const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-
-            toast.className = `${bgColor} text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3 animate-slide-in`;
-            toast.innerHTML = `
-            <i class="fas ${icon} text-xl"></i>
-            <span class="font-medium">${message}</span>
-        `;
-
-            document.getElementById('toast-container').appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.add('animate-fade-out');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // Listen for htmx events
-        document.body.addEventListener('courseDeleted', function (evt) {
-            showToast('Kursus berhasil dihapus!', 'success');
-
-            // Update course count
-            const courseCount = document.getElementById('course-count');
-            const totalCourses = document.getElementById('total-courses');
-            if (courseCount && totalCourses) {
-                const current = parseInt(totalCourses.textContent);
-                const newCount = current - 1;
-                totalCourses.textContent = newCount;
-                courseCount.textContent = `(${newCount})`;
-            }
-
-            // Reload the page after a short delay to update stats
-            setTimeout(() => window.location.reload(), 1500);
-        });
-
-        document.body.addEventListener('contentDeleted', function (evt) {
-            showToast('Konten berhasil dihapus!', 'success');
-        });
-
-        // Show loading indicator
-        document.body.addEventListener('htmx:beforeRequest', function (evt) {
-            if (evt.detail.elt.id === 'search-input') {
-                document.getElementById('search-indicator').classList.add('htmx-indicator-active');
-            }
-        });
-
-        document.body.addEventListener('htmx:afterRequest', function (evt) {
-            if (evt.detail.elt.id === 'search-input') {
-                document.getElementById('search-indicator').classList.remove('htmx-indicator-active');
-            }
-        });
-    </script>
-
-    <style>
-        .htmx-indicator {
-            opacity: 0;
-            transition: opacity 200ms ease-in;
-        }
-
-        .htmx-indicator-active {
-            opacity: 1;
-        }
-
-        @keyframes slide-in {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fade-out {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
-        }
-
-        .animate-slide-in {
-            animation: slide-in 0.3s ease-out;
-        }
-
-        .animate-fade-out {
-            animation: fade-out 0.3s ease-out;
-        }
-
-        #course-container.htmx-swapping {
-            opacity: 0.5;
-            transition: opacity 200ms ease-out;
-        }
-    </style>
 {% endblock %}

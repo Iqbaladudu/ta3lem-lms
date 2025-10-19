@@ -9,9 +9,12 @@ def get_config(setting_name):
     config = {
         "NPM_BIN_PATH": getattr(settings, "NPM_BIN_PATH", "npm"),
         "VITE_DEV_SERVER_URL": vite_dev_server_url,
-        "VITE_DEV_MODE": getattr(settings, "VITE_DEV_MODE", False),
+        "VITE_DEV_MODE": getattr(settings, "VITE_DEV_MODE", True),
         "VITE_JS_ENTRYPOINT": getattr(settings, "VITE_JS_ENTRYPOINT", f"{vite_dev_server_url}/src/index.ts"),
         "VITE_CSS_ENTRYPOINT": getattr(settings, "VITE_CSS_ENTRYPOINT", f"{vite_dev_server_url}/src/style.css"),
+        "VITE_MANIFEST_PATH": getattr(settings, "VITE_MANIFEST_PATH",
+                                      os.path.join(settings.BASE_DIR, "vite", "static", "dist", ".vite",
+                                                   "manifest.json")),
     }
 
     return config[setting_name]
