@@ -1,6 +1,6 @@
 import os.path
+import shutil
 import subprocess
-import threading
 
 from django.apps import apps
 from django.conf import settings
@@ -22,7 +22,6 @@ class Command(BaseCommand):
         parser.add_argument('package_name', type=str, help='NPM package name to install')
 
     def handle(self, *args, **options):
-        print(options)
         subcommand = options.get("package_name")
 
         if subcommand == "dev":
@@ -30,101 +29,36 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.ERROR(f"Unknown subcommand: {subcommand}"))
 
-    def stream_output(self, process, prefix, style_func=None):
-        """Thread function untuk membaca output dari proses"""
-        try:
-            for line in iter(process.stdout.readline, ''):
-                if line:
-                    if style_func:
-                        self.stdout.write(style_func(f"{prefix}: {line.strip()}"))
-                    else:
-                        self.stdout.write(f"{prefix}: {line.strip()}")
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f"{prefix} error: {e}"))
-
-    def stream_error(self, process, prefix):
-        """Thread function untuk membaca error output dari proses"""
-        try:
-            for line in iter(process.stderr.readline, ''):
-                if line:
-                    self.stdout.write(self.style.WARNING(f"{prefix} [ERROR]: {line.strip()}"))
-        except Exception as e:
-            self.stdout.write(self.style.ERROR(f"{prefix} stderr error: {e}"))
-
     def handle_dev(self):
-        vite_dir = self.get_app_cwd(app_name="vite")
         django_dir = settings.BASE_DIR
+        vite_dir = self.get_app_cwd(app_name="vite")
         vite_server = NpmManager(cwd=f'{vite_dir}/src')
 
-        if vite_server.is_npm_installed():
-            vite_process = vite_server.npm_run_dev()
+        if not vite_server.is_npm_installed():
+            self.stdout.write(self.style.ERROR('npm is not installed'))
+            return
 
-            if not vite_process:
-                self.stdout.write(self.style.ERROR('Failed to start Vite server'))
-                return
-
-            django_process = subprocess.Popen(
-                ["uv", "run", "manage.py", "runserver"],
-                cwd=django_dir,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-
-            # Buat thread untuk membaca output dari kedua proses
-            vite_stdout_thread = threading.Thread(
-                target=self.stream_output,
-                args=(vite_process, "Vite", self.style.SUCCESS),
-                daemon=True
-            )
-            vite_stderr_thread = threading.Thread(
-                target=self.stream_error,
-                args=(vite_process, "Vite"),
-                daemon=True
-            )
-            django_stdout_thread = threading.Thread(
-                target=self.stream_output,
-                args=(django_process, "Django", self.style.HTTP_INFO),
-                daemon=True
-            )
-            django_stderr_thread = threading.Thread(
-                target=self.stream_error,
-                args=(django_process, "Django"),
-                daemon=True
-            )
-
-            # Start semua thread
-            vite_stdout_thread.start()
-            vite_stderr_thread.start()
-            django_stdout_thread.start()
-            django_stderr_thread.start()
-
-            self.stdout.write(self.style.SUCCESS('\nStarting Vite and Django servers...'))
-            self.stdout.write(self.style.WARNING('Press Ctrl+C to stop both servers.\n'))
-
+        # Check if Honcho is available
+        if shutil.which('honcho'):
             try:
-                # Tunggu sampai salah satu proses berhenti atau user menekan Ctrl+C
-                while vite_process.poll() is None and django_process.poll() is None:
-                    vite_process.wait(timeout=0.1)
-                    django_process.wait(timeout=0.1)
+                self.stdout.write(self.style.SUCCESS('Starting Vite and Django with Honcho...'))
+                self.stdout.write(self.style.WARNING('Press Ctrl+C to stop all processes.\n'))
+
+                # Run honcho start in the project root
+                subprocess.run(
+                    ['honcho', 'start'],
+                    cwd=django_dir,
+                    check=True
+                )
             except KeyboardInterrupt:
-                self.stdout.write(self.style.WARNING('\n\nStopping servers...'))
-            except Exception:
-                pass
+                self.stdout.write(self.style.WARNING('\n\nStopping processes...'))
+            except subprocess.CalledProcessError as e:
+                self.stdout.write(self.style.ERROR(f'Honcho failed with error: {e}'))
+            except Exception as e:
+                self.stdout.write(self.style.ERROR(f'Unexpected error: {e}'))
             finally:
-                # Hentikan kedua proses
-                if vite_process.poll() is None:
-                    vite_process.terminate()
-                    try:
-                        vite_process.wait(timeout=5)
-                    except subprocess.TimeoutExpired:
-                        vite_process.kill()
-
-                if django_process.poll() is None:
-                    django_process.terminate()
-                    try:
-                        django_process.wait(timeout=5)
-                    except subprocess.TimeoutExpired:
-                        django_process.kill()
-
-                self.stdout.write(self.style.SUCCESS('Servers stopped.'))
+                self.stdout.write(self.style.SUCCESS('Processes stopped.'))
+        else:
+            self.stdout.write(self.style.ERROR(
+                'Honcho is not installed. Please install it with: uv add honcho'
+            ))

@@ -49,11 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
+    'vite.apps.ViteConfig',
     'embed_video',
     'debug_toolbar',
     'redisboard',
-    'tailwind',
-    'theme',
     'django_htmx',
 ]
 
