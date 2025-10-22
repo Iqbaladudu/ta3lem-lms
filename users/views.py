@@ -9,8 +9,16 @@ from django.shortcuts import redirect
 from courses.models import Course
 from .forms import CourseEnrollForm, StudentRegistrationForm, StudentLoginForm, InstructorLoginForm
 
+class StudentOnlyRedirectMixin:
+    def dispatch(self, request, *args, **kwargs):
+        is_authenticated = request.user.is_authenticated
 
-class StudentCourseDetailView(LoginRequiredMixin, DetailView):
+        if not is_authenticated:
+            return redirect('student_login')
+
+        return super().dispatch(request, *args, **kwargs)
+
+class StudentCourseDetailView(LoginRequiredMixin, StudentOnlyRedirectMixin, DetailView):
     model = Course
     template_name = "users/course/detail.html"
 
@@ -30,7 +38,7 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class StudentCourseListView(LoginRequiredMixin, ListView):
+class StudentCourseListView(LoginRequiredMixin, StudentOnlyRedirectMixin, ListView):
     model = Course
     template_name = "users/course/list.html"
 
@@ -39,7 +47,7 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
         return qs.filter(students__in=[self.request.user])
 
 
-class StudentEnrollCourseView(LoginRequiredMixin, FormView):
+class StudentEnrollCourseView(LoginRequiredMixin, StudentOnlyRedirectMixin, FormView):
     course = None
     form_class = CourseEnrollForm
 

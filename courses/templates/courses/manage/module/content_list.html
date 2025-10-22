@@ -133,17 +133,19 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex items-center gap-2 ml-4">
-                                                    <i class="fas fa-grip-vertical text-gray-400 cursor-move"></i>
+                                                    <i class="fas fa-grip-vertical text-gray-400 cursor-move mr-2"></i>
                                                     <a href="{% url 'module_content_update' module.id item|model_name item.id %}"
-                                                       class="w-9 h-9 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition">
-                                                        <i class="fas fa-edit text-sm"></i>
+                                                       class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg font-medium text-sm">
+                                                        <i class="fas fa-edit mr-2"></i>
+                                                        Edit
                                                     </a>
                                                     <button hx-post="{% url 'module_content_delete' content.id %}"
-                                                            hx-confirm="Apakah Anda yakin ingin menghapus konten '{{ item.title }}'?"
+                                                            hx-confirm="⚠️ Apakah Anda yakin ingin menghapus konten '{{ item.title }}'?\n\nTindakan ini tidak dapat dibatalkan."
                                                             hx-target="#content-{{ content.id }}"
                                                             hx-swap="outerHTML swap:300ms"
-                                                            class="w-9 h-9 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center transition">
-                                                        <i class="fas fa-trash-alt text-sm"></i>
+                                                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg font-medium text-sm border-2 border-red-700">
+                                                        <i class="fas fa-trash-alt mr-2"></i>
+                                                        Hapus
                                                     </button>
                                                 </div>
                                             </div>

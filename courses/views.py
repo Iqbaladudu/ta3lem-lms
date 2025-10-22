@@ -155,8 +155,7 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
     def dispatch(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         self.course = get_object_or_404(Course, id=pk, owner=self.request.user)
-
-        return super().dispatch(request, pk)
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         formset = self.get_formset()
@@ -165,9 +164,20 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
     def post(self, request, *args, **kwargs):
         formset = self.get_formset(data=request.POST)
         if formset.is_valid():
-            formset.save()
+            formset.save()  # ✅ CRITICAL: Save the formset data!
+
+            # Handle HTMX requests
+            if request.headers.get('HX-Request'):
+                # Return updated formset HTML for HTMX swap
+                formset = self.get_formset()  # Refresh formset with saved data
+                response = self.render_to_response({'course': self.course, 'formset': formset})
+                # Add success trigger for client-side handling
+                response['HX-Trigger'] = 'modulesUpdated'
+                return response
+
             return redirect('manage_course_list')
 
+        # Return form with errors (works for both regular and HTMX requests)
         return self.render_to_response({'course': self.course, 'formset': formset})
 
 
@@ -196,6 +206,14 @@ class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
 class ManageCourseListView(OwnerCourseMixin, ListView):
     template_name = "courses/manage/course/list.html"
     permission_required = 'courses.view_course'
+
+    def dispatch(self, request, *args, **kwargs):
+        is_authenticated = request.user.is_authenticated
+
+        if not is_authenticated:
+            return redirect('instructor_login')
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -249,7 +267,7 @@ class CourseDeleteView(OwnerCourseMixin, DeleteView):
 
         # Return htmx-friendly response
         if request.headers.get('HX-Request'):
-            response = HttpResponse(status=204)
+            response = HttpResponse('')
             response['HX-Trigger'] = 'courseDeleted'
             return response
 
