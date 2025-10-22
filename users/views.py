@@ -1,10 +1,11 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView
-
+from django.shortcuts import redirect
 from courses.models import Course
 from .forms import CourseEnrollForm, StudentRegistrationForm, StudentLoginForm, InstructorLoginForm
 
@@ -126,3 +127,32 @@ class InstructorLoginView(FormView):
         context = super().get_context_data(**kwargs)
         context['next'] = self.request.GET.get('next', '')
         return context
+
+class UserLogoutView(LogoutView):
+    # template_name = "users/logout.html"
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        is_student = user.is_student()
+        is_instructor = user.is_instructor()
+
+        # Logout the user
+        logout(request)
+
+        # Determine redirect URL based on role
+        if is_student:
+            redirect_url = reverse_lazy("student_login")
+        elif is_instructor:
+            redirect_url = reverse_lazy("instructor_login")
+        else:
+            redirect_url = reverse_lazy("student_login")
+
+        # Handle HTMX requests
+        if request.htmx:
+            response = HttpResponse()
+            response['HX-Redirect'] = str(redirect_url)
+            return response
+
+        # Handle regular requests
+        return redirect(redirect_url)
+

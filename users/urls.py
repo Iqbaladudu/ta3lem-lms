@@ -4,8 +4,10 @@ from django.views.decorators.cache import cache_page
 
 from . import views
 
+
 urlpatterns = [
     # Authentication URLs
+    path('logout', views.UserLogoutView.as_view(), name="logout"),
     path('login/', views.StudentLoginView.as_view(), name='student_login'),
     path('register/', views.StudentRegistrationView.as_view(), name='student_registration'),
     path('instructor/', views.InstructorLoginView.as_view(), name='instructor_login'),
@@ -28,9 +30,3 @@ urlpatterns = [
         name='student_course_detail_module'
     ),
 ]
-
-if settings.DEBUG:
-    # Include django_browser_reload URLs only in DEBUG mode
-    urlpatterns += [
-        path("__reload__/", include("django_browser_reload.urls")),
-    ]
