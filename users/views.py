@@ -83,7 +83,10 @@ class StudentRegistrationView(CreateView):
         message = f'Hi {user.username}, please click the link to verify your email address: {link}'
         user.email_user(subject, message)
 
-        return render(self.request, 'users/student/registration_success.html')
+        if self.request.htmx:
+            return render(self.request, 'users/student/registration_success.html')
+
+        return redirect('student_login')
 
     def form_invalid(self, form):
         if self.request.htmx:
