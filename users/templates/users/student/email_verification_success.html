@@ -1,0 +1,44 @@
+{% extends "users/auth_base.html" %}
+
+{% block title %}Verifikasi Email Berhasil - Ta3lem{% endblock %}
+
+{% block heading %}Verifikasi Email Berhasil!{% endblock %}
+
+{% block subheading %}Selamat! Akun Anda telah berhasil diverifikasi.{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100 mb-6">
+        <svg class="h-12 w-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+    </div>
+    <p class="text-gray-700 text-lg mb-6">
+        Email Anda telah berhasil diverifikasi. Anda sekarang dapat mengakses semua fitur platform Ta3lem.
+    </p>
+    <p class="text-gray-600 mb-8">
+        Selamat bergabung! Mari mulai perjalanan pembelajaran Anda.
+    </p>
+    <div class="space-y-4">
+        <a href="{% url 'student_course_list' %}"
+           class="inline-flex items-center justify-center w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-xl transition duration-200 ease-in-out transform hover:scale-105 shadow-lg">
+            <i class="fas fa-book mr-2"></i>
+            Lihat Kursus Saya
+        </a>
+        <a href="{% url 'course_list' %}"
+           class="inline-flex items-center justify-center w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-xl transition duration-200 ease-in-out">
+            <i class="fas fa-search mr-2"></i>
+            Jelajahi Kursus
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_links %}
+<p class="text-sm text-gray-600">
+    Ada pertanyaan?
+    <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold">
+        Hubungi Dukungan
+    </a>
+</p>
+{% endblock %}

@@ -1,13 +1,15 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404, render
 from courses.models import Course
 from .forms import CourseEnrollForm, StudentRegistrationForm, StudentLoginForm, InstructorLoginForm
+from .models import User
 
 class StudentOnlyRedirectMixin:
     def dispatch(self, request, *args, **kwargs):
@@ -63,22 +65,25 @@ class StudentEnrollCourseView(LoginRequiredMixin, StudentOnlyRedirectMixin, Form
 class StudentRegistrationView(CreateView):
     template_name = "users/student/registration.html"
     form_class = StudentRegistrationForm
-    success_url = reverse_lazy("student_course_list")
+    # success_url = reverse_lazy("student_course_list")
 
     def form_valid(self, form):
-        result = super().form_valid(form)
-        cd = form.cleaned_data
-        user = self.object
+        # Save the form first to create the user object
+        user = form.save(commit=False)
         user.role = 'student'
         user.is_active = True
         user.save()
-        user = authenticate(username=cd['username'], password=cd['password1'])
-        login(self.request, user)
-        if self.request.htmx:
-            response = HttpResponse()
-            response['HX-Redirect'] = str(self.success_url)
-            return response
-        return result
+
+        # generate token dan link
+        token = default_token_generator.make_token(user)
+        uid = user.pk
+        link = self.request.build_absolute_uri(reverse('verify_email', kwargs={'id': uid, 'token': token}))
+
+        subject = 'Verify your email address'
+        message = f'Hi {user.username}, please click the link to verify your email address: {link}'
+        user.email_user(subject, message)
+
+        return render(self.request, 'users/student/registration_success.html')
 
     def form_invalid(self, form):
         if self.request.htmx:
@@ -164,3 +169,12 @@ class UserLogoutView(LogoutView):
         # Handle regular requests
         return redirect(redirect_url)
 
+def verify_email(request, id, token):
+    user = get_object_or_404(User, pk=id)
+    if default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        return render(request, 'users/student/email_verification_success.html')
+    else:
+        return render(request, 'users/student/email_verification_failed.html')

@@ -1,4 +1,3 @@
-# users/models.py
 from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 
@@ -23,7 +22,7 @@ class User(AbstractUser):
         help_text='User role in the LMS'
     )
 
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
@@ -52,6 +51,7 @@ class User(AbstractUser):
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"
 
+
     def is_student(self):
         return self.role == self.STUDENT
 
@@ -62,7 +62,9 @@ class User(AbstractUser):
         return self.is_staff
 
     def save(self, *args, **kwargs):
-        self.is_staff = (self.role == self.STAFF)
+        # Only set is_staff based on role if not a superuser
+        if not self.is_superuser:
+            self.is_staff = (self.role == self.STAFF)
         return super().save(*args, **kwargs)
 
     def get_profile(self):

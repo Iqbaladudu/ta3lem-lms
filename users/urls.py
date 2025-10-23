@@ -29,4 +29,5 @@ urlpatterns = [
         cache_page(60 * 15)(views.StudentCourseDetailView.as_view()),
         name='student_course_detail_module'
     ),
+    path('verify-email/<int:id>/<str:token>/', views.verify_email, name='verify_email')
 ]
