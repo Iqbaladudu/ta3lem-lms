@@ -69,3 +69,15 @@ class InstructorLoginForm(AuthenticationForm):
             'autocomplete': 'current-password',
         })
     )
+
+
+class ResendEmailVerificationForm(forms.Form):
+    email = forms.EmailField(
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+            'class': 'block w-full pl-10 pr-3 py-3 border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 rounded-lg shadow-sm focus:outline-none focus:ring-2 transition duration-150',
+            'placeholder': 'your.email@example.com',
+            'autocomplete': 'email',
+            'required': True,
+        })
+    )

@@ -1,4 +1,4 @@
-{% extends "" %}
+{% extends "users/auth_base.html" %}
 
 {% block title %}Pendaftaran Berhasil - Ta3lem{% endblock %}
 
@@ -7,7 +7,7 @@
 {% block subheading %}Silakan periksa email Anda untuk link konfirmasi.{% endblock %}
 
 {% block content %}
-<div class="text-center">
+<div class="text-center" id="registration-success">
     <div class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 mb-6">
         <svg class="h-12 w-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>

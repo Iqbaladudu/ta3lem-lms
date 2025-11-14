@@ -8,8 +8,9 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView
 from django.shortcuts import redirect, get_object_or_404, render
 from courses.models import Course
-from .forms import CourseEnrollForm, StudentRegistrationForm, StudentLoginForm, InstructorLoginForm
+from .forms import CourseEnrollForm, StudentRegistrationForm, StudentLoginForm, InstructorLoginForm, ResendEmailVerificationForm
 from .models import User
+from django.views import View
 
 class StudentOnlyRedirectMixin:
     def dispatch(self, request, *args, **kwargs):
@@ -71,7 +72,7 @@ class StudentRegistrationView(CreateView):
         # Save the form first to create the user object
         user = form.save(commit=False)
         user.role = 'student'
-        user.is_active = True
+        user.is_active = False
         user.save()
 
         # generate token dan link
@@ -181,3 +182,31 @@ def verify_email(request, id, token):
         return render(request, 'users/student/email_verification_success.html')
     else:
         return render(request, 'users/student/email_verification_failed.html')
+
+class ResendEmailVerificationView(FormView):
+    template_name = "users/student/resend_verification_email.html"
+    form_class = ResendEmailVerificationForm
+    success_url = reverse_lazy('student_login')
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        user = get_object_or_404(User, email=email, role='student', is_active=False)
+
+        # generate token dan link
+        token = default_token_generator.make_token(user)
+        uid = user.pk
+        link = self.request.build_absolute_uri(reverse('verify_email', kwargs={'id': uid, 'token': token}))
+
+        subject = 'Verify your email address'
+        message = f'Hi {user.username}, please click the link to verify your email address: {link}'
+        user.email_user(subject, message)
+
+        if self.request.htmx:
+            return render(self.request, 'users/student/resend_verification_email_success.html')
+
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        if self.request.htmx:
+            return self.render_to_response(self.get_context_data(form=form))
+        return super().form_invalid(form)

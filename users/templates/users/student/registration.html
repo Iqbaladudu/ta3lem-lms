@@ -15,7 +15,7 @@
               hx-post="{% url 'student_registration' %}"
               hx-target="#registration-form-container"
               hx-swap="innerHTML"
-              hx-select="form"
+              hx-select="#registration-success"
               hx-indicator="#loading-indicator"
               class="space-y-6">
             {% csrf_token %}
