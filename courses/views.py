@@ -1,3 +1,5 @@
+from traceback import print_tb
+
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -141,11 +143,15 @@ class ContentDeleteView(View):
         content.item.delete()
         content.delete()
 
-        # Return htmx-friendly response
         if request.headers.get('HX-Request'):
-            response = HttpResponse(status=204)
-            response['HX-Trigger'] = 'contentDeleted'
-            return response
+            return HttpResponse(
+                status=200,
+                headers={
+                    'HX-Trigger': 'contentDeleted',
+                    'HX-Reswap': 'outerHTML',
+                    'HX-Retarget': f'#content-{id}'
+                }
+            )
 
         return redirect('module_content_list', module.id)
 

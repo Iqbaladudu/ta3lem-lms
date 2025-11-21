@@ -21,6 +21,16 @@ class StudentOnlyRedirectMixin:
 
         return super().dispatch(request, *args, **kwargs)
 
+class UserAlreadyAuthenticatedMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            print(request.user.is_authenticated)
+            if request.user.is_student():
+                return redirect('student_course_list')
+            elif request.user.is_instructor():
+                return redirect('manage_course_list')
+        return super().dispatch(request, *args, **kwargs)
+
 class StudentCourseDetailView(LoginRequiredMixin, StudentOnlyRedirectMixin, DetailView):
     model = Course
     template_name = "users/course/detail.html"
@@ -95,7 +105,7 @@ class StudentRegistrationView(CreateView):
         return super().form_invalid(form)
 
 
-class StudentLoginView(FormView):
+class StudentLoginView(UserAlreadyAuthenticatedMixin, FormView):
     template_name = "users/student/login.html"
     form_class = StudentLoginForm
     success_url = reverse_lazy("student_course_list")
@@ -115,7 +125,7 @@ class StudentLoginView(FormView):
         return context
 
 
-class InstructorLoginView(FormView):
+class InstructorLoginView(UserAlreadyAuthenticatedMixin ,FormView):
     template_name = "users/instructor/login.html"
     form_class = InstructorLoginForm
     success_url = reverse_lazy("manage_course_list")

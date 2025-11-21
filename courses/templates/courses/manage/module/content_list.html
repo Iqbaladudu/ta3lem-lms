@@ -140,9 +140,10 @@
                                                         Edit
                                                     </a>
                                                     <button hx-post="{% url 'module_content_delete' content.id %}"
-                                                            hx-confirm="⚠️ Apakah Anda yakin ingin menghapus konten '{{ item.title }}'?\n\nTindakan ini tidak dapat dibatalkan."
+                                                            hx-confirm="⚠Apakah Anda yakin ingin menghapus konten '{{ item.title }}'?\n\nTindakan ini tidak dapat dibatalkan."
                                                             hx-target="#content-{{ content.id }}"
                                                             hx-swap="outerHTML swap:300ms"
+                                                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                                                             class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg font-medium text-sm border-2 border-red-700">
                                                         <i class="fas fa-trash-alt mr-2"></i>
                                                         Hapus

@@ -4,6 +4,7 @@ Settings untuk environment development/local.
 """
 
 from .base import *
+import os
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+gdddxtl)^fib#1+ffnch4^u)0dw02_r5zeep%g2zlohgj9(bt'
@@ -26,11 +27,15 @@ INTERNAL_IPS = [
 # Development-specific middleware
 MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 
-# Database - SQLite untuk development
+# Database - PostgreSQL (disarankan)
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'ta3lem'),
+        'USER': os.environ.get('DB_USER', 'ta3lem'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'ta3lem'),
+        'HOST': os.environ.get('DB_HOST', '0.0.0.0'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
 
