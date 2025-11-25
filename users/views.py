@@ -10,7 +10,7 @@ from django.shortcuts import redirect, get_object_or_404, render
 from courses.models import Course
 from .forms import CourseEnrollForm, StudentRegistrationForm, StudentLoginForm, InstructorLoginForm, ResendEmailVerificationForm
 from .models import User
-from django.views import View
+from django.core.cache import cache
 
 class StudentOnlyRedirectMixin:
     def dispatch(self, request, *args, **kwargs):
@@ -110,9 +110,14 @@ class StudentLoginView(UserAlreadyAuthenticatedMixin, FormView):
     form_class = StudentLoginForm
     success_url = reverse_lazy("student_course_list")
 
+    # recreate cache in main view after login
+    course_list_url = reverse_lazy("course_list")
+    coursee_list_cache_key = f'course'
+
     def form_valid(self, form):
         user = form.get_user()
         login(self.request, user)
+
         if self.request.htmx:
             response = HttpResponse()
             response['HX-Redirect'] = str(self.success_url)

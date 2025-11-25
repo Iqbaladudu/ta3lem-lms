@@ -21,7 +21,6 @@ from .models import Course, Module, Content, Subject
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class CourseListView(ListView):
     model = Course
     template_name = 'courses/course/list.html'
