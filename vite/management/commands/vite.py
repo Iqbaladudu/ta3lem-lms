@@ -12,11 +12,18 @@ from vite import NpmManager
 class Command(BaseCommand):
     help = "Vite management command"
 
+    def __init__(self):
+        super().__init__()
+        self.npm = NpmManager(cwd=f'{self.get_app_cwd(app_name="vite")}/src')
+
     @staticmethod
     def get_app_cwd(app_name):
         app_config = apps.get_app_config(app_name)
         app_path = app_config.path
         return os.path.abspath(app_path)
+
+    def get_vite_dir(self, app_name):
+        return self.get_app_cwd(app_name)
 
     def add_arguments(self, parser):
         parser.add_argument('package_name', type=str, help='NPM package name to install')
@@ -27,16 +34,11 @@ class Command(BaseCommand):
         if subcommand == "dev":
             self.handle_dev()
         elif subcommand == "install":
-            self.handle_install()
+            self.npm.npm_install()
+        elif subcommand == "build":
+            self.npm.npm_run_build()
         else:
             self.stdout.write(self.style.ERROR(f"Unknown subcommand: {subcommand}"))
-
-    def handle_install(self):
-        vite_dir = self.get_app_cwd(app_name="vite")
-        npm = NpmManager(cwd=f'{vite_dir}/src')
-
-        # install
-        npm.npm_install()
 
     def handle_dev(self):
         django_dir = settings.BASE_DIR
