@@ -31,10 +31,10 @@ MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'ta3lem'),
+        'NAME': os.environ.get('DB_NAME', 'ta3lem_db'),
         'USER': os.environ.get('DB_USER', 'ta3lem'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'ta3lem'),
-        'HOST': os.environ.get('DB_HOST', '0.0.0.0'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'ta3lem123'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
@@ -43,7 +43,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379',
+        'LOCATION': os.environ.get('REDIS_URL', 'redis://localhost:6379'),
     }
 }
 
