@@ -26,8 +26,17 @@ class Command(BaseCommand):
 
         if subcommand == "dev":
             self.handle_dev()
+        elif subcommand == "install":
+            self.handle_install()
         else:
             self.stdout.write(self.style.ERROR(f"Unknown subcommand: {subcommand}"))
+
+    def handle_install(self):
+        vite_dir = self.get_app_cwd(app_name="vite")
+        npm = NpmManager(cwd=f'{vite_dir}/src')
+
+        # install
+        npm.npm_install()
 
     def handle_dev(self):
         django_dir = settings.BASE_DIR
