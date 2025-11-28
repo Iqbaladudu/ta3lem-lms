@@ -1,4 +1,3 @@
-from certifi import contents
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -96,6 +95,10 @@ class Module(models.Model):
         """Get the next module in the course by order"""
         return self.course.modules.filter(order__gt=self.order).order_by('order').first()
 
+    def get_first_content(self):
+        """Get the first content in this module"""
+        return self.contents.order_by('order').first()
+
 
 # Polymorphic content model
 class Content(models.Model):
@@ -165,7 +168,7 @@ class CourseEnrollment(models.Model):
             return  incomplete_modules.module
 
         # If all complete, return last module
-        return self.course.modules.order_by('-order').first()
+        return self.course.modules.order_by('order').first()
 
 class ContentProgress(models.Model):
     enrollment = models.ForeignKey(CourseEnrollment, on_delete=models.CASCADE, related_name='content_progress')

@@ -384,6 +384,17 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
         modules = course.modules.prefetch_related('contents').all()
         modules_data = []
 
+        # Get all content progress for this enrollment at once (optimization)
+        all_content_progress = {
+            cp.content_id: cp
+            for cp in ContentProgress.objects.filter(
+                enrollment=enrollment
+            ).select_related('content')
+        }
+
+        # Collect all contents with their completion status
+        all_contents_data = []
+
         for module in modules:
             module_progress = ModuleProgress.objects.filter(
                 enrollment=enrollment,
@@ -392,22 +403,38 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
 
             # Get content progress for this module
             total_contents = module.contents.count()
-            completed_contents = ContentProgress.objects.filter(
-                enrollment=enrollment,
-                content__module=module,
-                is_completed=True
-            ).count()
+            completed_contents = 0
+
+            for content in module.contents.all():
+                content_progress = all_content_progress.get(content.id)
+                is_completed = content_progress.is_completed if content_progress else False
+                if is_completed:
+                    completed_contents += 1
+
+                all_contents_data.append({
+                    'content': content,
+                    'progress': content_progress,
+                    'is_completed': is_completed
+                })
 
             modules_data.append({
                 'module': module,
-                'progress': module_progress,
+                'progress': module_progress if module_progress else type('obj', (object,), {'is_completed': False})(),
                 'total_contents': total_contents,
                 'completed_contents': completed_contents,
-                'completion_percentage': (completed_contents / total_contents * 100) if total_contents > 0 else 0
+                'completion_percentage': (completed_contents / total_contents * 100) if total_contents > 0 else 0,
+                'first_content': module.contents.first()  # Add first content for direct navigation
             })
 
         context['modules_data'] = modules_data
-        context['current_module'] = enrollment.get_current_module()
+        context['contents_data'] = all_contents_data
+
+        current_module = enrollment.get_current_module()
+        context['current_module'] = current_module
+
+        # Add first content of current module for direct link
+        if current_module:
+            context['current_module_first_content'] = current_module.contents.first()
 
         return context
 
@@ -513,7 +540,7 @@ class StudentContentView(LoginRequiredMixin, DetailView):
             content=content
         )
 
-        # Get neighboring content
+        # Get neighboring content (within current module)
         all_contents = list(module.contents.all())
         current_index = next(
             (i for i, c in enumerate(all_contents) if c.id == content.id),
@@ -523,16 +550,68 @@ class StudentContentView(LoginRequiredMixin, DetailView):
         previous_content = all_contents[current_index - 1] if current_index and current_index > 0 else None
         next_content = all_contents[current_index + 1] if current_index is not None and current_index < len(all_contents) - 1 else None
 
-        # Get all module contents with their progress for sidebar
-        module_contents_with_progress = []
-        for item in module.contents.all():
-            item_progress = ContentProgress.objects.filter(
+        # If no next content in current module, get first content of next module
+        if not next_content:
+            next_module = course.modules.filter(order__gt=module.order).first()
+            if next_module:
+                next_content = next_module.contents.first()
+                next_module_context = next_module
+            else:
+                next_module_context = None
+        else:
+            next_module_context = None
+
+        # Get all modules with contents and progress for sidebar
+        modules_data = []
+        all_content_ids = []
+
+        for mod in course.modules.all().prefetch_related('contents'):
+            module_progress, _ = ModuleProgress.objects.get_or_create(
                 enrollment=enrollment,
-                content=item
+                module=mod
+            )
+
+            contents_with_progress = []
+            completed_count = 0
+            total_count = mod.contents.count()
+
+            for cont in mod.contents.all():
+                cont_progress = ContentProgress.objects.filter(
+                    enrollment=enrollment,
+                    content=cont
+                ).first()
+
+                is_completed = cont_progress.is_completed if cont_progress else False
+                if is_completed:
+                    completed_count += 1
+
+                contents_with_progress.append({
+                    'content': cont,
+                    'is_completed': is_completed
+                })
+                all_content_ids.append(cont.pk)
+
+            completion_percentage = (completed_count / total_count * 100) if total_count > 0 else 0
+
+            modules_data.append({
+                'module': mod,
+                'progress': module_progress,
+                'contents_with_progress': contents_with_progress,
+                'completed_contents': completed_count,
+                'total_contents': total_count,
+                'completion_percentage': completion_percentage
+            })
+
+        # Get all contents data for quick lookup
+        contents_data = []
+        for content_id in all_content_ids:
+            cont_prog = ContentProgress.objects.filter(
+                enrollment=enrollment,
+                content_id=content_id
             ).first()
-            module_contents_with_progress.append({
-                'content': item,
-                'is_completed': item_progress.is_completed if item_progress else False
+            contents_data.append({
+                'content_id': content_id,
+                'is_completed': cont_prog.is_completed if cont_prog else False
             })
 
         context['enrollment'] = enrollment
@@ -542,15 +621,9 @@ class StudentContentView(LoginRequiredMixin, DetailView):
         context['course'] = course
         context['previous_content'] = previous_content
         context['next_content'] = next_content
-        context['module_contents_with_progress'] = module_contents_with_progress
-
-        return context
-        context['content_progress'] = content_progress
-        context['learning_session'] = learning_session
-        context['module'] = module
-        context['course'] = course
-        context['previous_content'] = previous_content
-        context['next_content'] = next_content
+        context['next_module'] = next_module_context
+        context['modules_data'] = modules_data
+        context['contents_data'] = contents_data
 
         return context
 
