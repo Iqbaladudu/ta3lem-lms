@@ -95,12 +95,13 @@ class StudentRegistrationView(CreateView):
         user.email_user(subject, message)
 
         if self.request.htmx:
-            return render(self.request, 'users/student/registration_success.html')
+            return render(self.request, 'users/student/registration_success_partial.html')
 
         return redirect('student_login')
 
     def form_invalid(self, form):
         if self.request.htmx:
+            # HTMX will select only #registration-form-wrapper content using hx-select
             return self.render_to_response(self.get_context_data(form=form))
         return super().form_invalid(form)
 
