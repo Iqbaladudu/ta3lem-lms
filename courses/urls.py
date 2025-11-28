@@ -3,11 +3,14 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    # Instructor/Owner Course Management
     path("mine/", views.ManageCourseListView.as_view(), name="manage_course_list"),
     path("create/", views.CourseCreateView.as_view(), name="course_create"),
     path("<int:pk>/edit/", views.CourseUpdateView.as_view(), name="course_edit"),
     path("<int:pk>/delete/", views.CourseDeleteView.as_view(), name="course_delete"),
     path("<int:pk>/module/", views.CourseModuleUpdateView.as_view(), name="course_module_update"),
+
+    # Module and Content Management
     path("module/<int:module_id>/content/<model_name>/create/", views.ContentCreateUpdateView.as_view(),
          name="module_content_create"),
     path("module/<int:module_id>/content/<model_name>/<int:id>/", views.ContentCreateUpdateView.as_view(),
@@ -16,6 +19,21 @@ urlpatterns = [
     path("module/<int:module_id>/", views.ModuleContentListView.as_view(), name="module_content_list"),
     path("module/order/", views.ModuleOrderView.as_view(), name="module_order"),
     path("content/order/", views.ContentOrderView.as_view(), name="content_order"),
+
+    # Student Course Tracking
+    path("student/dashboard/", views.StudentDashboardView.as_view(), name="student_dashboard"),
+    path("student/courses/", views.StudentCourseListView.as_view(), name="student_course_list"),
+    path("student/<int:pk>/enroll/", views.StudentEnrollCourseView.as_view(), name="student_enroll_course"),
+    path("student/<int:pk>/", views.StudentCourseDetailView.as_view(), name="student_course_detail"),
+    path("student/<int:pk>/module/<int:module_pk>/", views.StudentModuleDetailView.as_view(), name="student_module_detail"),
+    path("student/<int:pk>/module/<int:module_pk>/content/<int:content_pk>/", views.StudentContentView.as_view(), name="student_content_view"),
+    path("student/<int:pk>/module/<int:module_pk>/content/<int:content_pk>/complete/", views.MarkContentCompleteView.as_view(), name="mark_content_complete"),
+
+    # Instructor Analytics
+    path("analytics/<int:pk>/", views.InstructorCourseAnalyticsView.as_view(), name="instructor_course_analytics"),
+    path("analytics/<int:pk>/student/<int:student_id>/", views.StudentProgressDetailView.as_view(), name="instructor_student_progress"),
+
+    # Public Course Listing
     path('subject/<slug:subject>/', views.CourseListView.as_view(), name='course_list_subject'),
     path('<slug:slug>/', views.CourseDetailView.as_view(), name='course_detail'),
     path('__debug__/', include('debug_toolbar.urls')),
