@@ -16,7 +16,12 @@
                     </h1>
                     <p class="text-xl text-indigo-50">Kelola kursus dan pantau pembelajaran siswa</p>
                 </div>
-                <div>
+                <div class="flex gap-3">
+                    <a href="{% url 'instructor_students_overview' %}"
+                       class="inline-flex items-center bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 shadow-2xl hover:shadow-3xl hover:scale-105 border border-white/20">
+                        <i class="fas fa-users mr-2"></i>
+                        Kelola Siswa
+                    </a>
                     <a href="{% url 'course_create' %}"
                        class="inline-flex items-center bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 shadow-2xl hover:shadow-3xl hover:scale-105">
                         <i class="fas fa-plus-circle mr-2"></i>
@@ -49,7 +54,7 @@
             </div>
 
             <!-- Total Siswa Card -->
-            <div class="relative bg-gradient-to-br from-green-500 to-green-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <a href="{% url 'instructor_students_overview' %}" class="relative bg-gradient-to-br from-green-500 to-green-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105 block">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
                 <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
                 <div class="relative z-10">
@@ -61,10 +66,10 @@
                     <div>
                         <p class="text-green-100 text-sm font-semibold mb-1">Total Siswa</p>
                         <p class="text-5xl font-extrabold text-white mb-1" id="total-students">{{ total_students }}</p>
-                        <p class="text-xs text-green-100 opacity-90">Siswa terdaftar</p>
+                        <p class="text-xs text-green-100 opacity-90">Siswa terdaftar <i class="fas fa-arrow-right ml-1"></i></p>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Total Modul Card -->
             <div class="relative bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
@@ -184,7 +189,7 @@
                                     </a>
                                 </div>
 
-                                <div class="grid grid-cols-2 gap-2">
+                                <div class="grid grid-cols-2 gap-2 mb-3">
                                     {% if course.modules.count > 0 %}
                                         <a href="{% url 'module_content_list' course.modules.first.id %}"
                                            class="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
@@ -198,6 +203,19 @@
                                             Konten
                                         </button>
                                     {% endif %}
+                                    <a href="{% url 'instructor_course_analytics' course.id %}"
+                                       class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                        <i class="fas fa-chart-bar mr-2"></i>
+                                        Analytics
+                                    </a>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="{% url 'instructor_course_students' course.id %}"
+                                       class="flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                        <i class="fas fa-users mr-2"></i>
+                                        Siswa
+                                    </a>
                                     <button hx-delete="{% url 'course_delete' course.id %}"
                                             hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
                                             hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'

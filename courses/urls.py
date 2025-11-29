@@ -34,6 +34,10 @@ urlpatterns = [
     path("analytics/<int:pk>/", views.InstructorCourseAnalyticsView.as_view(), name="instructor_course_analytics"),
     path("analytics/<int:pk>/student/<int:student_id>/", views.StudentProgressDetailView.as_view(), name="instructor_student_progress"),
 
+    # Instructor Student Management
+    path("students/overview/", views.InstructorStudentsOverviewView.as_view(), name="instructor_students_overview"),
+    path("students/<int:pk>/", views.InstructorCourseStudentsView.as_view(), name="instructor_course_students"),
+
     # Public Course Listing
     path('subject/<slug:subject>/', views.CourseListView.as_view(), name='course_list_subject'),
     path('<slug:slug>/', views.CourseDetailView.as_view(), name='course_detail'),

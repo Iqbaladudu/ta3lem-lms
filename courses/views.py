@@ -881,3 +881,181 @@ class StudentProgressDetailView(LoginRequiredMixin, TemplateResponseMixin, View)
         return self.render_to_response(context)
 
 
+class InstructorStudentsOverviewView(LoginRequiredMixin, TemplateResponseMixin, View):
+    """Overview of all students across all instructor's courses"""
+    template_name = 'courses/instructor/students_overview.html'
+
+    def get(self, request):
+        # Get all courses owned by the instructor
+        instructor_courses = Course.objects.filter(owner=request.user).prefetch_related('modules')
+
+        # Get all enrollments for instructor's courses
+        all_enrollments = CourseEnrollment.objects.filter(
+            course__in=instructor_courses
+        ).select_related('student', 'course').order_by('-last_accessed')
+
+        # Calculate overall statistics
+        total_students = all_enrollments.values('student').distinct().count()
+        total_courses = instructor_courses.count()
+        total_enrollments = all_enrollments.count()
+
+        # Status breakdown
+        active_enrollments = all_enrollments.filter(status='enrolled').count()
+        completed_enrollments = all_enrollments.filter(status='completed').count()
+        paused_enrollments = all_enrollments.filter(status='paused').count()
+
+        # Average progress
+        avg_progress = all_enrollments.aggregate(avg=Avg('progress_percentage'))['avg'] or 0
+
+        # Get unique students with their enrollment data
+        students_data = []
+        processed_students = set()
+
+        for enrollment in all_enrollments:
+            if enrollment.student.id not in processed_students:
+                student = enrollment.student
+                student_enrollments = all_enrollments.filter(student=student)
+
+                # Calculate student statistics
+                student_total_courses = student_enrollments.count()
+                student_active_courses = student_enrollments.filter(status='enrolled').count()
+                student_completed_courses = student_enrollments.filter(status='completed').count()
+                student_avg_progress = student_enrollments.aggregate(
+                    avg=Avg('progress_percentage')
+                )['avg'] or 0
+
+                # Get latest activity
+                latest_enrollment = student_enrollments.order_by('-last_accessed').first()
+
+                students_data.append({
+                    'student': student,
+                    'total_courses': student_total_courses,
+                    'active_courses': student_active_courses,
+                    'completed_courses': student_completed_courses,
+                    'avg_progress': round(student_avg_progress, 1),
+                    'latest_course': latest_enrollment.course if latest_enrollment else None,
+                    'last_accessed': latest_enrollment.last_accessed if latest_enrollment else None,
+                    'enrollments': list(student_enrollments)
+                })
+
+                processed_students.add(student.id)
+
+        # Sort by last accessed (most recent first)
+        students_data.sort(key=lambda x: x['last_accessed'] or timezone.datetime.min.replace(tzinfo=timezone.utc), reverse=True)
+
+        # Course-wise enrollment statistics
+        courses_data = []
+        for course in instructor_courses:
+            course_enrollments = all_enrollments.filter(course=course)
+            course_total_students = course_enrollments.count()
+            course_active_students = course_enrollments.filter(status='enrolled').count()
+            course_completed_students = course_enrollments.filter(status='completed').count()
+            course_avg_progress = course_enrollments.aggregate(
+                avg=Avg('progress_percentage')
+            )['avg'] or 0
+
+            courses_data.append({
+                'course': course,
+                'total_students': course_total_students,
+                'active_students': course_active_students,
+                'completed_students': course_completed_students,
+                'avg_progress': round(course_avg_progress, 1)
+            })
+
+        context = {
+            'total_students': total_students,
+            'total_courses': total_courses,
+            'total_enrollments': total_enrollments,
+            'active_enrollments': active_enrollments,
+            'completed_enrollments': completed_enrollments,
+            'paused_enrollments': paused_enrollments,
+            'avg_progress': round(avg_progress, 1),
+            'students_data': students_data,
+            'courses_data': courses_data,
+        }
+
+        return self.render_to_response(context)
+
+
+class InstructorCourseStudentsView(LoginRequiredMixin, TemplateResponseMixin, View):
+    """Detailed view of all students in a specific course"""
+    template_name = 'courses/instructor/course_students.html'
+
+    def get(self, request, pk):
+        course = get_object_or_404(Course, pk=pk, owner=request.user)
+
+        # Get all enrollments for this course
+        enrollments = CourseEnrollment.objects.filter(
+            course=course
+        ).select_related('student').order_by('-last_accessed')
+
+        # Calculate statistics
+        total_students = enrollments.count()
+        active_students = enrollments.filter(status='enrolled').count()
+        completed_students = enrollments.filter(status='completed').count()
+        paused_students = enrollments.filter(status='paused').count()
+        avg_progress = enrollments.aggregate(avg=Avg('progress_percentage'))['avg'] or 0
+
+        # Get module completion data for each student
+        students_detailed = []
+        for enrollment in enrollments:
+            # Get module progress
+            modules_progress = ModuleProgress.objects.filter(
+                enrollment=enrollment
+            ).select_related('module')
+
+            completed_modules = modules_progress.filter(is_completed=True).count()
+            total_modules = course.modules.count()
+
+            # Get content progress
+            content_progress = ContentProgress.objects.filter(
+                enrollment=enrollment
+            )
+
+            completed_contents = content_progress.filter(is_completed=True).count()
+            total_contents = Content.objects.filter(module__course=course).count()
+
+            # Get recent learning sessions
+            recent_sessions = LearningSession.objects.filter(
+                enrollment=enrollment
+            ).order_by('-started_at')[:5]
+
+            students_detailed.append({
+                'enrollment': enrollment,
+                'student': enrollment.student,
+                'completed_modules': completed_modules,
+                'total_modules': total_modules,
+                'completed_contents': completed_contents,
+                'total_contents': total_contents,
+                'recent_sessions': recent_sessions,
+            })
+
+        # Module-wise completion statistics
+        modules_stats = []
+        for module in course.modules.all():
+            module_progress_all = ModuleProgress.objects.filter(
+                module=module,
+                enrollment__course=course
+            )
+            completed_count = module_progress_all.filter(is_completed=True).count()
+            completion_rate = (completed_count / total_students * 100) if total_students > 0 else 0
+
+            modules_stats.append({
+                'module': module,
+                'completed_count': completed_count,
+                'completion_rate': round(completion_rate, 1)
+            })
+
+        context = {
+            'course': course,
+            'enrollments': enrollments,
+            'students_detailed': students_detailed,
+            'total_students': total_students,
+            'active_students': active_students,
+            'completed_students': completed_students,
+            'paused_students': paused_students,
+            'avg_progress': round(avg_progress, 1),
+            'modules_stats': modules_stats,
+        }
+
+        return self.render_to_response(context)
