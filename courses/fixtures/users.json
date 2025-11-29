@@ -1,0 +1,952 @@
+[
+  {
+    "model": "users.user",
+    "pk": 10000,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_1",
+      "first_name": "Student",
+      "last_name": "FinalV2-1",
+      "email": "student_final_v2_1@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10001,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_2",
+      "first_name": "Student",
+      "last_name": "FinalV2-2",
+      "email": "student_final_v2_2@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10002,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_3",
+      "first_name": "Student",
+      "last_name": "FinalV2-3",
+      "email": "student_final_v2_3@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10003,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_4",
+      "first_name": "Student",
+      "last_name": "FinalV2-4",
+      "email": "student_final_v2_4@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10004,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_5",
+      "first_name": "Student",
+      "last_name": "FinalV2-5",
+      "email": "student_final_v2_5@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10005,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_6",
+      "first_name": "Student",
+      "last_name": "FinalV2-6",
+      "email": "student_final_v2_6@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10006,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_7",
+      "first_name": "Student",
+      "last_name": "FinalV2-7",
+      "email": "student_final_v2_7@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10007,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_8",
+      "first_name": "Student",
+      "last_name": "FinalV2-8",
+      "email": "student_final_v2_8@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10008,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_9",
+      "first_name": "Student",
+      "last_name": "FinalV2-9",
+      "email": "student_final_v2_9@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10009,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_10",
+      "first_name": "Student",
+      "last_name": "FinalV2-10",
+      "email": "student_final_v2_10@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10010,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_11",
+      "first_name": "Student",
+      "last_name": "FinalV2-11",
+      "email": "student_final_v2_11@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10011,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_12",
+      "first_name": "Student",
+      "last_name": "FinalV2-12",
+      "email": "student_final_v2_12@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10012,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_13",
+      "first_name": "Student",
+      "last_name": "FinalV2-13",
+      "email": "student_final_v2_13@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10013,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_14",
+      "first_name": "Student",
+      "last_name": "FinalV2-14",
+      "email": "student_final_v2_14@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10014,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_15",
+      "first_name": "Student",
+      "last_name": "FinalV2-15",
+      "email": "student_final_v2_15@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10015,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_16",
+      "first_name": "Student",
+      "last_name": "FinalV2-16",
+      "email": "student_final_v2_16@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10016,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_17",
+      "first_name": "Student",
+      "last_name": "FinalV2-17",
+      "email": "student_final_v2_17@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10017,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_18",
+      "first_name": "Student",
+      "last_name": "FinalV2-18",
+      "email": "student_final_v2_18@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10018,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_19",
+      "first_name": "Student",
+      "last_name": "FinalV2-19",
+      "email": "student_final_v2_19@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10019,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_20",
+      "first_name": "Student",
+      "last_name": "FinalV2-20",
+      "email": "student_final_v2_20@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10020,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_21",
+      "first_name": "Student",
+      "last_name": "FinalV2-21",
+      "email": "student_final_v2_21@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10021,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_22",
+      "first_name": "Student",
+      "last_name": "FinalV2-22",
+      "email": "student_final_v2_22@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10022,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_23",
+      "first_name": "Student",
+      "last_name": "FinalV2-23",
+      "email": "student_final_v2_23@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10023,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_24",
+      "first_name": "Student",
+      "last_name": "FinalV2-24",
+      "email": "student_final_v2_24@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10024,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_25",
+      "first_name": "Student",
+      "last_name": "FinalV2-25",
+      "email": "student_final_v2_25@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10025,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_26",
+      "first_name": "Student",
+      "last_name": "FinalV2-26",
+      "email": "student_final_v2_26@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10026,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_27",
+      "first_name": "Student",
+      "last_name": "FinalV2-27",
+      "email": "student_final_v2_27@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10027,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_28",
+      "first_name": "Student",
+      "last_name": "FinalV2-28",
+      "email": "student_final_v2_28@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10028,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_29",
+      "first_name": "Student",
+      "last_name": "FinalV2-29",
+      "email": "student_final_v2_29@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10029,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_30",
+      "first_name": "Student",
+      "last_name": "FinalV2-30",
+      "email": "student_final_v2_30@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10030,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_31",
+      "first_name": "Student",
+      "last_name": "FinalV2-31",
+      "email": "student_final_v2_31@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10031,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_32",
+      "first_name": "Student",
+      "last_name": "FinalV2-32",
+      "email": "student_final_v2_32@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10032,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_33",
+      "first_name": "Student",
+      "last_name": "FinalV2-33",
+      "email": "student_final_v2_33@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10033,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_34",
+      "first_name": "Student",
+      "last_name": "FinalV2-34",
+      "email": "student_final_v2_34@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10034,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_35",
+      "first_name": "Student",
+      "last_name": "FinalV2-35",
+      "email": "student_final_v2_35@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10035,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_36",
+      "first_name": "Student",
+      "last_name": "FinalV2-36",
+      "email": "student_final_v2_36@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10036,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_37",
+      "first_name": "Student",
+      "last_name": "FinalV2-37",
+      "email": "student_final_v2_37@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10037,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_38",
+      "first_name": "Student",
+      "last_name": "FinalV2-38",
+      "email": "student_final_v2_38@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10038,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_39",
+      "first_name": "Student",
+      "last_name": "FinalV2-39",
+      "email": "student_final_v2_39@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10039,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_40",
+      "first_name": "Student",
+      "last_name": "FinalV2-40",
+      "email": "student_final_v2_40@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10040,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_41",
+      "first_name": "Student",
+      "last_name": "FinalV2-41",
+      "email": "student_final_v2_41@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10041,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_42",
+      "first_name": "Student",
+      "last_name": "FinalV2-42",
+      "email": "student_final_v2_42@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10042,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_43",
+      "first_name": "Student",
+      "last_name": "FinalV2-43",
+      "email": "student_final_v2_43@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10043,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_44",
+      "first_name": "Student",
+      "last_name": "FinalV2-44",
+      "email": "student_final_v2_44@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10044,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_45",
+      "first_name": "Student",
+      "last_name": "FinalV2-45",
+      "email": "student_final_v2_45@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10045,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_46",
+      "first_name": "Student",
+      "last_name": "FinalV2-46",
+      "email": "student_final_v2_46@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10046,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_47",
+      "first_name": "Student",
+      "last_name": "FinalV2-47",
+      "email": "student_final_v2_47@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10047,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_48",
+      "first_name": "Student",
+      "last_name": "FinalV2-48",
+      "email": "student_final_v2_48@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10048,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_49",
+      "first_name": "Student",
+      "last_name": "FinalV2-49",
+      "email": "student_final_v2_49@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10049,
+    "fields": {
+      "password": "pbkdf2_sha25600000=",
+      "last_login": "2025-11-29T18:47:57.288208+00:00",
+      "is_superuser": false,
+      "username": "student_final_v2_50",
+      "first_name": "Student",
+      "last_name": "FinalV2-50",
+      "email": "student_final_v2_50@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-11-29T18:47:57.288208+00:00",
+      "role": "student",
+      "created_at": "2025-11-29T18:47:57.288208+00:00",
+      "updated_at": "2025-11-29T18:47:57.288208+00:00"
+    }
+  }
+]

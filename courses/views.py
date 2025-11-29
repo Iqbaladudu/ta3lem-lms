@@ -62,7 +62,7 @@ class CourseListView(ListView):
         return context
 
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
+# @method_decorator(cache_page(60 * 15), name='dispatch')
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course/detail.html'
@@ -520,6 +520,7 @@ class StudentContentView(LoginRequiredMixin, DetailView):
         content = self.object
         module = content.module
         course = module.course
+
 
         # Get enrollment
         enrollment = get_object_or_404(

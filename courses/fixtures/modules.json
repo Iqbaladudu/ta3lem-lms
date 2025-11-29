@@ -538,5 +538,305 @@
       "description": "Indexing, query optimization, dan best practices",
       "order": 3
     }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1000,
+    "fields": {
+      "course": 1000,
+      "title": "Modul 1 untuk Kursus Baru 1",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 1",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1001,
+    "fields": {
+      "course": 1000,
+      "title": "Modul 2 untuk Kursus Baru 1",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 1",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1002,
+    "fields": {
+      "course": 1000,
+      "title": "Modul 3 untuk Kursus Baru 1",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 1",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1003,
+    "fields": {
+      "course": 1001,
+      "title": "Modul 1 untuk Kursus Baru 2",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 2",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1004,
+    "fields": {
+      "course": 1001,
+      "title": "Modul 2 untuk Kursus Baru 2",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 2",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1005,
+    "fields": {
+      "course": 1001,
+      "title": "Modul 3 untuk Kursus Baru 2",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 2",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1006,
+    "fields": {
+      "course": 1002,
+      "title": "Modul 1 untuk Kursus Baru 3",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 3",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1007,
+    "fields": {
+      "course": 1002,
+      "title": "Modul 2 untuk Kursus Baru 3",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 3",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1008,
+    "fields": {
+      "course": 1002,
+      "title": "Modul 3 untuk Kursus Baru 3",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 3",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1009,
+    "fields": {
+      "course": 1003,
+      "title": "Modul 1 untuk Kursus Baru 4",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 4",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1010,
+    "fields": {
+      "course": 1003,
+      "title": "Modul 2 untuk Kursus Baru 4",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 4",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1011,
+    "fields": {
+      "course": 1003,
+      "title": "Modul 3 untuk Kursus Baru 4",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 4",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1012,
+    "fields": {
+      "course": 1004,
+      "title": "Modul 1 untuk Kursus Baru 5",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 5",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1013,
+    "fields": {
+      "course": 1004,
+      "title": "Modul 2 untuk Kursus Baru 5",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 5",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1014,
+    "fields": {
+      "course": 1004,
+      "title": "Modul 3 untuk Kursus Baru 5",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 5",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1015,
+    "fields": {
+      "course": 1005,
+      "title": "Modul 1 untuk Kursus Baru 6",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 6",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1016,
+    "fields": {
+      "course": 1005,
+      "title": "Modul 2 untuk Kursus Baru 6",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 6",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1017,
+    "fields": {
+      "course": 1005,
+      "title": "Modul 3 untuk Kursus Baru 6",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 6",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1018,
+    "fields": {
+      "course": 1006,
+      "title": "Modul 1 untuk Kursus Baru 7",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 7",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1019,
+    "fields": {
+      "course": 1006,
+      "title": "Modul 2 untuk Kursus Baru 7",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 7",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1020,
+    "fields": {
+      "course": 1006,
+      "title": "Modul 3 untuk Kursus Baru 7",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 7",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1021,
+    "fields": {
+      "course": 1007,
+      "title": "Modul 1 untuk Kursus Baru 8",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 8",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1022,
+    "fields": {
+      "course": 1007,
+      "title": "Modul 2 untuk Kursus Baru 8",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 8",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1023,
+    "fields": {
+      "course": 1007,
+      "title": "Modul 3 untuk Kursus Baru 8",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 8",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1024,
+    "fields": {
+      "course": 1008,
+      "title": "Modul 1 untuk Kursus Baru 9",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 9",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1025,
+    "fields": {
+      "course": 1008,
+      "title": "Modul 2 untuk Kursus Baru 9",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 9",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1026,
+    "fields": {
+      "course": 1008,
+      "title": "Modul 3 untuk Kursus Baru 9",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 9",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1027,
+    "fields": {
+      "course": 1009,
+      "title": "Modul 1 untuk Kursus Baru 10",
+      "description": "Deskripsi untuk Modul 1 untuk Kursus Baru 10",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1028,
+    "fields": {
+      "course": 1009,
+      "title": "Modul 2 untuk Kursus Baru 10",
+      "description": "Deskripsi untuk Modul 2 untuk Kursus Baru 10",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1029,
+    "fields": {
+      "course": 1009,
+      "title": "Modul 3 untuk Kursus Baru 10",
+      "description": "Deskripsi untuk Modul 3 untuk Kursus Baru 10",
+      "order": 2
+    }
   }
 ]

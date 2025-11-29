@@ -1,40 +1,29 @@
 {% load static %}
+{% load embed_video_tags %}
 <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden shadow-lg">
-    {% if 'youtube.com' in item.url or 'youtu.be' in item.url %}
-        {% if 'youtu.be' in item.url %}
-            {% with video_id=item.url|slice:"17:" %}
-                <iframe src="https://www.youtube.com/embed/{{ video_id }}"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        class="w-full h-full min-h-[400px]"></iframe>
-            {% endwith %}
-        {% elif 'watch?v=' in item.url %}
-            {% with video_id=item.url|slice:"32:" %}
-                <iframe src="https://www.youtube.com/embed/{{ video_id }}"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        class="w-full h-full min-h-[400px]"></iframe>
-            {% endwith %}
-        {% else %}
-            <iframe src="{{ item.url }}"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                    class="w-full h-full min-h-[400px]"></iframe>
-        {% endif %}
-    {% else %}
-        <video controls class="w-full h-full">
-            <source src="{{ item.url }}" type="video/mp4">
+    {% if item.url %}
+        <div class="w-full min-h-[400px]">
+            {% video item.url as video_item %}
+                <iframe width="100%" height="450" src="{{ video_item.url }}" frameborder="0" allowfullscreen></iframe>
+            {% endvideo %}
+        </div>
+    {% elif item.file %}
+        <video controls class="w-full h-full min-h-[400px]">
+            <source src="{{ item.file.url }}" type="video/mp4">
             Browser Anda tidak mendukung tag video.
         </video>
     {% endif %}
 </div>
 <div class="mt-3 flex items-center text-sm text-gray-600">
     <i class="fas fa-video mr-2 text-blue-600"></i>
-    <a href="{{ item.url }}" target="_blank" class="text-blue-600 hover:text-blue-700 hover:underline">
-        Buka di tab baru
-    </a>
+    {% if item.url %}
+        <a href="{{ item.url }}" target="_blank" class="text-blue-600 hover:text-blue-700 hover:underline">
+            Buka di tab baru
+        </a>
+    {% elif item.file %}
+        <a href="{{ item.file.url }}" target="_blank" class="text-blue-600 hover:text-blue-700 hover:underline">
+            Download video
+        </a>
+    {% endif %}
 </div>
 

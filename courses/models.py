@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils import timezone
+from embed_video.fields import EmbedVideoField
 
 from users.models import User
 from .fields import OrderField
@@ -23,6 +24,11 @@ class ItemBase(models.Model):
 
     @property
     def class_name(self):
+        return self._meta.model_name
+
+    @property
+    def content_type(self):
+        """Return the content type based on the model name"""
         return self._meta.model_name
 
     def render(self):
@@ -45,7 +51,8 @@ class Image(ItemBase):
 
 
 class Video(ItemBase):
-    url = models.URLField()
+    url = EmbedVideoField(blank=True, null=True)
+    file = models.FileField(upload_to='videos', blank=True, null=True)
 
 
 class Subject(models.Model):

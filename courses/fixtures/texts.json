@@ -812,5 +812,335 @@
       "updated": "2024-04-15T10:20:00Z",
       "content": "Indexing for performance:\n\n-- Create index\nCREATE INDEX idx_email ON users(email);\n\n-- Composite index\nCREATE INDEX idx_name_age ON users(name, age);\n\n-- Unique index\nCREATE UNIQUE INDEX idx_unique_email ON users(email);\n\nWhen to index:\n- Frequently searched columns\n- Foreign keys\n- JOIN columns\n\nAvoid over-indexing (slows INSERT/UPDATE)"
     }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1000,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1001,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1002,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1003,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1004,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1005,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1006,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1007,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1008,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1009,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1010,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1011,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1012,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1013,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1014,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1015,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1016,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1017,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1018,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1019,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1020,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1021,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1022,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1023,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1024,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1025,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1026,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1027,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 1",
+      "content": "Ini adalah isi dari Teks untuk Modul 1",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1028,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 2",
+      "content": "Ini adalah isi dari Teks untuk Modul 2",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 1029,
+    "fields": {
+      "owner": 1,
+      "title": "Teks untuk Modul 3",
+      "content": "Ini adalah isi dari Teks untuk Modul 3",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
   }
 ]

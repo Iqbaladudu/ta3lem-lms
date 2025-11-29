@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load course %}
+{% load embed_video_tags %}
 
 {% block title %}{{ content.item.title }} - {{ module.title }} - Ta3lem{% endblock %}
 
@@ -198,11 +199,7 @@
                         <!-- Video Content -->
                         <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden mb-6">
                             {% if content.item.url %}
-                                <iframe src="{{ content.item.url }}"
-                                        class="w-full h-full"
-                                        frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe>
+                                {% video content.item.url "small" %}
                             {% elif content.item.file %}
                                 <video controls class="w-full h-full">
                                     <source src="{{ content.item.file.url }}" type="video/mp4">
@@ -213,21 +210,25 @@
                     {% elif content.item.content_type == 'image' %}
                         <!-- Image Content -->
                         <div class="mb-6">
-                            <img src="{{ content.item.file.url }}"
-                                 alt="{{ content.item.title }}"
-                                 class="w-full rounded-xl shadow-lg">
+                            {% if content.item.file %}
+                                <img src="{{ content.item.file.url }}"
+                                     alt="{{ content.item.title }}"
+                                     class="w-full rounded-xl shadow-lg">
+                            {% endif %}
                         </div>
                     {% elif content.item.content_type == 'file' %}
                         <!-- File Content -->
                         <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6 text-center">
                             <i class="fas fa-file-pdf text-6xl text-blue-500 mb-4"></i>
                             <h3 class="text-xl font-bold text-gray-900 mb-2">{{ content.item.title }}</h3>
-                            <a href="{{ content.item.file.url }}"
-                               target="_blank"
-                               download
-                               class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                                <i class="fas fa-download mr-2"></i>Download File
-                            </a>
+                            {% if content.item.file %}
+                                <a href="{{ content.item.file.url }}"
+                                   target="_blank"
+                                   download
+                                   class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
+                                    <i class="fas fa-download mr-2"></i>Download File
+                                </a>
+                            {% endif %}
                         </div>
                     {% endif %}
 

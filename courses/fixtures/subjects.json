@@ -38,6 +38,85 @@
       "title": "Desain",
       "slug": "desain"
     }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1000,
+    "fields": {
+      "title": "Subjek Baru 1",
+      "slug": "subjek-baru-1"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1001,
+    "fields": {
+      "title": "Subjek Baru 2",
+      "slug": "subjek-baru-2"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1002,
+    "fields": {
+      "title": "Subjek Baru 3",
+      "slug": "subjek-baru-3"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1003,
+    "fields": {
+      "title": "Subjek Baru 4",
+      "slug": "subjek-baru-4"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1004,
+    "fields": {
+      "title": "Subjek Baru 5",
+      "slug": "subjek-baru-5"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1005,
+    "fields": {
+      "title": "Subjek Baru 6",
+      "slug": "subjek-baru-6"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1006,
+    "fields": {
+      "title": "Subjek Baru 7",
+      "slug": "subjek-baru-7"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1007,
+    "fields": {
+      "title": "Subjek Baru 8",
+      "slug": "subjek-baru-8"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1008,
+    "fields": {
+      "title": "Subjek Baru 9",
+      "slug": "subjek-baru-9"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 1009,
+    "fields": {
+      "title": "Subjek Baru 10",
+      "slug": "subjek-baru-10"
+    }
   }
 ]
-

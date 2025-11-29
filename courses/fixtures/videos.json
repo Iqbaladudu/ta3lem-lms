@@ -7,7 +7,7 @@
       "title": "Python Installation Tutorial",
       "created": "2024-01-15T10:00:00Z",
       "updated": "2024-01-15T10:00:00Z",
-      "url": "https://www.youtube.com/watch?v=example1"
+      "url": "https://www.youtube.com/watch?v=YYXdXT2l-Gg"
     }
   },
   {
@@ -18,7 +18,7 @@
       "title": "Python Variables Explained",
       "created": "2024-01-15T10:05:00Z",
       "updated": "2024-01-15T10:05:00Z",
-      "url": "https://www.youtube.com/watch?v=example2"
+      "url": "https://www.youtube.com/watch?v=cQT33yu9pY8"
     }
   },
   {
@@ -29,7 +29,7 @@
       "title": "Control Flow in Python",
       "created": "2024-01-15T10:10:00Z",
       "updated": "2024-01-15T10:10:00Z",
-      "url": "https://www.youtube.com/watch?v=example3"
+      "url": "https://www.youtube.com/watch?v=9Os0o3wzS_I"
     }
   },
   {
@@ -40,7 +40,7 @@
       "title": "Python Functions Tutorial",
       "created": "2024-01-15T10:15:00Z",
       "updated": "2024-01-15T10:15:00Z",
-      "url": "https://www.youtube.com/watch?v=example4"
+      "url": "https://www.youtube.com/watch?v=u-OmVr_fT4s"
     }
   },
   {
@@ -547,6 +547,336 @@
       "created": "2024-04-15T10:15:00Z",
       "updated": "2024-04-15T10:15:00Z",
       "url": "https://www.youtube.com/watch?v=sql-optimization"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1000,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1001,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1002,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1003,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1004,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1005,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1006,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1007,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1008,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1009,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1010,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1011,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1012,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1013,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1014,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1015,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1016,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1017,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1018,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1019,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1020,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1021,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1022,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1023,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1024,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1025,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1026,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1027,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 1",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1028,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 2",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 1029,
+    "fields": {
+      "owner": 1,
+      "title": "Video untuk Modul 3",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-29T20:31:15.759554",
+      "updated": "2025-11-29T20:31:15.759554"
     }
   }
 ]

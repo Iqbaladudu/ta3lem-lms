@@ -1,0 +1,4732 @@
+[
+  {
+    "model": "courses.learningsession",
+    "pk": 10000,
+    "fields": {
+      "enrollment": 10000,
+      "content": 28,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10001,
+    "fields": {
+      "enrollment": 10000,
+      "content": 29,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10002,
+    "fields": {
+      "enrollment": 10000,
+      "content": 32,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10003,
+    "fields": {
+      "enrollment": 10000,
+      "content": 35,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10004,
+    "fields": {
+      "enrollment": 10001,
+      "content": 1037,
+      "started_at": "2025-10-21T18:47:57.288208+00:00",
+      "ended_at": "2025-10-31T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10005,
+    "fields": {
+      "enrollment": 10001,
+      "content": 1040,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10006,
+    "fields": {
+      "enrollment": 10001,
+      "content": 1041,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10007,
+    "fields": {
+      "enrollment": 10002,
+      "content": 45,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10008,
+    "fields": {
+      "enrollment": 10003,
+      "content": 1026,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10009,
+    "fields": {
+      "enrollment": 10003,
+      "content": 1028,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10010,
+    "fields": {
+      "enrollment": 10004,
+      "content": 45,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10011,
+    "fields": {
+      "enrollment": 10005,
+      "content": 117,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10012,
+    "fields": {
+      "enrollment": 10005,
+      "content": 121,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10013,
+    "fields": {
+      "enrollment": 10005,
+      "content": 122,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10014,
+    "fields": {
+      "enrollment": 10005,
+      "content": 123,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10015,
+    "fields": {
+      "enrollment": 10005,
+      "content": 124,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10016,
+    "fields": {
+      "enrollment": 10006,
+      "content": 48,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10017,
+    "fields": {
+      "enrollment": 10007,
+      "content": 90,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10018,
+    "fields": {
+      "enrollment": 10007,
+      "content": 92,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10019,
+    "fields": {
+      "enrollment": 10007,
+      "content": 93,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10020,
+    "fields": {
+      "enrollment": 10007,
+      "content": 96,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10021,
+    "fields": {
+      "enrollment": 10008,
+      "content": 1048,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10022,
+    "fields": {
+      "enrollment": 10008,
+      "content": 1051,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10023,
+    "fields": {
+      "enrollment": 10010,
+      "content": 1044,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10024,
+    "fields": {
+      "enrollment": 10010,
+      "content": 1047,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10025,
+    "fields": {
+      "enrollment": 10011,
+      "content": 98,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10026,
+    "fields": {
+      "enrollment": 10011,
+      "content": 100,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10027,
+    "fields": {
+      "enrollment": 10011,
+      "content": 102,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10028,
+    "fields": {
+      "enrollment": 10011,
+      "content": 106,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10029,
+    "fields": {
+      "enrollment": 10012,
+      "content": 107,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10030,
+    "fields": {
+      "enrollment": 10012,
+      "content": 109,
+      "started_at": "2025-10-22T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10031,
+    "fields": {
+      "enrollment": 10012,
+      "content": 110,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10032,
+    "fields": {
+      "enrollment": 10012,
+      "content": 115,
+      "started_at": "2025-10-21T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10033,
+    "fields": {
+      "enrollment": 10013,
+      "content": 45,
+      "started_at": "2025-10-15T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10034,
+    "fields": {
+      "enrollment": 10014,
+      "content": 1036,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10035,
+    "fields": {
+      "enrollment": 10014,
+      "content": 1037,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10036,
+    "fields": {
+      "enrollment": 10014,
+      "content": 1039,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10037,
+    "fields": {
+      "enrollment": 10014,
+      "content": 1040,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10038,
+    "fields": {
+      "enrollment": 10014,
+      "content": 1041,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10039,
+    "fields": {
+      "enrollment": 10015,
+      "content": 71,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10040,
+    "fields": {
+      "enrollment": 10015,
+      "content": 72,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10041,
+    "fields": {
+      "enrollment": 10015,
+      "content": 74,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10042,
+    "fields": {
+      "enrollment": 10015,
+      "content": 76,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10043,
+    "fields": {
+      "enrollment": 10015,
+      "content": 79,
+      "started_at": "2025-10-19T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10044,
+    "fields": {
+      "enrollment": 10016,
+      "content": 116,
+      "started_at": "2025-10-19T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10045,
+    "fields": {
+      "enrollment": 10016,
+      "content": 118,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10046,
+    "fields": {
+      "enrollment": 10016,
+      "content": 119,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10047,
+    "fields": {
+      "enrollment": 10016,
+      "content": 121,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10048,
+    "fields": {
+      "enrollment": 10017,
+      "content": 1043,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10049,
+    "fields": {
+      "enrollment": 10017,
+      "content": 1045,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10050,
+    "fields": {
+      "enrollment": 10017,
+      "content": 1046,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10051,
+    "fields": {
+      "enrollment": 10018,
+      "content": 99,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10052,
+    "fields": {
+      "enrollment": 10018,
+      "content": 101,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10053,
+    "fields": {
+      "enrollment": 10018,
+      "content": 105,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10054,
+    "fields": {
+      "enrollment": 10018,
+      "content": 106,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10055,
+    "fields": {
+      "enrollment": 10019,
+      "content": 1055,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10056,
+    "fields": {
+      "enrollment": 10019,
+      "content": 1057,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10057,
+    "fields": {
+      "enrollment": 10019,
+      "content": 1059,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10058,
+    "fields": {
+      "enrollment": 10020,
+      "content": 72,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10059,
+    "fields": {
+      "enrollment": 10020,
+      "content": 73,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10060,
+    "fields": {
+      "enrollment": 10020,
+      "content": 74,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10061,
+    "fields": {
+      "enrollment": 10020,
+      "content": 76,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10062,
+    "fields": {
+      "enrollment": 10020,
+      "content": 78,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10063,
+    "fields": {
+      "enrollment": 10021,
+      "content": 69,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10064,
+    "fields": {
+      "enrollment": 10021,
+      "content": 70,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10065,
+    "fields": {
+      "enrollment": 10022,
+      "content": 82,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10066,
+    "fields": {
+      "enrollment": 10022,
+      "content": 84,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10067,
+    "fields": {
+      "enrollment": 10022,
+      "content": 85,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10068,
+    "fields": {
+      "enrollment": 10022,
+      "content": 88,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10069,
+    "fields": {
+      "enrollment": 10023,
+      "content": 49,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10070,
+    "fields": {
+      "enrollment": 10023,
+      "content": 51,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10071,
+    "fields": {
+      "enrollment": 10023,
+      "content": 53,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10072,
+    "fields": {
+      "enrollment": 10023,
+      "content": 57,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10073,
+    "fields": {
+      "enrollment": 10023,
+      "content": 58,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10074,
+    "fields": {
+      "enrollment": 10024,
+      "content": 62,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10075,
+    "fields": {
+      "enrollment": 10024,
+      "content": 65,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10076,
+    "fields": {
+      "enrollment": 10024,
+      "content": 66,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10077,
+    "fields": {
+      "enrollment": 10024,
+      "content": 70,
+      "started_at": "2025-10-08T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10078,
+    "fields": {
+      "enrollment": 10025,
+      "content": 1006,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10079,
+    "fields": {
+      "enrollment": 10025,
+      "content": 1007,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10080,
+    "fields": {
+      "enrollment": 10026,
+      "content": 1001,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10081,
+    "fields": {
+      "enrollment": 10027,
+      "content": 1048,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10082,
+    "fields": {
+      "enrollment": 10029,
+      "content": 18,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10083,
+    "fields": {
+      "enrollment": 10029,
+      "content": 22,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10084,
+    "fields": {
+      "enrollment": 10029,
+      "content": 24,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10085,
+    "fields": {
+      "enrollment": 10029,
+      "content": 25,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10086,
+    "fields": {
+      "enrollment": 10029,
+      "content": 26,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10087,
+    "fields": {
+      "enrollment": 10030,
+      "content": 1059,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10088,
+    "fields": {
+      "enrollment": 10031,
+      "content": 116,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10089,
+    "fields": {
+      "enrollment": 10031,
+      "content": 120,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10090,
+    "fields": {
+      "enrollment": 10032,
+      "content": 49,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10091,
+    "fields": {
+      "enrollment": 10032,
+      "content": 51,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10092,
+    "fields": {
+      "enrollment": 10032,
+      "content": 52,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10093,
+    "fields": {
+      "enrollment": 10032,
+      "content": 55,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10094,
+    "fields": {
+      "enrollment": 10032,
+      "content": 56,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10095,
+    "fields": {
+      "enrollment": 10032,
+      "content": 57,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10096,
+    "fields": {
+      "enrollment": 10033,
+      "content": 109,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10097,
+    "fields": {
+      "enrollment": 10033,
+      "content": 110,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10098,
+    "fields": {
+      "enrollment": 10033,
+      "content": 111,
+      "started_at": "2025-10-22T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10099,
+    "fields": {
+      "enrollment": 10033,
+      "content": 113,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10100,
+    "fields": {
+      "enrollment": 10033,
+      "content": 115,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10101,
+    "fields": {
+      "enrollment": 10034,
+      "content": 1030,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10102,
+    "fields": {
+      "enrollment": 10034,
+      "content": 1032,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10103,
+    "fields": {
+      "enrollment": 10034,
+      "content": 1034,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10104,
+    "fields": {
+      "enrollment": 10035,
+      "content": 117,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10105,
+    "fields": {
+      "enrollment": 10035,
+      "content": 118,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10106,
+    "fields": {
+      "enrollment": 10036,
+      "content": 47,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10107,
+    "fields": {
+      "enrollment": 10037,
+      "content": 81,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10108,
+    "fields": {
+      "enrollment": 10037,
+      "content": 83,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10109,
+    "fields": {
+      "enrollment": 10037,
+      "content": 86,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10110,
+    "fields": {
+      "enrollment": 10037,
+      "content": 87,
+      "started_at": "2025-10-04T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10111,
+    "fields": {
+      "enrollment": 10038,
+      "content": 1050,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10112,
+    "fields": {
+      "enrollment": 10038,
+      "content": 1053,
+      "started_at": "2025-10-22T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10113,
+    "fields": {
+      "enrollment": 10039,
+      "content": 1000,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10114,
+    "fields": {
+      "enrollment": 10039,
+      "content": 1001,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10115,
+    "fields": {
+      "enrollment": 10039,
+      "content": 1003,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10116,
+    "fields": {
+      "enrollment": 10039,
+      "content": 1005,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10117,
+    "fields": {
+      "enrollment": 10040,
+      "content": 82,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10118,
+    "fields": {
+      "enrollment": 10040,
+      "content": 84,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10119,
+    "fields": {
+      "enrollment": 10040,
+      "content": 85,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10120,
+    "fields": {
+      "enrollment": 10040,
+      "content": 87,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10121,
+    "fields": {
+      "enrollment": 10040,
+      "content": 88,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10122,
+    "fields": {
+      "enrollment": 10041,
+      "content": 118,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10123,
+    "fields": {
+      "enrollment": 10041,
+      "content": 121,
+      "started_at": "2025-10-04T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10124,
+    "fields": {
+      "enrollment": 10041,
+      "content": 122,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10125,
+    "fields": {
+      "enrollment": 10041,
+      "content": 124,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10126,
+    "fields": {
+      "enrollment": 10042,
+      "content": 98,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10127,
+    "fields": {
+      "enrollment": 10042,
+      "content": 102,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10128,
+    "fields": {
+      "enrollment": 10042,
+      "content": 106,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10129,
+    "fields": {
+      "enrollment": 10043,
+      "content": 91,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10130,
+    "fields": {
+      "enrollment": 10043,
+      "content": 92,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10131,
+    "fields": {
+      "enrollment": 10043,
+      "content": 93,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10132,
+    "fields": {
+      "enrollment": 10043,
+      "content": 94,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10133,
+    "fields": {
+      "enrollment": 10043,
+      "content": 97,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10134,
+    "fields": {
+      "enrollment": 10044,
+      "content": 1015,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10135,
+    "fields": {
+      "enrollment": 10044,
+      "content": 1016,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10136,
+    "fields": {
+      "enrollment": 10046,
+      "content": 62,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10137,
+    "fields": {
+      "enrollment": 10046,
+      "content": 63,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10138,
+    "fields": {
+      "enrollment": 10046,
+      "content": 70,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10139,
+    "fields": {
+      "enrollment": 10047,
+      "content": 1036,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10140,
+    "fields": {
+      "enrollment": 10047,
+      "content": 1038,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10141,
+    "fields": {
+      "enrollment": 10047,
+      "content": 1039,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10142,
+    "fields": {
+      "enrollment": 10047,
+      "content": 1040,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10143,
+    "fields": {
+      "enrollment": 10047,
+      "content": 1041,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10144,
+    "fields": {
+      "enrollment": 10048,
+      "content": 1032,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10145,
+    "fields": {
+      "enrollment": 10048,
+      "content": 1033,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10146,
+    "fields": {
+      "enrollment": 10048,
+      "content": 1035,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10147,
+    "fields": {
+      "enrollment": 10050,
+      "content": 1006,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10148,
+    "fields": {
+      "enrollment": 10050,
+      "content": 1007,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10149,
+    "fields": {
+      "enrollment": 10050,
+      "content": 1008,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10150,
+    "fields": {
+      "enrollment": 10051,
+      "content": 1012,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10151,
+    "fields": {
+      "enrollment": 10051,
+      "content": 1014,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10152,
+    "fields": {
+      "enrollment": 10051,
+      "content": 1016,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10153,
+    "fields": {
+      "enrollment": 10052,
+      "content": 108,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10154,
+    "fields": {
+      "enrollment": 10052,
+      "content": 109,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10155,
+    "fields": {
+      "enrollment": 10052,
+      "content": 112,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10156,
+    "fields": {
+      "enrollment": 10052,
+      "content": 114,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10157,
+    "fields": {
+      "enrollment": 10053,
+      "content": 1001,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10158,
+    "fields": {
+      "enrollment": 10053,
+      "content": 1002,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10159,
+    "fields": {
+      "enrollment": 10053,
+      "content": 1003,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10160,
+    "fields": {
+      "enrollment": 10054,
+      "content": 1036,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10161,
+    "fields": {
+      "enrollment": 10054,
+      "content": 1038,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10162,
+    "fields": {
+      "enrollment": 10054,
+      "content": 1040,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10163,
+    "fields": {
+      "enrollment": 10054,
+      "content": 1041,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10164,
+    "fields": {
+      "enrollment": 10055,
+      "content": 40,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10165,
+    "fields": {
+      "enrollment": 10055,
+      "content": 42,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10166,
+    "fields": {
+      "enrollment": 10055,
+      "content": 44,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10167,
+    "fields": {
+      "enrollment": 10056,
+      "content": 1012,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10168,
+    "fields": {
+      "enrollment": 10056,
+      "content": 1013,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10169,
+    "fields": {
+      "enrollment": 10057,
+      "content": 27,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10170,
+    "fields": {
+      "enrollment": 10057,
+      "content": 28,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10171,
+    "fields": {
+      "enrollment": 10057,
+      "content": 32,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10172,
+    "fields": {
+      "enrollment": 10058,
+      "content": 1030,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10173,
+    "fields": {
+      "enrollment": 10058,
+      "content": 1034,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10174,
+    "fields": {
+      "enrollment": 10059,
+      "content": 1018,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10175,
+    "fields": {
+      "enrollment": 10059,
+      "content": 1020,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10176,
+    "fields": {
+      "enrollment": 10059,
+      "content": 1021,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10177,
+    "fields": {
+      "enrollment": 10059,
+      "content": 1023,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10178,
+    "fields": {
+      "enrollment": 10060,
+      "content": 63,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10179,
+    "fields": {
+      "enrollment": 10060,
+      "content": 64,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10180,
+    "fields": {
+      "enrollment": 10060,
+      "content": 67,
+      "started_at": "2025-10-19T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10181,
+    "fields": {
+      "enrollment": 10060,
+      "content": 68,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10182,
+    "fields": {
+      "enrollment": 10060,
+      "content": 70,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10183,
+    "fields": {
+      "enrollment": 10061,
+      "content": 1052,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10184,
+    "fields": {
+      "enrollment": 10062,
+      "content": 3,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10185,
+    "fields": {
+      "enrollment": 10062,
+      "content": 7,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10186,
+    "fields": {
+      "enrollment": 10062,
+      "content": 9,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10187,
+    "fields": {
+      "enrollment": 10062,
+      "content": 12,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10188,
+    "fields": {
+      "enrollment": 10063,
+      "content": 37,
+      "started_at": "2025-10-22T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10189,
+    "fields": {
+      "enrollment": 10063,
+      "content": 38,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10190,
+    "fields": {
+      "enrollment": 10063,
+      "content": 40,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10191,
+    "fields": {
+      "enrollment": 10064,
+      "content": 1056,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10192,
+    "fields": {
+      "enrollment": 10064,
+      "content": 1057,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10193,
+    "fields": {
+      "enrollment": 10064,
+      "content": 1058,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10194,
+    "fields": {
+      "enrollment": 10065,
+      "content": 1001,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10195,
+    "fields": {
+      "enrollment": 10065,
+      "content": 1002,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10196,
+    "fields": {
+      "enrollment": 10066,
+      "content": 1055,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10197,
+    "fields": {
+      "enrollment": 10066,
+      "content": 1056,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10198,
+    "fields": {
+      "enrollment": 10066,
+      "content": 1057,
+      "started_at": "2025-10-04T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10199,
+    "fields": {
+      "enrollment": 10066,
+      "content": 1059,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10200,
+    "fields": {
+      "enrollment": 10067,
+      "content": 42,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10201,
+    "fields": {
+      "enrollment": 10067,
+      "content": 44,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10202,
+    "fields": {
+      "enrollment": 10068,
+      "content": 1028,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10203,
+    "fields": {
+      "enrollment": 10069,
+      "content": 62,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10204,
+    "fields": {
+      "enrollment": 10069,
+      "content": 64,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10205,
+    "fields": {
+      "enrollment": 10069,
+      "content": 68,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10206,
+    "fields": {
+      "enrollment": 10070,
+      "content": 1012,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10207,
+    "fields": {
+      "enrollment": 10070,
+      "content": 1013,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10208,
+    "fields": {
+      "enrollment": 10070,
+      "content": 1017,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10209,
+    "fields": {
+      "enrollment": 10071,
+      "content": 1030,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10210,
+    "fields": {
+      "enrollment": 10071,
+      "content": 1035,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10211,
+    "fields": {
+      "enrollment": 10072,
+      "content": 45,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-10-31T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10212,
+    "fields": {
+      "enrollment": 10074,
+      "content": 1006,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10213,
+    "fields": {
+      "enrollment": 10074,
+      "content": 1007,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10214,
+    "fields": {
+      "enrollment": 10074,
+      "content": 1008,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10215,
+    "fields": {
+      "enrollment": 10074,
+      "content": 1009,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10216,
+    "fields": {
+      "enrollment": 10075,
+      "content": 1000,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10217,
+    "fields": {
+      "enrollment": 10075,
+      "content": 1001,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10218,
+    "fields": {
+      "enrollment": 10075,
+      "content": 1002,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10219,
+    "fields": {
+      "enrollment": 10075,
+      "content": 1005,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10220,
+    "fields": {
+      "enrollment": 10076,
+      "content": 63,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10221,
+    "fields": {
+      "enrollment": 10076,
+      "content": 67,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10222,
+    "fields": {
+      "enrollment": 10076,
+      "content": 69,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10223,
+    "fields": {
+      "enrollment": 10077,
+      "content": 1051,
+      "started_at": "2025-10-15T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10224,
+    "fields": {
+      "enrollment": 10077,
+      "content": 1053,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10225,
+    "fields": {
+      "enrollment": 10078,
+      "content": 27,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-31T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10226,
+    "fields": {
+      "enrollment": 10078,
+      "content": 29,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10227,
+    "fields": {
+      "enrollment": 10078,
+      "content": 30,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10228,
+    "fields": {
+      "enrollment": 10078,
+      "content": 32,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10229,
+    "fields": {
+      "enrollment": 10078,
+      "content": 33,
+      "started_at": "2025-10-22T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10230,
+    "fields": {
+      "enrollment": 10078,
+      "content": 35,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10231,
+    "fields": {
+      "enrollment": 10079,
+      "content": 110,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10232,
+    "fields": {
+      "enrollment": 10079,
+      "content": 114,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10233,
+    "fields": {
+      "enrollment": 10080,
+      "content": 99,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10234,
+    "fields": {
+      "enrollment": 10080,
+      "content": 100,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10235,
+    "fields": {
+      "enrollment": 10080,
+      "content": 106,
+      "started_at": "2025-10-15T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10236,
+    "fields": {
+      "enrollment": 10081,
+      "content": 1019,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10237,
+    "fields": {
+      "enrollment": 10081,
+      "content": 1023,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10238,
+    "fields": {
+      "enrollment": 10082,
+      "content": 81,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10239,
+    "fields": {
+      "enrollment": 10082,
+      "content": 86,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10240,
+    "fields": {
+      "enrollment": 10082,
+      "content": 88,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10241,
+    "fields": {
+      "enrollment": 10083,
+      "content": 71,
+      "started_at": "2025-10-04T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10242,
+    "fields": {
+      "enrollment": 10083,
+      "content": 72,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10243,
+    "fields": {
+      "enrollment": 10083,
+      "content": 74,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10244,
+    "fields": {
+      "enrollment": 10083,
+      "content": 75,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10245,
+    "fields": {
+      "enrollment": 10083,
+      "content": 78,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10246,
+    "fields": {
+      "enrollment": 10084,
+      "content": 1,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10247,
+    "fields": {
+      "enrollment": 10084,
+      "content": 5,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10248,
+    "fields": {
+      "enrollment": 10084,
+      "content": 7,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10249,
+    "fields": {
+      "enrollment": 10084,
+      "content": 8,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10250,
+    "fields": {
+      "enrollment": 10084,
+      "content": 9,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10251,
+    "fields": {
+      "enrollment": 10084,
+      "content": 10,
+      "started_at": "2025-10-19T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10252,
+    "fields": {
+      "enrollment": 10084,
+      "content": 12,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10253,
+    "fields": {
+      "enrollment": 10085,
+      "content": 1033,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10254,
+    "fields": {
+      "enrollment": 10086,
+      "content": 1042,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10255,
+    "fields": {
+      "enrollment": 10086,
+      "content": 1043,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10256,
+    "fields": {
+      "enrollment": 10086,
+      "content": 1045,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10257,
+    "fields": {
+      "enrollment": 10088,
+      "content": 15,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10258,
+    "fields": {
+      "enrollment": 10088,
+      "content": 16,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10259,
+    "fields": {
+      "enrollment": 10088,
+      "content": 20,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10260,
+    "fields": {
+      "enrollment": 10088,
+      "content": 25,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-10-31T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10261,
+    "fields": {
+      "enrollment": 10089,
+      "content": 3,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10262,
+    "fields": {
+      "enrollment": 10089,
+      "content": 6,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10263,
+    "fields": {
+      "enrollment": 10089,
+      "content": 13,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10264,
+    "fields": {
+      "enrollment": 10090,
+      "content": 119,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10265,
+    "fields": {
+      "enrollment": 10090,
+      "content": 121,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10266,
+    "fields": {
+      "enrollment": 10091,
+      "content": 46,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10267,
+    "fields": {
+      "enrollment": 10092,
+      "content": 95,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10268,
+    "fields": {
+      "enrollment": 10093,
+      "content": 1003,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10269,
+    "fields": {
+      "enrollment": 10093,
+      "content": 1004,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10270,
+    "fields": {
+      "enrollment": 10094,
+      "content": 118,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10271,
+    "fields": {
+      "enrollment": 10094,
+      "content": 121,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10272,
+    "fields": {
+      "enrollment": 10094,
+      "content": 122,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10273,
+    "fields": {
+      "enrollment": 10095,
+      "content": 38,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10274,
+    "fields": {
+      "enrollment": 10095,
+      "content": 39,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10275,
+    "fields": {
+      "enrollment": 10095,
+      "content": 41,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10276,
+    "fields": {
+      "enrollment": 10096,
+      "content": 16,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10277,
+    "fields": {
+      "enrollment": 10096,
+      "content": 19,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10278,
+    "fields": {
+      "enrollment": 10096,
+      "content": 22,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10279,
+    "fields": {
+      "enrollment": 10096,
+      "content": 24,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10280,
+    "fields": {
+      "enrollment": 10097,
+      "content": 76,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10281,
+    "fields": {
+      "enrollment": 10097,
+      "content": 77,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10282,
+    "fields": {
+      "enrollment": 10098,
+      "content": 1020,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10283,
+    "fields": {
+      "enrollment": 10098,
+      "content": 1022,
+      "started_at": "2025-10-21T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10284,
+    "fields": {
+      "enrollment": 10099,
+      "content": 89,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10285,
+    "fields": {
+      "enrollment": 10099,
+      "content": 90,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10286,
+    "fields": {
+      "enrollment": 10099,
+      "content": 94,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10287,
+    "fields": {
+      "enrollment": 10100,
+      "content": 37,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10288,
+    "fields": {
+      "enrollment": 10100,
+      "content": 38,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10289,
+    "fields": {
+      "enrollment": 10100,
+      "content": 40,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10290,
+    "fields": {
+      "enrollment": 10100,
+      "content": 41,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10291,
+    "fields": {
+      "enrollment": 10100,
+      "content": 43,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10292,
+    "fields": {
+      "enrollment": 10101,
+      "content": 1025,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10293,
+    "fields": {
+      "enrollment": 10101,
+      "content": 1028,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10294,
+    "fields": {
+      "enrollment": 10101,
+      "content": 1029,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10295,
+    "fields": {
+      "enrollment": 10102,
+      "content": 1012,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10296,
+    "fields": {
+      "enrollment": 10102,
+      "content": 1013,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10297,
+    "fields": {
+      "enrollment": 10102,
+      "content": 1015,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10298,
+    "fields": {
+      "enrollment": 10103,
+      "content": 1042,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10299,
+    "fields": {
+      "enrollment": 10103,
+      "content": 1044,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10300,
+    "fields": {
+      "enrollment": 10103,
+      "content": 1047,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10301,
+    "fields": {
+      "enrollment": 10104,
+      "content": 1022,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10302,
+    "fields": {
+      "enrollment": 10105,
+      "content": 1036,
+      "started_at": "2025-10-04T18:47:57.288208+00:00",
+      "ended_at": "2025-10-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10303,
+    "fields": {
+      "enrollment": 10105,
+      "content": 1037,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-31T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10304,
+    "fields": {
+      "enrollment": 10106,
+      "content": 93,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10305,
+    "fields": {
+      "enrollment": 10106,
+      "content": 94,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10306,
+    "fields": {
+      "enrollment": 10106,
+      "content": 95,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10307,
+    "fields": {
+      "enrollment": 10106,
+      "content": 97,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10308,
+    "fields": {
+      "enrollment": 10107,
+      "content": 49,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10309,
+    "fields": {
+      "enrollment": 10107,
+      "content": 51,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10310,
+    "fields": {
+      "enrollment": 10107,
+      "content": 52,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10311,
+    "fields": {
+      "enrollment": 10107,
+      "content": 53,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10312,
+    "fields": {
+      "enrollment": 10107,
+      "content": 55,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10313,
+    "fields": {
+      "enrollment": 10107,
+      "content": 56,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10314,
+    "fields": {
+      "enrollment": 10107,
+      "content": 58,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10315,
+    "fields": {
+      "enrollment": 10107,
+      "content": 59,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10316,
+    "fields": {
+      "enrollment": 10107,
+      "content": 60,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10317,
+    "fields": {
+      "enrollment": 10108,
+      "content": 1028,
+      "started_at": "2025-11-07T18:47:57.288208+00:00",
+      "ended_at": "2025-11-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10318,
+    "fields": {
+      "enrollment": 10109,
+      "content": 117,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10319,
+    "fields": {
+      "enrollment": 10109,
+      "content": 118,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10320,
+    "fields": {
+      "enrollment": 10109,
+      "content": 120,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10321,
+    "fields": {
+      "enrollment": 10109,
+      "content": 121,
+      "started_at": "2025-10-15T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10322,
+    "fields": {
+      "enrollment": 10109,
+      "content": 122,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10323,
+    "fields": {
+      "enrollment": 10110,
+      "content": 46,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10324,
+    "fields": {
+      "enrollment": 10110,
+      "content": 47,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10325,
+    "fields": {
+      "enrollment": 10111,
+      "content": 1026,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10326,
+    "fields": {
+      "enrollment": 10111,
+      "content": 1028,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10327,
+    "fields": {
+      "enrollment": 10112,
+      "content": 62,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10328,
+    "fields": {
+      "enrollment": 10112,
+      "content": 64,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10329,
+    "fields": {
+      "enrollment": 10112,
+      "content": 69,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10330,
+    "fields": {
+      "enrollment": 10113,
+      "content": 89,
+      "started_at": "2025-10-08T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10331,
+    "fields": {
+      "enrollment": 10113,
+      "content": 90,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10332,
+    "fields": {
+      "enrollment": 10114,
+      "content": 46,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10333,
+    "fields": {
+      "enrollment": 10114,
+      "content": 47,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10334,
+    "fields": {
+      "enrollment": 10115,
+      "content": 82,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10335,
+    "fields": {
+      "enrollment": 10115,
+      "content": 86,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10336,
+    "fields": {
+      "enrollment": 10116,
+      "content": 1007,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10337,
+    "fields": {
+      "enrollment": 10117,
+      "content": 107,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10338,
+    "fields": {
+      "enrollment": 10117,
+      "content": 111,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10339,
+    "fields": {
+      "enrollment": 10117,
+      "content": 113,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10340,
+    "fields": {
+      "enrollment": 10117,
+      "content": 115,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10341,
+    "fields": {
+      "enrollment": 10118,
+      "content": 1018,
+      "started_at": "2025-10-19T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10342,
+    "fields": {
+      "enrollment": 10119,
+      "content": 1,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10343,
+    "fields": {
+      "enrollment": 10119,
+      "content": 2,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10344,
+    "fields": {
+      "enrollment": 10119,
+      "content": 4,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-01T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10345,
+    "fields": {
+      "enrollment": 10119,
+      "content": 6,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10346,
+    "fields": {
+      "enrollment": 10119,
+      "content": 8,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10347,
+    "fields": {
+      "enrollment": 10119,
+      "content": 10,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10348,
+    "fields": {
+      "enrollment": 10120,
+      "content": 1050,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10349,
+    "fields": {
+      "enrollment": 10120,
+      "content": 1051,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10350,
+    "fields": {
+      "enrollment": 10120,
+      "content": 1052,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10351,
+    "fields": {
+      "enrollment": 10121,
+      "content": 1006,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10352,
+    "fields": {
+      "enrollment": 10121,
+      "content": 1007,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10353,
+    "fields": {
+      "enrollment": 10121,
+      "content": 1011,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10354,
+    "fields": {
+      "enrollment": 10122,
+      "content": 1054,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10355,
+    "fields": {
+      "enrollment": 10122,
+      "content": 1057,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10356,
+    "fields": {
+      "enrollment": 10122,
+      "content": 1059,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10357,
+    "fields": {
+      "enrollment": 10123,
+      "content": 50,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10358,
+    "fields": {
+      "enrollment": 10123,
+      "content": 53,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10359,
+    "fields": {
+      "enrollment": 10123,
+      "content": 54,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10360,
+    "fields": {
+      "enrollment": 10123,
+      "content": 55,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10361,
+    "fields": {
+      "enrollment": 10124,
+      "content": 1000,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10362,
+    "fields": {
+      "enrollment": 10124,
+      "content": 1004,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10363,
+    "fields": {
+      "enrollment": 10124,
+      "content": 1005,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10364,
+    "fields": {
+      "enrollment": 10125,
+      "content": 1012,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10365,
+    "fields": {
+      "enrollment": 10125,
+      "content": 1013,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10366,
+    "fields": {
+      "enrollment": 10125,
+      "content": 1016,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10367,
+    "fields": {
+      "enrollment": 10126,
+      "content": 16,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10368,
+    "fields": {
+      "enrollment": 10126,
+      "content": 20,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10369,
+    "fields": {
+      "enrollment": 10126,
+      "content": 25,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10370,
+    "fields": {
+      "enrollment": 10127,
+      "content": 46,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10371,
+    "fields": {
+      "enrollment": 10127,
+      "content": 47,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10372,
+    "fields": {
+      "enrollment": 10128,
+      "content": 1026,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10373,
+    "fields": {
+      "enrollment": 10128,
+      "content": 1028,
+      "started_at": "2025-10-15T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10374,
+    "fields": {
+      "enrollment": 10128,
+      "content": 1029,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10375,
+    "fields": {
+      "enrollment": 10129,
+      "content": 28,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10376,
+    "fields": {
+      "enrollment": 10129,
+      "content": 31,
+      "started_at": "2025-10-21T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10377,
+    "fields": {
+      "enrollment": 10129,
+      "content": 33,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10378,
+    "fields": {
+      "enrollment": 10129,
+      "content": 35,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10379,
+    "fields": {
+      "enrollment": 10130,
+      "content": 72,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10380,
+    "fields": {
+      "enrollment": 10130,
+      "content": 74,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10381,
+    "fields": {
+      "enrollment": 10130,
+      "content": 75,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10382,
+    "fields": {
+      "enrollment": 10130,
+      "content": 76,
+      "started_at": "2025-10-22T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10383,
+    "fields": {
+      "enrollment": 10130,
+      "content": 79,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10384,
+    "fields": {
+      "enrollment": 10131,
+      "content": 1018,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10385,
+    "fields": {
+      "enrollment": 10131,
+      "content": 1021,
+      "started_at": "2025-10-08T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10386,
+    "fields": {
+      "enrollment": 10131,
+      "content": 1022,
+      "started_at": "2025-10-21T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10387,
+    "fields": {
+      "enrollment": 10132,
+      "content": 1030,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10388,
+    "fields": {
+      "enrollment": 10132,
+      "content": 1032,
+      "started_at": "2025-10-19T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10389,
+    "fields": {
+      "enrollment": 10132,
+      "content": 1034,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10390,
+    "fields": {
+      "enrollment": 10132,
+      "content": 1035,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10391,
+    "fields": {
+      "enrollment": 10133,
+      "content": 45,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10392,
+    "fields": {
+      "enrollment": 10134,
+      "content": 107,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10393,
+    "fields": {
+      "enrollment": 10134,
+      "content": 108,
+      "started_at": "2025-10-08T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10394,
+    "fields": {
+      "enrollment": 10134,
+      "content": 112,
+      "started_at": "2025-10-13T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10395,
+    "fields": {
+      "enrollment": 10134,
+      "content": 113,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-25T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10396,
+    "fields": {
+      "enrollment": 10134,
+      "content": 114,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10397,
+    "fields": {
+      "enrollment": 10135,
+      "content": 1,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10398,
+    "fields": {
+      "enrollment": 10135,
+      "content": 3,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-31T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10399,
+    "fields": {
+      "enrollment": 10135,
+      "content": 4,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10400,
+    "fields": {
+      "enrollment": 10135,
+      "content": 8,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10401,
+    "fields": {
+      "enrollment": 10135,
+      "content": 10,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10402,
+    "fields": {
+      "enrollment": 10135,
+      "content": 12,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10403,
+    "fields": {
+      "enrollment": 10135,
+      "content": 14,
+      "started_at": "2025-11-02T18:47:57.288208+00:00",
+      "ended_at": "2025-11-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10404,
+    "fields": {
+      "enrollment": 10136,
+      "content": 1008,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10405,
+    "fields": {
+      "enrollment": 10136,
+      "content": 1010,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10406,
+    "fields": {
+      "enrollment": 10136,
+      "content": 1011,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10407,
+    "fields": {
+      "enrollment": 10137,
+      "content": 1013,
+      "started_at": "2025-10-27T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10408,
+    "fields": {
+      "enrollment": 10137,
+      "content": 1015,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10409,
+    "fields": {
+      "enrollment": 10137,
+      "content": 1017,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10410,
+    "fields": {
+      "enrollment": 10138,
+      "content": 1050,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10411,
+    "fields": {
+      "enrollment": 10139,
+      "content": 1018,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10412,
+    "fields": {
+      "enrollment": 10139,
+      "content": 1019,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10413,
+    "fields": {
+      "enrollment": 10139,
+      "content": 1022,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10414,
+    "fields": {
+      "enrollment": 10139,
+      "content": 1023,
+      "started_at": "2025-10-11T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10415,
+    "fields": {
+      "enrollment": 10140,
+      "content": 1006,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10416,
+    "fields": {
+      "enrollment": 10140,
+      "content": 1008,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10417,
+    "fields": {
+      "enrollment": 10141,
+      "content": 27,
+      "started_at": "2025-11-04T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10418,
+    "fields": {
+      "enrollment": 10141,
+      "content": 29,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10419,
+    "fields": {
+      "enrollment": 10141,
+      "content": 30,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10420,
+    "fields": {
+      "enrollment": 10141,
+      "content": 31,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10421,
+    "fields": {
+      "enrollment": 10141,
+      "content": 33,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-05T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10422,
+    "fields": {
+      "enrollment": 10141,
+      "content": 36,
+      "started_at": "2025-11-03T18:47:57.288208+00:00",
+      "ended_at": "2025-11-11T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10423,
+    "fields": {
+      "enrollment": 10142,
+      "content": 2,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10424,
+    "fields": {
+      "enrollment": 10142,
+      "content": 7,
+      "started_at": "2025-10-23T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10425,
+    "fields": {
+      "enrollment": 10142,
+      "content": 9,
+      "started_at": "2025-10-28T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10426,
+    "fields": {
+      "enrollment": 10142,
+      "content": 14,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10427,
+    "fields": {
+      "enrollment": 10143,
+      "content": 16,
+      "started_at": "2025-10-29T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10428,
+    "fields": {
+      "enrollment": 10143,
+      "content": 17,
+      "started_at": "2025-10-01T18:47:57.288208+00:00",
+      "ended_at": "2025-10-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10429,
+    "fields": {
+      "enrollment": 10143,
+      "content": 18,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10430,
+    "fields": {
+      "enrollment": 10143,
+      "content": 20,
+      "started_at": "2025-10-16T18:47:57.288208+00:00",
+      "ended_at": "2025-10-26T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10431,
+    "fields": {
+      "enrollment": 10143,
+      "content": 23,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-11-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10432,
+    "fields": {
+      "enrollment": 10143,
+      "content": 26,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10433,
+    "fields": {
+      "enrollment": 10144,
+      "content": 109,
+      "started_at": "2025-11-05T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10434,
+    "fields": {
+      "enrollment": 10144,
+      "content": 111,
+      "started_at": "2025-10-03T18:47:57.288208+00:00",
+      "ended_at": "2025-10-09T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10435,
+    "fields": {
+      "enrollment": 10144,
+      "content": 112,
+      "started_at": "2025-10-25T18:47:57.288208+00:00",
+      "ended_at": "2025-11-10T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10436,
+    "fields": {
+      "enrollment": 10144,
+      "content": 113,
+      "started_at": "2025-11-09T18:47:57.288208+00:00",
+      "ended_at": "2025-11-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10437,
+    "fields": {
+      "enrollment": 10144,
+      "content": 114,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10438,
+    "fields": {
+      "enrollment": 10145,
+      "content": 1054,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10439,
+    "fields": {
+      "enrollment": 10145,
+      "content": 1055,
+      "started_at": "2025-10-21T18:47:57.288208+00:00",
+      "ended_at": "2025-11-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10440,
+    "fields": {
+      "enrollment": 10145,
+      "content": 1056,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-28T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10441,
+    "fields": {
+      "enrollment": 10145,
+      "content": 1059,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-10-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10442,
+    "fields": {
+      "enrollment": 10146,
+      "content": 81,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-06T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10443,
+    "fields": {
+      "enrollment": 10146,
+      "content": 82,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10444,
+    "fields": {
+      "enrollment": 10146,
+      "content": 85,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10445,
+    "fields": {
+      "enrollment": 10146,
+      "content": 87,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-24T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10446,
+    "fields": {
+      "enrollment": 10146,
+      "content": 88,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-03T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10447,
+    "fields": {
+      "enrollment": 10147,
+      "content": 27,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-30T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10448,
+    "fields": {
+      "enrollment": 10147,
+      "content": 30,
+      "started_at": "2025-10-12T18:47:57.288208+00:00",
+      "ended_at": "2025-10-15T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10449,
+    "fields": {
+      "enrollment": 10147,
+      "content": 33,
+      "started_at": "2025-10-09T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10450,
+    "fields": {
+      "enrollment": 10147,
+      "content": 34,
+      "started_at": "2025-10-18T18:47:57.288208+00:00",
+      "ended_at": "2025-10-22T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10451,
+    "fields": {
+      "enrollment": 10148,
+      "content": 1018,
+      "started_at": "2025-10-08T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10452,
+    "fields": {
+      "enrollment": 10148,
+      "content": 1021,
+      "started_at": "2025-11-01T18:47:57.288208+00:00",
+      "ended_at": "2025-11-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10453,
+    "fields": {
+      "enrollment": 10149,
+      "content": 45,
+      "started_at": "2025-10-30T18:47:57.288208+00:00",
+      "ended_at": "2025-11-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10454,
+    "fields": {
+      "enrollment": 10150,
+      "content": 1012,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-16T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10455,
+    "fields": {
+      "enrollment": 10150,
+      "content": 1013,
+      "started_at": "2025-10-10T18:47:57.288208+00:00",
+      "ended_at": "2025-10-27T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10456,
+    "fields": {
+      "enrollment": 10150,
+      "content": 1015,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-08T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10457,
+    "fields": {
+      "enrollment": 10150,
+      "content": 1016,
+      "started_at": "2025-10-08T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10458,
+    "fields": {
+      "enrollment": 10151,
+      "content": 63,
+      "started_at": "2025-10-04T18:47:57.288208+00:00",
+      "ended_at": "2025-10-07T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10459,
+    "fields": {
+      "enrollment": 10151,
+      "content": 64,
+      "started_at": "2025-10-06T18:47:57.288208+00:00",
+      "ended_at": "2025-10-19T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10460,
+    "fields": {
+      "enrollment": 10151,
+      "content": 66,
+      "started_at": "2025-10-20T18:47:57.288208+00:00",
+      "ended_at": "2025-11-04T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10461,
+    "fields": {
+      "enrollment": 10151,
+      "content": 68,
+      "started_at": "2025-11-06T18:47:57.288208+00:00",
+      "ended_at": "2025-11-21T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10462,
+    "fields": {
+      "enrollment": 10151,
+      "content": 70,
+      "started_at": "2025-11-08T18:47:57.288208+00:00",
+      "ended_at": "2025-11-23T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10463,
+    "fields": {
+      "enrollment": 10152,
+      "content": 1012,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10464,
+    "fields": {
+      "enrollment": 10152,
+      "content": 1014,
+      "started_at": "2025-10-07T18:47:57.288208+00:00",
+      "ended_at": "2025-10-14T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10465,
+    "fields": {
+      "enrollment": 10152,
+      "content": 1015,
+      "started_at": "2025-10-14T18:47:57.288208+00:00",
+      "ended_at": "2025-11-02T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10466,
+    "fields": {
+      "enrollment": 10152,
+      "content": 1016,
+      "started_at": "2025-10-24T18:47:57.288208+00:00",
+      "ended_at": "2025-10-29T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10467,
+    "fields": {
+      "enrollment": 10153,
+      "content": 99,
+      "started_at": "2025-09-30T18:47:57.288208+00:00",
+      "ended_at": "2025-10-17T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10468,
+    "fields": {
+      "enrollment": 10153,
+      "content": 102,
+      "started_at": "2025-10-17T18:47:57.288208+00:00",
+      "ended_at": "2025-10-18T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10469,
+    "fields": {
+      "enrollment": 10153,
+      "content": 103,
+      "started_at": "2025-10-02T18:47:57.288208+00:00",
+      "ended_at": "2025-10-20T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10470,
+    "fields": {
+      "enrollment": 10153,
+      "content": 104,
+      "started_at": "2025-10-05T18:47:57.288208+00:00",
+      "ended_at": "2025-10-12T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10471,
+    "fields": {
+      "enrollment": 10153,
+      "content": 105,
+      "started_at": "2025-10-31T18:47:57.288208+00:00",
+      "ended_at": "2025-11-13T18:47:57.288208+00:00"
+    }
+  },
+  {
+    "model": "courses.learningsession",
+    "pk": 10472,
+    "fields": {
+      "enrollment": 10153,
+      "content": 106,
+      "started_at": "2025-10-26T18:47:57.288208+00:00",
+      "ended_at": "2025-11-07T18:47:57.288208+00:00"
+    }
+  }
+]

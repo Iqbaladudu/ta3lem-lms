@@ -180,5 +180,125 @@
       "created": "2024-04-15T10:00:00Z",
       "students": []
     }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1000,
+    "fields": {
+      "subject": 1000,
+      "owner": 1,
+      "title": "Kursus Baru 1",
+      "slug": "kursus-baru-1",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 1.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1001,
+    "fields": {
+      "subject": 1001,
+      "owner": 1,
+      "title": "Kursus Baru 2",
+      "slug": "kursus-baru-2",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 2.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1002,
+    "fields": {
+      "subject": 1002,
+      "owner": 1,
+      "title": "Kursus Baru 3",
+      "slug": "kursus-baru-3",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 3.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1003,
+    "fields": {
+      "subject": 1003,
+      "owner": 1,
+      "title": "Kursus Baru 4",
+      "slug": "kursus-baru-4",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 4.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1004,
+    "fields": {
+      "subject": 1004,
+      "owner": 1,
+      "title": "Kursus Baru 5",
+      "slug": "kursus-baru-5",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 5.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1005,
+    "fields": {
+      "subject": 1005,
+      "owner": 1,
+      "title": "Kursus Baru 6",
+      "slug": "kursus-baru-6",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 6.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1006,
+    "fields": {
+      "subject": 1006,
+      "owner": 1,
+      "title": "Kursus Baru 7",
+      "slug": "kursus-baru-7",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 7.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1007,
+    "fields": {
+      "subject": 1007,
+      "owner": 1,
+      "title": "Kursus Baru 8",
+      "slug": "kursus-baru-8",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 8.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1008,
+    "fields": {
+      "subject": 1008,
+      "owner": 1,
+      "title": "Kursus Baru 9",
+      "slug": "kursus-baru-9",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 9.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 1009,
+    "fields": {
+      "subject": 1009,
+      "owner": 1,
+      "title": "Kursus Baru 10",
+      "slug": "kursus-baru-10",
+      "overview": "Ini adalah deskripsi untuk Kursus Baru 10.",
+      "created": "2025-11-29T20:31:15.759554"
+    }
   }
 ]
