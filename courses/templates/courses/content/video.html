@@ -1,14 +1,12 @@
 {% load static %}
-{% load embed_video_tags %}
+{% load course %}
 <div class="video-container">
     <h3 class="text-lg font-semibold mb-3">{{ item.title }}</h3>
     
     {% if item.url %}
-    <!-- Embedded video (YouTube, Vimeo, etc) -->
+    <!-- Embedded video (YouTube) -->
     <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden shadow-lg">
-        <div class="w-full min-h-[400px]">
-           <iframe class="w-full" height="400" src="https://www.youtube-nocookie.com/embed/3Lr3DJ_VbbU?si=hf3PdWIpA7mg4lmX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+        {% youtube_player item.url height=400 min_height="400px" container_class="w-full" %}
     </div>
     {% elif item.file %}
     <!-- Uploaded video file -->
