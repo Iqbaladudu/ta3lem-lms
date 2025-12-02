@@ -15,6 +15,16 @@ urlpatterns = [
          name="module_content_create"),
     path("module/<int:module_id>/content/<model_name>/<int:id>/", views.ContentCreateUpdateView.as_view(),
          name="module_content_update"),
+    # Tambah item ke Content yang sudah ada
+    path("module/<int:module_id>/content/<model_name>/create/<int:content_id>/", views.ContentCreateUpdateView.as_view(),
+         name="module_content_add_item"),
+    # ContentItem management
+    path("content/<int:content_id>/item/<model_name>/create/", views.ContentItemCreateView.as_view(),
+         name="content_item_create"),
+    path("content/<int:content_id>/item/<int:item_id>/delete/", views.ContentItemDeleteView.as_view(),
+         name="content_item_delete"),
+    path("content-item/order/", views.ContentItemOrderView.as_view(), name="content_item_order"),
+    # Content delete
     path("content/<int:id>/delete/", views.ContentDeleteView.as_view(), name="module_content_delete"),
     path("module/<int:module_id>/", views.ModuleContentListView.as_view(), name="module_content_list"),
     path("module/order/", views.ModuleOrderView.as_view(), name="module_order"),

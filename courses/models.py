@@ -107,15 +107,28 @@ class Module(models.Model):
         return self.contents.order_by('order').first()
 
 
-# Polymorphic content model
+# Content model - can have multiple content items of different types
 class Content(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='contents')
+    title = models.CharField(max_length=250, blank=True)
+    order = OrderField(blank=True, for_fields=['module'])
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.title
+
+
+class ContentItem(models.Model):
+    """Each Content can have multiple ContentItems of different types"""
+    content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='items')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to={
         'model__in': ('text', 'video', 'image', 'file')
     })
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('content_type', 'object_id')
-    order = OrderField(blank=True, for_fields=['module'])
+    order = OrderField(blank=True, for_fields=['content'])
 
     class Meta:
         ordering = ['order']

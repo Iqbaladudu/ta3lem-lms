@@ -1,0 +1,722 @@
+[
+  {
+    "model": "courses.content",
+    "pk": 3000,
+    "fields": {
+      "module": 3000,
+      "title": "Materi Getting Started",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3001,
+    "fields": {
+      "module": 3000,
+      "title": "Video Getting Started",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3002,
+    "fields": {
+      "module": 3001,
+      "title": "Materi Fundamental Concepts",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3003,
+    "fields": {
+      "module": 3001,
+      "title": "Video Fundamental Concepts",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3004,
+    "fields": {
+      "module": 3002,
+      "title": "Materi Building Blocks",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3005,
+    "fields": {
+      "module": 3002,
+      "title": "Video Building Blocks",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3006,
+    "fields": {
+      "module": 3003,
+      "title": "Materi Advanced Topics",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3007,
+    "fields": {
+      "module": 3003,
+      "title": "Video Advanced Topics",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3008,
+    "fields": {
+      "module": 3004,
+      "title": "Materi Final Project",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3009,
+    "fields": {
+      "module": 3004,
+      "title": "Video Final Project",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3010,
+    "fields": {
+      "module": 3005,
+      "title": "Materi Pengenalan dan Setup",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3011,
+    "fields": {
+      "module": 3005,
+      "title": "Video Pengenalan dan Setup",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3012,
+    "fields": {
+      "module": 3006,
+      "title": "Materi Konsep Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3013,
+    "fields": {
+      "module": 3006,
+      "title": "Video Konsep Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3014,
+    "fields": {
+      "module": 3007,
+      "title": "Materi Implementasi Awal",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3015,
+    "fields": {
+      "module": 3007,
+      "title": "Video Implementasi Awal",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3016,
+    "fields": {
+      "module": 3008,
+      "title": "Materi Studi Kasus",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3017,
+    "fields": {
+      "module": 3008,
+      "title": "Video Studi Kasus",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3018,
+    "fields": {
+      "module": 3009,
+      "title": "Materi Pengenalan dan Setup",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3019,
+    "fields": {
+      "module": 3009,
+      "title": "Video Pengenalan dan Setup",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3020,
+    "fields": {
+      "module": 3010,
+      "title": "Materi Konsep Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3021,
+    "fields": {
+      "module": 3010,
+      "title": "Video Konsep Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3022,
+    "fields": {
+      "module": 3011,
+      "title": "Materi Implementasi Awal",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3023,
+    "fields": {
+      "module": 3011,
+      "title": "Video Implementasi Awal",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3024,
+    "fields": {
+      "module": 3012,
+      "title": "Materi Pendahuluan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3025,
+    "fields": {
+      "module": 3012,
+      "title": "Video Pendahuluan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3026,
+    "fields": {
+      "module": 3013,
+      "title": "Materi Teori Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3027,
+    "fields": {
+      "module": 3013,
+      "title": "Video Teori Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3028,
+    "fields": {
+      "module": 3014,
+      "title": "Materi Praktik Hands-on",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3029,
+    "fields": {
+      "module": 3014,
+      "title": "Video Praktik Hands-on",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3030,
+    "fields": {
+      "module": 3015,
+      "title": "Materi Getting Started",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3031,
+    "fields": {
+      "module": 3015,
+      "title": "Video Getting Started",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3032,
+    "fields": {
+      "module": 3016,
+      "title": "Materi Fundamental Concepts",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3033,
+    "fields": {
+      "module": 3016,
+      "title": "Video Fundamental Concepts",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3034,
+    "fields": {
+      "module": 3017,
+      "title": "Materi Building Blocks",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3035,
+    "fields": {
+      "module": 3017,
+      "title": "Video Building Blocks",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3036,
+    "fields": {
+      "module": 3018,
+      "title": "Materi Advanced Topics",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3037,
+    "fields": {
+      "module": 3018,
+      "title": "Video Advanced Topics",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3038,
+    "fields": {
+      "module": 3019,
+      "title": "Materi Pendahuluan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3039,
+    "fields": {
+      "module": 3019,
+      "title": "Video Pendahuluan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3040,
+    "fields": {
+      "module": 3020,
+      "title": "Materi Teori Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3041,
+    "fields": {
+      "module": 3020,
+      "title": "Video Teori Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3042,
+    "fields": {
+      "module": 3021,
+      "title": "Materi Praktik Hands-on",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3043,
+    "fields": {
+      "module": 3021,
+      "title": "Video Praktik Hands-on",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3044,
+    "fields": {
+      "module": 3022,
+      "title": "Materi Lanjutan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3045,
+    "fields": {
+      "module": 3022,
+      "title": "Video Lanjutan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3046,
+    "fields": {
+      "module": 3023,
+      "title": "Materi Pendahuluan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3047,
+    "fields": {
+      "module": 3023,
+      "title": "Video Pendahuluan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3048,
+    "fields": {
+      "module": 3024,
+      "title": "Materi Teori Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3049,
+    "fields": {
+      "module": 3024,
+      "title": "Video Teori Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3050,
+    "fields": {
+      "module": 3025,
+      "title": "Materi Praktik Hands-on",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3051,
+    "fields": {
+      "module": 3025,
+      "title": "Video Praktik Hands-on",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3052,
+    "fields": {
+      "module": 3026,
+      "title": "Materi Lanjutan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3053,
+    "fields": {
+      "module": 3026,
+      "title": "Video Lanjutan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3054,
+    "fields": {
+      "module": 3027,
+      "title": "Materi Getting Started",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3055,
+    "fields": {
+      "module": 3027,
+      "title": "Video Getting Started",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3056,
+    "fields": {
+      "module": 3028,
+      "title": "Materi Fundamental Concepts",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3057,
+    "fields": {
+      "module": 3028,
+      "title": "Video Fundamental Concepts",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3058,
+    "fields": {
+      "module": 3029,
+      "title": "Materi Building Blocks",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3059,
+    "fields": {
+      "module": 3029,
+      "title": "Video Building Blocks",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3060,
+    "fields": {
+      "module": 3030,
+      "title": "Materi Advanced Topics",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3061,
+    "fields": {
+      "module": 3030,
+      "title": "Video Advanced Topics",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3062,
+    "fields": {
+      "module": 3031,
+      "title": "Materi Pendahuluan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3063,
+    "fields": {
+      "module": 3031,
+      "title": "Video Pendahuluan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3064,
+    "fields": {
+      "module": 3032,
+      "title": "Materi Teori Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3065,
+    "fields": {
+      "module": 3032,
+      "title": "Video Teori Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3066,
+    "fields": {
+      "module": 3033,
+      "title": "Materi Praktik Hands-on",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3067,
+    "fields": {
+      "module": 3033,
+      "title": "Video Praktik Hands-on",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3068,
+    "fields": {
+      "module": 3034,
+      "title": "Materi Lanjutan",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3069,
+    "fields": {
+      "module": 3034,
+      "title": "Video Lanjutan",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3070,
+    "fields": {
+      "module": 3035,
+      "title": "Materi Getting Started",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3071,
+    "fields": {
+      "module": 3035,
+      "title": "Video Getting Started",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3072,
+    "fields": {
+      "module": 3036,
+      "title": "Materi Fundamental Concepts",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3073,
+    "fields": {
+      "module": 3036,
+      "title": "Video Fundamental Concepts",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3074,
+    "fields": {
+      "module": 3037,
+      "title": "Materi Building Blocks",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3075,
+    "fields": {
+      "module": 3037,
+      "title": "Video Building Blocks",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3076,
+    "fields": {
+      "module": 3038,
+      "title": "Materi Advanced Topics",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3077,
+    "fields": {
+      "module": 3038,
+      "title": "Video Advanced Topics",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3078,
+    "fields": {
+      "module": 3039,
+      "title": "Materi Final Project",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.content",
+    "pk": 3079,
+    "fields": {
+      "module": 3039,
+      "title": "Video Final Project",
+      "order": 1
+    }
+  }
+]

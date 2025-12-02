@@ -1,0 +1,122 @@
+[
+  {
+    "model": "courses.course",
+    "pk": 2000,
+    "fields": {
+      "owner": 1,
+      "subject": 2000,
+      "title": "Machine Learning Dasar",
+      "slug": "machine-learning-dasar",
+      "overview": "Pelajari dasar-dasar machine learning dengan Python.",
+      "created": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2001,
+    "fields": {
+      "owner": 1,
+      "subject": 2001,
+      "title": "Flutter Mobile Development",
+      "slug": "flutter-mobile-development",
+      "overview": "Bangun aplikasi mobile cross-platform dengan Flutter dan Dart.",
+      "created": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2002,
+    "fields": {
+      "owner": 1,
+      "subject": 2002,
+      "title": "Cybersecurity Fundamentals",
+      "slug": "cybersecurity-fundamentals",
+      "overview": "Pelajari dasar-dasar keamanan siber dan ethical hacking.",
+      "created": "2025-10-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2003,
+    "fields": {
+      "owner": 1,
+      "subject": 2003,
+      "title": "Cloud Computing AWS",
+      "slug": "cloud-computing-aws",
+      "overview": "Kuasai layanan Amazon Web Services untuk deploy aplikasi.",
+      "created": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2004,
+    "fields": {
+      "owner": 1,
+      "subject": 2004,
+      "title": "DevOps dengan Docker & Kubernetes",
+      "slug": "devops-docker-kubernetes",
+      "overview": "Pelajari containerization dan orchestration.",
+      "created": "2025-10-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2005,
+    "fields": {
+      "owner": 1,
+      "subject": 2005,
+      "title": "Bahasa Jepang untuk Pemula",
+      "slug": "bahasa-jepang-pemula",
+      "overview": "Belajar bahasa Jepang dari dasar.",
+      "created": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2006,
+    "fields": {
+      "owner": 1,
+      "subject": 2006,
+      "title": "Digital Marketing Strategy",
+      "slug": "digital-marketing-strategy",
+      "overview": "Kuasai strategi digital marketing modern.",
+      "created": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2007,
+    "fields": {
+      "owner": 1,
+      "subject": 2007,
+      "title": "Game Development Unity",
+      "slug": "game-development-unity",
+      "overview": "Buat game 2D dan 3D menggunakan Unity engine.",
+      "created": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2008,
+    "fields": {
+      "owner": 1,
+      "subject": 2008,
+      "title": "Blockchain & Web3",
+      "slug": "blockchain-web3",
+      "overview": "Pelajari teknologi blockchain dan smart contracts.",
+      "created": "2025-10-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.course",
+    "pk": 2009,
+    "fields": {
+      "owner": 1,
+      "subject": 2009,
+      "title": "Artificial Intelligence Advanced",
+      "slug": "artificial-intelligence-advanced",
+      "overview": "Deep dive ke dunia AI: NLP, Computer Vision, RL.",
+      "created": "2025-10-11T10:00:00"
+    }
+  }
+]

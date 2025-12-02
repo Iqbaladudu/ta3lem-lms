@@ -2,7 +2,7 @@
 {% load course %}
 {% load embed_video_tags %}
 
-{% block title %}{{ content.item.title }} - {{ module.title }} - Ta3lem{% endblock %}
+{% block title %}{{ content.title }} - {{ module.title }} - Ta3lem{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -55,7 +55,9 @@
                 <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                 <a href="{% url 'student_course_detail' course.pk %}" class="text-blue-600 hover:text-blue-700 font-semibold truncate max-w-[150px] sm:max-w-none">{{ course.title }}</a>
                 <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                <span class="text-gray-600 truncate max-w-[150px] sm:max-w-none">{{ content.item.title }}</span>
+                <span class="text-gray-600 truncate max-w-[150px] sm:max-w-none">{{ module.title }}</span>
+                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+                <span class="text-gray-600 truncate max-w-[150px] sm:max-w-none">{{ content.title }}</span>
             </nav>
         </div>
 
@@ -130,9 +132,10 @@
                                                         {% endif %}
                                                     </div>
                                                     <div class="flex-1 min-w-0">
-                                                        <p class="text-sm font-medium truncate {% if item.content.pk == content.pk %}text-white{% else %}text-gray-700 group-hover:text-blue-600{% endif %}">{{ item.content.item.title }}</p>
+                                                        <p class="text-sm font-medium truncate {% if item.content.pk == content.pk %}text-white{% else %}text-gray-700 group-hover:text-blue-600{% endif %}">{{ item.content.title }}</p>
+                                                        <p class="text-xs {% if item.content.pk == content.pk %}text-white/70{% else %}text-gray-500{% endif %}">{{ item.content.items.count }} item{% if item.content.items.count > 1 %}s{% endif %}</p>
                                                     </div>
-                                                    <i class="fas fa-{% if item.content.item.content_type == 'video' %}video{% elif item.content.item.content_type == 'file' %}file-pdf{% else %}file-text{% endif %} {% if item.content.pk == content.pk %}text-white{% else %}text-gray-400{% endif %} text-xs"></i>
+                                                    <span class="{% if item.content.pk == content.pk %}text-white{% else %}text-gray-400{% endif %} text-xs">{% if item.content.items.count > 1 %}📚{% else %}📄{% endif %}</span>
                                                 </a>
                                             {% endfor %}
                                         {% else %}
@@ -181,7 +184,8 @@
                             <p class="text-sm text-blue-100 mb-2 flex items-center">
                                 <i class="fas fa-layer-group mr-2"></i>{{ module.title }}
                             </p>
-                            <h1 class="text-2xl sm:text-3xl font-extrabold mb-2">{{ content.item.title }}</h1>
+                            <h1 class="text-2xl sm:text-3xl font-extrabold mb-2">{{ content.title }}</h1>
+                            <p class="text-sm text-blue-100">{{ content.items.count }} item{% if content.items.count > 1 %}s{% endif %}</p>
                         </div>
                         {% if content_progress.is_completed %}
                             <div class="flex-shrink-0 ml-4">
@@ -193,53 +197,18 @@
                     </div>
                 </div>
 
-                <!-- Content Display -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 mb-6 border border-gray-100">
-                    {% if content.item.content_type == 'video' %}
-                        <!-- Video Content -->
-                        <div class="aspect-video bg-gray-900 rounded-xl overflow-hidden mb-6">
-                            {% if content.item.url %}
-                                {% video content.item.url "small" %}
-                            {% elif content.item.file %}
-                                <video controls class="w-full h-full">
-                                    <source src="{{ content.item.file.url }}" type="video/mp4">
-                                    Browser Anda tidak support video tag.
-                                </video>
-                            {% endif %}
-                        </div>
-                    {% elif content.item.content_type == 'image' %}
-                        <!-- Image Content -->
-                        <div class="mb-6">
-                            {% if content.item.file %}
-                                <img src="{{ content.item.file.url }}"
-                                     alt="{{ content.item.title }}"
-                                     class="w-full rounded-xl shadow-lg">
-                            {% endif %}
-                        </div>
-                    {% elif content.item.content_type == 'file' %}
-                        <!-- File Content -->
-                        <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6 text-center">
-                            <i class="fas fa-file-pdf text-6xl text-blue-500 mb-4"></i>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ content.item.title }}</h3>
-                            {% if content.item.file %}
-                                <a href="{{ content.item.file.url }}"
-                                   target="_blank"
-                                   download
-                                   class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
-                                    <i class="fas fa-download mr-2"></i>Download File
-                                </a>
-                            {% endif %}
-                        </div>
-                    {% endif %}
-
-                    <!-- Text Content -->
-                    {% if content.item.content %}
-                        <div class="prose prose-lg max-w-none">
-                            <div class="text-gray-800 leading-relaxed">
-                                {{ content.item.content|safe }}
-                            </div>
-                        </div>
-                    {% endif %}
+                <!-- Content Items Display -->
+                <div class="space-y-6">
+                    {% for item in content.items.all %}
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
+                        {{ item.item.render|safe }}
+                    </div>
+                    {% empty %}
+                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 text-center">
+                        <i class="fas fa-inbox text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600">Belum ada konten untuk ditampilkan.</p>
+                    </div>
+                    {% endfor %}
                 </div>
 
                 <!-- Mark as Complete Button -->

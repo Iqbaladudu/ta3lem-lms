@@ -4,11 +4,7 @@
     "pk": 1,
     "fields": {
       "module": 1,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1,
+      "title": "Content 1",
       "order": 0
     }
   },
@@ -17,11 +13,7 @@
     "pk": 2,
     "fields": {
       "module": 1,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1,
+      "title": "Content 2",
       "order": 1
     }
   },
@@ -30,11 +22,7 @@
     "pk": 3,
     "fields": {
       "module": 1,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 2,
+      "title": "Content 3",
       "order": 2
     }
   },
@@ -43,11 +31,7 @@
     "pk": 4,
     "fields": {
       "module": 1,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 3,
+      "title": "Content 4",
       "order": 3
     }
   },
@@ -56,11 +40,7 @@
     "pk": 5,
     "fields": {
       "module": 2,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 4,
+      "title": "Content 5",
       "order": 0
     }
   },
@@ -69,11 +49,7 @@
     "pk": 6,
     "fields": {
       "module": 2,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 2,
+      "title": "Content 6",
       "order": 1
     }
   },
@@ -82,11 +58,7 @@
     "pk": 7,
     "fields": {
       "module": 2,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 5,
+      "title": "Content 7",
       "order": 2
     }
   },
@@ -95,11 +67,7 @@
     "pk": 8,
     "fields": {
       "module": 3,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 6,
+      "title": "Content 8",
       "order": 0
     }
   },
@@ -108,11 +76,7 @@
     "pk": 9,
     "fields": {
       "module": 3,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 3,
+      "title": "Content 9",
       "order": 1
     }
   },
@@ -121,11 +85,7 @@
     "pk": 10,
     "fields": {
       "module": 3,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 7,
+      "title": "Content 10",
       "order": 2
     }
   },
@@ -134,11 +94,7 @@
     "pk": 11,
     "fields": {
       "module": 3,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 8,
+      "title": "Content 11",
       "order": 3
     }
   },
@@ -147,11 +103,7 @@
     "pk": 12,
     "fields": {
       "module": 4,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 9,
+      "title": "Content 12",
       "order": 0
     }
   },
@@ -160,11 +112,7 @@
     "pk": 13,
     "fields": {
       "module": 4,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 4,
+      "title": "Content 13",
       "order": 1
     }
   },
@@ -173,11 +121,7 @@
     "pk": 14,
     "fields": {
       "module": 4,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 10,
+      "title": "Content 14",
       "order": 2
     }
   },
@@ -186,11 +130,7 @@
     "pk": 15,
     "fields": {
       "module": 5,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 11,
+      "title": "Content 15",
       "order": 0
     }
   },
@@ -199,11 +139,7 @@
     "pk": 16,
     "fields": {
       "module": 5,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 5,
+      "title": "Content 16",
       "order": 1
     }
   },
@@ -212,11 +148,7 @@
     "pk": 17,
     "fields": {
       "module": 5,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 12,
+      "title": "Content 17",
       "order": 2
     }
   },
@@ -225,11 +157,7 @@
     "pk": 18,
     "fields": {
       "module": 6,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 13,
+      "title": "Content 18",
       "order": 0
     }
   },
@@ -238,11 +166,7 @@
     "pk": 19,
     "fields": {
       "module": 6,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 6,
+      "title": "Content 19",
       "order": 1
     }
   },
@@ -251,11 +175,7 @@
     "pk": 20,
     "fields": {
       "module": 6,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 14,
+      "title": "Content 20",
       "order": 2
     }
   },
@@ -264,11 +184,7 @@
     "pk": 21,
     "fields": {
       "module": 7,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 15,
+      "title": "Content 21",
       "order": 0
     }
   },
@@ -277,11 +193,7 @@
     "pk": 22,
     "fields": {
       "module": 7,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 7,
+      "title": "Content 22",
       "order": 1
     }
   },
@@ -290,11 +202,7 @@
     "pk": 23,
     "fields": {
       "module": 7,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 16,
+      "title": "Content 23",
       "order": 2
     }
   },
@@ -303,11 +211,7 @@
     "pk": 24,
     "fields": {
       "module": 8,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 17,
+      "title": "Content 24",
       "order": 0
     }
   },
@@ -316,11 +220,7 @@
     "pk": 25,
     "fields": {
       "module": 8,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 8,
+      "title": "Content 25",
       "order": 1
     }
   },
@@ -329,11 +229,7 @@
     "pk": 26,
     "fields": {
       "module": 8,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 18,
+      "title": "Content 26",
       "order": 2
     }
   },
@@ -342,11 +238,7 @@
     "pk": 27,
     "fields": {
       "module": 9,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 19,
+      "title": "Content 27",
       "order": 0
     }
   },
@@ -355,11 +247,7 @@
     "pk": 28,
     "fields": {
       "module": 10,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 20,
+      "title": "Content 28",
       "order": 0
     }
   },
@@ -368,11 +256,7 @@
     "pk": 29,
     "fields": {
       "module": 10,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 9,
+      "title": "Content 29",
       "order": 1
     }
   },
@@ -381,11 +265,7 @@
     "pk": 30,
     "fields": {
       "module": 10,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 21,
+      "title": "Content 30",
       "order": 2
     }
   },
@@ -394,11 +274,7 @@
     "pk": 31,
     "fields": {
       "module": 11,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 22,
+      "title": "Content 31",
       "order": 0
     }
   },
@@ -407,11 +283,7 @@
     "pk": 32,
     "fields": {
       "module": 11,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 10,
+      "title": "Content 32",
       "order": 1
     }
   },
@@ -420,11 +292,7 @@
     "pk": 33,
     "fields": {
       "module": 11,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 23,
+      "title": "Content 33",
       "order": 2
     }
   },
@@ -433,11 +301,7 @@
     "pk": 34,
     "fields": {
       "module": 12,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 24,
+      "title": "Content 34",
       "order": 0
     }
   },
@@ -446,11 +310,7 @@
     "pk": 35,
     "fields": {
       "module": 12,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 11,
+      "title": "Content 35",
       "order": 1
     }
   },
@@ -459,11 +319,7 @@
     "pk": 36,
     "fields": {
       "module": 12,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 25,
+      "title": "Content 36",
       "order": 2
     }
   },
@@ -472,11 +328,7 @@
     "pk": 37,
     "fields": {
       "module": 13,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 26,
+      "title": "Content 37",
       "order": 0
     }
   },
@@ -485,11 +337,7 @@
     "pk": 38,
     "fields": {
       "module": 13,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 12,
+      "title": "Content 38",
       "order": 1
     }
   },
@@ -498,11 +346,7 @@
     "pk": 39,
     "fields": {
       "module": 13,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 27,
+      "title": "Content 39",
       "order": 2
     }
   },
@@ -511,11 +355,7 @@
     "pk": 40,
     "fields": {
       "module": 14,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 28,
+      "title": "Content 40",
       "order": 0
     }
   },
@@ -524,11 +364,7 @@
     "pk": 41,
     "fields": {
       "module": 14,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 13,
+      "title": "Content 41",
       "order": 1
     }
   },
@@ -537,11 +373,7 @@
     "pk": 42,
     "fields": {
       "module": 14,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 29,
+      "title": "Content 42",
       "order": 2
     }
   },
@@ -550,11 +382,7 @@
     "pk": 43,
     "fields": {
       "module": 15,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 30,
+      "title": "Content 43",
       "order": 0
     }
   },
@@ -563,11 +391,7 @@
     "pk": 44,
     "fields": {
       "module": 15,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 14,
+      "title": "Content 44",
       "order": 1
     }
   },
@@ -576,11 +400,7 @@
     "pk": 45,
     "fields": {
       "module": 16,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 15,
+      "title": "Content 45",
       "order": 0
     }
   },
@@ -589,11 +409,7 @@
     "pk": 46,
     "fields": {
       "module": 19,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 16,
+      "title": "Content 46",
       "order": 0
     }
   },
@@ -602,11 +418,7 @@
     "pk": 47,
     "fields": {
       "module": 20,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 17,
+      "title": "Content 47",
       "order": 0
     }
   },
@@ -615,11 +427,7 @@
     "pk": 48,
     "fields": {
       "module": 21,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 18,
+      "title": "Content 48",
       "order": 0
     }
   },
@@ -628,11 +436,7 @@
     "pk": 49,
     "fields": {
       "module": 23,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 31,
+      "title": "Content 49",
       "order": 0
     }
   },
@@ -641,11 +445,7 @@
     "pk": 50,
     "fields": {
       "module": 23,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 19,
+      "title": "Content 50",
       "order": 1
     }
   },
@@ -654,11 +454,7 @@
     "pk": 51,
     "fields": {
       "module": 23,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 32,
+      "title": "Content 51",
       "order": 2
     }
   },
@@ -667,11 +463,7 @@
     "pk": 52,
     "fields": {
       "module": 23,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 33,
+      "title": "Content 52",
       "order": 3
     }
   },
@@ -680,11 +472,7 @@
     "pk": 53,
     "fields": {
       "module": 24,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 34,
+      "title": "Content 53",
       "order": 0
     }
   },
@@ -693,11 +481,7 @@
     "pk": 54,
     "fields": {
       "module": 24,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 20,
+      "title": "Content 54",
       "order": 1
     }
   },
@@ -706,11 +490,7 @@
     "pk": 55,
     "fields": {
       "module": 24,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 35,
+      "title": "Content 55",
       "order": 2
     }
   },
@@ -719,11 +499,7 @@
     "pk": 56,
     "fields": {
       "module": 25,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 36,
+      "title": "Content 56",
       "order": 0
     }
   },
@@ -732,11 +508,7 @@
     "pk": 57,
     "fields": {
       "module": 25,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 21,
+      "title": "Content 57",
       "order": 1
     }
   },
@@ -745,11 +517,7 @@
     "pk": 58,
     "fields": {
       "module": 25,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 37,
+      "title": "Content 58",
       "order": 2
     }
   },
@@ -758,11 +526,7 @@
     "pk": 59,
     "fields": {
       "module": 26,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 38,
+      "title": "Content 59",
       "order": 0
     }
   },
@@ -771,11 +535,7 @@
     "pk": 60,
     "fields": {
       "module": 26,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 22,
+      "title": "Content 60",
       "order": 1
     }
   },
@@ -784,11 +544,7 @@
     "pk": 61,
     "fields": {
       "module": 26,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 39,
+      "title": "Content 61",
       "order": 2
     }
   },
@@ -797,11 +553,7 @@
     "pk": 62,
     "fields": {
       "module": 27,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 40,
+      "title": "Content 62",
       "order": 0
     }
   },
@@ -810,11 +562,7 @@
     "pk": 63,
     "fields": {
       "module": 27,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 23,
+      "title": "Content 63",
       "order": 1
     }
   },
@@ -823,11 +571,7 @@
     "pk": 64,
     "fields": {
       "module": 27,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 41,
+      "title": "Content 64",
       "order": 2
     }
   },
@@ -836,11 +580,7 @@
     "pk": 65,
     "fields": {
       "module": 28,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 42,
+      "title": "Content 65",
       "order": 0
     }
   },
@@ -849,11 +589,7 @@
     "pk": 66,
     "fields": {
       "module": 28,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 24,
+      "title": "Content 66",
       "order": 1
     }
   },
@@ -862,11 +598,7 @@
     "pk": 67,
     "fields": {
       "module": 29,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 43,
+      "title": "Content 67",
       "order": 0
     }
   },
@@ -875,11 +607,7 @@
     "pk": 68,
     "fields": {
       "module": 29,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 25,
+      "title": "Content 68",
       "order": 1
     }
   },
@@ -888,11 +616,7 @@
     "pk": 69,
     "fields": {
       "module": 30,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 44,
+      "title": "Content 69",
       "order": 0
     }
   },
@@ -901,11 +625,7 @@
     "pk": 70,
     "fields": {
       "module": 30,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 26,
+      "title": "Content 70",
       "order": 1
     }
   },
@@ -914,11 +634,7 @@
     "pk": 71,
     "fields": {
       "module": 31,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 45,
+      "title": "Content 71",
       "order": 0
     }
   },
@@ -927,11 +643,7 @@
     "pk": 72,
     "fields": {
       "module": 31,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 27,
+      "title": "Content 72",
       "order": 1
     }
   },
@@ -940,11 +652,7 @@
     "pk": 73,
     "fields": {
       "module": 31,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 46,
+      "title": "Content 73",
       "order": 2
     }
   },
@@ -953,11 +661,7 @@
     "pk": 74,
     "fields": {
       "module": 32,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 47,
+      "title": "Content 74",
       "order": 0
     }
   },
@@ -966,11 +670,7 @@
     "pk": 75,
     "fields": {
       "module": 32,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 28,
+      "title": "Content 75",
       "order": 1
     }
   },
@@ -979,11 +679,7 @@
     "pk": 76,
     "fields": {
       "module": 33,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 48,
+      "title": "Content 76",
       "order": 0
     }
   },
@@ -992,11 +688,7 @@
     "pk": 77,
     "fields": {
       "module": 33,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 29,
+      "title": "Content 77",
       "order": 1
     }
   },
@@ -1005,11 +697,7 @@
     "pk": 78,
     "fields": {
       "module": 33,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 49,
+      "title": "Content 78",
       "order": 2
     }
   },
@@ -1018,11 +706,7 @@
     "pk": 79,
     "fields": {
       "module": 34,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 30,
+      "title": "Content 79",
       "order": 0
     }
   },
@@ -1031,11 +715,7 @@
     "pk": 80,
     "fields": {
       "module": 35,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 50,
+      "title": "Content 80",
       "order": 0
     }
   },
@@ -1044,11 +724,7 @@
     "pk": 81,
     "fields": {
       "module": 35,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 31,
+      "title": "Content 81",
       "order": 1
     }
   },
@@ -1057,11 +733,7 @@
     "pk": 82,
     "fields": {
       "module": 35,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 51,
+      "title": "Content 82",
       "order": 2
     }
   },
@@ -1070,11 +742,7 @@
     "pk": 83,
     "fields": {
       "module": 36,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 52,
+      "title": "Content 83",
       "order": 0
     }
   },
@@ -1083,11 +751,7 @@
     "pk": 84,
     "fields": {
       "module": 36,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 32,
+      "title": "Content 84",
       "order": 1
     }
   },
@@ -1096,11 +760,7 @@
     "pk": 85,
     "fields": {
       "module": 37,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 53,
+      "title": "Content 85",
       "order": 0
     }
   },
@@ -1109,11 +769,7 @@
     "pk": 86,
     "fields": {
       "module": 37,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 33,
+      "title": "Content 86",
       "order": 1
     }
   },
@@ -1122,11 +778,7 @@
     "pk": 87,
     "fields": {
       "module": 38,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 54,
+      "title": "Content 87",
       "order": 0
     }
   },
@@ -1135,11 +787,7 @@
     "pk": 88,
     "fields": {
       "module": 38,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 34,
+      "title": "Content 88",
       "order": 1
     }
   },
@@ -1148,11 +796,7 @@
     "pk": 89,
     "fields": {
       "module": 39,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 55,
+      "title": "Content 89",
       "order": 0
     }
   },
@@ -1161,11 +805,7 @@
     "pk": 90,
     "fields": {
       "module": 39,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 35,
+      "title": "Content 90",
       "order": 1
     }
   },
@@ -1174,11 +814,7 @@
     "pk": 91,
     "fields": {
       "module": 39,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 56,
+      "title": "Content 91",
       "order": 2
     }
   },
@@ -1187,11 +823,7 @@
     "pk": 92,
     "fields": {
       "module": 40,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 57,
+      "title": "Content 92",
       "order": 0
     }
   },
@@ -1200,11 +832,7 @@
     "pk": 93,
     "fields": {
       "module": 40,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 36,
+      "title": "Content 93",
       "order": 1
     }
   },
@@ -1213,11 +841,7 @@
     "pk": 94,
     "fields": {
       "module": 41,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 58,
+      "title": "Content 94",
       "order": 0
     }
   },
@@ -1226,11 +850,7 @@
     "pk": 95,
     "fields": {
       "module": 41,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 37,
+      "title": "Content 95",
       "order": 1
     }
   },
@@ -1239,11 +859,7 @@
     "pk": 96,
     "fields": {
       "module": 42,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 59,
+      "title": "Content 96",
       "order": 0
     }
   },
@@ -1252,11 +868,7 @@
     "pk": 97,
     "fields": {
       "module": 42,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 38,
+      "title": "Content 97",
       "order": 1
     }
   },
@@ -1265,11 +877,7 @@
     "pk": 98,
     "fields": {
       "module": 43,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 60,
+      "title": "Content 98",
       "order": 0
     }
   },
@@ -1278,11 +886,7 @@
     "pk": 99,
     "fields": {
       "module": 43,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 39,
+      "title": "Content 99",
       "order": 1
     }
   },
@@ -1291,11 +895,7 @@
     "pk": 100,
     "fields": {
       "module": 43,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 61,
+      "title": "Content 100",
       "order": 2
     }
   },
@@ -1304,11 +904,7 @@
     "pk": 101,
     "fields": {
       "module": 44,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 62,
+      "title": "Content 101",
       "order": 0
     }
   },
@@ -1317,11 +913,7 @@
     "pk": 102,
     "fields": {
       "module": 44,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 40,
+      "title": "Content 102",
       "order": 1
     }
   },
@@ -1330,11 +922,7 @@
     "pk": 103,
     "fields": {
       "module": 45,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 63,
+      "title": "Content 103",
       "order": 0
     }
   },
@@ -1343,11 +931,7 @@
     "pk": 104,
     "fields": {
       "module": 45,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 41,
+      "title": "Content 104",
       "order": 1
     }
   },
@@ -1356,11 +940,7 @@
     "pk": 105,
     "fields": {
       "module": 46,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 64,
+      "title": "Content 105",
       "order": 0
     }
   },
@@ -1369,11 +949,7 @@
     "pk": 106,
     "fields": {
       "module": 46,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 42,
+      "title": "Content 106",
       "order": 1
     }
   },
@@ -1382,11 +958,7 @@
     "pk": 107,
     "fields": {
       "module": 47,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 65,
+      "title": "Content 107",
       "order": 0
     }
   },
@@ -1395,11 +967,7 @@
     "pk": 108,
     "fields": {
       "module": 47,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 43,
+      "title": "Content 108",
       "order": 1
     }
   },
@@ -1408,11 +976,7 @@
     "pk": 109,
     "fields": {
       "module": 47,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 66,
+      "title": "Content 109",
       "order": 2
     }
   },
@@ -1421,11 +985,7 @@
     "pk": 110,
     "fields": {
       "module": 48,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 67,
+      "title": "Content 110",
       "order": 0
     }
   },
@@ -1434,11 +994,7 @@
     "pk": 111,
     "fields": {
       "module": 48,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 44,
+      "title": "Content 111",
       "order": 1
     }
   },
@@ -1447,11 +1003,7 @@
     "pk": 112,
     "fields": {
       "module": 49,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 68,
+      "title": "Content 112",
       "order": 0
     }
   },
@@ -1460,11 +1012,7 @@
     "pk": 113,
     "fields": {
       "module": 49,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 45,
+      "title": "Content 113",
       "order": 1
     }
   },
@@ -1473,11 +1021,7 @@
     "pk": 114,
     "fields": {
       "module": 50,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 69,
+      "title": "Content 114",
       "order": 0
     }
   },
@@ -1486,11 +1030,7 @@
     "pk": 115,
     "fields": {
       "module": 50,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 46,
+      "title": "Content 115",
       "order": 1
     }
   },
@@ -1499,11 +1039,7 @@
     "pk": 116,
     "fields": {
       "module": 51,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 70,
+      "title": "Content 116",
       "order": 0
     }
   },
@@ -1512,11 +1048,7 @@
     "pk": 117,
     "fields": {
       "module": 51,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 47,
+      "title": "Content 117",
       "order": 1
     }
   },
@@ -1525,11 +1057,7 @@
     "pk": 118,
     "fields": {
       "module": 51,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 71,
+      "title": "Content 118",
       "order": 2
     }
   },
@@ -1538,11 +1066,7 @@
     "pk": 119,
     "fields": {
       "module": 52,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 72,
+      "title": "Content 119",
       "order": 0
     }
   },
@@ -1551,11 +1075,7 @@
     "pk": 120,
     "fields": {
       "module": 52,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 48,
+      "title": "Content 120",
       "order": 1
     }
   },
@@ -1564,11 +1084,7 @@
     "pk": 121,
     "fields": {
       "module": 53,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 73,
+      "title": "Content 121",
       "order": 0
     }
   },
@@ -1577,11 +1093,7 @@
     "pk": 122,
     "fields": {
       "module": 53,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 49,
+      "title": "Content 122",
       "order": 1
     }
   },
@@ -1590,11 +1102,7 @@
     "pk": 123,
     "fields": {
       "module": 54,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 74,
+      "title": "Content 123",
       "order": 0
     }
   },
@@ -1603,11 +1111,7 @@
     "pk": 124,
     "fields": {
       "module": 54,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 50,
+      "title": "Content 124",
       "order": 1
     }
   },
@@ -1616,11 +1120,7 @@
     "pk": 1000,
     "fields": {
       "module": 1000,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1000,
+      "title": "Content 1000",
       "order": 0
     }
   },
@@ -1629,11 +1129,7 @@
     "pk": 1001,
     "fields": {
       "module": 1000,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1000,
+      "title": "Content 1001",
       "order": 1
     }
   },
@@ -1642,11 +1138,7 @@
     "pk": 1002,
     "fields": {
       "module": 1001,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1001,
+      "title": "Content 1002",
       "order": 0
     }
   },
@@ -1655,11 +1147,7 @@
     "pk": 1003,
     "fields": {
       "module": 1001,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1001,
+      "title": "Content 1003",
       "order": 1
     }
   },
@@ -1668,11 +1156,7 @@
     "pk": 1004,
     "fields": {
       "module": 1002,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1002,
+      "title": "Content 1004",
       "order": 0
     }
   },
@@ -1681,11 +1165,7 @@
     "pk": 1005,
     "fields": {
       "module": 1002,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1002,
+      "title": "Content 1005",
       "order": 1
     }
   },
@@ -1694,11 +1174,7 @@
     "pk": 1006,
     "fields": {
       "module": 1003,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1003,
+      "title": "Content 1006",
       "order": 0
     }
   },
@@ -1707,11 +1183,7 @@
     "pk": 1007,
     "fields": {
       "module": 1003,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1003,
+      "title": "Content 1007",
       "order": 1
     }
   },
@@ -1720,11 +1192,7 @@
     "pk": 1008,
     "fields": {
       "module": 1004,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1004,
+      "title": "Content 1008",
       "order": 0
     }
   },
@@ -1733,11 +1201,7 @@
     "pk": 1009,
     "fields": {
       "module": 1004,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1004,
+      "title": "Content 1009",
       "order": 1
     }
   },
@@ -1746,11 +1210,7 @@
     "pk": 1010,
     "fields": {
       "module": 1005,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1005,
+      "title": "Content 1010",
       "order": 0
     }
   },
@@ -1759,11 +1219,7 @@
     "pk": 1011,
     "fields": {
       "module": 1005,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1005,
+      "title": "Content 1011",
       "order": 1
     }
   },
@@ -1772,11 +1228,7 @@
     "pk": 1012,
     "fields": {
       "module": 1006,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1006,
+      "title": "Content 1012",
       "order": 0
     }
   },
@@ -1785,11 +1237,7 @@
     "pk": 1013,
     "fields": {
       "module": 1006,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1006,
+      "title": "Content 1013",
       "order": 1
     }
   },
@@ -1798,11 +1246,7 @@
     "pk": 1014,
     "fields": {
       "module": 1007,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1007,
+      "title": "Content 1014",
       "order": 0
     }
   },
@@ -1811,11 +1255,7 @@
     "pk": 1015,
     "fields": {
       "module": 1007,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1007,
+      "title": "Content 1015",
       "order": 1
     }
   },
@@ -1824,11 +1264,7 @@
     "pk": 1016,
     "fields": {
       "module": 1008,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1008,
+      "title": "Content 1016",
       "order": 0
     }
   },
@@ -1837,11 +1273,7 @@
     "pk": 1017,
     "fields": {
       "module": 1008,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1008,
+      "title": "Content 1017",
       "order": 1
     }
   },
@@ -1850,11 +1282,7 @@
     "pk": 1018,
     "fields": {
       "module": 1009,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1009,
+      "title": "Content 1018",
       "order": 0
     }
   },
@@ -1863,11 +1291,7 @@
     "pk": 1019,
     "fields": {
       "module": 1009,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1009,
+      "title": "Content 1019",
       "order": 1
     }
   },
@@ -1876,11 +1300,7 @@
     "pk": 1020,
     "fields": {
       "module": 1010,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1010,
+      "title": "Content 1020",
       "order": 0
     }
   },
@@ -1889,11 +1309,7 @@
     "pk": 1021,
     "fields": {
       "module": 1010,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1010,
+      "title": "Content 1021",
       "order": 1
     }
   },
@@ -1902,11 +1318,7 @@
     "pk": 1022,
     "fields": {
       "module": 1011,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1011,
+      "title": "Content 1022",
       "order": 0
     }
   },
@@ -1915,11 +1327,7 @@
     "pk": 1023,
     "fields": {
       "module": 1011,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1011,
+      "title": "Content 1023",
       "order": 1
     }
   },
@@ -1928,11 +1336,7 @@
     "pk": 1024,
     "fields": {
       "module": 1012,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1012,
+      "title": "Content 1024",
       "order": 0
     }
   },
@@ -1941,11 +1345,7 @@
     "pk": 1025,
     "fields": {
       "module": 1012,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1012,
+      "title": "Content 1025",
       "order": 1
     }
   },
@@ -1954,11 +1354,7 @@
     "pk": 1026,
     "fields": {
       "module": 1013,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1013,
+      "title": "Content 1026",
       "order": 0
     }
   },
@@ -1967,11 +1363,7 @@
     "pk": 1027,
     "fields": {
       "module": 1013,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1013,
+      "title": "Content 1027",
       "order": 1
     }
   },
@@ -1980,11 +1372,7 @@
     "pk": 1028,
     "fields": {
       "module": 1014,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1014,
+      "title": "Content 1028",
       "order": 0
     }
   },
@@ -1993,11 +1381,7 @@
     "pk": 1029,
     "fields": {
       "module": 1014,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1014,
+      "title": "Content 1029",
       "order": 1
     }
   },
@@ -2006,11 +1390,7 @@
     "pk": 1030,
     "fields": {
       "module": 1015,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1015,
+      "title": "Content 1030",
       "order": 0
     }
   },
@@ -2019,11 +1399,7 @@
     "pk": 1031,
     "fields": {
       "module": 1015,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1015,
+      "title": "Content 1031",
       "order": 1
     }
   },
@@ -2032,11 +1408,7 @@
     "pk": 1032,
     "fields": {
       "module": 1016,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1016,
+      "title": "Content 1032",
       "order": 0
     }
   },
@@ -2045,11 +1417,7 @@
     "pk": 1033,
     "fields": {
       "module": 1016,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1016,
+      "title": "Content 1033",
       "order": 1
     }
   },
@@ -2058,11 +1426,7 @@
     "pk": 1034,
     "fields": {
       "module": 1017,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1017,
+      "title": "Content 1034",
       "order": 0
     }
   },
@@ -2071,11 +1435,7 @@
     "pk": 1035,
     "fields": {
       "module": 1017,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1017,
+      "title": "Content 1035",
       "order": 1
     }
   },
@@ -2084,11 +1444,7 @@
     "pk": 1036,
     "fields": {
       "module": 1018,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1018,
+      "title": "Content 1036",
       "order": 0
     }
   },
@@ -2097,11 +1453,7 @@
     "pk": 1037,
     "fields": {
       "module": 1018,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1018,
+      "title": "Content 1037",
       "order": 1
     }
   },
@@ -2110,11 +1462,7 @@
     "pk": 1038,
     "fields": {
       "module": 1019,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1019,
+      "title": "Content 1038",
       "order": 0
     }
   },
@@ -2123,11 +1471,7 @@
     "pk": 1039,
     "fields": {
       "module": 1019,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1019,
+      "title": "Content 1039",
       "order": 1
     }
   },
@@ -2136,11 +1480,7 @@
     "pk": 1040,
     "fields": {
       "module": 1020,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1020,
+      "title": "Content 1040",
       "order": 0
     }
   },
@@ -2149,11 +1489,7 @@
     "pk": 1041,
     "fields": {
       "module": 1020,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1020,
+      "title": "Content 1041",
       "order": 1
     }
   },
@@ -2162,11 +1498,7 @@
     "pk": 1042,
     "fields": {
       "module": 1021,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1021,
+      "title": "Content 1042",
       "order": 0
     }
   },
@@ -2175,11 +1507,7 @@
     "pk": 1043,
     "fields": {
       "module": 1021,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1021,
+      "title": "Content 1043",
       "order": 1
     }
   },
@@ -2188,11 +1516,7 @@
     "pk": 1044,
     "fields": {
       "module": 1022,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1022,
+      "title": "Content 1044",
       "order": 0
     }
   },
@@ -2201,11 +1525,7 @@
     "pk": 1045,
     "fields": {
       "module": 1022,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1022,
+      "title": "Content 1045",
       "order": 1
     }
   },
@@ -2214,11 +1534,7 @@
     "pk": 1046,
     "fields": {
       "module": 1023,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1023,
+      "title": "Content 1046",
       "order": 0
     }
   },
@@ -2227,11 +1543,7 @@
     "pk": 1047,
     "fields": {
       "module": 1023,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1023,
+      "title": "Content 1047",
       "order": 1
     }
   },
@@ -2240,11 +1552,7 @@
     "pk": 1048,
     "fields": {
       "module": 1024,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1024,
+      "title": "Content 1048",
       "order": 0
     }
   },
@@ -2253,11 +1561,7 @@
     "pk": 1049,
     "fields": {
       "module": 1024,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1024,
+      "title": "Content 1049",
       "order": 1
     }
   },
@@ -2266,11 +1570,7 @@
     "pk": 1050,
     "fields": {
       "module": 1025,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1025,
+      "title": "Content 1050",
       "order": 0
     }
   },
@@ -2279,11 +1579,7 @@
     "pk": 1051,
     "fields": {
       "module": 1025,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1025,
+      "title": "Content 1051",
       "order": 1
     }
   },
@@ -2292,11 +1588,7 @@
     "pk": 1052,
     "fields": {
       "module": 1026,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1026,
+      "title": "Content 1052",
       "order": 0
     }
   },
@@ -2305,11 +1597,7 @@
     "pk": 1053,
     "fields": {
       "module": 1026,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1026,
+      "title": "Content 1053",
       "order": 1
     }
   },
@@ -2318,11 +1606,7 @@
     "pk": 1054,
     "fields": {
       "module": 1027,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1027,
+      "title": "Content 1054",
       "order": 0
     }
   },
@@ -2331,11 +1615,7 @@
     "pk": 1055,
     "fields": {
       "module": 1027,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1027,
+      "title": "Content 1055",
       "order": 1
     }
   },
@@ -2344,11 +1624,7 @@
     "pk": 1056,
     "fields": {
       "module": 1028,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1028,
+      "title": "Content 1056",
       "order": 0
     }
   },
@@ -2357,11 +1633,7 @@
     "pk": 1057,
     "fields": {
       "module": 1028,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1028,
+      "title": "Content 1057",
       "order": 1
     }
   },
@@ -2370,11 +1642,7 @@
     "pk": 1058,
     "fields": {
       "module": 1029,
-      "content_type": [
-        "courses",
-        "text"
-      ],
-      "object_id": 1029,
+      "title": "Content 1058",
       "order": 0
     }
   },
@@ -2383,11 +1651,7 @@
     "pk": 1059,
     "fields": {
       "module": 1029,
-      "content_type": [
-        "courses",
-        "video"
-      ],
-      "object_id": 1029,
+      "title": "Content 1059",
       "order": 1
     }
   }

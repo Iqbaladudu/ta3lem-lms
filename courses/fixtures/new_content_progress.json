@@ -1,0 +1,3346 @@
+[
+  {
+    "model": "courses.contentprogress",
+    "pk": 20000,
+    "fields": {
+      "enrollment": 20000,
+      "content": 3019,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20001,
+    "fields": {
+      "enrollment": 20000,
+      "content": 3022,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20002,
+    "fields": {
+      "enrollment": 20000,
+      "content": 3021,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20003,
+    "fields": {
+      "enrollment": 20000,
+      "content": 3020,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20004,
+    "fields": {
+      "enrollment": 20000,
+      "content": 3023,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20005,
+    "fields": {
+      "enrollment": 20002,
+      "content": 3017,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20006,
+    "fields": {
+      "enrollment": 20002,
+      "content": 3016,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20007,
+    "fields": {
+      "enrollment": 20002,
+      "content": 3015,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-21T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20008,
+    "fields": {
+      "enrollment": 20002,
+      "content": 3012,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20009,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3009,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20010,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3005,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20011,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3006,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20012,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3002,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20013,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3001,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20014,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3000,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20015,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3008,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20016,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3003,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20017,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3007,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20018,
+    "fields": {
+      "enrollment": 20003,
+      "content": 3004,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20019,
+    "fields": {
+      "enrollment": 20004,
+      "content": 3070,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20020,
+    "fields": {
+      "enrollment": 20004,
+      "content": 3072,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20021,
+    "fields": {
+      "enrollment": 20006,
+      "content": 3054,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20022,
+    "fields": {
+      "enrollment": 20006,
+      "content": 3060,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20023,
+    "fields": {
+      "enrollment": 20006,
+      "content": 3058,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20024,
+    "fields": {
+      "enrollment": 20006,
+      "content": 3057,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20025,
+    "fields": {
+      "enrollment": 20006,
+      "content": 3055,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20026,
+    "fields": {
+      "enrollment": 20006,
+      "content": 3056,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20027,
+    "fields": {
+      "enrollment": 20007,
+      "content": 3045,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20028,
+    "fields": {
+      "enrollment": 20007,
+      "content": 3043,
+      "started_at": "2025-11-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20029,
+    "fields": {
+      "enrollment": 20007,
+      "content": 3038,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20030,
+    "fields": {
+      "enrollment": 20007,
+      "content": 3044,
+      "started_at": "2025-11-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20031,
+    "fields": {
+      "enrollment": 20007,
+      "content": 3041,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20032,
+    "fields": {
+      "enrollment": 20007,
+      "content": 3039,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20033,
+    "fields": {
+      "enrollment": 20008,
+      "content": 3028,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20034,
+    "fields": {
+      "enrollment": 20008,
+      "content": 3026,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20035,
+    "fields": {
+      "enrollment": 20008,
+      "content": 3024,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20036,
+    "fields": {
+      "enrollment": 20008,
+      "content": 3027,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20037,
+    "fields": {
+      "enrollment": 20008,
+      "content": 3025,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20038,
+    "fields": {
+      "enrollment": 20008,
+      "content": 3029,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20039,
+    "fields": {
+      "enrollment": 20009,
+      "content": 3034,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20040,
+    "fields": {
+      "enrollment": 20010,
+      "content": 3007,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20041,
+    "fields": {
+      "enrollment": 20010,
+      "content": 3002,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20042,
+    "fields": {
+      "enrollment": 20010,
+      "content": 3009,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20043,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3065,
+      "started_at": "2025-10-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20044,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3067,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20045,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3064,
+      "started_at": "2025-10-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20046,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3062,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20047,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3066,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20048,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3063,
+      "started_at": "2025-10-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20049,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3068,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20050,
+    "fields": {
+      "enrollment": 20011,
+      "content": 3069,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20051,
+    "fields": {
+      "enrollment": 20012,
+      "content": 3021,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20052,
+    "fields": {
+      "enrollment": 20012,
+      "content": 3018,
+      "started_at": "2025-11-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20053,
+    "fields": {
+      "enrollment": 20012,
+      "content": 3019,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20054,
+    "fields": {
+      "enrollment": 20012,
+      "content": 3023,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20055,
+    "fields": {
+      "enrollment": 20012,
+      "content": 3022,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20056,
+    "fields": {
+      "enrollment": 20013,
+      "content": 3054,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20057,
+    "fields": {
+      "enrollment": 20013,
+      "content": 3059,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20058,
+    "fields": {
+      "enrollment": 20013,
+      "content": 3058,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20059,
+    "fields": {
+      "enrollment": 20014,
+      "content": 3033,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20060,
+    "fields": {
+      "enrollment": 20014,
+      "content": 3036,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20061,
+    "fields": {
+      "enrollment": 20014,
+      "content": 3034,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20062,
+    "fields": {
+      "enrollment": 20015,
+      "content": 3003,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20063,
+    "fields": {
+      "enrollment": 20015,
+      "content": 3008,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20064,
+    "fields": {
+      "enrollment": 20016,
+      "content": 3038,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20065,
+    "fields": {
+      "enrollment": 20016,
+      "content": 3040,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20066,
+    "fields": {
+      "enrollment": 20017,
+      "content": 3067,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20067,
+    "fields": {
+      "enrollment": 20017,
+      "content": 3066,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20068,
+    "fields": {
+      "enrollment": 20017,
+      "content": 3062,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20069,
+    "fields": {
+      "enrollment": 20017,
+      "content": 3065,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20070,
+    "fields": {
+      "enrollment": 20017,
+      "content": 3064,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20071,
+    "fields": {
+      "enrollment": 20017,
+      "content": 3063,
+      "started_at": "2025-10-30T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20072,
+    "fields": {
+      "enrollment": 20018,
+      "content": 3057,
+      "started_at": "2025-11-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20073,
+    "fields": {
+      "enrollment": 20018,
+      "content": 3059,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20074,
+    "fields": {
+      "enrollment": 20018,
+      "content": 3055,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20075,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3001,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20076,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3002,
+      "started_at": "2025-10-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20077,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3003,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20078,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3000,
+      "started_at": "2025-10-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20079,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3007,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20080,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3006,
+      "started_at": "2025-10-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20081,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3008,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20082,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3009,
+      "started_at": "2025-10-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20083,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3004,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20084,
+    "fields": {
+      "enrollment": 20019,
+      "content": 3005,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20085,
+    "fields": {
+      "enrollment": 20020,
+      "content": 3028,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20086,
+    "fields": {
+      "enrollment": 20021,
+      "content": 3036,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20087,
+    "fields": {
+      "enrollment": 20021,
+      "content": 3035,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20088,
+    "fields": {
+      "enrollment": 20021,
+      "content": 3037,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20089,
+    "fields": {
+      "enrollment": 20022,
+      "content": 3054,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20090,
+    "fields": {
+      "enrollment": 20022,
+      "content": 3055,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20091,
+    "fields": {
+      "enrollment": 20022,
+      "content": 3059,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-21T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20092,
+    "fields": {
+      "enrollment": 20022,
+      "content": 3056,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20093,
+    "fields": {
+      "enrollment": 20023,
+      "content": 3015,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20094,
+    "fields": {
+      "enrollment": 20023,
+      "content": 3014,
+      "started_at": "2025-11-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20095,
+    "fields": {
+      "enrollment": 20023,
+      "content": 3016,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20096,
+    "fields": {
+      "enrollment": 20023,
+      "content": 3017,
+      "started_at": "2025-11-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20097,
+    "fields": {
+      "enrollment": 20023,
+      "content": 3013,
+      "started_at": "2025-11-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20098,
+    "fields": {
+      "enrollment": 20023,
+      "content": 3011,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20099,
+    "fields": {
+      "enrollment": 20024,
+      "content": 3049,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20100,
+    "fields": {
+      "enrollment": 20024,
+      "content": 3047,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20101,
+    "fields": {
+      "enrollment": 20024,
+      "content": 3053,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20102,
+    "fields": {
+      "enrollment": 20024,
+      "content": 3051,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20103,
+    "fields": {
+      "enrollment": 20024,
+      "content": 3052,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20104,
+    "fields": {
+      "enrollment": 20024,
+      "content": 3048,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20105,
+    "fields": {
+      "enrollment": 20025,
+      "content": 3023,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20106,
+    "fields": {
+      "enrollment": 20025,
+      "content": 3020,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20107,
+    "fields": {
+      "enrollment": 20025,
+      "content": 3018,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20108,
+    "fields": {
+      "enrollment": 20027,
+      "content": 3036,
+      "started_at": "2025-11-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20109,
+    "fields": {
+      "enrollment": 20027,
+      "content": 3032,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20110,
+    "fields": {
+      "enrollment": 20027,
+      "content": 3037,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20111,
+    "fields": {
+      "enrollment": 20027,
+      "content": 3033,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20112,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3008,
+      "started_at": "2025-11-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20113,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3004,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20114,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3002,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20115,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3005,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20116,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3003,
+      "started_at": "2025-11-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20117,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3009,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20118,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3001,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20119,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3007,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20120,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3000,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20121,
+    "fields": {
+      "enrollment": 20028,
+      "content": 3006,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20122,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3055,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20123,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3060,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20124,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3054,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20125,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3056,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20126,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3058,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20127,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3057,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20128,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3061,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20129,
+    "fields": {
+      "enrollment": 20029,
+      "content": 3059,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20130,
+    "fields": {
+      "enrollment": 20030,
+      "content": 3048,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20131,
+    "fields": {
+      "enrollment": 20030,
+      "content": 3050,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20132,
+    "fields": {
+      "enrollment": 20030,
+      "content": 3053,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20133,
+    "fields": {
+      "enrollment": 20030,
+      "content": 3046,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-21T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20134,
+    "fields": {
+      "enrollment": 20030,
+      "content": 3051,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20135,
+    "fields": {
+      "enrollment": 20031,
+      "content": 3045,
+      "started_at": "2025-10-30T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20136,
+    "fields": {
+      "enrollment": 20031,
+      "content": 3041,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20137,
+    "fields": {
+      "enrollment": 20031,
+      "content": 3039,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20138,
+    "fields": {
+      "enrollment": 20031,
+      "content": 3040,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20139,
+    "fields": {
+      "enrollment": 20032,
+      "content": 3012,
+      "started_at": "2025-11-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20140,
+    "fields": {
+      "enrollment": 20032,
+      "content": 3013,
+      "started_at": "2025-11-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20141,
+    "fields": {
+      "enrollment": 20033,
+      "content": 3076,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20142,
+    "fields": {
+      "enrollment": 20033,
+      "content": 3078,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-21T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20143,
+    "fields": {
+      "enrollment": 20033,
+      "content": 3072,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20144,
+    "fields": {
+      "enrollment": 20033,
+      "content": 3079,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20145,
+    "fields": {
+      "enrollment": 20033,
+      "content": 3075,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20146,
+    "fields": {
+      "enrollment": 20033,
+      "content": 3074,
+      "started_at": "2025-10-16T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20147,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3044,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20148,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3045,
+      "started_at": "2025-10-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20149,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3040,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20150,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3041,
+      "started_at": "2025-10-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20151,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3039,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20152,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3038,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20153,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3043,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20154,
+    "fields": {
+      "enrollment": 20034,
+      "content": 3042,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20155,
+    "fields": {
+      "enrollment": 20035,
+      "content": 3050,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20156,
+    "fields": {
+      "enrollment": 20035,
+      "content": 3048,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20157,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3016,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20158,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3012,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20159,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3017,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20160,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3011,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20161,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3010,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20162,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3015,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20163,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3013,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20164,
+    "fields": {
+      "enrollment": 20036,
+      "content": 3014,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20165,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3063,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20166,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3069,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20167,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3064,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20168,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3062,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20169,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3068,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20170,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3067,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20171,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3066,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20172,
+    "fields": {
+      "enrollment": 20037,
+      "content": 3065,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20173,
+    "fields": {
+      "enrollment": 20038,
+      "content": 3024,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20174,
+    "fields": {
+      "enrollment": 20038,
+      "content": 3025,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20175,
+    "fields": {
+      "enrollment": 20039,
+      "content": 3046,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20176,
+    "fields": {
+      "enrollment": 20039,
+      "content": 3053,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20177,
+    "fields": {
+      "enrollment": 20039,
+      "content": 3052,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20178,
+    "fields": {
+      "enrollment": 20040,
+      "content": 3040,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20179,
+    "fields": {
+      "enrollment": 20040,
+      "content": 3038,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20180,
+    "fields": {
+      "enrollment": 20040,
+      "content": 3044,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20181,
+    "fields": {
+      "enrollment": 20040,
+      "content": 3041,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20182,
+    "fields": {
+      "enrollment": 20040,
+      "content": 3042,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20183,
+    "fields": {
+      "enrollment": 20042,
+      "content": 3022,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20184,
+    "fields": {
+      "enrollment": 20042,
+      "content": 3023,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20185,
+    "fields": {
+      "enrollment": 20042,
+      "content": 3020,
+      "started_at": "2025-10-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20186,
+    "fields": {
+      "enrollment": 20042,
+      "content": 3021,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20187,
+    "fields": {
+      "enrollment": 20043,
+      "content": 3028,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20188,
+    "fields": {
+      "enrollment": 20043,
+      "content": 3024,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20189,
+    "fields": {
+      "enrollment": 20044,
+      "content": 3009,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20190,
+    "fields": {
+      "enrollment": 20044,
+      "content": 3001,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20191,
+    "fields": {
+      "enrollment": 20044,
+      "content": 3005,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20192,
+    "fields": {
+      "enrollment": 20044,
+      "content": 3006,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20193,
+    "fields": {
+      "enrollment": 20044,
+      "content": 3003,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20194,
+    "fields": {
+      "enrollment": 20044,
+      "content": 3007,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-26T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20195,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3040,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20196,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3045,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20197,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3041,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20198,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3039,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20199,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3042,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20200,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3044,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20201,
+    "fields": {
+      "enrollment": 20045,
+      "content": 3038,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20202,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3047,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20203,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3046,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20204,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3049,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-26T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20205,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3053,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20206,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3052,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20207,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3051,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20208,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3050,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20209,
+    "fields": {
+      "enrollment": 20046,
+      "content": 3048,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20210,
+    "fields": {
+      "enrollment": 20047,
+      "content": 3031,
+      "started_at": "2025-10-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20211,
+    "fields": {
+      "enrollment": 20047,
+      "content": 3035,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20212,
+    "fields": {
+      "enrollment": 20047,
+      "content": 3030,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20213,
+    "fields": {
+      "enrollment": 20047,
+      "content": 3033,
+      "started_at": "2025-10-15T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20214,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3079,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20215,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3075,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20216,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3072,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20217,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3070,
+      "started_at": "2025-10-14T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20218,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3073,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20219,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3071,
+      "started_at": "2025-10-09T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20220,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3077,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20221,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3074,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20222,
+    "fields": {
+      "enrollment": 20048,
+      "content": 3076,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20223,
+    "fields": {
+      "enrollment": 20049,
+      "content": 3022,
+      "started_at": "2025-11-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20224,
+    "fields": {
+      "enrollment": 20049,
+      "content": 3020,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20225,
+    "fields": {
+      "enrollment": 20049,
+      "content": 3021,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20226,
+    "fields": {
+      "enrollment": 20049,
+      "content": 3019,
+      "started_at": "2025-10-30T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20227,
+    "fields": {
+      "enrollment": 20049,
+      "content": 3023,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20228,
+    "fields": {
+      "enrollment": 20049,
+      "content": 3018,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20229,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3052,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20230,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3046,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20231,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3053,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-21T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20232,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3051,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20233,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3047,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20234,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3049,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-16T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20235,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3048,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20236,
+    "fields": {
+      "enrollment": 20050,
+      "content": 3050,
+      "started_at": "2025-10-10T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20237,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3014,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20238,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3017,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20239,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3015,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-20T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20240,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3013,
+      "started_at": "2025-10-17T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-19T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20241,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3012,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20242,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3010,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20243,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3016,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-26T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20244,
+    "fields": {
+      "enrollment": 20051,
+      "content": 3011,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20245,
+    "fields": {
+      "enrollment": 20052,
+      "content": 3054,
+      "started_at": "2025-11-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-13T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20246,
+    "fields": {
+      "enrollment": 20052,
+      "content": 3058,
+      "started_at": "2025-11-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-09T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20247,
+    "fields": {
+      "enrollment": 20052,
+      "content": 3056,
+      "started_at": "2025-11-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20248,
+    "fields": {
+      "enrollment": 20053,
+      "content": 3023,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-15T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20249,
+    "fields": {
+      "enrollment": 20053,
+      "content": 3021,
+      "started_at": "2025-10-13T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-18T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20250,
+    "fields": {
+      "enrollment": 20053,
+      "content": 3020,
+      "started_at": "2025-10-05T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20251,
+    "fields": {
+      "enrollment": 20053,
+      "content": 3019,
+      "started_at": "2025-10-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20252,
+    "fields": {
+      "enrollment": 20053,
+      "content": 3022,
+      "started_at": "2025-10-04T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20253,
+    "fields": {
+      "enrollment": 20053,
+      "content": 3018,
+      "started_at": "2025-10-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20254,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3034,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20255,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3031,
+      "started_at": "2025-10-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20256,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3033,
+      "started_at": "2025-10-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20257,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3032,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20258,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3035,
+      "started_at": "2025-10-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20259,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3036,
+      "started_at": "2025-10-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20260,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3037,
+      "started_at": "2025-10-12T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-17T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20261,
+    "fields": {
+      "enrollment": 20054,
+      "content": 3030,
+      "started_at": "2025-10-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-06T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20262,
+    "fields": {
+      "enrollment": 20055,
+      "content": 3023,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20263,
+    "fields": {
+      "enrollment": 20055,
+      "content": 3020,
+      "started_at": "2025-10-18T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20264,
+    "fields": {
+      "enrollment": 20055,
+      "content": 3018,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20265,
+    "fields": {
+      "enrollment": 20055,
+      "content": 3019,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20266,
+    "fields": {
+      "enrollment": 20055,
+      "content": 3022,
+      "started_at": "2025-10-25T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20267,
+    "fields": {
+      "enrollment": 20055,
+      "content": 3021,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20268,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3045,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20269,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3040,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20270,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3038,
+      "started_at": "2025-10-30T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20271,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3043,
+      "started_at": "2025-10-23T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20272,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3041,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20273,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3039,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20274,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3042,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20275,
+    "fields": {
+      "enrollment": 20056,
+      "content": 3044,
+      "started_at": "2025-11-01T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-05T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20276,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3051,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20277,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3052,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-23T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20278,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3047,
+      "started_at": "2025-10-26T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20279,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3046,
+      "started_at": "2025-10-29T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-02T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20280,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3048,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20281,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3053,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-25T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20282,
+    "fields": {
+      "enrollment": 20057,
+      "content": 3049,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20283,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3034,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20284,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3036,
+      "started_at": "2025-11-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20285,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3031,
+      "started_at": "2025-11-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20286,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3035,
+      "started_at": "2025-10-30T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-04T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20287,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3033,
+      "started_at": "2025-11-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-11T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20288,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3037,
+      "started_at": "2025-11-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20289,
+    "fields": {
+      "enrollment": 20058,
+      "content": 3032,
+      "started_at": "2025-10-31T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-11-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20290,
+    "fields": {
+      "enrollment": 20059,
+      "content": 3057,
+      "started_at": "2025-10-11T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-14T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20291,
+    "fields": {
+      "enrollment": 20059,
+      "content": 3060,
+      "started_at": "2025-10-06T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-10T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20292,
+    "fields": {
+      "enrollment": 20059,
+      "content": 3056,
+      "started_at": "2025-10-03T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-07T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20293,
+    "fields": {
+      "enrollment": 20059,
+      "content": 3059,
+      "started_at": "2025-10-08T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-12T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20294,
+    "fields": {
+      "enrollment": 20059,
+      "content": 3058,
+      "started_at": "2025-10-02T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-03T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20295,
+    "fields": {
+      "enrollment": 20059,
+      "content": 3055,
+      "started_at": "2025-10-07T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-08T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20296,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3064,
+      "started_at": "2025-10-24T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20297,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3069,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-22T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20298,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3067,
+      "started_at": "2025-10-27T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20299,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3068,
+      "started_at": "2025-10-21T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-26T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20300,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3065,
+      "started_at": "2025-10-19T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-24T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20301,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3063,
+      "started_at": "2025-10-28T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20302,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3066,
+      "started_at": "2025-10-20T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-21T10:00:00"
+    }
+  },
+  {
+    "model": "courses.contentprogress",
+    "pk": 20303,
+    "fields": {
+      "enrollment": 20060,
+      "content": 3062,
+      "started_at": "2025-10-22T10:00:00",
+      "is_completed": true,
+      "completed_at": "2025-10-27T10:00:00"
+    }
+  }
+]

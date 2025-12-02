@@ -1,0 +1,795 @@
+[
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20000,
+    "fields": {
+      "student": 20000,
+      "course": 2002,
+      "status": "paused",
+      "enrolled_on": "2025-10-10T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 83.33,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20001,
+    "fields": {
+      "student": 20000,
+      "course": 2006,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-16T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 0.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20002,
+    "fields": {
+      "student": 20000,
+      "course": 2001,
+      "status": "paused",
+      "enrolled_on": "2025-10-11T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 50.0,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20003,
+    "fields": {
+      "student": 20001,
+      "course": 2000,
+      "status": "completed",
+      "enrolled_on": "2025-10-08T10:00:00",
+      "completed_on": "2025-11-16T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20004,
+    "fields": {
+      "student": 20001,
+      "course": 2009,
+      "status": "paused",
+      "enrolled_on": "2025-10-27T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 20.0,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20005,
+    "fields": {
+      "student": 20001,
+      "course": 2006,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-03T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 0.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20006,
+    "fields": {
+      "student": 20001,
+      "course": 2007,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-19T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 75.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20007,
+    "fields": {
+      "student": 20002,
+      "course": 2005,
+      "status": "paused",
+      "enrolled_on": "2025-10-30T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 75.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20008,
+    "fields": {
+      "student": 20002,
+      "course": 2003,
+      "status": "completed",
+      "enrolled_on": "2025-10-26T10:00:00",
+      "completed_on": "2025-11-08T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20009,
+    "fields": {
+      "student": 20003,
+      "course": 2004,
+      "status": "paused",
+      "enrolled_on": "2025-10-23T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 12.5,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20010,
+    "fields": {
+      "student": 20003,
+      "course": 2000,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-20T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 30.0,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20011,
+    "fields": {
+      "student": 20003,
+      "course": 2008,
+      "status": "completed",
+      "enrolled_on": "2025-10-03T10:00:00",
+      "completed_on": "2025-11-18T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20012,
+    "fields": {
+      "student": 20003,
+      "course": 2002,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-29T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 83.33,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20013,
+    "fields": {
+      "student": 20004,
+      "course": 2007,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-29T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 37.5,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20014,
+    "fields": {
+      "student": 20004,
+      "course": 2004,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-24T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 37.5,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20015,
+    "fields": {
+      "student": 20004,
+      "course": 2000,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-09T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 20.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20016,
+    "fields": {
+      "student": 20005,
+      "course": 2005,
+      "status": "paused",
+      "enrolled_on": "2025-10-30T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 25.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20017,
+    "fields": {
+      "student": 20005,
+      "course": 2008,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-24T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 75.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20018,
+    "fields": {
+      "student": 20005,
+      "course": 2007,
+      "status": "paused",
+      "enrolled_on": "2025-10-31T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 37.5,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20019,
+    "fields": {
+      "student": 20006,
+      "course": 2000,
+      "status": "completed",
+      "enrolled_on": "2025-10-03T10:00:00",
+      "completed_on": "2025-11-11T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20020,
+    "fields": {
+      "student": 20006,
+      "course": 2003,
+      "status": "paused",
+      "enrolled_on": "2025-10-06T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 16.67,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20021,
+    "fields": {
+      "student": 20006,
+      "course": 2004,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-09T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 37.5,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20022,
+    "fields": {
+      "student": 20006,
+      "course": 2007,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-10T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 50.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20023,
+    "fields": {
+      "student": 20007,
+      "course": 2001,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-30T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 75.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20024,
+    "fields": {
+      "student": 20007,
+      "course": 2006,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-21T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 75.0,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20025,
+    "fields": {
+      "student": 20007,
+      "course": 2002,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-10T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 50.0,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20026,
+    "fields": {
+      "student": 20007,
+      "course": 2000,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-17T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 0.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20027,
+    "fields": {
+      "student": 20008,
+      "course": 2004,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-31T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 50.0,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20028,
+    "fields": {
+      "student": 20008,
+      "course": 2000,
+      "status": "completed",
+      "enrolled_on": "2025-10-27T10:00:00",
+      "completed_on": "2025-11-18T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20029,
+    "fields": {
+      "student": 20009,
+      "course": 2007,
+      "status": "completed",
+      "enrolled_on": "2025-10-14T10:00:00",
+      "completed_on": "2025-11-09T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20030,
+    "fields": {
+      "student": 20009,
+      "course": 2006,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-18T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 62.5,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20031,
+    "fields": {
+      "student": 20009,
+      "course": 2005,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-29T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 50.0,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20032,
+    "fields": {
+      "student": 20010,
+      "course": 2001,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-31T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 25.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20033,
+    "fields": {
+      "student": 20010,
+      "course": 2009,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-08T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 60.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20034,
+    "fields": {
+      "student": 20011,
+      "course": 2005,
+      "status": "completed",
+      "enrolled_on": "2025-10-05T10:00:00",
+      "completed_on": "2025-11-18T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20035,
+    "fields": {
+      "student": 20011,
+      "course": 2006,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-22T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 25.0,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20036,
+    "fields": {
+      "student": 20011,
+      "course": 2001,
+      "status": "completed",
+      "enrolled_on": "2025-10-20T10:00:00",
+      "completed_on": "2025-11-17T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20037,
+    "fields": {
+      "student": 20012,
+      "course": 2008,
+      "status": "completed",
+      "enrolled_on": "2025-10-15T10:00:00",
+      "completed_on": "2025-11-10T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20038,
+    "fields": {
+      "student": 20012,
+      "course": 2003,
+      "status": "paused",
+      "enrolled_on": "2025-10-12T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 33.33,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20039,
+    "fields": {
+      "student": 20012,
+      "course": 2006,
+      "status": "paused",
+      "enrolled_on": "2025-10-23T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 37.5,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20040,
+    "fields": {
+      "student": 20013,
+      "course": 2005,
+      "status": "paused",
+      "enrolled_on": "2025-10-22T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 62.5,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20041,
+    "fields": {
+      "student": 20013,
+      "course": 2007,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-22T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 0.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20042,
+    "fields": {
+      "student": 20014,
+      "course": 2002,
+      "status": "paused",
+      "enrolled_on": "2025-10-05T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 66.67,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20043,
+    "fields": {
+      "student": 20014,
+      "course": 2003,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-06T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 33.33,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20044,
+    "fields": {
+      "student": 20014,
+      "course": 2000,
+      "status": "paused",
+      "enrolled_on": "2025-10-24T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 60.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20045,
+    "fields": {
+      "student": 20014,
+      "course": 2005,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-18T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 87.5,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20046,
+    "fields": {
+      "student": 20015,
+      "course": 2006,
+      "status": "completed",
+      "enrolled_on": "2025-10-17T10:00:00",
+      "completed_on": "2025-11-18T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20047,
+    "fields": {
+      "student": 20015,
+      "course": 2004,
+      "status": "paused",
+      "enrolled_on": "2025-10-06T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 50.0,
+      "last_accessed": "2025-10-31T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20048,
+    "fields": {
+      "student": 20016,
+      "course": 2009,
+      "status": "paused",
+      "enrolled_on": "2025-10-06T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 90.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20049,
+    "fields": {
+      "student": 20016,
+      "course": 2002,
+      "status": "completed",
+      "enrolled_on": "2025-10-29T10:00:00",
+      "completed_on": "2025-11-07T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20050,
+    "fields": {
+      "student": 20017,
+      "course": 2006,
+      "status": "completed",
+      "enrolled_on": "2025-10-09T10:00:00",
+      "completed_on": "2025-11-11T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20051,
+    "fields": {
+      "student": 20017,
+      "course": 2001,
+      "status": "completed",
+      "enrolled_on": "2025-10-15T10:00:00",
+      "completed_on": "2025-11-06T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-27T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20052,
+    "fields": {
+      "student": 20017,
+      "course": 2007,
+      "status": "paused",
+      "enrolled_on": "2025-10-31T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 37.5,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20053,
+    "fields": {
+      "student": 20017,
+      "course": 2002,
+      "status": "completed",
+      "enrolled_on": "2025-10-03T10:00:00",
+      "completed_on": "2025-11-06T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20054,
+    "fields": {
+      "student": 20018,
+      "course": 2004,
+      "status": "completed",
+      "enrolled_on": "2025-10-02T10:00:00",
+      "completed_on": "2025-11-21T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20055,
+    "fields": {
+      "student": 20018,
+      "course": 2002,
+      "status": "completed",
+      "enrolled_on": "2025-10-18T10:00:00",
+      "completed_on": "2025-11-13T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20056,
+    "fields": {
+      "student": 20018,
+      "course": 2005,
+      "status": "completed",
+      "enrolled_on": "2025-10-23T10:00:00",
+      "completed_on": "2025-11-04T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20057,
+    "fields": {
+      "student": 20019,
+      "course": 2006,
+      "status": "paused",
+      "enrolled_on": "2025-10-20T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 87.5,
+      "last_accessed": "2025-10-28T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20058,
+    "fields": {
+      "student": 20019,
+      "course": 2004,
+      "status": "enrolled",
+      "enrolled_on": "2025-10-29T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 87.5,
+      "last_accessed": "2025-10-29T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20059,
+    "fields": {
+      "student": 20019,
+      "course": 2007,
+      "status": "paused",
+      "enrolled_on": "2025-10-02T10:00:00",
+      "completed_on": null,
+      "progress_percentage": 75.0,
+      "last_accessed": "2025-10-30T10:00:00"
+    }
+  },
+  {
+    "model": "courses.courseenrollment",
+    "pk": 20060,
+    "fields": {
+      "student": 20019,
+      "course": 2008,
+      "status": "completed",
+      "enrolled_on": "2025-10-19T10:00:00",
+      "completed_on": "2025-11-13T10:00:00",
+      "progress_percentage": 100.0,
+      "last_accessed": "2025-11-01T10:00:00"
+    }
+  }
+]

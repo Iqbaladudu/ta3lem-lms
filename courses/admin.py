@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subject, Course, Module, Text, File, Image, Video, Content, CourseEnrollment, ContentProgress, ModuleProgress, LearningSession
+from .models import Subject, Course, Module, Text, File, Image, Video, Content, ContentItem, CourseEnrollment, ContentProgress, ModuleProgress, LearningSession
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
@@ -45,11 +45,25 @@ class VideoAdmin(admin.ModelAdmin):
     search_fields = ['title', 'url']
     readonly_fields = ['created', 'updated']
 
+
+class ContentItemInline(admin.TabularInline):
+    model = ContentItem
+    extra = 1
+
+
 @admin.register(Content)
 class ContentAdmin(admin.ModelAdmin):
-    list_display = ['module', 'content_type', 'item', 'order']
-    list_filter = ['content_type', 'module__course']
-    search_fields = ['item__title']
+    list_display = ['title', 'module', 'order']
+    list_filter = ['module__course']
+    search_fields = ['title']
+    inlines = [ContentItemInline]
+
+
+@admin.register(ContentItem)
+class ContentItemAdmin(admin.ModelAdmin):
+    list_display = ['content', 'content_type', 'item', 'order']
+    list_filter = ['content_type', 'content__module__course']
+    search_fields = ['content__title']
 
 @admin.register(CourseEnrollment)
 class CourseEnrollmentAdmin(admin.ModelAdmin):

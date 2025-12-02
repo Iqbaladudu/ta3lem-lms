@@ -19,7 +19,7 @@ from django.views.decorators.cache import cache_page
 from users.forms import CourseEnrollForm
 from .forms import ModuleFormSets
 from .models import (
-    Course, Module, Content, Subject, CourseEnrollment,
+    Course, Module, Content, ContentItem, Subject, CourseEnrollment,
     ContentProgress, ModuleProgress, LearningSession
 )
 
@@ -89,10 +89,80 @@ class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
         return self.render_json_response({'saved': 'OK'})
 
 
-class ContentCreateUpdateView(TemplateResponseMixin, View):
-    module = None
+class ContentItemOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    """View untuk mengatur urutan ContentItem dalam Content"""
+    def post(self, request):
+        for id, order in self.request_json.items():
+            ContentItem.objects.filter(
+                id=id,
+                content__module__course__owner=request.user
+            ).update(order=order)
+        return self.render_json_response({'saved': 'OK'})
+
+
+class ContentItemCreateView(TemplateResponseMixin, View):
+    """View untuk menambah ContentItem baru ke Content yang sudah ada"""
+    content = None
     model = None
-    obj = None
+    template_name = 'courses/manage/content/item_form.html'
+
+    @staticmethod
+    def get_model(model_name):
+        if model_name in ['text', 'video', 'image', 'file']:
+            return apps.get_model(app_label='courses', model_name=model_name)
+        return None
+
+    @staticmethod
+    def get_form(model, *args, **kwargs):
+        Form = modelform_factory(model, exclude=['owner', 'order', 'created', 'updated'])
+        return Form(*args, **kwargs)
+
+    def dispatch(self, request, content_id, model_name):
+        self.content = get_object_or_404(
+            Content,
+            id=content_id,
+            module__course__owner=request.user
+        )
+        self.model = self.get_model(model_name)
+        return super().dispatch(request, content_id, model_name)
+
+    def get(self, request, content_id, model_name):
+        form = self.get_form(self.model)
+        return self.render_to_response({
+            'form': form,
+            'content': self.content,
+            'model_name': model_name
+        })
+
+    def post(self, request, content_id, model_name):
+        form = self.get_form(self.model, data=request.POST, files=request.FILES)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = request.user
+            obj.save()
+
+            # Buat ContentItem
+            from django.contrib.contenttypes.models import ContentType
+            content_type = ContentType.objects.get_for_model(obj)
+            ContentItem.objects.create(
+                content=self.content,
+                content_type=content_type,
+                object_id=obj.id
+            )
+            return redirect('module_content_list', self.content.module.id)
+        return self.render_to_response({
+            'form': form,
+            'content': self.content,
+            'model_name': model_name
+        })
+
+
+class ContentCreateUpdateView(TemplateResponseMixin, View):
+    """View untuk membuat/update Content dan ContentItem"""
+    module = None
+    content = None  # Content object
+    model = None    # Item model (Text, Video, Image, File)
+    obj = None      # Item object
     template_name = 'courses/manage/content/form.html'
 
     @staticmethod
@@ -106,27 +176,52 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
         Form = modelform_factory(model, exclude=['owner', 'order', 'created', 'updated'])
         return Form(*args, **kwargs)
 
-    def dispatch(self, request, module_id, model_name, id=None):
+    def dispatch(self, request, module_id, model_name, id=None, content_id=None):
         self.module = get_object_or_404(Module, id=module_id, course__owner=request.user)
         self.model = self.get_model(model_name)
+        if content_id:
+            self.content = get_object_or_404(Content, id=content_id, module=self.module)
         if id:
             self.obj = get_object_or_404(self.model, id=id, owner=request.user)
-        return super().dispatch(request, module_id, model_name, id)
+        return super().dispatch(request, module_id, model_name, id, content_id)
 
-    def get(self, request, module_id, model_name, id=None):
+    def get(self, request, module_id, model_name, id=None, content_id=None):
         form = self.get_form(self.model, instance=self.obj)
-        return self.render_to_response({'form': form, 'object': self.obj})
+        return self.render_to_response({
+            'form': form,
+            'object': self.obj,
+            'content': self.content,
+            'module': self.module
+        })
 
-    def post(self, request, module_id, model_name, id=None):
+    def post(self, request, module_id, model_name, id=None, content_id=None):
         form = self.get_form(self.model, instance=self.obj, data=request.POST, files=request.FILES)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.owner = request.user
             obj.save()
             if not id:
-                Content.objects.create(module=self.module, item=obj)
+                # Jika tidak ada content_id, buat Content baru
+                if not self.content:
+                    self.content = Content.objects.create(
+                        module=self.module,
+                        title=obj.title
+                    )
+                # Buat ContentItem yang menghubungkan Content dengan item
+                from django.contrib.contenttypes.models import ContentType
+                content_type = ContentType.objects.get_for_model(obj)
+                ContentItem.objects.create(
+                    content=self.content,
+                    content_type=content_type,
+                    object_id=obj.id
+                )
             return redirect('module_content_list', self.module.id)
-        return self.render_to_response({'form': form, 'object': self.obj})
+        return self.render_to_response({
+            'form': form,
+            'object': self.obj,
+            'content': self.content,
+            'module': self.module
+        })
 
 
 class ModuleContentListView(TemplateResponseMixin, View):
@@ -141,7 +236,11 @@ class ContentDeleteView(View):
     def post(self, request, id):
         content = get_object_or_404(Content, id=id, module__course__owner=request.user)
         module = content.module
-        content.item.delete()
+        # Hapus semua ContentItem dan item terkait
+        for content_item in content.items.all():
+            if content_item.item:
+                content_item.item.delete()
+            content_item.delete()
         content.delete()
 
         if request.headers.get('HX-Request'):
@@ -151,6 +250,36 @@ class ContentDeleteView(View):
                     'HX-Trigger': 'contentDeleted',
                     'HX-Reswap': 'outerHTML',
                     'HX-Retarget': f'#content-{id}'
+                }
+            )
+
+        return redirect('module_content_list', module.id)
+
+
+class ContentItemDeleteView(View):
+    """View untuk menghapus satu ContentItem dari Content"""
+    def post(self, request, content_id, item_id):
+        content_item = get_object_or_404(
+            ContentItem,
+            id=item_id,
+            content_id=content_id,
+            content__module__course__owner=request.user
+        )
+        content = content_item.content
+        module = content.module
+
+        # Hapus item dan ContentItem
+        if content_item.item:
+            content_item.item.delete()
+        content_item.delete()
+
+        if request.headers.get('HX-Request'):
+            return HttpResponse(
+                status=200,
+                headers={
+                    'HX-Trigger': 'contentItemDeleted',
+                    'HX-Reswap': 'outerHTML',
+                    'HX-Retarget': f'#content-item-{item_id}'
                 }
             )
 

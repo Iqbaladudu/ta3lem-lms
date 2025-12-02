@@ -173,9 +173,10 @@
                                                                         <i class="fas fa-check text-white text-xs"></i>
                                                                     </div>
                                                                     <div class="flex-1 min-w-0">
-                                                                        <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600 truncate">{{ content.item.title }}</p>
+                                                                        <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600 truncate">{{ content.title }}</p>
+                                                                        <p class="text-xs text-gray-500">{{ content.items.count }} item{% if content.items.count > 1 %}s{% endif %}</p>
                                                                     </div>
-                                                                    <i class="fas fa-{% if content.item.content_type == 'video' %}video{% elif content.item.content_type == 'file' %}file-pdf{% else %}file-text{% endif %} text-gray-400 text-xs"></i>
+                                                                    <span class="text-gray-400 text-xs">{% if content.items.count > 1 %}📚{% else %}📄{% endif %}</span>
                                                                 </a>
                                                                 {% endwith %}
                                                             {% else %}
@@ -185,9 +186,10 @@
                                                                         <i class="fas fa-circle text-gray-300 text-xs"></i>
                                                                     </div>
                                                                     <div class="flex-1 min-w-0">
-                                                                        <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600 truncate">{{ content.item.title }}</p>
+                                                                        <p class="text-sm font-medium text-gray-700 group-hover:text-blue-600 truncate">{{ content.title }}</p>
+                                                                        <p class="text-xs text-gray-500">{{ content.items.count }} item{% if content.items.count > 1 %}s{% endif %}</p>
                                                                     </div>
-                                                                    <i class="fas fa-{% if content.item.content_type == 'video' %}video{% elif content.item.content_type == 'file' %}file-pdf{% else %}file-text{% endif %} text-gray-400 text-xs"></i>
+                                                                    <span class="text-gray-400 text-xs">{% if content.items.count > 1 %}📚{% else %}📄{% endif %}</span>
                                                                 </a>
                                                             {% endif %}
                                                         {% endif %}

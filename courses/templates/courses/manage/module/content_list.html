@@ -107,50 +107,112 @@
                                 {% for content in module.contents.all %}
                                     <div data-id="{{ content.id }}"
                                          id="content-{{ content.id }}"
-                                         class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 hover:border-green-300 transition cursor-move">
-                                        {% with item=content.item %}
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center flex-1 min-w-0">
-                                                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mr-3 flex-shrink-0
+                                         class="bg-white rounded-lg shadow p-4 mb-4 border-2 border-gray-200 hover:border-green-300 transition">
+                                        <!-- Content Header -->
+                                        <div class="flex justify-between items-center border-b pb-3 mb-3">
+                                            <div class="flex items-center">
+                                                <i class="fas fa-grip-vertical text-gray-400 cursor-move mr-3"></i>
+                                                <h3 class="font-semibold text-lg text-gray-900">{{ content.title }}</h3>
+                                                <span class="ml-2 text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                                    {{ content.items.count }} item
+                                                </span>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <!-- Dropdown tambah item -->
+                                                <div class="relative" x-data="{ open: false }">
+                                                    <button @click="open = !open" 
+                                                            class="px-3 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg flex items-center text-sm font-medium transition">
+                                                        <i class="fas fa-plus mr-1"></i>
+                                                        Tambah Item
+                                                    </button>
+                                                    <div x-show="open" @click.away="open = false"
+                                                         x-transition:enter="transition ease-out duration-100"
+                                                         x-transition:enter-start="transform opacity-0 scale-95"
+                                                         x-transition:enter-end="transform opacity-100 scale-100"
+                                                         x-transition:leave="transition ease-in duration-75"
+                                                         x-transition:leave-start="transform opacity-100 scale-100"
+                                                         x-transition:leave-end="transform opacity-0 scale-95"
+                                                         class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border z-10">
+                                                        <a href="{% url 'content_item_create' content.id 'text' %}"
+                                                           class="flex items-center px-4 py-2 hover:bg-gray-100 rounded-t-lg">
+                                                            <i class="fas fa-align-left text-blue-600 mr-2"></i> Teks
+                                                        </a>
+                                                        <a href="{% url 'content_item_create' content.id 'video' %}"
+                                                           class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                                            <i class="fas fa-video text-red-600 mr-2"></i> Video
+                                                        </a>
+                                                        <a href="{% url 'content_item_create' content.id 'image' %}"
+                                                           class="flex items-center px-4 py-2 hover:bg-gray-100">
+                                                            <i class="fas fa-image text-purple-600 mr-2"></i> Gambar
+                                                        </a>
+                                                        <a href="{% url 'content_item_create' content.id 'file' %}"
+                                                           class="flex items-center px-4 py-2 hover:bg-gray-100 rounded-b-lg">
+                                                            <i class="fas fa-file text-orange-600 mr-2"></i> File
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- Tombol hapus content -->
+                                                <button hx-post="{% url 'module_content_delete' content.id %}"
+                                                        hx-confirm="⚠ Apakah Anda yakin ingin menghapus konten '{{ content.title }}' beserta semua item di dalamnya?\n\nTindakan ini tidak dapat dibatalkan."
+                                                        hx-target="#content-{{ content.id }}"
+                                                        hx-swap="outerHTML swap:300ms"
+                                                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                                                        class="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center text-sm font-medium transition">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- List ContentItems -->
+                                        <div id="content-items-{{ content.id }}" class="space-y-2">
+                                            {% for content_item in content.items.all %}
+                                                {% with item=content_item.item %}
+                                                <div id="content-item-{{ content_item.id }}"
+                                                     data-id="{{ content_item.id }}"
+                                                     class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                                    <!-- Icon berdasarkan type -->
+                                                    <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0
                                                         {% if item|model_name == 'text' %}bg-blue-100 text-blue-600
                                                         {% elif item|model_name == 'video' %}bg-red-100 text-red-600
                                                         {% elif item|model_name == 'image' %}bg-purple-100 text-purple-600
                                                         {% elif item|model_name == 'file' %}bg-orange-100 text-orange-600
                                                         {% endif %}">
                                                         {% if item|model_name == 'text' %}
-                                                            <i class="fas fa-align-left"></i>
+                                                            <i class="fas fa-align-left text-sm"></i>
                                                         {% elif item|model_name == 'video' %}
-                                                            <i class="fas fa-video"></i>
+                                                            <i class="fas fa-video text-sm"></i>
                                                         {% elif item|model_name == 'image' %}
-                                                            <i class="fas fa-image"></i>
+                                                            <i class="fas fa-image text-sm"></i>
                                                         {% elif item|model_name == 'file' %}
-                                                            <i class="fas fa-file"></i>
+                                                            <i class="fas fa-file text-sm"></i>
                                                         {% endif %}
                                                     </div>
                                                     <div class="flex-1 min-w-0">
-                                                        <p class="font-semibold text-gray-900 truncate">{{ item.title }}</p>
+                                                        <p class="font-medium text-gray-900 truncate">{{ item.title }}</p>
                                                         <p class="text-xs text-gray-500 uppercase">{{ item|model_name }}</p>
                                                     </div>
+                                                    <div class="flex items-center gap-2">
+                                                        <a href="{% url 'module_content_update' module.id item|model_name item.id %}"
+                                                           class="px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-medium transition">
+                                                            <i class="fas fa-edit mr-1"></i>Edit
+                                                        </a>
+                                                        <button hx-post="{% url 'content_item_delete' content.id content_item.id %}"
+                                                                hx-confirm="Hapus item '{{ item.title }}'?"
+                                                                hx-target="#content-item-{{ content_item.id }}"
+                                                                hx-swap="outerHTML swap:300ms"
+                                                                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                                                                class="px-3 py-1.5 bg-red-100 hover:bg-red-200 text-red-600 rounded-lg text-xs font-medium transition">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <div class="flex items-center gap-2 ml-4">
-                                                    <i class="fas fa-grip-vertical text-gray-400 cursor-move mr-2"></i>
-                                                    <a href="{% url 'module_content_update' module.id item|model_name item.id %}"
-                                                       class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg font-medium text-sm">
-                                                        <i class="fas fa-edit mr-2"></i>
-                                                        Edit
-                                                    </a>
-                                                    <button hx-post="{% url 'module_content_delete' content.id %}"
-                                                            hx-confirm="⚠Apakah Anda yakin ingin menghapus konten '{{ item.title }}'?\n\nTindakan ini tidak dapat dibatalkan."
-                                                            hx-target="#content-{{ content.id }}"
-                                                            hx-swap="outerHTML swap:300ms"
-                                                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                                                            class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center transition shadow-md hover:shadow-lg font-medium text-sm border-2 border-red-700">
-                                                        <i class="fas fa-trash-alt mr-2"></i>
-                                                        Hapus
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        {% endwith %}
+                                                {% endwith %}
+                                            {% empty %}
+                                                <p class="text-gray-400 text-sm italic py-4 text-center">
+                                                    <i class="fas fa-inbox mr-1"></i>Belum ada item. Klik "Tambah Item" untuk menambahkan konten.
+                                                </p>
+                                            {% endfor %}
+                                        </div>
                                     </div>
                                 {% empty %}
                                     <div class="text-center py-12" id="empty-content-state">
@@ -300,6 +362,30 @@
     `;
     }
     }, 400);
+    });
+
+    // Listen for contentItemDeleted event
+    document.body.addEventListener('contentItemDeleted', function(evt) {
+    showToast('Item berhasil dihapus!', 'success');
+    });
+
+    // Initialize sortable for ContentItems within each Content
+    const contentItemOrderUrl = '{% url "content_item_order" %}';
+    document.querySelectorAll('[id^="content-items-"]').forEach(function(container) {
+        if (container.children.length > 0 && !container.querySelector('.text-gray-400.italic')) {
+            sortable(container, {
+                forcePlaceholderSize: true,
+                placeholderClass: 'placeholder'
+            })[0].addEventListener('sortupdate', function(e) {
+                const itemOrder = {};
+                container.querySelectorAll('[data-id]').forEach(function(item, index) {
+                    itemOrder[item.dataset.id] = index;
+                });
+                options['body'] = JSON.stringify(itemOrder);
+                fetch(contentItemOrderUrl, options)
+                    .then(() => showToast('Urutan item berhasil diperbarui!', 'success'));
+            });
+        }
     });
 {% endblock %}
 

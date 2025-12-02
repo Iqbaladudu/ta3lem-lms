@@ -1,0 +1,442 @@
+[
+  {
+    "model": "courses.text",
+    "pk": 2000,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Getting Started",
+      "content": "<p>Konten teks untuk modul 1 dari Machine Learning Dasar.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2001,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Fundamental Concepts",
+      "content": "<p>Konten teks untuk modul 2 dari Machine Learning Dasar.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2002,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Building Blocks",
+      "content": "<p>Konten teks untuk modul 3 dari Machine Learning Dasar.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2003,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Advanced Topics",
+      "content": "<p>Konten teks untuk modul 4 dari Machine Learning Dasar.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2004,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Final Project",
+      "content": "<p>Konten teks untuk modul 5 dari Machine Learning Dasar.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2005,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Pengenalan dan Setup",
+      "content": "<p>Konten teks untuk modul 1 dari Flutter Mobile Development.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2006,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Konsep Dasar",
+      "content": "<p>Konten teks untuk modul 2 dari Flutter Mobile Development.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2007,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Implementasi Awal",
+      "content": "<p>Konten teks untuk modul 3 dari Flutter Mobile Development.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2008,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Studi Kasus",
+      "content": "<p>Konten teks untuk modul 4 dari Flutter Mobile Development.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2009,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Pengenalan dan Setup",
+      "content": "<p>Konten teks untuk modul 1 dari Cybersecurity Fundamentals.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2010,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Konsep Dasar",
+      "content": "<p>Konten teks untuk modul 2 dari Cybersecurity Fundamentals.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2011,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Implementasi Awal",
+      "content": "<p>Konten teks untuk modul 3 dari Cybersecurity Fundamentals.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2012,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Pendahuluan",
+      "content": "<p>Konten teks untuk modul 1 dari Cloud Computing AWS.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2013,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Teori Dasar",
+      "content": "<p>Konten teks untuk modul 2 dari Cloud Computing AWS.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2014,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Praktik Hands-on",
+      "content": "<p>Konten teks untuk modul 3 dari Cloud Computing AWS.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2015,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Getting Started",
+      "content": "<p>Konten teks untuk modul 1 dari DevOps dengan Docker & Kubernetes.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2016,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Fundamental Concepts",
+      "content": "<p>Konten teks untuk modul 2 dari DevOps dengan Docker & Kubernetes.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2017,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Building Blocks",
+      "content": "<p>Konten teks untuk modul 3 dari DevOps dengan Docker & Kubernetes.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2018,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Advanced Topics",
+      "content": "<p>Konten teks untuk modul 4 dari DevOps dengan Docker & Kubernetes.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2019,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Pendahuluan",
+      "content": "<p>Konten teks untuk modul 1 dari Bahasa Jepang untuk Pemula.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2020,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Teori Dasar",
+      "content": "<p>Konten teks untuk modul 2 dari Bahasa Jepang untuk Pemula.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2021,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Praktik Hands-on",
+      "content": "<p>Konten teks untuk modul 3 dari Bahasa Jepang untuk Pemula.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2022,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Lanjutan",
+      "content": "<p>Konten teks untuk modul 4 dari Bahasa Jepang untuk Pemula.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2023,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Pendahuluan",
+      "content": "<p>Konten teks untuk modul 1 dari Digital Marketing Strategy.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2024,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Teori Dasar",
+      "content": "<p>Konten teks untuk modul 2 dari Digital Marketing Strategy.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2025,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Praktik Hands-on",
+      "content": "<p>Konten teks untuk modul 3 dari Digital Marketing Strategy.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2026,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Lanjutan",
+      "content": "<p>Konten teks untuk modul 4 dari Digital Marketing Strategy.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2027,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Getting Started",
+      "content": "<p>Konten teks untuk modul 1 dari Game Development Unity.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2028,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Fundamental Concepts",
+      "content": "<p>Konten teks untuk modul 2 dari Game Development Unity.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2029,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Building Blocks",
+      "content": "<p>Konten teks untuk modul 3 dari Game Development Unity.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2030,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Advanced Topics",
+      "content": "<p>Konten teks untuk modul 4 dari Game Development Unity.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2031,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Pendahuluan",
+      "content": "<p>Konten teks untuk modul 1 dari Blockchain & Web3.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2032,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Teori Dasar",
+      "content": "<p>Konten teks untuk modul 2 dari Blockchain & Web3.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2033,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Praktik Hands-on",
+      "content": "<p>Konten teks untuk modul 3 dari Blockchain & Web3.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2034,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Lanjutan",
+      "content": "<p>Konten teks untuk modul 4 dari Blockchain & Web3.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2035,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Getting Started",
+      "content": "<p>Konten teks untuk modul 1 dari Artificial Intelligence Advanced.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2036,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Fundamental Concepts",
+      "content": "<p>Konten teks untuk modul 2 dari Artificial Intelligence Advanced.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2037,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Building Blocks",
+      "content": "<p>Konten teks untuk modul 3 dari Artificial Intelligence Advanced.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2038,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Advanced Topics",
+      "content": "<p>Konten teks untuk modul 4 dari Artificial Intelligence Advanced.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.text",
+    "pk": 2039,
+    "fields": {
+      "owner": 1,
+      "title": "Materi Final Project",
+      "content": "<p>Konten teks untuk modul 5 dari Artificial Intelligence Advanced.</p>",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  }
+]

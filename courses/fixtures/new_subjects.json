@@ -1,0 +1,82 @@
+[
+  {
+    "model": "courses.subject",
+    "pk": 2000,
+    "fields": {
+      "title": "Data Science",
+      "slug": "data-science"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2001,
+    "fields": {
+      "title": "Mobile Development",
+      "slug": "mobile-development"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2002,
+    "fields": {
+      "title": "Keamanan Siber",
+      "slug": "keamanan-siber"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2003,
+    "fields": {
+      "title": "Cloud Computing",
+      "slug": "cloud-computing"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2004,
+    "fields": {
+      "title": "DevOps",
+      "slug": "devops"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2005,
+    "fields": {
+      "title": "Bahasa Asing",
+      "slug": "bahasa-asing"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2006,
+    "fields": {
+      "title": "Marketing",
+      "slug": "marketing"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2007,
+    "fields": {
+      "title": "Game Development",
+      "slug": "game-development"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2008,
+    "fields": {
+      "title": "Blockchain",
+      "slug": "blockchain"
+    }
+  },
+  {
+    "model": "courses.subject",
+    "pk": 2009,
+    "fields": {
+      "title": "Artificial Intelligence",
+      "slug": "artificial-intelligence"
+    }
+  }
+]

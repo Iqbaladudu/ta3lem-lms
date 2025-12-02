@@ -1,0 +1,442 @@
+[
+  {
+    "model": "courses.video",
+    "pk": 2000,
+    "fields": {
+      "owner": 1,
+      "title": "Video Getting Started",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2001,
+    "fields": {
+      "owner": 1,
+      "title": "Video Fundamental Concepts",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2002,
+    "fields": {
+      "owner": 1,
+      "title": "Video Building Blocks",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2003,
+    "fields": {
+      "owner": 1,
+      "title": "Video Advanced Topics",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2004,
+    "fields": {
+      "owner": 1,
+      "title": "Video Final Project",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2005,
+    "fields": {
+      "owner": 1,
+      "title": "Video Pengenalan dan Setup",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2006,
+    "fields": {
+      "owner": 1,
+      "title": "Video Konsep Dasar",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2007,
+    "fields": {
+      "owner": 1,
+      "title": "Video Implementasi Awal",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2008,
+    "fields": {
+      "owner": 1,
+      "title": "Video Studi Kasus",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2009,
+    "fields": {
+      "owner": 1,
+      "title": "Video Pengenalan dan Setup",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2010,
+    "fields": {
+      "owner": 1,
+      "title": "Video Konsep Dasar",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2011,
+    "fields": {
+      "owner": 1,
+      "title": "Video Implementasi Awal",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2012,
+    "fields": {
+      "owner": 1,
+      "title": "Video Pendahuluan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2013,
+    "fields": {
+      "owner": 1,
+      "title": "Video Teori Dasar",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2014,
+    "fields": {
+      "owner": 1,
+      "title": "Video Praktik Hands-on",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2015,
+    "fields": {
+      "owner": 1,
+      "title": "Video Getting Started",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2016,
+    "fields": {
+      "owner": 1,
+      "title": "Video Fundamental Concepts",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2017,
+    "fields": {
+      "owner": 1,
+      "title": "Video Building Blocks",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2018,
+    "fields": {
+      "owner": 1,
+      "title": "Video Advanced Topics",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2019,
+    "fields": {
+      "owner": 1,
+      "title": "Video Pendahuluan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2020,
+    "fields": {
+      "owner": 1,
+      "title": "Video Teori Dasar",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2021,
+    "fields": {
+      "owner": 1,
+      "title": "Video Praktik Hands-on",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2022,
+    "fields": {
+      "owner": 1,
+      "title": "Video Lanjutan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2023,
+    "fields": {
+      "owner": 1,
+      "title": "Video Pendahuluan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2024,
+    "fields": {
+      "owner": 1,
+      "title": "Video Teori Dasar",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2025,
+    "fields": {
+      "owner": 1,
+      "title": "Video Praktik Hands-on",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2026,
+    "fields": {
+      "owner": 1,
+      "title": "Video Lanjutan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2027,
+    "fields": {
+      "owner": 1,
+      "title": "Video Getting Started",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2028,
+    "fields": {
+      "owner": 1,
+      "title": "Video Fundamental Concepts",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2029,
+    "fields": {
+      "owner": 1,
+      "title": "Video Building Blocks",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2030,
+    "fields": {
+      "owner": 1,
+      "title": "Video Advanced Topics",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2031,
+    "fields": {
+      "owner": 1,
+      "title": "Video Pendahuluan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2032,
+    "fields": {
+      "owner": 1,
+      "title": "Video Teori Dasar",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2033,
+    "fields": {
+      "owner": 1,
+      "title": "Video Praktik Hands-on",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2034,
+    "fields": {
+      "owner": 1,
+      "title": "Video Lanjutan",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2035,
+    "fields": {
+      "owner": 1,
+      "title": "Video Getting Started",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2036,
+    "fields": {
+      "owner": 1,
+      "title": "Video Fundamental Concepts",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2037,
+    "fields": {
+      "owner": 1,
+      "title": "Video Building Blocks",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2038,
+    "fields": {
+      "owner": 1,
+      "title": "Video Advanced Topics",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  },
+  {
+    "model": "courses.video",
+    "pk": 2039,
+    "fields": {
+      "owner": 1,
+      "title": "Video Final Project",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "created": "2025-11-01T10:00:00",
+      "updated": "2025-11-01T10:00:00"
+    }
+  }
+]

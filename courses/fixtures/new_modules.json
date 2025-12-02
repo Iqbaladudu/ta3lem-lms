@@ -1,0 +1,402 @@
+[
+  {
+    "model": "courses.module",
+    "pk": 3000,
+    "fields": {
+      "course": 2000,
+      "title": "Getting Started",
+      "description": "Modul 1 untuk Machine Learning Dasar",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3001,
+    "fields": {
+      "course": 2000,
+      "title": "Fundamental Concepts",
+      "description": "Modul 2 untuk Machine Learning Dasar",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3002,
+    "fields": {
+      "course": 2000,
+      "title": "Building Blocks",
+      "description": "Modul 3 untuk Machine Learning Dasar",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3003,
+    "fields": {
+      "course": 2000,
+      "title": "Advanced Topics",
+      "description": "Modul 4 untuk Machine Learning Dasar",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3004,
+    "fields": {
+      "course": 2000,
+      "title": "Final Project",
+      "description": "Modul 5 untuk Machine Learning Dasar",
+      "order": 4
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3005,
+    "fields": {
+      "course": 2001,
+      "title": "Pengenalan dan Setup",
+      "description": "Modul 1 untuk Flutter Mobile Development",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3006,
+    "fields": {
+      "course": 2001,
+      "title": "Konsep Dasar",
+      "description": "Modul 2 untuk Flutter Mobile Development",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3007,
+    "fields": {
+      "course": 2001,
+      "title": "Implementasi Awal",
+      "description": "Modul 3 untuk Flutter Mobile Development",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3008,
+    "fields": {
+      "course": 2001,
+      "title": "Studi Kasus",
+      "description": "Modul 4 untuk Flutter Mobile Development",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3009,
+    "fields": {
+      "course": 2002,
+      "title": "Pengenalan dan Setup",
+      "description": "Modul 1 untuk Cybersecurity Fundamentals",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3010,
+    "fields": {
+      "course": 2002,
+      "title": "Konsep Dasar",
+      "description": "Modul 2 untuk Cybersecurity Fundamentals",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3011,
+    "fields": {
+      "course": 2002,
+      "title": "Implementasi Awal",
+      "description": "Modul 3 untuk Cybersecurity Fundamentals",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3012,
+    "fields": {
+      "course": 2003,
+      "title": "Pendahuluan",
+      "description": "Modul 1 untuk Cloud Computing AWS",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3013,
+    "fields": {
+      "course": 2003,
+      "title": "Teori Dasar",
+      "description": "Modul 2 untuk Cloud Computing AWS",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3014,
+    "fields": {
+      "course": 2003,
+      "title": "Praktik Hands-on",
+      "description": "Modul 3 untuk Cloud Computing AWS",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3015,
+    "fields": {
+      "course": 2004,
+      "title": "Getting Started",
+      "description": "Modul 1 untuk DevOps dengan Docker & Kubernetes",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3016,
+    "fields": {
+      "course": 2004,
+      "title": "Fundamental Concepts",
+      "description": "Modul 2 untuk DevOps dengan Docker & Kubernetes",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3017,
+    "fields": {
+      "course": 2004,
+      "title": "Building Blocks",
+      "description": "Modul 3 untuk DevOps dengan Docker & Kubernetes",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3018,
+    "fields": {
+      "course": 2004,
+      "title": "Advanced Topics",
+      "description": "Modul 4 untuk DevOps dengan Docker & Kubernetes",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3019,
+    "fields": {
+      "course": 2005,
+      "title": "Pendahuluan",
+      "description": "Modul 1 untuk Bahasa Jepang untuk Pemula",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3020,
+    "fields": {
+      "course": 2005,
+      "title": "Teori Dasar",
+      "description": "Modul 2 untuk Bahasa Jepang untuk Pemula",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3021,
+    "fields": {
+      "course": 2005,
+      "title": "Praktik Hands-on",
+      "description": "Modul 3 untuk Bahasa Jepang untuk Pemula",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3022,
+    "fields": {
+      "course": 2005,
+      "title": "Lanjutan",
+      "description": "Modul 4 untuk Bahasa Jepang untuk Pemula",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3023,
+    "fields": {
+      "course": 2006,
+      "title": "Pendahuluan",
+      "description": "Modul 1 untuk Digital Marketing Strategy",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3024,
+    "fields": {
+      "course": 2006,
+      "title": "Teori Dasar",
+      "description": "Modul 2 untuk Digital Marketing Strategy",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3025,
+    "fields": {
+      "course": 2006,
+      "title": "Praktik Hands-on",
+      "description": "Modul 3 untuk Digital Marketing Strategy",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3026,
+    "fields": {
+      "course": 2006,
+      "title": "Lanjutan",
+      "description": "Modul 4 untuk Digital Marketing Strategy",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3027,
+    "fields": {
+      "course": 2007,
+      "title": "Getting Started",
+      "description": "Modul 1 untuk Game Development Unity",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3028,
+    "fields": {
+      "course": 2007,
+      "title": "Fundamental Concepts",
+      "description": "Modul 2 untuk Game Development Unity",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3029,
+    "fields": {
+      "course": 2007,
+      "title": "Building Blocks",
+      "description": "Modul 3 untuk Game Development Unity",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3030,
+    "fields": {
+      "course": 2007,
+      "title": "Advanced Topics",
+      "description": "Modul 4 untuk Game Development Unity",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3031,
+    "fields": {
+      "course": 2008,
+      "title": "Pendahuluan",
+      "description": "Modul 1 untuk Blockchain & Web3",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3032,
+    "fields": {
+      "course": 2008,
+      "title": "Teori Dasar",
+      "description": "Modul 2 untuk Blockchain & Web3",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3033,
+    "fields": {
+      "course": 2008,
+      "title": "Praktik Hands-on",
+      "description": "Modul 3 untuk Blockchain & Web3",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3034,
+    "fields": {
+      "course": 2008,
+      "title": "Lanjutan",
+      "description": "Modul 4 untuk Blockchain & Web3",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3035,
+    "fields": {
+      "course": 2009,
+      "title": "Getting Started",
+      "description": "Modul 1 untuk Artificial Intelligence Advanced",
+      "order": 0
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3036,
+    "fields": {
+      "course": 2009,
+      "title": "Fundamental Concepts",
+      "description": "Modul 2 untuk Artificial Intelligence Advanced",
+      "order": 1
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3037,
+    "fields": {
+      "course": 2009,
+      "title": "Building Blocks",
+      "description": "Modul 3 untuk Artificial Intelligence Advanced",
+      "order": 2
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3038,
+    "fields": {
+      "course": 2009,
+      "title": "Advanced Topics",
+      "description": "Modul 4 untuk Artificial Intelligence Advanced",
+      "order": 3
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 3039,
+    "fields": {
+      "course": 2009,
+      "title": "Final Project",
+      "description": "Modul 5 untuk Artificial Intelligence Advanced",
+      "order": 4
+    }
+  }
+]
