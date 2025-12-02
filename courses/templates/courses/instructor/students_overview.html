@@ -77,12 +77,25 @@
             <div class="lg:col-span-2 space-y-6 lg:space-y-8">
                 <!-- Students List -->
                 <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-3">
-                            <i class="fas fa-user-graduate text-white"></i>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center">
+                            <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-3">
+                                <i class="fas fa-user-graduate text-white"></i>
+                            </div>
+                            <span>Daftar Siswa</span>
+                        </h2>
+
+                        <!-- Per Page Selector -->
+                        <div class="flex items-center gap-2">
+                            <label for="per_page" class="text-sm font-medium text-gray-700">Tampilkan:</label>
+                            <select id="per_page" name="per_page" class="text-sm border border-gray-300 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                {% for option in per_page_options %}
+                                    <option value="{{ option }}" {% if per_page == option %}selected{% endif %}>{{ option }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="text-sm text-gray-600">per halaman</span>
                         </div>
-                        <span>Daftar Siswa</span>
-                    </h2>
+                    </div>
 
                     {% if students_data %}
                         <div class="space-y-4">
@@ -157,6 +170,50 @@
                         <div class="text-center py-12">
                             <i class="fas fa-users text-6xl text-gray-300 mb-4"></i>
                             <p class="text-gray-600 text-lg">Belum ada siswa yang terdaftar</p>
+                        </div>
+                    {% endif %}
+
+                    <!-- Pagination Controls -->
+                    {% if students_data.has_other_pages %}
+                        <div class="mt-6 flex items-center justify-between">
+                            <div class="text-sm text-gray-700">
+                                Menampilkan {{ students_data.start_index }}-{{ students_data.end_index }} dari {{ students_data.paginator.count }} siswa
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <!-- Previous Button -->
+                                {% if students_data.has_previous %}
+                                    <a href="?page={{ students_data.previous_page_number }}&per_page={{ per_page }}"
+                                       class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                                        <i class="fas fa-chevron-left mr-1"></i>
+                                        Sebelumnya
+                                    </a>
+                                {% endif %}
+
+                                <!-- Page Numbers -->
+                                {% for num in students_data.paginator.page_range %}
+                                    {% if students_data.number == num %}
+                                        <span class="px-3 py-2 text-sm bg-blue-600 text-white border border-blue-600 rounded-lg">
+                                            {{ num }}
+                                        </span>
+                                    {% elif num > students_data.number|add:'-3' and num < students_data.number|add:'3' %}
+                                        <a href="?page={{ num }}&per_page={{ per_page }}"
+                                           class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                                            {{ num }}
+                                        </a>
+                                    {% elif num == students_data.paginator.page_range.0 or num == students_data.paginator.page_range.last %}
+                                        <span class="px-3 py-2 text-sm text-gray-500">...</span>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <!-- Next Button -->
+                                {% if students_data.has_next %}
+                                    <a href="?page={{ students_data.next_page_number }}&per_page={{ per_page }}"
+                                       class="px-3 py-2 text-sm bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                                        Selanjutnya
+                                        <i class="fas fa-chevron-right ml-1"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
                         </div>
                     {% endif %}
                 </div>
@@ -241,5 +298,29 @@
             </div>
         </div>
     </div>
+
+    {% if not students_data and not courses_data %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+            <div class="text-center py-12">
+                <i class="fas fa-users text-6xl text-gray-300 mb-4"></i>
+                <p class="text-gray-600 text-lg">Belum ada siswa yang terdaftar</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- JavaScript for dynamic pagination -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const perPageSelect = document.getElementById('per_page');
+            if (perPageSelect) {
+                perPageSelect.addEventListener('change', function() {
+                    const currentUrl = new URL(window.location.href);
+                    currentUrl.searchParams.set('per_page', this.value);
+                    currentUrl.searchParams.set('page', '1'); // Reset to first page
+                    window.location.href = currentUrl.toString();
+                });
+            }
+        });
+    </script>
 {% endblock %}
 

@@ -2,6 +2,7 @@ from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.cache import cache
+from django.core.paginator import Paginator
 from django.db.models import Q, Avg
 from django.db.models.aggregates import Count
 from django.forms import modelform_factory
@@ -799,6 +800,9 @@ class MarkContentCompleteView(LoginRequiredMixin, View):
         if module_progress.calculate_completion():
             module_progress.mark_completed()
 
+        # Always update course progress after marking content complete
+        enrollment.update_progress()
+
         # Return JSON response for AJAX requests
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.headers.get('HX-Request'):
             return JsonResponse({
@@ -1073,6 +1077,23 @@ class InstructorStudentsOverviewView(LoginRequiredMixin, TemplateResponseMixin, 
         # Sort by last accessed (most recent first)
         students_data.sort(key=lambda x: x['last_accessed'] or timezone.datetime.min.replace(tzinfo=timezone.utc), reverse=True)
 
+        # Pagination with multiples of 5
+        per_page = request.GET.get('per_page', '5')
+        try:
+            per_page = int(per_page)
+            # Ensure per_page is a multiple of 5 between 5 and 50
+            if per_page not in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]:
+                per_page = 5
+        except (ValueError, TypeError):
+            per_page = 5
+
+        paginator = Paginator(students_data, per_page)
+        page_number = request.GET.get('page', 1)
+        students_page = paginator.get_page(page_number)
+
+        # Available per_page options (multiples of 5)
+        per_page_options = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+
         # Course-wise enrollment statistics
         courses_data = []
         for course in instructor_courses:
@@ -1100,8 +1121,10 @@ class InstructorStudentsOverviewView(LoginRequiredMixin, TemplateResponseMixin, 
             'completed_enrollments': completed_enrollments,
             'paused_enrollments': paused_enrollments,
             'avg_progress': round(avg_progress, 1),
-            'students_data': students_data,
+            'students_data': students_page,  # Use paginated data
             'courses_data': courses_data,
+            'per_page': per_page,
+            'per_page_options': per_page_options,
         }
 
         return self.render_to_response(context)
@@ -1176,16 +1199,35 @@ class InstructorCourseStudentsView(LoginRequiredMixin, TemplateResponseMixin, Vi
                 'completion_rate': round(completion_rate, 1)
             })
 
+        # Pagination with multiples of 5
+        per_page = request.GET.get('per_page', '5')
+        try:
+            per_page = int(per_page)
+            # Ensure per_page is a multiple of 5 between 5 and 50
+            if per_page not in [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]:
+                per_page = 5
+        except (ValueError, TypeError):
+            per_page = 5
+
+        paginator = Paginator(students_detailed, per_page)
+        page_number = request.GET.get('page', 1)
+        students_page = paginator.get_page(page_number)
+
+        # Available per_page options (multiples of 5)
+        per_page_options = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+
         context = {
             'course': course,
             'enrollments': enrollments,
-            'students_detailed': students_detailed,
+            'students_detailed': students_page,
             'total_students': total_students,
             'active_students': active_students,
             'completed_students': completed_students,
             'paused_students': paused_students,
             'avg_progress': round(avg_progress, 1),
             'modules_stats': modules_stats,
+            'per_page': per_page,
+            'per_page_options': per_page_options,
         }
 
         return self.render_to_response(context)

@@ -163,14 +163,20 @@ class CourseEnrollment(models.Model):
         return f"{self.student.username} - {self.course.title} ({self.status})"
 
     def calculate_progress(self):
+        total_modules = self.course.modules.count()
         total_contents = Content.objects.filter(module__course=self.course).count()
 
-        if total_contents == 0:
+        if total_modules == 0 and total_contents == 0:
             return 0.00
 
+        completed_modules = ModuleProgress.objects.filter(enrollment=self, is_completed=True).count()
         completed_contents = ContentProgress.objects.filter(enrollment=self, is_completed=True).count()
 
-        return round((completed_contents / total_contents) * 100, 2)
+        # Calculate weighted progress: 50% from modules + 50% from contents
+        module_progress = (completed_modules / total_modules * 100) if total_modules > 0 else 0
+        content_progress = (completed_contents / total_contents * 100) if total_contents > 0 else 0
+
+        return round((module_progress + content_progress) / 2, 2)
 
     def update_progress(self):
         self.progress_percentage = self.calculate_progress()
