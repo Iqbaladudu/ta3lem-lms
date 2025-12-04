@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Avg
 from django.db.models.aggregates import Count
 from django.forms import modelform_factory
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -33,10 +33,13 @@ class CourseListView(ListView):
 
     def get_queryset(self):
         subject_slug = self.kwargs.get('subject')
-        cache_key = f"course_list_queryset_{subject_slug}" if subject_slug else "course_list_queryset"
+        # Include 'published' in cache key to avoid cache pollution between admin and public views
+        cache_key = f"course_list_published_{subject_slug}" if subject_slug else "course_list_published"
         queryset = cache.get(cache_key)
         if queryset is None:
-            queryset = Course.objects.annotate(total_modules=Count('modules')).order_by('-created')
+            # SECURITY: Only show published courses to the public
+            # This ensures draft and archived courses are not visible to students/public
+            queryset = Course.objects.filter(status='published').annotate(total_modules=Count('modules')).order_by('-created')
             if subject_slug:
                 subject = get_object_or_404(Subject, slug=subject_slug)
                 queryset = queryset.filter(subject=subject)
@@ -68,6 +71,13 @@ class CourseListView(ListView):
 class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course/detail.html'
+
+    def get_object(self):
+        """Override to ensure only published courses are accessible to the public"""
+        # SECURITY: Only allow public access to published courses
+        # This prevents students from accessing draft or archived courses via direct URLs
+        slug = self.kwargs.get('slug')
+        return get_object_or_404(Course, slug=slug, status='published')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -116,6 +126,12 @@ class ContentItemCreateView(TemplateResponseMixin, View):
 
     @staticmethod
     def get_form(model, *args, **kwargs):
+        # Use custom form for Video model
+        if model.__name__ == 'Video':
+            from .forms import VideoForm
+            return VideoForm(*args, **kwargs)
+        
+        # Default to auto-generated form for other models
         Form = modelform_factory(model, exclude=['owner', 'order', 'created', 'updated'])
         return Form(*args, **kwargs)
 
@@ -175,6 +191,12 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 
     @staticmethod
     def get_form(model, *args, **kwargs):
+        # Use custom form for Video model
+        if model.__name__ == 'Video':
+            from .forms import VideoForm
+            return VideoForm(*args, **kwargs)
+        
+        # Default to auto-generated form for other models
         Form = modelform_factory(model, exclude=['owner', 'order', 'created', 'updated'])
         return Form(*args, **kwargs)
 
@@ -338,7 +360,11 @@ class OwnerEditMixin:
 
 class OwnerCourseMixin(OwnerMixin, LoginRequiredMixin, PermissionRequiredMixin):
     model = Course
-    fields = ["subject", "title", "slug", "overview"]
+    fields = [
+        "subject", "title", "slug", "overview", 
+        "status", "enrollment_type", "max_capacity", "waitlist_enabled",
+        "difficulty_level", "estimated_hours", "certificate_enabled"
+    ]
     success_url = reverse_lazy("manage_course_list")
 
 
@@ -394,10 +420,19 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
     permission_required = 'courses.add_course'
+    
+    def get_form_class(self):
+        from .forms import CourseForm
+        return CourseForm
 
 
 class CourseUpdateView(OwnerCourseEditMixin, UpdateView):
     permission_required = 'courses.change_course'
+    
+    def get_form_class(self):
+        from .forms import CourseForm
+        return CourseForm
+
 
 
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
@@ -425,7 +460,9 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
     """Handle student course enrollment with waitlist and approval support"""
 
     def post(self, request, pk):
-        course = get_object_or_404(Course, pk=pk)
+        # SECURITY: Only allow enrollment in published courses
+        # This prevents students from enrolling in draft or archived courses
+        course = get_object_or_404(Course, pk=pk, status='published')
         user = request.user
 
         # Check if already enrolled
@@ -436,7 +473,7 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
         
         if existing_enrollment:
             messages.info(request, f'You are already enrolled in "{course.title}" with status: {existing_enrollment.get_status_display()}')
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
 
         # Check if course allows enrollment
         can_enroll, message = course.can_enroll(user)
@@ -473,7 +510,7 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
                 # Approval required
                 enrollment_type_display = dict(course._meta.get_field('enrollment_type').choices)[course.enrollment_type]
                 messages.info(request, f'Your enrollment request for "{course.title}" is pending approval. Course type: {enrollment_type_display}.')
-                return redirect('course_detail', pk=course.pk)
+                return redirect('course_detail', slug=course.slug)
         
         elif message == "Course full - can join waitlist":
             # Add to waitlist
@@ -489,29 +526,30 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
                 position = waitlist_entry.get_position()
                 messages.info(request, f'You are already on the waitlist at position {position}.')
             
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
         
         else:
             # Cannot enroll
             messages.error(request, f'Cannot enroll: {message}')
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
 
 
 class StudentJoinWaitlistView(LoginRequiredMixin, View):
     """Handle explicit waitlist joining"""
     
     def post(self, request, pk):
-        course = get_object_or_404(Course, pk=pk)
+        # Only allow waitlist joining for published courses
+        course = get_object_or_404(Course, pk=pk, status='published')
         user = request.user
         
         # Check if already enrolled or waitlisted
         if CourseEnrollment.objects.filter(student=user, course=course).exists():
             messages.info(request, 'You are already enrolled in this course.')
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
         
         if CourseWaitlist.objects.filter(student=user, course=course).exists():
             messages.info(request, 'You are already on the waitlist for this course.')
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
         
         # Add to waitlist
         waitlist_entry = CourseWaitlist.objects.create(
@@ -521,7 +559,7 @@ class StudentJoinWaitlistView(LoginRequiredMixin, View):
         
         position = waitlist_entry.get_position()
         messages.success(request, f'You have been added to the waitlist at position {position}.')
-        return redirect('course_detail', pk=course.pk)
+        return redirect('course_detail', slug=course.slug)
 
 
 class ApproveEnrollmentView(LoginRequiredMixin, View):
@@ -534,7 +572,7 @@ class ApproveEnrollmentView(LoginRequiredMixin, View):
         # Check if user is course owner or staff
         if not (request.user == course.owner or request.user.is_staff):
             messages.error(request, 'You do not have permission to approve enrollments.')
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
         
         if enrollment.status != 'pending':
             messages.error(request, 'Only pending enrollments can be approved.')
@@ -576,7 +614,7 @@ class RejectEnrollmentView(LoginRequiredMixin, View):
         # Check if user is course owner or staff
         if not (request.user == course.owner or request.user.is_staff):
             messages.error(request, 'You do not have permission to reject enrollments.')
-            return redirect('course_detail', pk=course.pk)
+            return redirect('course_detail', slug=course.slug)
         
         if enrollment.status != 'pending':
             messages.error(request, 'Only pending enrollments can be rejected.')
@@ -637,6 +675,26 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
     model = Course
     template_name = 'courses/student/course_detail.html'
     context_object_name = 'course'
+
+    def get_object(self):
+        """Override to ensure only published courses are accessible to students"""
+        # Students can access courses if:
+        # 1. Course is published, OR
+        # 2. They are already enrolled (even if course becomes draft later)
+        pk = self.kwargs.get('pk')
+        course = get_object_or_404(Course, pk=pk)
+        
+        # Check if user is enrolled in this course
+        is_enrolled = CourseEnrollment.objects.filter(
+            student=self.request.user, 
+            course=course
+        ).exists()
+        
+        # If course is not published and user is not enrolled, deny access
+        if course.status != 'published' and not is_enrolled:
+            raise Http404("Course not found or not available.")
+            
+        return course
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -788,6 +846,20 @@ class StudentContentView(LoginRequiredMixin, DetailView):
     pk_url_kwarg = 'content_pk'
 
     def get_queryset(self):
+        # Only allow access to content from published courses OR courses user is enrolled in
+        course_pk = self.kwargs['pk']
+        course = get_object_or_404(Course, pk=course_pk)
+        
+        # Check if user is enrolled in this course
+        is_enrolled = CourseEnrollment.objects.filter(
+            student=self.request.user, 
+            course=course
+        ).exists()
+        
+        # If course is not published and user is not enrolled, deny access
+        if course.status != 'published' and not is_enrolled:
+            raise Http404("Course content not found or not available.")
+        
         return Content.objects.filter(
             module__pk=self.kwargs['module_pk'],
             module__course__pk=self.kwargs['pk']
@@ -1478,6 +1550,238 @@ class ApproveWaitlistEntryView(LoginRequiredMixin, View):
         waitlist_entry.delete()
         
         return redirect('course_waitlist_management', pk=course.pk)
+
+
+class CourseQuickStatusView(LoginRequiredMixin, View):
+    """Quick status change for courses from the management dashboard"""
+    
+    def post(self, request, pk):
+        course = get_object_or_404(Course, pk=pk, owner=request.user)
+        new_status = request.POST.get('status')
+        
+        # Validate status
+        valid_statuses = ['draft', 'published', 'archived']
+        if new_status not in valid_statuses:
+            messages.error(request, 'Status tidak valid.')
+            return redirect('manage_course_list')
+        
+        old_status = course.status
+        course.status = new_status
+        course.save()
+        
+        # Status change messages
+        status_messages = {
+            'published': f'Kursus "{course.title}" berhasil dipublikasikan dan sekarang terlihat oleh siswa.',
+            'draft': f'Kursus "{course.title}" diubah ke draft. Siswa baru tidak dapat melihat kursus ini.',
+            'archived': f'Kursus "{course.title}" diarsipkan. Kursus tidak lagi terlihat di publik.'
+        }
+        
+        messages.success(request, status_messages.get(new_status, f'Status kursus diubah ke {new_status}.'))
+        
+        # Return JSON response for HTMX or redirect for regular forms
+        if request.headers.get('HX-Request'):
+            return JsonResponse({
+                'status': 'success', 
+                'message': status_messages.get(new_status),
+                'new_status': new_status,
+                'old_status': old_status
+            })
+        
+        return redirect('manage_course_list')
+
+
+class BulkContentOperationsView(LoginRequiredMixin, View):
+    """Bulk operations for content management"""
+    
+    def post(self, request, module_id):
+        module = get_object_or_404(Module, id=module_id, course__owner=request.user)
+        operation = request.POST.get('operation')
+        content_ids = request.POST.getlist('content_ids')
+        
+        if not content_ids:
+            messages.error(request, 'Tidak ada konten yang dipilih.')
+            return redirect('module_content_list', module_id=module.id)
+        
+        if operation == 'delete':
+            # Bulk delete selected content
+            deleted_count = 0
+            for content_id in content_ids:
+                try:
+                    content = get_object_or_404(Content, id=content_id, module=module)
+                    # Delete all content items and their actual items
+                    for content_item in content.items.all():
+                        if content_item.item:
+                            content_item.item.delete()
+                    content.delete()
+                    deleted_count += 1
+                except Exception as e:
+                    messages.error(request, f'Error deleting content ID {content_id}: {str(e)}')
+            
+            if deleted_count > 0:
+                messages.success(request, f'{deleted_count} konten berhasil dihapus.')
+        
+        elif operation == 'duplicate':
+            # Bulk duplicate selected content
+            duplicated_count = 0
+            for content_id in content_ids:
+                try:
+                    original_content = get_object_or_404(Content, id=content_id, module=module)
+                    
+                    # Create duplicate content
+                    new_content = Content.objects.create(
+                        module=module,
+                        title=f"{original_content.title} (Copy)",
+                        order=original_content.order + 100  # Place at end
+                    )
+                    
+                    # Duplicate all content items
+                    for content_item in original_content.items.all():
+                        if content_item.item:
+                            original_item = content_item.item
+                            
+                            # Create copy of the content item
+                            new_item = type(original_item).objects.create(
+                                owner=request.user,
+                                title=f"{original_item.title} (Copy)",
+                                created=timezone.now(),
+                                updated=timezone.now()
+                            )
+                            
+                            # Copy type-specific fields
+                            if hasattr(original_item, 'text'):
+                                new_item.text = original_item.text
+                            elif hasattr(original_item, 'file'):
+                                new_item.file = original_item.file
+                            elif hasattr(original_item, 'url'):
+                                new_item.url = original_item.url
+                                if hasattr(original_item, 'video_platform'):
+                                    new_item.video_platform = original_item.video_platform
+                                if hasattr(original_item, 'duration'):
+                                    new_item.duration = original_item.duration
+                                if hasattr(original_item, 'transcript'):
+                                    new_item.transcript = original_item.transcript
+                                if hasattr(original_item, 'captions_enabled'):
+                                    new_item.captions_enabled = original_item.captions_enabled
+                                if hasattr(original_item, 'auto_play'):
+                                    new_item.auto_play = original_item.auto_play
+                                if hasattr(original_item, 'minimum_watch_percentage'):
+                                    new_item.minimum_watch_percentage = original_item.minimum_watch_percentage
+                            
+                            new_item.save()
+                            
+                            # Create content item relationship
+                            ContentItem.objects.create(
+                                content=new_content,
+                                item=new_item,
+                                order=content_item.order
+                            )
+                    
+                    duplicated_count += 1
+                except Exception as e:
+                    messages.error(request, f'Error duplicating content ID {content_id}: {str(e)}')
+            
+            if duplicated_count > 0:
+                messages.success(request, f'{duplicated_count} konten berhasil diduplikasi.')
+        
+        elif operation == 'reorder':
+            # Bulk reorder - expect order data in request
+            order_data = request.POST.get('order_data')  # JSON string of {id: order, ...}
+            if order_data:
+                try:
+                    import json
+                    orders = json.loads(order_data)
+                    for content_id, order in orders.items():
+                        Content.objects.filter(
+                            id=int(content_id),
+                            module=module
+                        ).update(order=int(order))
+                    messages.success(request, 'Urutan konten berhasil diperbarui.')
+                except Exception as e:
+                    messages.error(request, f'Error reordering content: {str(e)}')
+        
+        elif operation == 'change_module':
+            # Move content to another module
+            target_module_id = request.POST.get('target_module_id')
+            if target_module_id:
+                try:
+                    target_module = get_object_or_404(
+                        Module, 
+                        id=target_module_id, 
+                        course__owner=request.user
+                    )
+                    moved_count = 0
+                    for content_id in content_ids:
+                        content = get_object_or_404(Content, id=content_id, module=module)
+                        content.module = target_module
+                        content.save()
+                        moved_count += 1
+                    
+                    if moved_count > 0:
+                        messages.success(
+                            request, 
+                            f'{moved_count} konten berhasil dipindah ke modul "{target_module.title}".'
+                        )
+                except Exception as e:
+                    messages.error(request, f'Error moving content: {str(e)}')
+        
+        else:
+            messages.error(request, 'Operasi tidak valid.')
+        
+        return redirect('module_content_list', module_id=module.id)
+
+
+class BulkContentItemOperationsView(LoginRequiredMixin, View):
+    """Bulk operations for content items within a content"""
+    
+    def post(self, request, content_id):
+        content = get_object_or_404(Content, id=content_id, module__course__owner=request.user)
+        operation = request.POST.get('operation')
+        item_ids = request.POST.getlist('item_ids')
+        
+        if not item_ids:
+            messages.error(request, 'Tidak ada item yang dipilih.')
+            return redirect('module_content_list', module_id=content.module.id)
+        
+        if operation == 'delete':
+            # Bulk delete selected content items
+            deleted_count = 0
+            for item_id in item_ids:
+                try:
+                    content_item = get_object_or_404(
+                        ContentItem, 
+                        id=item_id, 
+                        content=content
+                    )
+                    if content_item.item:
+                        content_item.item.delete()
+                    content_item.delete()
+                    deleted_count += 1
+                except Exception as e:
+                    messages.error(request, f'Error deleting item ID {item_id}: {str(e)}')
+            
+            if deleted_count > 0:
+                messages.success(request, f'{deleted_count} item konten berhasil dihapus.')
+        
+        elif operation == 'reorder':
+            # Bulk reorder content items
+            order_data = request.POST.get('order_data')  # JSON string
+            if order_data:
+                try:
+                    import json
+                    orders = json.loads(order_data)
+                    for item_id, order in orders.items():
+                        ContentItem.objects.filter(
+                            id=int(item_id),
+                            content=content
+                        ).update(order=int(order))
+                    messages.success(request, 'Urutan item konten berhasil diperbarui.')
+                except Exception as e:
+                    messages.error(request, f'Error reordering items: {str(e)}')
+        
+        else:
+            messages.error(request, 'Operasi tidak valid.')
+        
+        return redirect('module_content_list', module_id=content.module.id)
 
 
 class RemoveWaitlistEntryView(LoginRequiredMixin, View):

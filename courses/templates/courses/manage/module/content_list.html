@@ -103,6 +103,49 @@
                             </h3>
                         </div>
                         <div class="p-6">
+                            <!-- Bulk Operations Bar -->
+                            <div id="bulk-operations" class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 mb-6 hidden">
+                                <div class="flex items-center justify-between flex-wrap gap-4">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium text-gray-700 mr-4">
+                                            <span id="selected-count">0</span> konten dipilih
+                                        </span>
+                                        <button onclick="selectAll()" class="text-sm text-blue-600 hover:text-blue-800 font-medium mr-3">
+                                            Pilih Semua
+                                        </button>
+                                        <button onclick="clearSelection()" class="text-sm text-gray-600 hover:text-gray-800 font-medium">
+                                            Batal Pilih
+                                        </button>
+                                    </div>
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <form method="post" action="{% url 'bulk_content_operations' module.id %}" class="inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="duplicate">
+                                            <input type="hidden" name="content_ids" id="duplicate-ids">
+                                            <button type="submit" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg flex items-center">
+                                                <i class="fas fa-copy mr-2"></i>
+                                                Duplikat
+                                            </button>
+                                        </form>
+                                        <button onclick="showMoveModal()" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg flex items-center">
+                                            <i class="fas fa-exchange-alt mr-2"></i>
+                                            Pindah
+                                        </button>
+                                        <form method="post" action="{% url 'bulk_content_operations' module.id %}" class="inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="operation" value="delete">
+                                            <input type="hidden" name="content_ids" id="delete-ids">
+                                            <button type="submit" 
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus konten yang dipilih? Tindakan ini tidak dapat dibatalkan.')"
+                                                    class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg flex items-center">
+                                                <i class="fas fa-trash mr-2"></i>
+                                                Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div id="module-contents" class="space-y-3">
                                 {% for content in module.contents.all %}
                                     <div data-id="{{ content.id }}"
@@ -111,6 +154,10 @@
                                         <!-- Content Header -->
                                         <div class="flex justify-between items-center border-b pb-3 mb-3">
                                             <div class="flex items-center">
+                                                <input type="checkbox" 
+                                                       class="content-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mr-3" 
+                                                       value="{{ content.id }}"
+                                                       onchange="updateBulkOperations()">
                                                 <i class="fas fa-grip-vertical text-gray-400 cursor-move mr-3"></i>
                                                 <h3 class="font-semibold text-lg text-gray-900">{{ content.title }}</h3>
                                                 <span class="ml-2 text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
@@ -277,6 +324,39 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Move Content Modal -->
+        <div id="move-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+                <div class="p-6 border-b border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900">Pindah Konten</h3>
+                </div>
+                <form method="post" action="{% url 'bulk_content_operations' module.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="operation" value="change_module">
+                    <input type="hidden" name="content_ids" id="move-content-ids">
+                    <div class="p-6">
+                        <p class="text-gray-600 mb-4">Pilih modul tujuan untuk memindahkan konten yang dipilih:</p>
+                        <select name="target_module_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" required>
+                            <option value="">-- Pilih Modul Tujuan --</option>
+                            {% for m in course.modules.all %}
+                                {% if m != module %}
+                                    <option value="{{ m.id }}">{{ m.order|add:1 }}. {{ m.title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="flex justify-end space-x-3 p-6 bg-gray-50 rounded-b-2xl">
+                        <button type="button" onclick="hideMoveModal()" class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium">
+                            Batal
+                        </button>
+                        <button type="submit" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg">
+                            Pindahkan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- Toast Notification Container -->
         <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
@@ -387,6 +467,55 @@
             });
         }
     });
+    
+    // Bulk Operations JavaScript
+    function updateBulkOperations() {
+        const checkboxes = document.querySelectorAll('.content-checkbox:checked');
+        const bulkBar = document.getElementById('bulk-operations');
+        const selectedCount = document.getElementById('selected-count');
+        const deleteIds = document.getElementById('delete-ids');
+        const duplicateIds = document.getElementById('duplicate-ids');
+        
+        const ids = Array.from(checkboxes).map(cb => cb.value);
+        
+        selectedCount.textContent = ids.length;
+        deleteIds.value = ids.join(',');
+        duplicateIds.value = ids.join(',');
+        
+        if (ids.length > 0) {
+            bulkBar.classList.remove('hidden');
+        } else {
+            bulkBar.classList.add('hidden');
+        }
+    }
+    
+    function selectAll() {
+        const checkboxes = document.querySelectorAll('.content-checkbox');
+        checkboxes.forEach(cb => cb.checked = true);
+        updateBulkOperations();
+    }
+    
+    function clearSelection() {
+        const checkboxes = document.querySelectorAll('.content-checkbox');
+        checkboxes.forEach(cb => cb.checked = false);
+        updateBulkOperations();
+    }
+    
+    function showMoveModal() {
+        const checkboxes = document.querySelectorAll('.content-checkbox:checked');
+        if (checkboxes.length === 0) {
+            alert('Pilih konten yang akan dipindah terlebih dahulu.');
+            return;
+        }
+        
+        const ids = Array.from(checkboxes).map(cb => cb.value).join(',');
+        document.getElementById('move-content-ids').value = ids;
+        document.getElementById('move-modal').classList.remove('hidden');
+    }
+    
+    function hideMoveModal() {
+        document.getElementById('move-modal').classList.add('hidden');
+    }
 {% endblock %}
 
 {% block extra_css %}

@@ -175,6 +175,76 @@
                                     <span>Dibuat {{ course.created|date:"d M Y" }}</span>
                                 </div>
 
+                                <!-- Course Status & Enrollment Info -->
+                                <div class="mb-4 space-y-2">
+                                    <!-- Status Badge -->
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-medium text-gray-600">Status:</span>
+                                        {% if course.status == 'published' %}
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                                <i class="fas fa-check-circle mr-1"></i>Published
+                                            </span>
+                                        {% elif course.status == 'draft' %}
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                                <i class="fas fa-edit mr-1"></i>Draft
+                                            </span>
+                                        {% elif course.status == 'archived' %}
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                                <i class="fas fa-archive mr-1"></i>Archived
+                                            </span>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Enrollment Type -->
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs font-medium text-gray-600">Pendaftaran:</span>
+                                        {% if course.enrollment_type == 'open' %}
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                <i class="fas fa-door-open mr-1"></i>Terbuka
+                                            </span>
+                                        {% elif course.enrollment_type == 'approval' %}
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                                <i class="fas fa-hand-paper mr-1"></i>Persetujuan
+                                            </span>
+                                        {% elif course.enrollment_type == 'restricted' %}
+                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                <i class="fas fa-lock mr-1"></i>Terbatas
+                                            </span>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Capacity Info -->
+                                    {% if course.max_capacity %}
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-medium text-gray-600">Kapasitas:</span>
+                                            <span class="text-xs font-medium {% if course.is_full %}text-red-600{% else %}text-gray-800{% endif %}">
+                                                {{ course.get_enrollment_count }}/{{ course.max_capacity }}
+                                                {% if course.is_full %}<i class="fas fa-exclamation-triangle ml-1 text-red-500"></i>{% endif %}
+                                            </span>
+                                        </div>
+                                        
+                                        <!-- Waitlist Info -->
+                                        {% if course.waitlist_enabled %}
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-xs font-medium text-gray-600">Daftar Tunggu:</span>
+                                                <span class="text-xs font-medium text-purple-600">
+                                                    {{ course.waitlist_entries.count }} siswa
+                                                    {% if course.waitlist_entries.count > 0 %}
+                                                        <a href="{% url 'course_waitlist_management' course.id %}" class="text-purple-700 hover:text-purple-800 ml-1">
+                                                            <i class="fas fa-external-link-alt"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    {% else %}
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-xs font-medium text-gray-600">Kapasitas:</span>
+                                            <span class="text-xs font-medium text-gray-800">Tidak terbatas</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
                                 <!-- Action Buttons -->
                                 <div class="grid grid-cols-2 gap-2 mb-3">
                                     <a href="{% url 'course_edit' course.id %}"
@@ -210,22 +280,91 @@
                                     </a>
                                 </div>
 
-                                <div class="grid grid-cols-2 gap-2">
-                                    <a href="{% url 'instructor_course_students' course.id %}"
-                                       class="flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                        <i class="fas fa-users mr-2"></i>
-                                        Siswa
-                                    </a>
-                                    <button hx-delete="{% url 'course_delete' course.id %}"
-                                            hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
-                                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                                            hx-target="#course-{{ course.id }}"
-                                            hx-swap="delete swap:500ms"
-                                            class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                        <i class="fas fa-trash-alt mr-2"></i>
-                                        Hapus
-                                    </button>
-                                </div>
+                                <!-- Quick Status Actions -->
+                                {% if course.status != 'published' %}
+                                    <div class="mb-3">
+                                        <form method="post" action="{% url 'course_quick_status' course.id %}" class="inline w-full">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="status" value="published">
+                                            <button type="submit" 
+                                                    onclick="return confirm('Publikasikan kursus \'{{ course.title }}\'? Kursus akan terlihat oleh siswa.')"
+                                                    class="w-full flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                                <i class="fas fa-rocket mr-2"></i>
+                                                Publikasikan Kursus
+                                            </button>
+                                        </form>
+                                    </div>
+                                {% elif course.status == 'published' %}
+                                    <div class="mb-3 grid grid-cols-2 gap-2">
+                                        <form method="post" action="{% url 'course_quick_status' course.id %}" class="inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="status" value="draft">
+                                            <button type="submit" 
+                                                    onclick="return confirm('Ubah kursus ke draft? Kursus tidak akan terlihat oleh siswa baru.')"
+                                                    class="w-full flex items-center justify-center bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
+                                                <i class="fas fa-edit mr-1"></i>
+                                                <span class="text-xs">Draft</span>
+                                            </button>
+                                        </form>
+                                        <form method="post" action="{% url 'course_quick_status' course.id %}" class="inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="status" value="archived">
+                                            <button type="submit" 
+                                                    onclick="return confirm('Arsipkan kursus? Kursus tidak akan terlihat di publik.')"
+                                                    class="w-full flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
+                                                <i class="fas fa-archive mr-1"></i>
+                                                <span class="text-xs">Arsip</span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                {% endif %}
+
+                                {% comment %} Determine grid layout based on waitlist status {% endcomment %}
+                                {% if course.waitlist_enabled and course.waitlist_entries.count > 0 %}
+                                    <!-- Layout with Waitlist Management Button -->
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <a href="{% url 'instructor_course_students' course.id %}"
+                                           class="flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
+                                            <i class="fas fa-users mr-1"></i>
+                                            <span class="hidden sm:inline">Siswa</span>
+                                        </a>
+                                        <a href="{% url 'course_waitlist_management' course.id %}"
+                                           class="flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md relative">
+                                            <i class="fas fa-list mr-1"></i>
+                                            <span class="hidden sm:inline">Waitlist</span>
+                                            <span class="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                                                {{ course.waitlist_entries.count }}
+                                            </span>
+                                        </a>
+                                        <button hx-delete="{% url 'course_delete' course.id %}"
+                                                hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
+                                                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                                                hx-target="#course-{{ course.id }}"
+                                                hx-swap="delete swap:500ms"
+                                                class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
+                                            <i class="fas fa-trash-alt mr-1"></i>
+                                            <span class="hidden sm:inline">Hapus</span>
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <!-- Standard Layout -->
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <a href="{% url 'instructor_course_students' course.id %}"
+                                           class="flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                            <i class="fas fa-users mr-2"></i>
+                                            Siswa
+                                        </a>
+                                        <button hx-delete="{% url 'course_delete' course.id %}"
+                                                hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
+                                                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                                                hx-target="#course-{{ course.id }}"
+                                                hx-swap="delete swap:500ms"
+                                                class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                            <i class="fas fa-trash-alt mr-2"></i>
+                                            Hapus
+                                        </button>
+                                    </div>
+                                {% endif %}
                             </div>
                         </article>
                     {% endfor %}

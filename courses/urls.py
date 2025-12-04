@@ -7,6 +7,7 @@ urlpatterns = [
     path("mine/", views.ManageCourseListView.as_view(), name="manage_course_list"),
     path("create/", views.CourseCreateView.as_view(), name="course_create"),
     path("<int:pk>/edit/", views.CourseUpdateView.as_view(), name="course_edit"),
+    path("<int:pk>/status/", views.CourseQuickStatusView.as_view(), name="course_quick_status"),
     path("<int:pk>/delete/", views.CourseDeleteView.as_view(), name="course_delete"),
     path("<int:pk>/module/", views.CourseModuleUpdateView.as_view(), name="course_module_update"),
 
@@ -27,6 +28,8 @@ urlpatterns = [
     # Content delete
     path("content/<int:id>/delete/", views.ContentDeleteView.as_view(), name="module_content_delete"),
     path("module/<int:module_id>/", views.ModuleContentListView.as_view(), name="module_content_list"),
+    path("module/<int:module_id>/bulk/", views.BulkContentOperationsView.as_view(), name="bulk_content_operations"),
+    path("content/<int:content_id>/bulk/", views.BulkContentItemOperationsView.as_view(), name="bulk_content_item_operations"),
     path("module/order/", views.ModuleOrderView.as_view(), name="module_order"),
     path("content/order/", views.ContentOrderView.as_view(), name="content_order"),
 

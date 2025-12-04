@@ -51,8 +51,96 @@ class Image(ItemBase):
 
 
 class Video(ItemBase):
-    url = EmbedVideoField(blank=True, null=True)
-    file = models.FileField(upload_to='videos', blank=True, null=True)
+    """Enhanced video model with multiple platform support and metadata"""
+    url = EmbedVideoField(blank=True, null=True, help_text='Video URL from YouTube, Vimeo, Dailymotion, or other platforms')
+    file = models.FileField(upload_to='videos', blank=True, null=True, help_text='Upload video file directly')
+    
+    # Enhanced video metadata
+    duration = models.PositiveIntegerField(
+        blank=True, 
+        null=True, 
+        help_text='Video duration in seconds'
+    )
+    video_platform = models.CharField(
+        max_length=20,
+        choices=[
+            ('youtube', 'YouTube'),
+            ('vimeo', 'Vimeo'),
+            ('dailymotion', 'Dailymotion'),
+            ('uploaded', 'Uploaded File'),
+            ('other', 'Other Platform')
+        ],
+        blank=True,
+        help_text='Auto-detected from URL or set manually'
+    )
+    
+    # Video quality and accessibility
+    transcript = models.TextField(
+        blank=True,
+        help_text='Video transcript for accessibility'
+    )
+    captions_enabled = models.BooleanField(
+        default=True,
+        help_text='Whether captions/subtitles are available'
+    )
+    auto_play = models.BooleanField(
+        default=False,
+        help_text='Auto-play video when content is viewed'
+    )
+    
+    # Learning analytics
+    minimum_watch_percentage = models.PositiveIntegerField(
+        default=80,
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+        help_text='Minimum percentage to watch for completion (default: 80%)'
+    )
+    
+    class Meta:
+        indexes = [
+            models.Index(fields=['video_platform']),
+            models.Index(fields=['owner', 'created']),
+        ]
+    
+    def save(self, *args, **kwargs):
+        # Auto-detect video platform from URL
+        if self.url and not self.video_platform:
+            from .templatetags.course import extract_video_id
+            platform, video_id = extract_video_id(str(self.url))
+            if platform:
+                self.video_platform = platform
+        elif self.file and not self.video_platform:
+            self.video_platform = 'uploaded'
+        
+        super().save(*args, **kwargs)
+    
+    def get_thumbnail_url(self):
+        """Get video thumbnail URL"""
+        if self.url and self.video_platform:
+            from .templatetags.course import video_thumbnail
+            return video_thumbnail(str(self.url))
+        return None
+    
+    def get_embed_code(self, **kwargs):
+        """Get video embed HTML"""
+        if self.url:
+            from .templatetags.course import video_player
+            return video_player(
+                str(self.url), 
+                autoplay=self.auto_play,
+                **kwargs
+            )
+        return None
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        
+        if not self.url and not self.file:
+            raise ValidationError('Either URL or file must be provided.')
+        
+        if self.url and self.file:
+            raise ValidationError('Provide either URL or file, not both.')
+        
+        super().clean()
 
 
 class Subject(models.Model):

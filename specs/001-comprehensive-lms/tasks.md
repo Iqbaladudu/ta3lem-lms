@@ -72,12 +72,12 @@ Based on project analysis: Django web application structure
 - [x] T031 ✅ [US1] Implement automatic progress calculation in courses/models.py
 
 ### 📋 Enhancement Tasks (From Clarifications)
-- [ ] T032 📋 [US1] Add course capacity and enrollment type fields to Course model in courses/models.py
-- [ ] T033 📋 [US1] Create CourseWaitlist model for capacity management in courses/models.py  
-- [ ] T034 📋 [US1] Implement waitlist functionality in enrollment views in courses/views.py
+- [x] T032 ✅ [US1] Add course capacity and enrollment type fields to Course model in courses/models.py
+- [x] T033 ✅ [US1] Create CourseWaitlist model for capacity management in courses/models.py  
+- [x] T034 ✅ [US1] Implement waitlist functionality in enrollment views in courses/views.py
 - [x] T035 ✅ [US1] Add approval workflow for restricted courses in courses/views.py
-- [ ] T036 📋 [P] [US1] Create waitlist UI components in courses/templates/courses/course/detail.html
-- [ ] T037 📋 [P] [US1] Enhance video content handling (external embedding) in courses/models.py
+- [x] T036 ✅ [P] [US1] Create waitlist UI components in courses/templates/courses/course/detail.html
+- [x] T037 ✅ [P] [US1] Enhance video content handling (external embedding) in courses/models.py
 
 ## Phase 4: User Story 2 - Instructor Course Creation and Management (Priority: P2) - ✅ COMPLETED
 
@@ -97,9 +97,15 @@ Based on project analysis: Django web application structure
 - [x] T047 ✅ [US2] Implement module and content reordering in courses/views.py
 
 ### 📋 Enhancement Tasks
-- [ ] T048 📋 [P] [US2] Add course status workflow (draft/published/archived) in courses/models.py
-- [ ] T049 📋 [P] [US2] Implement course template and duplication features in courses/views.py
-- [ ] T050 📋 [P] [US2] Add bulk content operations for instructors in courses/views.py
+- [x] T048 ✅ [P] [US2] Add course status workflow (draft/published/archived) in courses/models.py
+- [x] T049 🗑️ [P] [US2] ~~Implement course template and duplication features~~ (REMOVED - not needed)
+- [x] T050 ✅ [P] [US2] Add bulk content operations for instructors in courses/views.py
+
+### ✅ Additional Enhancements Completed
+- [x] 🎨 Enhanced course management UI with sectioned forms, status indicators, capacity management, and waitlist controls
+- [x] 🚀 Quick status change actions from course dashboard for improved instructor workflow
+- [x] 📊 Visual course status and enrollment information in course list cards
+- [x] 🔒 **SECURITY FIX**: Implemented published-only course filtering for public and student views
 
 ## Phase 5: User Story 3 - Progress Tracking and Analytics (Priority: P3) - ✅ MOSTLY COMPLETED  
 
@@ -288,17 +294,17 @@ graph TD
 ## Summary
 
 - **Total Tasks**: 127 tasks
-- **Completed**: 79 tasks (62% complete) ✅
-- **Remaining**: 48 tasks (38% remaining) 📋
+- **Completed**: 88 tasks (69% complete) ✅
+- **Remaining**: 39 tasks (31% remaining) 📋
 
 **Task Distribution by User Story**:
-- US1 (Student Learning): 17 total (11 ✅, 6 📋)  
-- US2 (Course Creation): 13 total (10 ✅, 3 📋)
+- US1 (Student Learning): 17 total (17 ✅, 0 📋) - ✅ **COMPLETED**
+- US2 (Course Creation): 13 total (13 ✅, 0 📋) - ✅ **COMPLETED**
 - US3 (Analytics): 12 total (7 ✅, 5 📋)  
 - US4 (User Management): 11 total (8 ✅, 3 📋)
-- US5 (Student Management): 6 total (6 ✅, 0 📋)
+- US5 (Student Management): 6 total (6 ✅, 0 📋) - ✅ **COMPLETED**
 - **API Development**: 19 tasks (0 ✅, 19 📋) - NEW PHASE
 - **Testing**: 14 tasks (0 ✅, 14 📋) - QUALITY PHASE  
 - **Production**: 15 tasks (0 ✅, 15 📋) - DEPLOYMENT PHASE
 
-**Current Status**: ✅ **FULLY FUNCTIONAL LMS** with all core user stories implemented. Ready for API development, testing, and production deployment phases.
+**Current Status**: ✅ **FULLY FUNCTIONAL LMS** with all core user stories implemented including enhanced waitlist management, multi-platform video support, and bulk content operations. Course template/duplication features removed per request. Ready for analytics enhancements, API development, testing, and production deployment phases.
