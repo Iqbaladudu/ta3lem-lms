@@ -56,63 +56,293 @@
                 {% csrf_token %}
 
                 <!-- Form Fields -->
-                <div class="space-y-6">
-                    {% for field in form %}
-                        <div class="form-group">
-                            <label for="{{ field.id_for_label }}"
-                                   class="block text-sm font-bold text-gray-900 mb-2">
-                                {{ field.label }}
-                                {% if field.field.required %}
-                                    <span class="text-red-500">*</span>
-                                {% endif %}
+                <!-- Basic Information Section -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 mb-8 border border-blue-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-info-circle text-white text-sm"></i>
+                        </div>
+                        Informasi Dasar
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Subject Field -->
+                        <div class="lg:col-span-2">
+                            <label for="{{ form.subject.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.subject.label }}
+                                {% if form.subject.field.required %}<span class="text-red-500">*</span>{% endif %}
                             </label>
-
-                            {% if field.name == 'overview' %}
-                                <textarea name="{{ field.name }}"
-                                          id="{{ field.id_for_label }}"
-                                          rows="6"
-                                          class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 resize-none"
-                                          {% if field.field.required %}required{% endif %}
-                                          placeholder="Jelaskan secara singkat tentang kursus ini...">{{ field.value|default:'' }}</textarea>
-                            {% elif field.name == 'subject' %}
-                                <select name="{{ field.name }}"
-                                        id="{{ field.id_for_label }}"
-                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
-                                        {% if field.field.required %}required{% endif %}>
-                                    <option value="">Pilih subjek...</option>
-                                    {% for choice in field.field.choices %}
-                                        {% if choice.0 %}
-                                            <option value="{{ choice.0 }}"
-                                                    {% if field.value == choice.0 %}selected{% endif %}>
-                                                {{ choice.1 }}
-                                            </option>
-                                        {% endif %}
-                                    {% endfor %}
-                                </select>
-                            {% else %}
-                                <input type="text"
-                                       name="{{ field.name }}"
-                                       id="{{ field.id_for_label }}"
-                                       value="{{ field.value|default:'' }}"
-                                       class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
-                                       {% if field.field.required %}required{% endif %}
-                                       placeholder="{{ field.label }}">
+                            {{ form.subject }}
+                            {% if form.subject.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.subject.help_text }}</p>
                             {% endif %}
-
-                            {% if field.help_text %}
-                                <p class="mt-2 text-sm text-gray-500 flex items-start">
-                                    <i class="fas fa-info-circle mr-2 mt-0.5"></i>{{ field.help_text }}
-                                </p>
-                            {% endif %}
-
-                            {% if field.errors %}
-                                <div class="mt-2 text-sm text-red-600 flex items-start bg-red-50 px-3 py-2 rounded-lg">
-                                    <i class="fas fa-exclamation-circle mr-2 mt-0.5"></i>
-                                    {{ field.errors.0 }}
-                                </div>
+                            {% if form.subject.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.subject.errors.0 }}</div>
                             {% endif %}
                         </div>
-                    {% endfor %}
+
+                        <!-- Title Field -->
+                        <div class="lg:col-span-2">
+                            <label for="{{ form.title.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.title.label }}
+                                {% if form.title.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            {{ form.title }}
+                            {% if form.title.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.title.help_text }}</p>
+                            {% endif %}
+                            {% if form.title.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.title.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Slug Field -->
+                        <div class="lg:col-span-2">
+                            <label for="{{ form.slug.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.slug.label }}
+                                {% if form.slug.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            {{ form.slug }}
+                            {% if form.slug.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.slug.help_text }}</p>
+                            {% endif %}
+                            {% if form.slug.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.slug.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Overview Field -->
+                        <div class="lg:col-span-2">
+                            <label for="{{ form.overview.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.overview.label }}
+                                {% if form.overview.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            {{ form.overview }}
+                            {% if form.overview.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.overview.help_text }}</p>
+                            {% endif %}
+                            {% if form.overview.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.overview.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pricing Section -->
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-8 border border-purple-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-money-bill-wave text-white text-sm"></i>
+                        </div>
+                        Harga & Pembayaran
+                    </h3>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Is Free Field -->
+                        <div class="lg:col-span-3">
+                            <div class="flex items-center space-x-3">
+                                {{ form.is_free }}
+                                <label for="{{ form.is_free.id_for_label }}" class="text-sm font-bold text-gray-900">
+                                    {{ form.is_free.label }}
+                                </label>
+                            </div>
+                            {% if form.is_free.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.is_free.help_text }}</p>
+                            {% endif %}
+                            {% if form.is_free.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.is_free.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Price Field -->
+                        <div class="lg:col-span-2">
+                            <label for="{{ form.price.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.price.label }}
+                            </label>
+                            {{ form.price }}
+                            {% if form.price.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.price.help_text }}</p>
+                            {% endif %}
+                            {% if form.price.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.price.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Currency Field -->
+                        <div>
+                            <label for="{{ form.currency.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.currency.label }}
+                            </label>
+                            {{ form.currency }}
+                            {% if form.currency.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.currency.help_text }}</p>
+                            {% endif %}
+                            {% if form.currency.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.currency.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Settings Section -->
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6 mb-8 border border-green-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-cog text-white text-sm"></i>
+                        </div>
+                        Pengaturan Kursus
+                    </h3>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Status Field -->
+                        <div>
+                            <label for="{{ form.status.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.status.label }}
+                                {% if form.status.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            {{ form.status }}
+                            {% if form.status.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.status.help_text }}</p>
+                            {% endif %}
+                            {% if form.status.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.status.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Difficulty Level Field -->
+                        <div>
+                            <label for="{{ form.difficulty_level.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.difficulty_level.label }}
+                            </label>
+                            {{ form.difficulty_level }}
+                            {% if form.difficulty_level.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.difficulty_level.help_text }}</p>
+                            {% endif %}
+                            {% if form.difficulty_level.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.difficulty_level.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Estimated Hours Field -->
+                        <div>
+                            <label for="{{ form.estimated_hours.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.estimated_hours.label }}
+                            </label>
+                            {{ form.estimated_hours }}
+                            {% if form.estimated_hours.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.estimated_hours.help_text }}</p>
+                            {% endif %}
+                            {% if form.estimated_hours.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.estimated_hours.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Certificate Toggle -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-900 mb-2">Sertifikat</label>
+                            <div class="flex items-center">
+                                {{ form.certificate_enabled }}
+                                <label for="{{ form.certificate_enabled.id_for_label }}" class="ml-2 text-sm text-gray-700">
+                                    {{ form.certificate_enabled.label }}
+                                </label>
+                            </div>
+                            {% if form.certificate_enabled.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.certificate_enabled.help_text }}</p>
+                            {% endif %}
+                            {% if form.certificate_enabled.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.certificate_enabled.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enrollment Management Section -->
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 mb-8 border border-purple-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-users text-white text-sm"></i>
+                        </div>
+                        Manajemen Pendaftaran
+                    </h3>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <!-- Enrollment Type Field -->
+                        <div class="lg:col-span-2">
+                            <label for="{{ form.enrollment_type.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.enrollment_type.label }}
+                                {% if form.enrollment_type.field.required %}<span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            {{ form.enrollment_type }}
+                            {% if form.enrollment_type.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.enrollment_type.help_text }}</p>
+                            {% endif %}
+                            {% if form.enrollment_type.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.enrollment_type.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Max Capacity Field -->
+                        <div>
+                            <label for="{{ form.max_capacity.id_for_label }}" class="block text-sm font-bold text-gray-900 mb-2">
+                                {{ form.max_capacity.label }}
+                            </label>
+                            {{ form.max_capacity }}
+                            {% if form.max_capacity.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.max_capacity.help_text }}</p>
+                            {% endif %}
+                            {% if form.max_capacity.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.max_capacity.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Waitlist Toggle -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-900 mb-2">Daftar Tunggu</label>
+                            <div class="flex items-center">
+                                {{ form.waitlist_enabled }}
+                                <label for="{{ form.waitlist_enabled.id_for_label }}" class="ml-2 text-sm text-gray-700">
+                                    {{ form.waitlist_enabled.label }}
+                                </label>
+                            </div>
+                            {% if form.waitlist_enabled.help_text %}
+                                <p class="text-xs text-gray-500 mt-1">{{ form.waitlist_enabled.help_text }}</p>
+                            {% endif %}
+                            {% if form.waitlist_enabled.errors %}
+                                <div class="text-red-600 text-xs mt-1">{{ form.waitlist_enabled.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Enrollment Info Cards -->
+                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-blue-100 border border-blue-200 rounded-lg p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2">
+                                    <i class="fas fa-door-open text-white text-xs"></i>
+                                </div>
+                                <h4 class="text-sm font-semibold text-blue-900">Open</h4>
+                            </div>
+                            <p class="text-xs text-blue-700">Siswa dapat mendaftar langsung tanpa persetujuan.</p>
+                        </div>
+                        <div class="bg-yellow-100 border border-yellow-200 rounded-lg p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center mr-2">
+                                    <i class="fas fa-hand-paper text-white text-xs"></i>
+                                </div>
+                                <h4 class="text-sm font-semibold text-yellow-900">Approval</h4>
+                            </div>
+                            <p class="text-xs text-yellow-700">Pendaftaran memerlukan persetujuan instruktur.</p>
+                        </div>
+                        <div class="bg-red-100 border border-red-200 rounded-lg p-4">
+                            <div class="flex items-center mb-2">
+                                <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center mr-2">
+                                    <i class="fas fa-lock text-white text-xs"></i>
+                                </div>
+                                <h4 class="text-sm font-semibold text-red-900">Restricted</h4>
+                            </div>
+                            <p class="text-xs text-red-700">Akses terbatas hanya untuk siswa tertentu.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Action Buttons -->
@@ -170,3 +400,32 @@
         {% endif %}
     </div>
 {% endblock %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const isFreeCheckbox = document.querySelector('input[name="is_free"]');
+    const priceField = document.querySelector('input[name="price"]');
+    const currencyField = document.querySelector('select[name="currency"]');
+    
+    function togglePriceFields() {
+        const isDisabled = isFreeCheckbox.checked;
+        priceField.disabled = isDisabled;
+        currencyField.disabled = isDisabled;
+        
+        if (isDisabled) {
+            priceField.value = '';
+            priceField.style.backgroundColor = '#f9fafb';
+            currencyField.style.backgroundColor = '#f9fafb';
+        } else {
+            priceField.style.backgroundColor = '';
+            currencyField.style.backgroundColor = '';
+        }
+    }
+    
+    // Initialize state
+    if (isFreeCheckbox) {
+        togglePriceFields();
+        isFreeCheckbox.addEventListener('change', togglePriceFields);
+    }
+});
+</script>
