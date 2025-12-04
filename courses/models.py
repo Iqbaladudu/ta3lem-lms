@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -163,6 +164,29 @@ class Course(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
     
+    # Pricing information
+    is_free = models.BooleanField(
+        default=True,
+        help_text='Whether this course is free or paid'
+    )
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text='Course price (set only if not free)'
+    )
+    currency = models.CharField(
+        max_length=3,
+        default='IDR',
+        choices=[
+            ('IDR', 'Indonesian Rupiah'),
+            ('USD', 'US Dollar'),
+            ('EUR', 'Euro'),
+        ],
+        help_text='Currency for pricing'
+    )
+    
     # Enhanced fields from clarifications
     enrollment_type = models.CharField(
         max_length=20,
@@ -214,11 +238,19 @@ class Course(models.Model):
             models.Index(fields=['status', 'published_at']),
             models.Index(fields=['enrollment_type']),
             models.Index(fields=['subject', 'status']),
+            models.Index(fields=['is_free', 'price']),
         ]
         constraints = [
             models.CheckConstraint(
                 check=models.Q(max_capacity__isnull=True) | models.Q(max_capacity__gt=0),
                 name='positive_capacity'
+            ),
+            models.CheckConstraint(
+                check=(
+                    models.Q(is_free=True, price__isnull=True) |
+                    models.Q(is_free=False, price__isnull=False, price__gt=0)
+                ),
+                name='valid_pricing'
             ),
         ]
 
@@ -231,20 +263,56 @@ class Course(models.Model):
             status__in=['enrolled', 'completed']
         ).count()
     
+    def get_pending_approvals_count(self):
+        """Get number of pending approval requests"""
+        return self.course_enrollments.filter(status='pending').count()
+    
+    def get_available_spots(self):
+        """Get number of available enrollment spots"""
+        if not self.max_capacity:
+            return None  # Unlimited
+        return max(0, self.max_capacity - self.get_enrollment_count())
+    
     def is_full(self):
         """Check if course has reached capacity"""
         if not self.max_capacity:
             return False
         return self.get_enrollment_count() >= self.max_capacity
     
+    def get_formatted_price(self):
+        """Get formatted price string"""
+        if self.is_free:
+            return "Gratis"
+        
+        if self.currency == 'IDR':
+            return f"Rp {self.price:,.0f}".replace(',', '.')
+        elif self.currency == 'USD':
+            return f"${self.price:,.2f}"
+        elif self.currency == 'EUR':
+            return f"€{self.price:,.2f}"
+        return f"{self.price} {self.currency}"
+    
+    def get_enrollment_button_text(self):
+        """Get appropriate button text based on enrollment type and pricing"""
+        if self.enrollment_type == 'approval':
+            return "Request Pendaftaran"
+        elif self.is_free:
+            return "Daftar Kursus Gratis"
+        else:
+            return f"Beli Kursus - {self.get_formatted_price()}"
+    
     def can_enroll(self, user):
         """Check if user can enroll in course"""
         # Check if user is already enrolled
         if self.course_enrollments.filter(
             student=user, 
-            status__in=['enrolled', 'completed']
+            status__in=['enrolled', 'completed', 'pending']
         ).exists():
-            return False, "Already enrolled"
+            enrollment = self.course_enrollments.filter(student=user).first()
+            if enrollment.status == 'pending':
+                return False, "Approval request pending"
+            elif enrollment.status in ['enrolled', 'completed']:
+                return False, "Already enrolled"
             
         # Check capacity
         if self.is_full():
@@ -255,7 +323,7 @@ class Course(models.Model):
         
         # Check enrollment type
         if self.enrollment_type == 'restricted':
-            return False, "Restricted course"
+            return False, "Restricted course - contact instructor"
         
         return True, "Can enroll"
     
@@ -347,7 +415,7 @@ class CourseWaitlist(models.Model):
 
 
 class CourseEnrollment(models.Model):
-    """Enhanced enrollment model with approval workflow"""
+    """Enhanced enrollment model with approval workflow and payment tracking"""
     
     STATUS_CHOICES = [
         ('pending', 'Pending Approval'),
@@ -357,6 +425,14 @@ class CourseEnrollment(models.Model):
         ('withdrawn', 'Withdrawn'),
         ('rejected', 'Rejected')  # New status for approval workflow
     ]
+    
+    PAYMENT_STATUS_CHOICES = [
+        ('pending', 'Payment Pending'),
+        ('paid', 'Paid'),
+        ('failed', 'Payment Failed'),
+        ('refunded', 'Refunded'),
+        ('free', 'Free Course'),
+    ]
 
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student_enrollments')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_enrollments')
@@ -365,6 +441,25 @@ class CourseEnrollment(models.Model):
     completed_on = models.DateTimeField(null=True, blank=True)
     progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     last_accessed = models.DateTimeField(null=True, blank=True)
+    
+    # Payment tracking
+    payment_status = models.CharField(
+        max_length=15, 
+        choices=PAYMENT_STATUS_CHOICES, 
+        default='free'
+    )
+    payment_amount = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        null=True, 
+        blank=True
+    )
+    payment_date = models.DateTimeField(null=True, blank=True)
+    payment_reference = models.CharField(
+        max_length=100, 
+        blank=True,
+        help_text='Payment gateway reference or transaction ID'
+    )
     
     # Enhanced fields for approval workflow
     approval_requested_at = models.DateTimeField(blank=True, null=True)
@@ -379,7 +474,7 @@ class CourseEnrollment(models.Model):
     rejection_reason = models.TextField(blank=True)
     
     # Learning analytics
-    total_time_spent = models.DurationField(default=__import__('datetime').timedelta)
+    total_time_spent = models.DurationField(default=timedelta)
     last_activity = models.DateTimeField(auto_now=True)
     engagement_score = models.DecimalField(
         max_digits=3, 
@@ -399,6 +494,13 @@ class CourseEnrollment(models.Model):
                 check=models.Q(engagement_score__gte=0.0) & models.Q(engagement_score__lte=1.0),
                 name='valid_engagement_score'
             ),
+            models.CheckConstraint(
+                check=(
+                    models.Q(payment_status='free', payment_amount__isnull=True) |
+                    models.Q(payment_status__in=['pending', 'paid', 'failed', 'refunded'], payment_amount__isnull=False)
+                ),
+                name='valid_payment_data'
+            ),
         ]
         ordering = ['-enrolled_on']
         indexes = [
@@ -406,6 +508,7 @@ class CourseEnrollment(models.Model):
             models.Index(fields=['course', 'status']),
             models.Index(fields=['-last_accessed']),
             models.Index(fields=['status', 'approval_requested_at']),
+            models.Index(fields=['payment_status', 'payment_date']),
         ]
 
     def __str__(self):
@@ -414,67 +517,23 @@ class CourseEnrollment(models.Model):
     def save(self, *args, **kwargs):
         # Auto-set completion date when status changes to completed
         if self.status == 'completed' and not self.completed_on:
-            from django.utils import timezone
             self.completed_on = timezone.now()
         
-        # Set default status based on course enrollment type
+        # Set default payment status based on course pricing
+        if not self.pk:
+            if self.course.is_free:
+                self.payment_status = 'free'
+            else:
+                self.payment_status = 'pending'
+                self.payment_amount = self.course.price
+        
+        # Set default enrollment status based on course enrollment type
         if not self.pk and self.course.enrollment_type == 'approval':
             self.status = 'pending'
-            self.approval_requested_at = __import__('django.utils.timezone').timezone.now()
+            self.approval_requested_at = timezone.now()
         
         super().save(*args, **kwargs)
-    enrolled_on = models.DateTimeField(auto_now_add=True)
-    completed_on = models.DateTimeField(null=True, blank=True)
-    progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])
-    last_accessed = models.DateTimeField(null=True, blank=True)
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['student', 'course'], name='unique_enrollment')
-        ]
-        ordering = ['-enrolled_on']
-        indexes = [
-            models.Index(fields=['student', 'status']),
-            models.Index(fields=['course', 'status']),
-            models.Index(fields=['-last_accessed']),
-        ]
-
-    def __str__(self):
-        return f"{self.student.username} - {self.course.title} ({self.status})"
-
-    def calculate_progress(self):
-        total_modules = self.course.modules.count()
-        total_contents = Content.objects.filter(module__course=self.course).count()
-
-        if total_modules == 0 and total_contents == 0:
-            return 0.00
-
-        completed_modules = ModuleProgress.objects.filter(enrollment=self, is_completed=True).count()
-        completed_contents = ContentProgress.objects.filter(enrollment=self, is_completed=True).count()
-
-        # Calculate weighted progress: 50% from modules + 50% from contents
-        module_progress = (completed_modules / total_modules * 100) if total_modules > 0 else 0
-        content_progress = (completed_contents / total_contents * 100) if total_contents > 0 else 0
-
-        return round((module_progress + content_progress) / 2, 2)
-
-    def update_progress(self):
-        self.progress_percentage = self.calculate_progress()
-
-        if self.progress_percentage == 100 and self.status == 'active':
-            self.status = 'completed'
-            self.completed_on = timezone.now()
-
-        self.save(update_fields=['progress_percentage', 'status', 'completed_on'])
-
-    def get_current_module(self):
-        incomplete_modules = ModuleProgress.objects.filter(enrollment=self, is_completed=False).order_by('module__order').first()
-
-        if incomplete_modules:
-            return  incomplete_modules.module
-
-        # If all complete, return last module
-        return self.course.modules.order_by('order').first()
 
 class ContentProgress(models.Model):
     enrollment = models.ForeignKey(CourseEnrollment, on_delete=models.CASCADE, related_name='content_progress')
@@ -482,6 +541,9 @@ class ContentProgress(models.Model):
     started_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
+    view_count = models.PositiveIntegerField(default=0)
+    time_spent = models.DurationField(default=timedelta)
+    last_viewed = models.DateTimeField(auto_now=True)
 
     class Meta:
         constraints = [

@@ -11,6 +11,7 @@ class CourseForm(forms.ModelForm):
         model = Course
         fields = [
             'subject', 'title', 'slug', 'overview',
+            'is_free', 'price', 'currency',
             'status', 'enrollment_type', 'max_capacity', 'waitlist_enabled',
             'difficulty_level', 'estimated_hours', 'certificate_enabled'
         ]
@@ -56,9 +57,24 @@ class CourseForm(forms.ModelForm):
             'certificate_enabled': forms.CheckboxInput(attrs={
                 'class': 'w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
             }),
+            'is_free': forms.CheckboxInput(attrs={
+                'class': 'w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2'
+            }),
+            'price': forms.NumberInput(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition',
+                'placeholder': 'Harga kursus',
+                'min': '0',
+                'step': '0.01'
+            }),
+            'currency': forms.Select(attrs={
+                'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition'
+            }),
         }
         help_texts = {
             'slug': 'URL unik untuk kursus. Akan dibuat otomatis dari judul jika dikosongkan.',
+            'is_free': 'Centang jika kursus ini gratis. Jika tidak, atur harga di bawah.',
+            'price': 'Harga kursus (kosongkan jika gratis)',
+            'currency': 'Mata uang untuk harga kursus',
             'status': 'Draft: Belum terlihat publik | Published: Tersedia untuk pendaftaran | Archived: Tidak aktif',
             'enrollment_type': 'Open: Pendaftaran bebas | Approval: Perlu persetujuan | Restricted: Akses terbatas',
             'max_capacity': 'Batas maksimal siswa yang dapat mendaftar. Kosongkan untuk tidak ada batas.',
@@ -76,6 +92,9 @@ class CourseForm(forms.ModelForm):
         self.fields['title'].label = "Judul Kursus"
         self.fields['slug'].label = "URL Slug"
         self.fields['overview'].label = "Deskripsi Kursus"
+        self.fields['is_free'].label = "Kursus Gratis"
+        self.fields['price'].label = "Harga"
+        self.fields['currency'].label = "Mata Uang"
         self.fields['status'].label = "Status Publikasi"
         self.fields['enrollment_type'].label = "Tipe Pendaftaran"
         self.fields['max_capacity'].label = "Kapasitas Maksimal"
@@ -103,11 +122,22 @@ class CourseForm(forms.ModelForm):
         cleaned_data = super().clean()
         max_capacity = cleaned_data.get('max_capacity')
         waitlist_enabled = cleaned_data.get('waitlist_enabled')
+        is_free = cleaned_data.get('is_free')
+        price = cleaned_data.get('price')
         
         # If waitlist is enabled but no max capacity is set, show warning
         if waitlist_enabled and not max_capacity:
             self.add_error('waitlist_enabled', 
                 'Daftar tunggu hanya dapat diaktifkan jika ada batas kapasitas maksimal.')
+        
+        # Validate pricing logic
+        if not is_free and (price is None or price <= 0):
+            self.add_error('price', 
+                'Harga harus diisi dan lebih dari 0 untuk kursus berbayar.')
+        
+        if is_free and price is not None and price > 0:
+            self.add_error('is_free', 
+                'Kursus tidak dapat gratis jika ada harga yang ditetapkan.')
         
         return cleaned_data
     
