@@ -1,0 +1,91 @@
+openapi: 3.0.3
+info:
+  title: Ta3lem LMS Authentication API
+  description: Authentication and user management endpoints for the Ta3lem Learning Management System
+  version: 1.0.0
+  contact:
+    name: Ta3lem LMS
+servers:
+  - url: https://api.ta3lem.edu/v1
+    description: Production server
+  - url: https://api-staging.ta3lem.edu/v1
+    description: Staging server
+  - url: http://localhost:8000/api/v1
+    description: Development server
+
+paths:
+  /auth/register:
+    post:
+      tags: [Authentication]
+      summary: Register a new user account
+      description: Create a new student, instructor, or staff account
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegistrationRequest'
+      responses:
+        '201':
+          description: User successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegistrationResponse'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    UserRegistrationRequest:
+      type: object
+      required: [username, email, password, first_name, last_name, role]
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 150
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+        role:
+          type: string
+          enum: [student, instructor, staff]
+
+    UserRegistrationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+tags:
+  - name: Authentication
+    description: User authentication and session management

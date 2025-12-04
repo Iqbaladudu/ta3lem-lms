@@ -23,6 +23,33 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+        <!-- Quick Management Actions -->
+        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div class="mb-4 sm:mb-0">
+                    <h2 class="text-lg font-bold text-gray-900 mb-1">Course Management</h2>
+                    <p class="text-sm text-gray-600">Quick access to enrollment and student management</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{% url 'course_waitlist_management' course.pk %}" 
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl">
+                        <i class="fas fa-list-ol mr-2"></i>
+                        Manage Waitlist
+                    </a>
+                    <a href="{% url 'instructor_course_students' course.pk %}" 
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-200 shadow-lg hover:shadow-xl">
+                        <i class="fas fa-users mr-2"></i>
+                        Student Details
+                    </a>
+                    <a href="{% url 'course_edit' course.pk %}" 
+                       class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white text-sm font-semibold rounded-lg hover:from-green-600 hover:to-teal-600 transition-all duration-200 shadow-lg hover:shadow-xl">
+                        <i class="fas fa-edit mr-2"></i>
+                        Edit Course
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- Statistics Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
             <!-- Total Students -->

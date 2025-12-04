@@ -21,8 +21,9 @@ from users.forms import CourseEnrollForm
 from .forms import ModuleFormSets
 from .models import (
     Course, Module, Content, ContentItem, Subject, CourseEnrollment,
-    ContentProgress, ModuleProgress, LearningSession
+    ContentProgress, ModuleProgress, LearningSession, CourseWaitlist
 )
+from django.contrib import messages  # Added for enrollment messages
 
 class CourseListView(ListView):
     model = Course
@@ -421,31 +422,178 @@ class CourseDeleteView(OwnerCourseMixin, DeleteView):
 # ============================================================================
 
 class StudentEnrollCourseView(LoginRequiredMixin, View):
-    """Handle student course enrollment"""
+    """Handle student course enrollment with waitlist and approval support"""
 
     def post(self, request, pk):
         course = get_object_or_404(Course, pk=pk)
+        user = request.user
 
         # Check if already enrolled
-        enrollment, created = CourseEnrollment.objects.get_or_create(
-            student=request.user,
+        existing_enrollment = CourseEnrollment.objects.filter(
+            student=user,
+            course=course
+        ).first()
+        
+        if existing_enrollment:
+            messages.info(request, f'You are already enrolled in "{course.title}" with status: {existing_enrollment.get_status_display()}')
+            return redirect('course_detail', pk=course.pk)
+
+        # Check if course allows enrollment
+        can_enroll, message = course.can_enroll(user)
+        
+        if can_enroll:
+            # Direct enrollment
+            enrollment_data = {
+                'student': user,
+                'course': course,
+                'status': 'enrolled' if course.enrollment_type == 'open' else 'pending'
+            }
+            
+            # Set approval_requested_at for pending enrollments
+            if course.enrollment_type in ['approval', 'restricted']:
+                enrollment_data['approval_requested_at'] = timezone.now()
+            
+            enrollment = CourseEnrollment.objects.create(**enrollment_data)
+            
+            if course.enrollment_type == 'open':
+                # Add student to course's students M2M field
+                course.students.add(user)
+                
+                # Create initial module progress for first module
+                first_module = course.modules.order_by('order').first()
+                if first_module:
+                    ModuleProgress.objects.create(
+                        enrollment=enrollment,
+                        module=first_module
+                    )
+                
+                messages.success(request, f'Successfully enrolled in "{course.title}"!')
+                return redirect('student_course_detail', pk=course.pk)
+            else:
+                # Approval required
+                enrollment_type_display = dict(course._meta.get_field('enrollment_type').choices)[course.enrollment_type]
+                messages.info(request, f'Your enrollment request for "{course.title}" is pending approval. Course type: {enrollment_type_display}.')
+                return redirect('course_detail', pk=course.pk)
+        
+        elif message == "Course full - can join waitlist":
+            # Add to waitlist
+            waitlist_entry, created = CourseWaitlist.objects.get_or_create(
+                course=course,
+                student=user
+            )
+            
+            if created:
+                position = waitlist_entry.get_position()
+                messages.info(request, f'Course is full. You have been added to the waitlist at position {position}.')
+            else:
+                position = waitlist_entry.get_position()
+                messages.info(request, f'You are already on the waitlist at position {position}.')
+            
+            return redirect('course_detail', pk=course.pk)
+        
+        else:
+            # Cannot enroll
+            messages.error(request, f'Cannot enroll: {message}')
+            return redirect('course_detail', pk=course.pk)
+
+
+class StudentJoinWaitlistView(LoginRequiredMixin, View):
+    """Handle explicit waitlist joining"""
+    
+    def post(self, request, pk):
+        course = get_object_or_404(Course, pk=pk)
+        user = request.user
+        
+        # Check if already enrolled or waitlisted
+        if CourseEnrollment.objects.filter(student=user, course=course).exists():
+            messages.info(request, 'You are already enrolled in this course.')
+            return redirect('course_detail', pk=course.pk)
+        
+        if CourseWaitlist.objects.filter(student=user, course=course).exists():
+            messages.info(request, 'You are already on the waitlist for this course.')
+            return redirect('course_detail', pk=course.pk)
+        
+        # Add to waitlist
+        waitlist_entry = CourseWaitlist.objects.create(
             course=course,
-            defaults={'status': 'enrolled'}
+            student=user
         )
+        
+        position = waitlist_entry.get_position()
+        messages.success(request, f'You have been added to the waitlist at position {position}.')
+        return redirect('course_detail', pk=course.pk)
 
-        if created:
-            # Add student to course's students M2M field
-            course.students.add(request.user)
 
-            # Create initial module progress for first module
-            first_module = course.modules.order_by('order').first()
-            if first_module:
-                ModuleProgress.objects.create(
-                    enrollment=enrollment,
-                    module=first_module
-                )
+class ApproveEnrollmentView(LoginRequiredMixin, View):
+    """Approve a pending enrollment"""
+    
+    def post(self, request, pk):
+        enrollment = get_object_or_404(CourseEnrollment, pk=pk)
+        course = enrollment.course
+        
+        # Check if user is course owner or staff
+        if not (request.user == course.owner or request.user.is_staff):
+            messages.error(request, 'You do not have permission to approve enrollments.')
+            return redirect('course_detail', pk=course.pk)
+        
+        if enrollment.status != 'pending':
+            messages.error(request, 'Only pending enrollments can be approved.')
+            return redirect('instructor_course_analytics', pk=course.pk)
+        
+        # Check course capacity
+        if course.is_full():
+            messages.error(request, 'Cannot approve: course is at capacity.')
+            return redirect('instructor_course_analytics', pk=course.pk)
+        
+        # Approve enrollment
+        enrollment.status = 'enrolled'
+        enrollment.approved_by = request.user
+        enrollment.approved_at = timezone.now()
+        enrollment.save()
+        
+        # Add to course students
+        course.students.add(enrollment.student)
+        
+        # Create initial module progress
+        first_module = course.modules.order_by('order').first()
+        if first_module:
+            ModuleProgress.objects.get_or_create(
+                enrollment=enrollment,
+                module=first_module
+            )
+        
+        messages.success(request, f'Approved enrollment for {enrollment.student.get_full_name()}.')
+        return redirect('instructor_course_analytics', pk=course.pk)
 
-        return redirect('student_course_detail', pk=course.pk)
+
+class RejectEnrollmentView(LoginRequiredMixin, View):
+    """Reject a pending enrollment"""
+    
+    def post(self, request, pk):
+        enrollment = get_object_or_404(CourseEnrollment, pk=pk)
+        course = enrollment.course
+        
+        # Check if user is course owner or staff
+        if not (request.user == course.owner or request.user.is_staff):
+            messages.error(request, 'You do not have permission to reject enrollments.')
+            return redirect('course_detail', pk=course.pk)
+        
+        if enrollment.status != 'pending':
+            messages.error(request, 'Only pending enrollments can be rejected.')
+            return redirect('instructor_course_analytics', pk=course.pk)
+        
+        # Get rejection reason from form
+        rejection_reason = request.POST.get('rejection_reason', 'No reason provided')
+        
+        # Reject enrollment
+        enrollment.status = 'rejected'
+        enrollment.approved_by = request.user
+        enrollment.approved_at = timezone.now()
+        enrollment.rejection_reason = rejection_reason
+        enrollment.save()
+        
+        messages.success(request, f'Rejected enrollment for {enrollment.student.get_full_name()}.')
+        return redirect('instructor_course_analytics', pk=course.pk)
 
 
 class StudentCourseListView(LoginRequiredMixin, ListView):
@@ -1231,3 +1379,126 @@ class InstructorCourseStudentsView(LoginRequiredMixin, TemplateResponseMixin, Vi
         }
 
         return self.render_to_response(context)
+
+
+class CourseWaitlistManagementView(LoginRequiredMixin, TemplateResponseMixin, View):
+    """Manage course waitlist and approve enrollments from waitlist"""
+    template_name = 'courses/instructor/waitlist_management.html'
+
+    def get(self, request, pk):
+        course = get_object_or_404(Course, pk=pk, owner=request.user)
+        
+        # Get waitlist entries
+        waitlist_entries = CourseWaitlist.objects.filter(
+            course=course
+        ).select_related('student').order_by('priority', 'joined_waitlist')
+        
+        # Get pending enrollments
+        pending_enrollments = CourseEnrollment.objects.filter(
+            course=course,
+            status='pending'
+        ).select_related('student').order_by('enrolled_on')
+        
+        # Get recent rejected enrollments
+        rejected_enrollments = CourseEnrollment.objects.filter(
+            course=course,
+            status='rejected'
+        ).select_related('student', 'approved_by').order_by('-approved_at')[:10]
+        
+        # Calculate capacity statistics
+        current_enrolled = course.get_enrollment_count()
+        capacity_remaining = (course.max_capacity - current_enrolled) if course.max_capacity else None
+        
+        context = {
+            'course': course,
+            'waitlist_entries': waitlist_entries,
+            'pending_enrollments': pending_enrollments,
+            'rejected_enrollments': rejected_enrollments,
+            'current_enrolled': current_enrolled,
+            'capacity_remaining': capacity_remaining,
+            'has_capacity': course.max_capacity is None or capacity_remaining > 0,
+            'waitlist_count': waitlist_entries.count(),
+            'pending_count': pending_enrollments.count(),
+        }
+        
+        return self.render_to_response(context)
+
+
+class ApproveWaitlistEntryView(LoginRequiredMixin, View):
+    """Approve a waitlist entry and create enrollment"""
+    
+    def post(self, request, pk):
+        waitlist_entry = get_object_or_404(CourseWaitlist, pk=pk)
+        course = waitlist_entry.course
+        student = waitlist_entry.student
+        
+        # Check permissions
+        if not (request.user == course.owner or request.user.is_staff):
+            messages.error(request, 'You do not have permission to approve waitlist entries.')
+            return redirect('course_waitlist_management', pk=course.pk)
+        
+        # Check if course has capacity
+        if course.is_full():
+            messages.error(request, 'Cannot approve: course is at capacity.')
+            return redirect('course_waitlist_management', pk=course.pk)
+        
+        # Check if student is already enrolled
+        if CourseEnrollment.objects.filter(student=student, course=course, status__in=['enrolled', 'pending']).exists():
+            messages.error(request, 'Student is already enrolled or has pending enrollment.')
+            waitlist_entry.delete()
+            return redirect('course_waitlist_management', pk=course.pk)
+        
+        # Create enrollment
+        enrollment = CourseEnrollment.objects.create(
+            student=student,
+            course=course,
+            status='enrolled' if course.enrollment_type == 'open' else 'pending',
+            approved_by=request.user,
+            approved_at=timezone.now()
+        )
+        
+        if course.enrollment_type == 'open':
+            # Direct enrollment for open courses
+            course.students.add(student)
+            
+            # Create initial module progress
+            first_module = course.modules.order_by('order').first()
+            if first_module:
+                ModuleProgress.objects.create(
+                    enrollment=enrollment,
+                    module=first_module
+                )
+            
+            messages.success(request, f'Approved and enrolled {student.get_full_name()} from waitlist.')
+        else:
+            # Requires additional approval for restricted courses
+            messages.success(request, f'Moved {student.get_full_name()} from waitlist to pending approval.')
+        
+        # Remove from waitlist
+        waitlist_entry.delete()
+        
+        return redirect('course_waitlist_management', pk=course.pk)
+
+
+class RemoveWaitlistEntryView(LoginRequiredMixin, View):
+    """Remove a student from waitlist"""
+    
+    def post(self, request, pk):
+        waitlist_entry = get_object_or_404(CourseWaitlist, pk=pk)
+        course = waitlist_entry.course
+        student = waitlist_entry.student
+        
+        # Check permissions
+        if not (request.user == course.owner or request.user.is_staff):
+            messages.error(request, 'You do not have permission to manage waitlist.')
+            return redirect('course_waitlist_management', pk=course.pk)
+        
+        # Get removal reason
+        removal_reason = request.POST.get('removal_reason', 'No reason provided')
+        
+        # Remove from waitlist
+        waitlist_entry.delete()
+        
+        messages.success(request, f'Removed {student.get_full_name()} from waitlist.')
+        
+        return redirect('course_waitlist_management', pk=course.pk)

@@ -74,12 +74,109 @@ class Course(models.Model):
     overview = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
+    
+    # Enhanced fields from clarifications
+    enrollment_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('open', 'Open Enrollment'),
+            ('approval', 'Requires Approval'),
+            ('restricted', 'Restricted Access')
+        ],
+        default='open'
+    )
+    max_capacity = models.PositiveIntegerField(
+        blank=True, 
+        null=True, 
+        help_text='Optional enrollment limit'
+    )
+    waitlist_enabled = models.BooleanField(
+        default=True, 
+        help_text='Enable waitlist when capacity reached'
+    )
+    
+    # Course metadata
+    difficulty_level = models.CharField(
+        max_length=20,
+        choices=[
+            ('beginner', 'Beginner'),
+            ('intermediate', 'Intermediate'),
+            ('advanced', 'Advanced')
+        ],
+        blank=True
+    )
+    estimated_hours = models.PositiveIntegerField(blank=True, null=True)
+    certificate_enabled = models.BooleanField(default=False)
+    
+    # Course status
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('draft', 'Draft'),
+            ('published', 'Published'),
+            ('archived', 'Archived')
+        ],
+        default='draft'
+    )
+    published_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         ordering = ['-created']
+        indexes = [
+            models.Index(fields=['status', 'published_at']),
+            models.Index(fields=['enrollment_type']),
+            models.Index(fields=['subject', 'status']),
+        ]
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(max_capacity__isnull=True) | models.Q(max_capacity__gt=0),
+                name='positive_capacity'
+            ),
+        ]
 
     def __str__(self):
         return self.title
+    
+    def get_enrollment_count(self):
+        """Get current enrollment count including active enrollments"""
+        return self.course_enrollments.filter(
+            status__in=['enrolled', 'completed']
+        ).count()
+    
+    def is_full(self):
+        """Check if course has reached capacity"""
+        if not self.max_capacity:
+            return False
+        return self.get_enrollment_count() >= self.max_capacity
+    
+    def can_enroll(self, user):
+        """Check if user can enroll in course"""
+        # Check if user is already enrolled
+        if self.course_enrollments.filter(
+            student=user, 
+            status__in=['enrolled', 'completed']
+        ).exists():
+            return False, "Already enrolled"
+            
+        # Check capacity
+        if self.is_full():
+            if self.waitlist_enabled:
+                return False, "Course full - can join waitlist"
+            else:
+                return False, "Course full - no waitlist"
+        
+        # Check enrollment type
+        if self.enrollment_type == 'restricted':
+            return False, "Restricted course"
+        
+        return True, "Can enroll"
+    
+    def save(self, *args, **kwargs):
+        # Auto-set published_at when status changes to published
+        if self.status == 'published' and not self.published_at:
+            from django.utils import timezone
+            self.published_at = timezone.now()
+        super().save(*args, **kwargs)
 
 
 class Module(models.Model):
@@ -133,16 +230,111 @@ class ContentItem(models.Model):
     class Meta:
         ordering = ['order']
 
+class CourseWaitlist(models.Model):
+    """Waitlist for courses that have reached capacity"""
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='waitlist_entries')
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='waitlist_entries')
+    joined_waitlist = models.DateTimeField(auto_now_add=True)
+    notified_of_opening = models.BooleanField(default=False)
+    priority = models.PositiveIntegerField(default=1)  # Lower numbers = higher priority
+    
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['course', 'student'], name='unique_course_waitlist')
+        ]
+        ordering = ['priority', 'joined_waitlist']
+        indexes = [
+            models.Index(fields=['course', 'priority', 'joined_waitlist']),
+        ]
+    
+    def __str__(self):
+        return f"{self.student.username} waitlisted for {self.course.title}"
+    
+    def get_position(self):
+        """Get position in waitlist (1-indexed)"""
+        return self.course.waitlist_entries.filter(
+            models.Q(priority__lt=self.priority) |
+            (models.Q(priority=self.priority) & models.Q(joined_waitlist__lt=self.joined_waitlist))
+        ).count() + 1
+
+
 class CourseEnrollment(models.Model):
+    """Enhanced enrollment model with approval workflow"""
+    
     STATUS_CHOICES = [
-        ('pending', 'Pending'),
+        ('pending', 'Pending Approval'),
         ('enrolled', 'Enrolled'),
         ('completed', 'Completed'),
-        ('paused', 'Paused')]
+        ('paused', 'Paused'),
+        ('withdrawn', 'Withdrawn'),
+        ('rejected', 'Rejected')  # New status for approval workflow
+    ]
 
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student_enrollments')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_enrollments')
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='enrolled')
+    status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='enrolled')
+    enrolled_on = models.DateTimeField(auto_now_add=True)
+    completed_on = models.DateTimeField(null=True, blank=True)
+    progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    last_accessed = models.DateTimeField(null=True, blank=True)
+    
+    # Enhanced fields for approval workflow
+    approval_requested_at = models.DateTimeField(blank=True, null=True)
+    approved_by = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='approved_enrollments'
+    )
+    approved_at = models.DateTimeField(blank=True, null=True)
+    rejection_reason = models.TextField(blank=True)
+    
+    # Learning analytics
+    total_time_spent = models.DurationField(default=__import__('datetime').timedelta)
+    last_activity = models.DateTimeField(auto_now=True)
+    engagement_score = models.DecimalField(
+        max_digits=3, 
+        decimal_places=2, 
+        default=0.0,
+        help_text='Engagement score from 0.0 to 1.0'
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['student', 'course'], name='unique_enrollment'),
+            models.CheckConstraint(
+                check=models.Q(progress_percentage__gte=0) & models.Q(progress_percentage__lte=100),
+                name='valid_progress_percentage'
+            ),
+            models.CheckConstraint(
+                check=models.Q(engagement_score__gte=0.0) & models.Q(engagement_score__lte=1.0),
+                name='valid_engagement_score'
+            ),
+        ]
+        ordering = ['-enrolled_on']
+        indexes = [
+            models.Index(fields=['student', 'status']),
+            models.Index(fields=['course', 'status']),
+            models.Index(fields=['-last_accessed']),
+            models.Index(fields=['status', 'approval_requested_at']),
+        ]
+
+    def __str__(self):
+        return f'{self.student.username} enrolled in {self.course.title} ({self.status})'
+    
+    def save(self, *args, **kwargs):
+        # Auto-set completion date when status changes to completed
+        if self.status == 'completed' and not self.completed_on:
+            from django.utils import timezone
+            self.completed_on = timezone.now()
+        
+        # Set default status based on course enrollment type
+        if not self.pk and self.course.enrollment_type == 'approval':
+            self.status = 'pending'
+            self.approval_requested_at = __import__('django.utils.timezone').timezone.now()
+        
+        super().save(*args, **kwargs)
     enrolled_on = models.DateTimeField(auto_now_add=True)
     completed_on = models.DateTimeField(null=True, blank=True)
     progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, validators=[MinValueValidator(0.0), MaxValueValidator(100.0)])

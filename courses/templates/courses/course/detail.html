@@ -81,15 +81,95 @@
                             Anda sudah terdaftar
                         </p>
                     {% else %}
-                        <form action="{% url 'student_enroll_course' %}" method="post">
-                            {% csrf_token %}
-                            {{ enroll_form.as_p }}
-                            <button type="submit"
-                                    class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl text-sm sm:text-base">
-                                <i class="fas fa-user-plus mr-2"></i>
-                                Daftar Kursus Gratis
-                            </button>
-                        </form>
+                        <!-- Check enrollment status for this user -->
+                        {% with user_enrollment=course.course_enrollments.all|first %}
+                            {% if user_enrollment %}
+                                {% if user_enrollment.status == 'pending' %}
+                                    <div class="text-center">
+                                        <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-yellow-50 text-yellow-700 rounded-xl mb-3">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            Menunggu Persetujuan Instruktur
+                                        </p>
+                                        <p class="text-xs text-gray-600">Permintaan pendaftaran Anda sedang ditinjau</p>
+                                    </div>
+                                {% elif user_enrollment.status == 'rejected' %}
+                                    <div class="text-center">
+                                        <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-red-50 text-red-700 rounded-xl mb-3">
+                                            <i class="fas fa-times-circle mr-1"></i>
+                                            Pendaftaran Ditolak
+                                        </p>
+                                        {% if user_enrollment.rejection_reason %}
+                                            <p class="text-xs text-gray-600">{{ user_enrollment.rejection_reason }}</p>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <!-- Check if user is on waitlist -->
+                                {% with user_waitlist=course.waitlist_entries.all|first %}
+                                    {% if user_waitlist %}
+                                        <div class="text-center">
+                                            <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-orange-50 text-orange-700 rounded-xl mb-3">
+                                                <i class="fas fa-list mr-1"></i>
+                                                Dalam Daftar Tunggu (Posisi #{{ user_waitlist.get_position }})
+                                            </p>
+                                            <p class="text-xs text-gray-600">Anda akan diberitahu jika ada tempat yang tersedia</p>
+                                        </div>
+                                    {% else %}
+                                        <!-- Show enrollment options based on course settings -->
+                                        {% if course.max_capacity and course.get_enrollment_count >= course.max_capacity %}
+                                            <!-- Course is full -->
+                                            {% if course.waitlist_enabled %}
+                                                <form action="{% url 'student_join_waitlist' course.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit"
+                                                            class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl text-sm sm:text-base mb-3">
+                                                        <i class="fas fa-list mr-2"></i>
+                                                        Bergabung ke Daftar Tunggu
+                                                    </button>
+                                                </form>
+                                                <p class="text-center text-xs sm:text-sm text-gray-600">
+                                                    Kursus penuh ({{ course.get_enrollment_count }}/{{ course.max_capacity }})
+                                                </p>
+                                            {% else %}
+                                                <div class="text-center">
+                                                    <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-red-50 text-red-700 rounded-xl">
+                                                        <i class="fas fa-ban mr-1"></i>
+                                                        Kursus Penuh
+                                                    </p>
+                                                </div>
+                                            {% endif %}
+                                        {% elif course.enrollment_type == 'restricted' %}
+                                            <div class="text-center">
+                                                <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-gray-50 text-gray-700 rounded-xl">
+                                                    <i class="fas fa-lock mr-1"></i>
+                                                    Kursus Terbatas
+                                                </p>
+                                                <p class="text-xs text-gray-600 mt-2">Hubungi instruktur untuk akses</p>
+                                            </div>
+                                        {% else %}
+                                            <!-- Normal enrollment -->
+                                            <form action="{% url 'student_enroll_course' course.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit"
+                                                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl text-sm sm:text-base">
+                                                    <i class="fas fa-user-plus mr-2"></i>
+                                                    {% if course.enrollment_type == 'approval' %}
+                                                        Ajukan Pendaftaran
+                                                    {% else %}
+                                                        Daftar Kursus Gratis
+                                                    {% endif %}
+                                                </button>
+                                            </form>
+                                            {% if course.max_capacity %}
+                                                <p class="text-center text-xs text-gray-600 mt-2">
+                                                    {{ course.get_enrollment_count }}/{{ course.max_capacity }} terdaftar
+                                                </p>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endwith %}
                     {% endif %}
                 {% else %}
                     <a href="{% url 'student_login' %}?next={{ request.path }}"
