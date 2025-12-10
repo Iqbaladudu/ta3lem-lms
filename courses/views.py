@@ -492,13 +492,14 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
                     payment_status='pending',
                     payment_amount=course.price
                 )
-                
-                messages.info(request, 
-                    f'Untuk menyelesaikan pendaftaran kursus "{course.title}", '
-                    f'silakan lakukan pembayaran sebesar {course.get_formatted_price()}. '
-                    'Link pembayaran akan dikirim ke email Anda.')
-                return redirect('course_detail', slug=course.slug)
-            
+
+                messages.info(request,
+                              f'Untuk menyelesaikan pendaftaran kursus "{course.title}", '
+                              f'silakan lakukan pembayaran sebesar {course.get_formatted_price()}. '
+                              'Link pembayaran akan dikirim ke email Anda.')
+                # Redirect to student dashboard for this course (not public page)
+                return redirect('student_course_detail', pk=course.pk)
+
             # For free courses, proceed with normal enrollment
             enrollment_data = {
                 'student': user,
@@ -682,9 +683,12 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Add statistics
+        # Add statistics - only count accessible courses
         all_enrollments = CourseEnrollment.objects.filter(student=self.request.user)
+        accessible_enrollments = [e for e in all_enrollments if e.can_access_course()]
+
         context['total_courses'] = all_enrollments.count()
+        context['accessible_courses'] = len(accessible_enrollments)
         context['active_courses'] = all_enrollments.filter(status='enrolled').count()
         context['completed_courses'] = all_enrollments.filter(status='completed').count()
         context['avg_progress'] = all_enrollments.aggregate(
@@ -711,13 +715,13 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
         course = get_object_or_404(Course, pk=pk)
 
         # Check if user is enrolled in this course
-        is_enrolled = CourseEnrollment.objects.filter(
+        enrollment = CourseEnrollment.objects.filter(
             student=self.request.user,
             course=course
-        ).exists()
+        ).first()
 
         # If course is not published and user is not enrolled, deny access
-        if course.status != 'published' and not is_enrolled:
+        if course.status != 'published' and not enrollment:
             raise Http404("Course not found or not available.")
 
         return course
@@ -735,6 +739,10 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
 
         if created:
             course.students.add(self.request.user)
+
+        # Check if user can access this course based on enrollment and payment status
+        if not enrollment.can_access_course():
+            raise Http404("You do not have access to this course. Please check your enrollment and payment status.")
 
         # Update last accessed
         enrollment.last_accessed = timezone.now()
@@ -825,6 +833,10 @@ class StudentModuleDetailView(LoginRequiredMixin, DetailView):
             course=course
         )
 
+        # Check if user can access this course
+        if not enrollment.can_access_course():
+            raise Http404("You do not have access to this course. Please check your enrollment and payment status.")
+
         # Get or create module progress
         module_progress, created = ModuleProgress.objects.get_or_create(
             enrollment=enrollment,
@@ -903,6 +915,11 @@ class StudentContentView(LoginRequiredMixin, DetailView):
             student=self.request.user,
             course=course
         )
+
+        # Check if user can access this course
+        if not enrollment.can_access_course():
+            raise Http404(
+                "You do not have access to this course content. Please check your enrollment and payment status.")
 
         # Get or create content progress
         content_progress, created = ContentProgress.objects.get_or_create(

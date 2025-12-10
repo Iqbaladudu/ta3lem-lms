@@ -103,6 +103,12 @@
                                     <span class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full">Selesai</span>
                                 {% elif enrollment.status == 'paused' %}
                                     <span class="px-3 py-1 bg-gray-500 text-white text-xs font-bold rounded-full">Ditunda</span>
+                                {% elif enrollment.status == 'pending' %}
+                                    <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">Pending</span>
+                                {% elif enrollment.status == 'withdrawn' %}
+                                    <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full">Dibatalkan</span>
+                                {% elif enrollment.status == 'rejected' %}
+                                    <span class="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full">Ditolak</span>
                                 {% endif %}
                             </div>
                             <h3 class="text-xl font-bold mb-2 pr-20">{{ enrollment.course.title }}</h3>
@@ -111,6 +117,23 @@
 
                         <!-- Course Info -->
                         <div class="p-6">
+                            <!-- Access Warning -->
+                            {% if not enrollment.can_access_course %}
+                                <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                                    <div class="flex items-start">
+                                        <i class="fas fa-exclamation-triangle text-red-500 mt-0.5 mr-2"></i>
+                                        <div class="text-xs text-red-700">
+                                            <strong>Akses Ditolak:</strong>
+                                            {% if enrollment.status not in 'enrolled,completed,paused' %}
+                                                Status enrollment tidak valid.
+                                            {% elif enrollment.payment_status not in 'paid,free' %}
+                                                Pembayaran belum lunas ({{ enrollment.get_payment_status_display }}).
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
                             <!-- Progress Bar -->
                             <div class="mb-4">
                                 <div class="flex items-center justify-between mb-2">
@@ -136,14 +159,21 @@
                             </div>
 
                             <!-- Action Button -->
-                            <a href="{% url 'student_course_detail' enrollment.course.pk %}"
-                               class="block w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-center font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl">
-                                {% if enrollment.status == 'completed' %}
-                                    <i class="fas fa-eye mr-2"></i>Lihat Detail
-                                {% else %}
-                                    <i class="fas fa-play-circle mr-2"></i>Lanjutkan Belajar
-                                {% endif %}
-                            </a>
+                            {% if enrollment.can_access_course %}
+                                <a href="{% url 'student_course_detail' enrollment.course.pk %}"
+                                   class="block w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-center font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl">
+                                    {% if enrollment.status == 'completed' %}
+                                        <i class="fas fa-eye mr-2"></i>Lihat Detail
+                                    {% else %}
+                                        <i class="fas fa-play-circle mr-2"></i>Lanjutkan Belajar
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                <button disabled
+                                        class="block w-full bg-gray-400 text-white text-center font-bold py-3 px-6 rounded-xl cursor-not-allowed opacity-75">
+                                    <i class="fas fa-lock mr-2"></i>Tidak Dapat Diakses
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
@@ -157,7 +187,8 @@
                            class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
                             <i class="fas fa-angle-double-left"></i>
                         </a>
-                        <a href="?page={{ page_obj.previous_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
+                        <a href="?page=
+                                {{ page_obj.previous_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
                            class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
                             <i class="fas fa-angle-left"></i>
                         </a>
@@ -168,11 +199,13 @@
                     </span>
 
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
+                        <a href="?page=
+                                {{ page_obj.next_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
                            class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
                             <i class="fas fa-angle-right"></i>
                         </a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
+                        <a href="?page=
+                                {{ page_obj.paginator.num_pages }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
                            class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
                             <i class="fas fa-angle-double-right"></i>
                         </a>
