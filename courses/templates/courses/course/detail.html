@@ -61,22 +61,31 @@
             <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-5 sm:p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-lg sm:text-xl font-extrabold text-gray-900">
-                            {% if course.enrollment_type == 'approval' %}
-                                Request Pendaftaran
-                            {% elif course.is_free %}
-                                Daftar Sekarang
-                            {% else %}
-                                Beli Kursus
-                            {% endif %}
-                        </h3>
-                        <p class="text-xs sm:text-sm text-gray-600">
-                            {% if course.is_free %}
-                                Gratis & Akses Selamanya
-                            {% else %}
-                                {{ course.get_formatted_price }} - Akses Selamanya
-                            {% endif %}
-                        </p>
+                        {% if user_enrollment and user_enrollment.payment_status == 'pending' %}
+                            <h3 class="text-lg sm:text-xl font-extrabold text-gray-900">
+                                Lanjutkan Pembayaran
+                            </h3>
+                            <p class="text-xs sm:text-sm text-gray-600">
+                                Selesaikan transaksi untuk akses
+                            </p>
+                        {% else %}
+                            <h3 class="text-lg sm:text-xl font-extrabold text-gray-900">
+                                {% if course.enrollment_type == 'approval' %}
+                                    Request Pendaftaran
+                                {% elif course.is_free %}
+                                    Daftar Sekarang
+                                {% else %}
+                                    Beli Kursus
+                                {% endif %}
+                            </h3>
+                            <p class="text-xs sm:text-sm text-gray-600">
+                                {% if course.is_free %}
+                                    Gratis & Akses Selamanya
+                                {% else %}
+                                    {{ course.get_formatted_price }} - Akses Selamanya
+                                {% endif %}
+                            </p>
+                        {% endif %}
                     </div>
                     <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                         <i class="fas fa-graduation-cap text-2xl sm:text-3xl text-white"></i>
@@ -96,27 +105,50 @@
                         </p>
                     {% else %}
                         <!-- Check enrollment status for this user -->
-                        {% with user_enrollment=course.course_enrollments.all|first %}
-                            {% if user_enrollment %}
-                                {% if user_enrollment.status == 'pending' %}
-                                    <div class="text-center">
-                                        <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-yellow-50 text-yellow-700 rounded-xl mb-3">
-                                            <i class="fas fa-clock mr-1"></i>
-                                            Menunggu Persetujuan Instruktur
-                                        </p>
-                                        <p class="text-xs text-gray-600">Permintaan pendaftaran Anda sedang ditinjau</p>
+                        <!-- Check enrollment status for this user -->
+                        {% if user_enrollment %}
+                            {% if user_enrollment.payment_status == 'pending' %}
+                                <div class="mt-4 bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-200 rounded-xl p-4 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                                    <div class="absolute top-0 right-0 -mt-2 -mr-2 w-16 h-16 bg-yellow-100 rounded-full opacity-50 blur-xl group-hover:scale-150 transition-transform duration-500"></div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center animate-pulse">
+                                                <i class="fas fa-clock text-yellow-600 text-lg"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-bold text-yellow-800">Menunggu Pembayaran</h4>
+                                            <p class="text-xs text-yellow-700 mt-1 leading-relaxed">
+                                                Silakan selesaikan pembayaran Anda.
+                                            </p>
+                                            <div class="mt-3">
+                                                <a href="{% url 'student_course_detail' course.id %}" class="block w-full bg-yellow-500 hover:bg-yellow-600 text-white text-center font-bold py-2 px-4 rounded-lg shadow transition-all duration-200 text-xs shadow-md transform hover:scale-105">
+                                                    Bayar Sekarang <i class="fas fa-arrow-right ml-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                {% elif user_enrollment.status == 'rejected' %}
-                                    <div class="text-center">
-                                        <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-red-50 text-red-700 rounded-xl mb-3">
-                                            <i class="fas fa-times-circle mr-1"></i>
-                                            Pendaftaran Ditolak
-                                        </p>
-                                        {% if user_enrollment.rejection_reason %}
-                                            <p class="text-xs text-gray-600">{{ user_enrollment.rejection_reason }}</p>
-                                        {% endif %}
-                                    </div>
-                                {% endif %}
+                                </div>
+                            {% elif user_enrollment.status == 'pending' %}
+                                <div class="text-center">
+                                    <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-yellow-50 text-yellow-700 rounded-xl mb-3">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Menunggu Persetujuan Instruktur
+                                    </p>
+                                    <p class="text-xs text-gray-600">Permintaan pendaftaran Anda sedang ditinjau</p>
+                                </div>
+                            {% elif user_enrollment.status == 'rejected' %}
+                                <div class="text-center">
+                                    <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-red-50 text-red-700 rounded-xl mb-3">
+                                        <i class="fas fa-times-circle mr-1"></i>
+                                        Pendaftaran Ditolak
+                                    </p>
+                                    {% if user_enrollment.rejection_reason %}
+                                        <p class="text-xs text-gray-600">{{ user_enrollment.rejection_reason }}</p>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                             {% else %}
                                 <!-- Check if user is on waitlist -->
                                 {% with user_waitlist=course.waitlist_entries.all|first %}
@@ -153,32 +185,54 @@
                                                 </div>
                                             {% endif %}
                                         {% elif course.enrollment_type == 'restricted' %}
-                                            <div class="text-center">
-                                                <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-gray-50 text-gray-700 rounded-xl mb-2">
+                                            {% if not course.is_free %}
+                                                <!-- Paid Restricted Course - Show Buy Button -->
+                                                <form action="{% url 'student_enroll_course' course.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit"
+                                                            class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 sm:py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl text-sm sm:text-base mb-3">
+                                                        <i class="fas fa-credit-card mr-2"></i>
+                                                        Beli - {{ course.get_formatted_price }}
+                                                    </button>
+                                                </form>
+                                                <p class="text-center text-xs text-gray-600">
                                                     <i class="fas fa-lock mr-1"></i>
-                                                    Kursus Terbatas
+                                                    Kursus Terbatas - Perlu persetujuan setelah pembayaran
                                                 </p>
                                                 {% if course.max_capacity %}
-                                                    <div class="bg-blue-50 rounded-lg p-3 mb-2">
-                                                        <p class="text-xs text-blue-700 font-medium">
-                                                            <i class="fas fa-users mr-1"></i>
-                                                            Kapasitas: {{ course.get_enrollment_count }}/{{ course.max_capacity }}
-                                                        </p>
-                                                        {% if course.get_available_spots > 0 %}
-                                                            <p class="text-xs text-green-600 font-medium">
-                                                                <i class="fas fa-check-circle mr-1"></i>
-                                                                {{ course.get_available_spots }} tempat tersedia
-                                                            </p>
-                                                        {% else %}
-                                                            <p class="text-xs text-red-600 font-medium">
-                                                                <i class="fas fa-times-circle mr-1"></i>
-                                                                Kapasitas penuh
-                                                            </p>
-                                                        {% endif %}
-                                                    </div>
+                                                    <p class="text-center text-xs text-gray-500 mt-1">
+                                                        {{ course.get_enrollment_count }}/{{ course.max_capacity }} terdaftar
+                                                    </p>
                                                 {% endif %}
-                                                <p class="text-xs text-gray-600">Hubungi instruktur untuk akses</p>
-                                            </div>
+                                            {% else %}
+                                                <!-- Free Restricted Course - Contact Instructor -->
+                                                <div class="text-center">
+                                                    <p class="text-xs sm:text-sm font-semibold px-4 py-2.5 sm:py-3 bg-gray-50 text-gray-700 rounded-xl mb-2">
+                                                        <i class="fas fa-lock mr-1"></i>
+                                                        Kursus Terbatas
+                                                    </p>
+                                                    {% if course.max_capacity %}
+                                                        <div class="bg-blue-50 rounded-lg p-3 mb-2">
+                                                            <p class="text-xs text-blue-700 font-medium">
+                                                                <i class="fas fa-users mr-1"></i>
+                                                                Kapasitas: {{ course.get_enrollment_count }}/{{ course.max_capacity }}
+                                                            </p>
+                                                            {% if course.get_available_spots > 0 %}
+                                                                <p class="text-xs text-green-600 font-medium">
+                                                                    <i class="fas fa-check-circle mr-1"></i>
+                                                                    {{ course.get_available_spots }} tempat tersedia
+                                                                </p>
+                                                            {% else %}
+                                                                <p class="text-xs text-red-600 font-medium">
+                                                                    <i class="fas fa-times-circle mr-1"></i>
+                                                                    Kapasitas penuh
+                                                                </p>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endif %}
+                                                    <p class="text-xs text-gray-600">Hubungi instruktur untuk akses</p>
+                                                </div>
+                                            {% endif %}
                                         {% else %}
                                             <!-- Normal enrollment -->
                                             <form action="{% url 'student_enroll_course' course.id %}" method="post">
@@ -204,7 +258,7 @@
                                     {% endif %}
                                 {% endwith %}
                             {% endif %}
-                        {% endwith %}
+
                     {% endif %}
                 {% else %}
                     <a href="{% url 'student_login' %}?next={{ request.path }}"
@@ -296,27 +350,39 @@
             <aside class="hidden lg:block lg:w-96 flex-shrink-0">
                 <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-6 sm:p-8 sticky top-24 border border-gray-100">
                     <div class="text-center mb-6">
-                        <div class="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 shadow-2xl">
-                            <i class="fas fa-graduation-cap text-5xl text-white"></i>
-                        </div>
-                        <h3 class="text-2xl font-extrabold text-gray-900 mb-2">
-                            {% if course.enrollment_type == 'approval' %}
-                                Request Pendaftaran
-                            {% elif course.is_free %}
-                                Mulai Belajar Sekarang
-                            {% else %}
-                                Beli Kursus Sekarang
-                            {% endif %}
-                        </h3>
-                        <p class="text-gray-600">
-                            {% if course.enrollment_type == 'approval' %}
-                                Ajukan permohonan untuk bergabung dengan kursus ini
-                            {% elif course.is_free %}
-                                Gratis - Daftar ke kursus ini dan mulai pembelajaran
-                            {% else %}
-                                {{ course.get_formatted_price }} - Beli sekali, akses selamanya
-                            {% endif %}
-                        </p>
+                        {% if user_enrollment and user_enrollment.payment_status == 'pending' %}
+                            <div class="w-24 h-24 mx-auto bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-2xl flex items-center justify-center mb-4 shadow-2xl animate-pulse">
+                                <i class="fas fa-receipt text-5xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-2">
+                                Lanjutkan Pembayaran
+                            </h3>
+                            <p class="text-gray-600">
+                                Selesaikan transaksi untuk mulai belajar
+                            </p>
+                        {% else %}
+                            <div class="w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-4 shadow-2xl">
+                                <i class="fas fa-graduation-cap text-5xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-gray-900 mb-2">
+                                {% if course.enrollment_type == 'approval' %}
+                                    Request Pendaftaran
+                                {% elif course.is_free %}
+                                    Mulai Belajar Sekarang
+                                {% else %}
+                                    Beli Kursus Sekarang
+                                {% endif %}
+                            </h3>
+                            <p class="text-gray-600">
+                                {% if course.enrollment_type == 'approval' %}
+                                    Ajukan permohonan untuk bergabung dengan kursus ini
+                                {% elif course.is_free %}
+                                    Gratis - Daftar ke kursus ini dan mulai pembelajaran
+                                {% else %}
+                                    {{ course.get_formatted_price }} - Beli sekali, akses selamanya
+                                {% endif %}
+                            </p>
+                        {% endif %}
                     </div>
 
                     {% if user.is_authenticated %}
@@ -331,20 +397,58 @@
                                 Anda sudah terdaftar di kursus ini
                             </p>
                         {% else %}
-                            <form action="{% url 'student_enroll_course' course.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit"
-                                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105">
-                                    <i class="{% if course.enrollment_type == 'approval' %}fas fa-paper-plane{% elif course.is_free %}fas fa-user-plus{% else %}fas fa-credit-card{% endif %} mr-2"></i>
-                                    {% if course.enrollment_type == 'approval' %}
-                                        Request Pendaftaran
-                                    {% elif course.is_free %}
-                                        Daftar Kursus Gratis
-                                    {% else %}
-                                        Beli - {{ course.get_formatted_price }}
-                                    {% endif %}
-                                </button>
-                            </form>
+                            {# Check pending payment status #}
+                            {% if user_enrollment and user_enrollment.payment_status == 'pending' %}
+                                <div class="mt-4 bg-gradient-to-br from-yellow-50 to-orange-50 border border-yellow-200 rounded-xl p-4 relative overflow-hidden group hover:shadow-md transition-all duration-300">
+                                    <div class="absolute top-0 right-0 -mt-2 -mr-2 w-16 h-16 bg-yellow-100 rounded-full opacity-50 blur-xl group-hover:scale-150 transition-transform duration-500"></div>
+                                    
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center animate-pulse">
+                                                <i class="fas fa-clock text-yellow-600 text-lg"></i>
+                                            </div>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h4 class="text-sm font-bold text-yellow-800">Menunggu Pembayaran</h4>
+                                            <p class="text-xs text-yellow-700 mt-1 leading-relaxed">
+                                                Silakan selesaikan pembayaran Anda.
+                                            </p>
+                                            <div class="mt-3">
+                                                <a href="{% url 'student_course_detail' course.id %}" class="block w-full bg-yellow-500 hover:bg-yellow-600 text-white text-center font-bold py-2 px-4 rounded-lg shadow transition-all duration-200 text-xs shadow-md transform hover:scale-105">
+                                                    Bayar Sekarang <i class="fas fa-arrow-right ml-1"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif user_enrollment and user_enrollment.status == 'rejected' %}
+                                <div class="mt-4 bg-red-50 border border-red-200 rounded-xl p-4">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3">
+                                            <i class="fas fa-times text-red-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-red-800">Pendaftaran Ditolak</h4>
+                                            <p class="text-xs text-red-600 mt-1">Silakan hubungi administrator.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <form action="{% url 'student_enroll_course' course.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 shadow-xl hover:shadow-2xl hover:scale-105">
+                                        <i class="{% if course.enrollment_type == 'approval' %}fas fa-paper-plane{% elif course.is_free %}fas fa-user-plus{% else %}fas fa-credit-card{% endif %} mr-2"></i>
+                                        {% if course.enrollment_type == 'approval' %}
+                                            Request Pendaftaran
+                                        {% elif course.is_free %}
+                                            Daftar Kursus Gratis
+                                        {% else %}
+                                            Beli - {{ course.get_formatted_price }}
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         <a href="{% url 'student_login' %}?next={{ request.path }}"

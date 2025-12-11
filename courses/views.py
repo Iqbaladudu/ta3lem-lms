@@ -84,6 +84,11 @@ class CourseDetailView(DetailView):
         context['enroll_form'] = CourseEnrollForm(
             initial={'course': self.object}
         )
+        if self.request.user.is_authenticated:
+            context['user_enrollment'] = CourseEnrollment.objects.filter(
+                course=self.object,
+                student=self.request.user
+            ).first()
         return context
 
 

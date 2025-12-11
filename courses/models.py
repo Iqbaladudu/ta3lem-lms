@@ -324,8 +324,14 @@ class Course(models.Model):
                 return False, "Course full - no waitlist"
 
         # Check enrollment type
+        # For restricted courses: allow if it's a paid course (payment acts as access control)
         if self.enrollment_type == 'restricted':
-            return False, "Restricted course - contact instructor"
+            if not self.is_free:
+                # Paid restricted courses can be purchased (approval after payment)
+                return True, "Can purchase restricted course"
+            else:
+                # Free restricted courses require instructor invite
+                return False, "Restricted course - contact instructor"
 
         return True, "Can enroll"
 

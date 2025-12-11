@@ -184,7 +184,31 @@
 
             <!-- Content Display -->
             <div class="content-area flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6">
-                {% if module.contents.all %}
+                {% if enrollment and enrollment.payment_status == 'pending' %}
+                    <!-- Payment Pending State -->
+                    <div class="flex items-center justify-center h-full">
+                        <div class="text-center px-4 max-w-lg mx-auto">
+                            <div class="w-24 h-24 sm:w-32 sm:h-32 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 animate-pulse">
+                                <i class="fas fa-receipt text-4xl sm:text-5xl lg:text-6xl text-orange-500"></i>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-gray-900 mb-2">Menunggu Pembayaran</h3>
+                            <p class="text-base sm:text-lg text-gray-600 mb-6">
+                                Silakan selesaikan pembayaran sebesar <span class="font-bold text-gray-900">{{ object.get_formatted_price }}</span> untuk mengakses materi kursus ini.
+                            </p>
+                            <div class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm text-left mb-6">
+                                <h4 class="font-bold text-gray-900 mb-2">Instruksi Pembayaran:</h4>
+                                <ol class="list-decimal list-inside text-sm text-gray-600 space-y-2">
+                                    <li>Transfer ke Virtual Account: <span class="font-mono font-bold bg-gray-100 px-2 py-1 rounded">123-456-7890</span></li>
+                                    <li>Kirim bukti transfer ke email: <span class="font-bold">payments@ta3lem.com</span></li>
+                                    <li>Tunggu konfirmasi dalam 1x24 jam</li>
+                                </ol>
+                            </div>
+                            <a href="{% url 'course_detail' object.slug %}" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-bold hover:underline">
+                                <i class="fas fa-arrow-left mr-2"></i> Kembali ke Halaman Utama Kursus
+                            </a>
+                        </div>
+                    </div>
+                {% elif module.contents.all %}
                     <div class="max-w-5xl mx-auto space-y-4 sm:space-y-6">
                         {% for content in module.contents.all %}
                             <div class="bg-white/90 backdrop-blur-sm border-2 border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:border-blue-300">
