@@ -243,3 +243,10 @@ def video_thumbnail(url, size='default'):
         return f"https://www.dailymotion.com/thumbnail/video/{video_id}"
     
     return None
+
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    import markdown
+    return mark_safe(markdown.markdown(text))
+

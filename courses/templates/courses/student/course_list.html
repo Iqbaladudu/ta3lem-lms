@@ -1,233 +1,159 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Kursus Saya - Ta3lem{% endblock %}
+{% block title %}My Learning - Ta3lem{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white py-12 sm:py-16 lg:py-20 overflow-hidden">
-        <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/20"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight">
-                    Kursus Saya
-                </h1>
-                <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-50 max-w-3xl mx-auto leading-relaxed">
-                    Kelola dan lanjutkan perjalanan belajar Anda
-                </p>
-            </div>
+<div class="bg-slate-50 min-h-screen">
+    <!-- Header -->
+    <div class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            <h1 class="text-3xl font-bold tracking-tight text-slate-900 mb-2">My Learning</h1>
+            <p class="text-slate-600">Track your progress and continue learning.</p>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-        <!-- Statistics Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
-            <!-- Total Courses -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-book text-white text-xl"></i>
-                    </div>
-                    <span class="text-3xl font-extrabold text-gray-900">{{ total_courses }}</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Total Kursus</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-sm font-medium text-slate-500 mb-1">Total Courses</div>
+                <div class="text-2xl font-bold text-slate-900">{{ total_courses }}</div>
             </div>
-
-            <!-- Active Courses -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-play-circle text-white text-xl"></i>
-                    </div>
-                    <span class="text-3xl font-extrabold text-gray-900">{{ active_courses }}</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Kursus Aktif</p>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-sm font-medium text-slate-500 mb-1">Active</div>
+                <div class="text-2xl font-bold text-slate-900">{{ active_courses }}</div>
             </div>
-
-            <!-- Completed Courses -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-trophy text-white text-xl"></i>
-                    </div>
-                    <span class="text-3xl font-extrabold text-gray-900">{{ completed_courses }}</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Kursus Selesai</p>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-sm font-medium text-slate-500 mb-1">Completed</div>
+                <div class="text-2xl font-bold text-slate-900">{{ completed_courses }}</div>
             </div>
-
-            <!-- Average Progress -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-all duration-300">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-red-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-chart-line text-white text-xl"></i>
-                    </div>
-                    <span class="text-3xl font-extrabold text-gray-900">{{ avg_progress|floatformat:0 }}%</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Rata-rata Progress</p>
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div class="text-sm font-medium text-slate-500 mb-1">Avg. Progress</div>
+                <div class="text-2xl font-bold text-slate-900">{{ avg_progress|floatformat:0 }}%</div>
             </div>
         </div>
 
         <!-- Filter Tabs -->
-        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-2 mb-6 sm:mb-8 border border-gray-100">
-            <div class="flex flex-wrap gap-2">
+        <div class="border-b border-slate-200 mb-8 overflow-x-auto">
+            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
                 <a href="{% url 'student_course_list' %}"
-                   class="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-xl text-sm font-semibold text-center transition-all duration-200 {% if not status_filter %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
-                    <i class="fas fa-th-large mr-2"></i>Semua
+                   class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors {% if not status_filter %}border-indigo-500 text-indigo-600{% else %}border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300{% endif %}">
+                   All Courses
                 </a>
                 <a href="{% url 'student_course_list' %}?status=enrolled"
-                   class="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-xl text-sm font-semibold text-center transition-all duration-200 {% if status_filter == 'enrolled' %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
-                    <i class="fas fa-play-circle mr-2"></i>Aktif
+                   class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors {% if status_filter == 'enrolled' %}border-indigo-500 text-indigo-600{% else %}border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300{% endif %}">
+                   Active
                 </a>
                 <a href="{% url 'student_course_list' %}?status=completed"
-                   class="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-xl text-sm font-semibold text-center transition-all duration-200 {% if status_filter == 'completed' %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
-                    <i class="fas fa-check-circle mr-2"></i>Selesai
+                   class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors {% if status_filter == 'completed' %}border-indigo-500 text-indigo-600{% else %}border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300{% endif %}">
+                   Completed
                 </a>
-                <a href="{% url 'student_course_list' %}?status=paused"
-                   class="flex-1 sm:flex-none px-4 sm:px-6 py-3 rounded-xl text-sm font-semibold text-center transition-all duration-200 {% if status_filter == 'paused' %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}text-gray-700 hover:bg-gray-50{% endif %}">
-                    <i class="fas fa-pause-circle mr-2"></i>Ditunda
-                </a>
-            </div>
+            </nav>
         </div>
 
-        <!-- Courses Grid -->
-        {% if enrollments %}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8">
+        {% if enrollments %}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for enrollment in enrollments %}
-                    <div class="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                        <!-- Course Header -->
-                        <div class="relative bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-6 text-white">
-                            <div class="absolute top-4 right-4">
-                                {% if enrollment.status == 'enrolled' %}
-                                    <span class="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full">Aktif</span>
-                                {% elif enrollment.status == 'completed' %}
-                                    <span class="px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full">Selesai</span>
-                                {% elif enrollment.status == 'paused' %}
-                                    <span class="px-3 py-1 bg-gray-500 text-white text-xs font-bold rounded-full">Ditunda</span>
-                                {% elif enrollment.status == 'pending' %}
-                                    <span class="px-3 py-1 bg-orange-500 text-white text-xs font-bold rounded-full">Pending</span>
-                                {% elif enrollment.status == 'withdrawn' %}
-                                    <span class="px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full">Dibatalkan</span>
-                                {% elif enrollment.status == 'rejected' %}
-                                    <span class="px-3 py-1 bg-red-600 text-white text-xs font-bold rounded-full">Ditolak</span>
+                <div class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full overflow-hidden group relative">
+                    <!-- Card Header -->
+                    <div class="h-32 bg-slate-100 relative items-center justify-center flex border-b border-slate-100 group-hover:bg-indigo-50/30 transition-colors">
+                         <div class="absolute top-3 right-3">
+                            {% if enrollment.payment_status == 'pending' %}
+                                <span class="px-2 py-0.5 rounded text-xs font-semibold bg-red-100 text-red-700 border border-red-200">Unpaid</span>
+                            {% elif enrollment.status == 'pending' %}
+                                <span class="px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-200">Pending Approval</span>
+                            {% elif enrollment.status == 'completed' %}
+                                <span class="px-2 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200">Completed</span>
+                            {% elif enrollment.status == 'enrolled' %}
+                                <span class="px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-700 border border-emerald-200">Active</span>
+                            {% endif %}
+                         </div>
+                         <i class="fas fa-graduation-cap text-3xl text-slate-300 group-hover:text-indigo-300/80 transition-colors"></i>
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col">
+                        <div class="mb-4">
+                            <span class="text-xs font-medium text-slate-500">{{ enrollment.course.subject.title }}</span>
+                            <h3 class="text-lg font-bold text-slate-900 line-clamp-1 group-hover:text-indigo-600 transition-colors">
+                                <a href="{% url 'student_course_detail' enrollment.course.pk %}">
+                                    <span class="absolute inset-0"></span>
+                                    {{ enrollment.course.title }}
+                                </a>
+                            </h3>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div class="mt-auto">
+                            <div class="flex items-center justify-between text-xs font-medium text-slate-500 mb-1.5">
+                                <span>Progress</span>
+                                <span>{{ enrollment.progress_percentage|floatformat:0 }}%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                                <div class="bg-indigo-600 h-1.5 rounded-full transition-all duration-500" style="width: {{ enrollment.progress_percentage }}%"></div>
+                            </div>
+                            
+                            <!-- Action Footer -->
+                            <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                <span class="text-xs text-slate-400">
+                                    {% if enrollment.last_accessed %}
+                                        Last accessed {{ enrollment.last_accessed|timesince }} ago
+                                    {% else %}
+                                        Not started yet
+                                    {% endif %}
+                                </span>
+                                {% if enrollment.can_access_course %}
+                                    <span class="text-xs font-bold text-indigo-600 group-hover:underline">Continue</span>
+                                {% else %}
+                                    <span class="text-xs font-bold text-slate-400 cursor-not-allowed">Locked</span>
                                 {% endif %}
                             </div>
-                            <h3 class="text-xl font-bold mb-2 pr-20">{{ enrollment.course.title }}</h3>
-                            <p class="text-sm text-blue-50 mb-3">{{ enrollment.course.subject.title }}</p>
-                        </div>
-
-                        <!-- Course Info -->
-                        <div class="p-6">
-                            <!-- Access Warning -->
-                            {% if not enrollment.can_access_course %}
-                                <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-                                    <div class="flex items-start">
-                                        <i class="fas fa-exclamation-triangle text-red-500 mt-0.5 mr-2"></i>
-                                        <div class="text-xs text-red-700">
-                                            <strong>Akses Ditolak:</strong>
-                                            {% if enrollment.status not in 'enrolled,completed,paused' %}
-                                                Status enrollment tidak valid.
-                                            {% elif enrollment.payment_status not in 'paid,free' %}
-                                                Pembayaran belum lunas ({{ enrollment.get_payment_status_display }}).
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                            <!-- Progress Bar -->
-                            <div class="mb-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm font-semibold text-gray-700">Progress</span>
-                                    <span class="text-sm font-bold text-blue-600">{{ enrollment.progress_percentage|floatformat:1 }}%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500"
-                                         style="width: {{ enrollment.progress_percentage }}%"></div>
-                                </div>
-                            </div>
-
-                            <!-- Course Stats -->
-                            <div class="flex items-center gap-4 mb-4 text-sm text-gray-600">
-                                <div class="flex items-center">
-                                    <i class="fas fa-layer-group mr-2 text-blue-500"></i>
-                                    <span>{{ enrollment.course.modules.count }} Modul</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-clock mr-2 text-purple-500"></i>
-                                    <span>{{ enrollment.enrolled_on|date:"d M Y" }}</span>
-                                </div>
-                            </div>
-
-                            <!-- Action Button -->
-                            {% if enrollment.can_access_course %}
-                                <a href="{% url 'student_course_detail' enrollment.course.pk %}"
-                                   class="block w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-center font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl">
-                                    {% if enrollment.status == 'completed' %}
-                                        <i class="fas fa-eye mr-2"></i>Lihat Detail
-                                    {% else %}
-                                        <i class="fas fa-play-circle mr-2"></i>Lanjutkan Belajar
-                                    {% endif %}
-                                </a>
-                            {% else %}
-                                <button disabled
-                                        class="block w-full bg-gray-400 text-white text-center font-bold py-3 px-6 rounded-xl cursor-not-allowed opacity-75">
-                                    <i class="fas fa-lock mr-2"></i>Tidak Dapat Diakses
-                                </button>
-                            {% endif %}
                         </div>
                     </div>
+                </div>
                 {% endfor %}
             </div>
 
             <!-- Pagination -->
             {% if is_paginated %}
-                <div class="flex justify-center items-center gap-2 mt-8">
+            <div class="mt-8 flex justify-center">
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                     {% if page_obj.has_previous %}
-                        <a href="?page=1{% if status_filter %}&status={{ status_filter }}{% endif %}"
-                           class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
-                            <i class="fas fa-angle-double-left"></i>
-                        </a>
-                        <a href="?page=
-                                {{ page_obj.previous_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
-                           class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
-                            <i class="fas fa-angle-left"></i>
+                        <a href="?page={{ page_obj.previous_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}" class="relative inline-flex items-center rounded-l-md px-3 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Previous</span>
+                            <i class="fas fa-chevron-left h-4 w-4"></i>
                         </a>
                     {% endif %}
-
-                    <span class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-bold">
-                        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                    
+                    <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-300 focus:outline-offset-0">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                     </span>
 
                     {% if page_obj.has_next %}
-                        <a href="?page=
-                                {{ page_obj.next_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
-                           class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
-                            <i class="fas fa-angle-right"></i>
-                        </a>
-                        <a href="?page=
-                                {{ page_obj.paginator.num_pages }}{% if status_filter %}&status={{ status_filter }}{% endif %}"
-                           class="px-4 py-2 bg-white rounded-lg shadow hover:shadow-lg transition-all duration-200 text-gray-700 font-semibold">
-                            <i class="fas fa-angle-double-right"></i>
+                        <a href="?page={{ page_obj.next_page_number }}{% if status_filter %}&status={{ status_filter }}{% endif %}" class="relative inline-flex items-center rounded-r-md px-3 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Next</span>
+                            <i class="fas fa-chevron-right h-4 w-4"></i>
                         </a>
                     {% endif %}
-                </div>
+                </nav>
+            </div>
             {% endif %}
+
         {% else %}
             <!-- Empty State -->
-            <div class="text-center py-16 sm:py-20">
-                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-book-open text-5xl text-gray-400"></i>
+            <div class="text-center py-20 bg-white rounded-xl border border-slate-200 border-dashed">
+                <div class="mx-auto h-12 w-12 text-slate-300 mb-3">
+                    <i class="fas fa-book-reader text-4xl"></i>
                 </div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-3">Belum Ada Kursus</h3>
-                <p class="text-gray-600 mb-6 max-w-md mx-auto">
-                    Anda belum mendaftar ke kursus apapun. Mulai jelajahi katalog kursus kami!
-                </p>
-                <a href="{% url 'course_list' %}"
-                   class="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-200">
-                    <i class="fas fa-search mr-2"></i>Jelajahi Kursus
+                <h3 class="text-sm font-bold text-slate-900">No courses found</h3>
+                <p class="text-sm text-slate-500 mt-1 mb-6">You haven't enrolled in any courses yet.</p>
+                <a href="{% url 'course_list' %}" class="inline-flex items-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <i class="fas fa-search mr-2"></i> Browse Courses
                 </a>
             </div>
         {% endif %}
-    </div>
-{% endblock %}
 
+    </div>
+</div>
+{% endblock %}

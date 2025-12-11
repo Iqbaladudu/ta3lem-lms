@@ -1,300 +1,210 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Progress {{ student.username }} - {{ course.title }} - Ta3lem{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white py-8 sm:py-12 overflow-hidden">
-        <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/30"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-4">
+<div class="bg-slate-50 min-h-screen pb-12">
+    
+    <!-- Header -->
+    <div class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mb-6">
                 <a href="{% url 'instructor_course_analytics' course.pk %}"
-                   class="inline-flex items-center text-white/90 hover:text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-200">
+                   class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
-                    <span>Kembali ke Analytics</span>
+                    <span>Back to Analytics</span>
                 </a>
             </div>
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-3xl sm:text-4xl font-extrabold">
-                    {{ student.username.0|upper }}
-                </div>
-                <div class="flex-1">
-                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 leading-tight">{{ student.username }}</h1>
-                    <p class="text-sm sm:text-base text-blue-50">{{ course.title }}</p>
-                </div>
-            </div>
 
-            <!-- Progress Overview -->
-            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-sm sm:text-base font-bold">Progress Keseluruhan</span>
-                    <span class="text-xl sm:text-2xl font-extrabold">{{ enrollment.progress_percentage|floatformat:1 }}%</span>
+            <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+                <!-- ID Card style header -->
+                <div class="flex items-center gap-5">
+                    <div class="h-20 w-20 rounded-full bg-slate-900 text-white flex items-center justify-center text-3xl font-bold shadow-sm ring-4 ring-white">
+                        {{ student.username.0|upper }}
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900">{{ student.username }}</h1>
+                        <p class="text-slate-500 text-sm mb-2">{{ student.email }}</p>
+                        <div class="flex flex-wrap gap-2">
+                            {% if enrollment.status == 'enrolled' %}
+                                <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
+                            {% elif enrollment.status == 'completed' %}
+                                <span class="inline-flex items-center rounded-md bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700 ring-1 ring-inset ring-amber-600/20">Completed</span>
+                            {% else %}
+                                <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10">{{ enrollment.status|title }}</span>
+                            {% endif %}
+                            <span class="inline-flex items-center rounded-md bg-slate-50 px-2 py-1 text-xs font-medium text-slate-600 border border-slate-200">
+                                Enrolled: {{ enrollment.enrolled_on|date:"d M Y" }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-full bg-white/20 rounded-full h-4 overflow-hidden">
-                    <div class="bg-gradient-to-r from-green-400 to-emerald-400 h-full rounded-full transition-all duration-500"
-                         style="width: {{ enrollment.progress_percentage }}%"></div>
-                </div>
-                <div class="mt-3 flex items-center justify-between text-xs sm:text-sm text-blue-50">
-                    <span>Status:
-                        {% if enrollment.status == 'enrolled' %}
-                            <span class="font-bold text-green-300">Aktif</span>
-                        {% elif enrollment.status == 'completed' %}
-                            <span class="font-bold text-yellow-300">Selesai</span>
-                        {% elif enrollment.status == 'paused' %}
-                            <span class="font-bold text-gray-300">Ditunda</span>
-                        {% endif %}
-                    </span>
-                    <span>Terdaftar: {{ enrollment.enrolled_on|date:"d M Y" }}</span>
+
+                <!-- Overall Progress Big -->
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 min-w-[240px]">
+                    <div class="flex justify-between items-end mb-2">
+                        <span class="text-sm font-medium text-slate-600">Total Progress</span>
+                        <span class="text-3xl font-bold text-indigo-600 leading-none">{{ enrollment.progress_percentage|floatformat:0 }}<span class="text-lg text-slate-400">%</span></span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-3">
+                        <div class="bg-indigo-600 h-3 rounded-full" style="width: {{ enrollment.progress_percentage }}%"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            <!-- Main Content - Modules Progress -->
-            <div class="lg:col-span-2">
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 mb-8">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mr-3">
-                            <i class="fas fa-layer-group text-white"></i>
-                        </div>
-                        <span>Progress per Modul</span>
-                    </h2>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Detailed Progress -->
+            <div class="lg:col-span-2 space-y-8">
+                
+                <!-- Modules Progress List -->
+                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-slate-200 bg-slate-50/50">
+                        <h2 class="font-bold text-slate-900">Module Progress</h2>
+                    </div>
 
                     {% if modules_progress %}
-                        <div class="space-y-6">
+                        <div class="divide-y divide-slate-100">
                             {% for module_item in modules_progress %}
-                                <div class="border-2 rounded-xl overflow-hidden transition-all duration-200 {% if module_item.progress.is_completed %}border-green-300 bg-green-50/30{% else %}border-gray-200{% endif %}">
+                                <div class="p-6">
                                     <!-- Module Header -->
-                                    <div class="bg-gradient-to-r {% if module_item.progress.is_completed %}from-green-50 to-emerald-50{% else %}from-gray-50 to-blue-50{% endif %} px-5 sm:px-6 py-4 flex items-center justify-between">
-                                        <div class="flex items-center flex-1 min-w-0 mr-4">
-                                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-4 flex-shrink-0 {% if module_item.progress.is_completed %}bg-green-500{% else %}bg-blue-500{% endif %}">
-                                                {% if module_item.progress.is_completed %}
-                                                    <i class="fas fa-check text-white text-xl"></i>
-                                                {% else %}
-                                                    <i class="fas fa-play text-white"></i>
-                                                {% endif %}
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="mt-1 h-6 w-6 rounded-full flex items-center justify-center text-xs border 
+                                                {% if module_item.progress.is_completed %}bg-emerald-50 border-emerald-200 text-emerald-600{% else %}bg-slate-50 border-slate-200 text-slate-500{% endif %}">
+                                                {% if module_item.progress.is_completed %}<i class="fas fa-check"></i>{% else %}{{ forloop.counter }}{% endif %}
                                             </div>
-                                            <div class="flex-1 min-w-0">
-                                                <h3 class="text-lg font-bold text-gray-900 mb-1">{{ module_item.module.title }}</h3>
+                                            <div>
+                                                <h3 class="font-semibold text-slate-900">{{ module_item.module.title }}</h3>
                                                 {% if module_item.progress.started_at %}
-                                                    <p class="text-xs text-gray-600">
-                                                        Dimulai: {{ module_item.progress.started_at|date:"d M Y" }}
-                                                        {% if module_item.progress.completed_at %}
-                                                            | Selesai: {{ module_item.progress.completed_at|date:"d M Y" }}
-                                                        {% endif %}
+                                                    <p class="text-xs text-slate-500">
+                                                        Started: {{ module_item.progress.started_at|date:"d M Y" }}
+                                                        {% if module_item.progress.completed_at %} &bull; Finished: {{ module_item.progress.completed_at|date:"d M Y" }}{% endif %}
                                                     </p>
+                                                {% else %}
+                                                     <p class="text-xs text-slate-400">Not started yet</p>
                                                 {% endif %}
                                             </div>
                                         </div>
                                         {% if module_item.progress.is_completed %}
-                                            <span class="px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full flex-shrink-0">
-                                                <i class="fas fa-check-circle mr-1"></i>Selesai
-                                            </span>
+                                            <span class="inline-flex items-center rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">Completed</span>
                                         {% endif %}
                                     </div>
 
-                                    <!-- Module Contents -->
-                                    <div class="p-5 sm:p-6">
-                                        <div class="space-y-2">
-                                            {% for content_item in module_item.contents_progress %}
-                                                <div class="flex items-center justify-between p-3 rounded-lg {% if content_item.progress.is_completed %}bg-green-50{% else %}bg-gray-50{% endif %}">
-                                                    <div class="flex items-center flex-1 min-w-0 mr-3">
-                                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center mr-3 flex-shrink-0 {% if content_item.progress.is_completed %}bg-green-500{% else %}bg-gray-300{% endif %}">
-                                                            {% if content_item.progress.is_completed %}
-                                                                <i class="fas fa-check text-white text-sm"></i>
-                                                            {% else %}
-                                                                <i class="fas fa-circle text-white text-xs"></i>
-                                                            {% endif %}
-                                                        </div>
-                                                        <div class="flex-1 min-w-0">
-                                                            <p class="text-sm font-semibold text-gray-900 truncate">
-                                                                {{ content_item.content.item.title }}
-                                                            </p>
-                                                            {% if content_item.progress and content_item.progress.completed_at %}
-                                                                <p class="text-xs text-gray-600">
-                                                                    Selesai: {{ content_item.progress.completed_at|date:"d M Y, H:i" }}
-                                                                </p>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
+                                    <!-- Content Items -->
+                                    <div class="ml-10 space-y-2">
+                                        {% for content_item in module_item.contents_progress %}
+                                            <div class="flex items-center justify-between p-3 rounded-lg border 
+                                                {% if content_item.progress.is_completed %}bg-slate-50 border-slate-200{% else %}bg-white border-slate-100{% endif %}">
+                                                <div class="flex items-center gap-3">
                                                     {% if content_item.progress.is_completed %}
-                                                        <i class="fas fa-check-circle text-green-500 text-lg flex-shrink-0"></i>
+                                                        <i class="fas fa-check-circle text-emerald-500 text-sm"></i>
                                                     {% else %}
-                                                        <i class="far fa-circle text-gray-400 text-lg flex-shrink-0"></i>
+                                                        <i class="far fa-circle text-slate-300 text-sm"></i>
                                                     {% endif %}
+                                                    <span class="text-sm font-medium {% if content_item.progress.is_completed %}text-slate-700{% else %}text-slate-500{% endif %}">
+                                                        {{ content_item.content.item.title }}
+                                                    </span>
                                                 </div>
-                                            {% endfor %}
-                                        </div>
+                                                {% if content_item.progress.completed_at %}
+                                                    <span class="text-xs text-slate-400">{{ content_item.progress.completed_at|date:"d M, H:i" }}</span>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-gray-600 text-center py-8">Belum ada data progress</p>
+                        <div class="p-8 text-center text-slate-500">No progress data available.</div>
                     {% endif %}
-                </div>
+                 </div>
 
-                <!-- Learning Sessions -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100">
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 flex items-center">
-                        <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mr-3">
-                            <i class="fas fa-clock text-white"></i>
-                        </div>
-                        <span>Riwayat Sesi Belajar</span>
-                    </h2>
-
-                    {% if learning_sessions %}
-                        <div class="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+                 <!-- Learning Sessions Activity -->
+                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="px-6 py-5 border-b border-slate-200 bg-slate-50/50">
+                        <h2 class="font-bold text-slate-900">Recent Learning Activity</h2>
+                    </div>
+                     {% if learning_sessions %}
+                        <div class="divide-y divide-slate-100 max-h-[400px] overflow-y-auto">
                             {% for session in learning_sessions %}
-                                <div class="bg-gray-50 hover:bg-gray-100 rounded-xl p-4 transition-all duration-200">
-                                    <div class="flex items-start justify-between mb-2">
-                                        <div class="flex-1 min-w-0 mr-3">
-                                            <p class="text-sm font-bold text-gray-900 mb-1 line-clamp-2">
-                                                {{ session.content.item.title }}
-                                            </p>
-                                            <p class="text-xs text-gray-600 mb-1">
-                                                {{ session.content.module.title }}
-                                            </p>
-                                        </div>
-                                        <div class="flex-shrink-0">
-                                            {% if session.ended_at %}
-                                                <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded">Selesai</span>
-                                            {% else %}
-                                                <span class="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded">Aktif</span>
-                                            {% endif %}
-                                        </div>
+                                <div class="px-6 py-4 hover:bg-slate-50 transition-colors">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-semibold text-slate-900">{{ session.content.item.title }}</p>
+                                        <span class="text-xs text-slate-400">{{ session.started_at|timesince }} ago</span>
                                     </div>
-                                    <div class="flex items-center gap-4 text-xs text-gray-600">
-                                        <span>
-                                            <i class="fas fa-play-circle mr-1 text-blue-500"></i>
-                                            {{ session.started_at|date:"d M Y, H:i" }}
-                                        </span>
+                                    <p class="text-xs text-slate-500 mb-2">{{ session.content.module.title }}</p>
+                                    <div class="flex items-center gap-4 text-xs">
+                                        <span class="text-indigo-600"><i class="fas fa-play mr-1"></i> {{ session.started_at|date:"H:i" }}</span>
                                         {% if session.ended_at %}
-                                            <span>
-                                                <i class="fas fa-stop-circle mr-1 text-green-500"></i>
-                                                {{ session.ended_at|date:"d M Y, H:i" }}
-                                            </span>
+                                             <span class="text-emerald-600"><i class="fas fa-stop mr-1"></i> {{ session.ended_at|date:"H:i" }}</span>
+                                        {% else %}
+                                            <span class="text-amber-600 font-medium italic">In progress...</span>
                                         {% endif %}
                                     </div>
                                 </div>
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p class="text-gray-600 text-center py-8">Belum ada riwayat sesi belajar</p>
+                         <div class="p-8 text-center text-slate-500">No activity recorded yet.</div>
                     {% endif %}
-                </div>
+                 </div>
+
             </div>
 
-            <!-- Sidebar -->
+            <!-- Right Column: Sidebar Stats -->
             <div class="lg:col-span-1 space-y-6">
-                <!-- Student Info -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-5 sm:p-6 border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                        <i class="fas fa-user text-blue-500 mr-2"></i>
-                        Info Siswa
-                    </h3>
-
-                    <div class="space-y-3">
-                        <div class="bg-blue-50 rounded-xl p-3">
-                            <p class="text-xs text-gray-600 mb-1">Username</p>
-                            <p class="text-sm font-bold text-blue-600">{{ student.username }}</p>
+                
+                <!-- Quick stats -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Engagement Stats</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                             <span class="text-sm text-slate-600">Last Accessed</span>
+                             <span class="text-sm font-bold text-slate-900">
+                                 {% if enrollment.last_accessed %}{{ enrollment.last_accessed|date:"d M Y" }}{% else %}-{% endif %}
+                             </span>
                         </div>
-
-                        <div class="bg-green-50 rounded-xl p-3">
-                            <p class="text-xs text-gray-600 mb-1">Email</p>
-                            <p class="text-sm font-bold text-green-600 truncate">{{ student.email }}</p>
+                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
+                             <span class="text-sm text-slate-600">Joined</span>
+                             <span class="text-sm font-bold text-slate-900">{{ student.date_joined|date:"d M Y" }}</span>
                         </div>
-
-                        <div class="bg-purple-50 rounded-xl p-3">
-                            <p class="text-xs text-gray-600 mb-1">Bergabung</p>
-                            <p class="text-sm font-bold text-purple-600">{{ student.date_joined|date:"d M Y" }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Enrollment Stats -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-5 sm:p-6 border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                        <i class="fas fa-chart-bar text-purple-500 mr-2"></i>
-                        Statistik
-                    </h3>
-
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-xl">
-                            <span class="text-sm font-semibold text-gray-700">Progress</span>
-                            <span class="text-xl font-extrabold text-blue-600">{{ enrollment.progress_percentage|floatformat:0 }}%</span>
-                        </div>
-
-                        <div class="flex items-center justify-between p-3 bg-green-50 rounded-xl">
-                            <span class="text-sm font-semibold text-gray-700">Status</span>
-                            <span class="text-sm font-bold">
-                                {% if enrollment.status == 'enrolled' %}
-                                    <span class="px-2 py-1 bg-green-500 text-white rounded">Aktif</span>
-                                {% elif enrollment.status == 'completed' %}
-                                    <span class="px-2 py-1 bg-yellow-500 text-white rounded">Selesai</span>
-                                {% elif enrollment.status == 'paused' %}
-                                    <span class="px-2 py-1 bg-gray-500 text-white rounded">Ditunda</span>
-                                {% endif %}
-                            </span>
-                        </div>
-
-                        <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-xl">
-                            <span class="text-sm font-semibold text-gray-700">Terdaftar</span>
-                            <span class="text-sm font-bold text-yellow-600">{{ enrollment.enrolled_on|date:"d M Y" }}</span>
-                        </div>
-
-                        {% if enrollment.last_accessed %}
-                            <div class="flex items-center justify-between p-3 bg-pink-50 rounded-xl">
-                                <span class="text-sm font-semibold text-gray-700">Akses Terakhir</span>
-                                <span class="text-sm font-bold text-pink-600">{{ enrollment.last_accessed|date:"d M" }}</span>
-                            </div>
-                        {% endif %}
-
                         {% if enrollment.completed_on %}
-                            <div class="flex items-center justify-between p-3 bg-green-50 rounded-xl">
-                                <span class="text-sm font-semibold text-gray-700">Selesai Pada</span>
-                                <span class="text-sm font-bold text-green-600">{{ enrollment.completed_on|date:"d M Y" }}</span>
-                            </div>
+                        <div class="flex justify-between items-center py-2">
+                             <span class="text-sm text-slate-600">Completed On</span>
+                             <span class="text-sm font-bold text-emerald-600">{{ enrollment.completed_on|date:"d M Y" }}</span>
+                        </div>
                         {% endif %}
                     </div>
                 </div>
 
-                <!-- Quick Actions -->
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-5 sm:p-6 border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                        <i class="fas fa-bolt text-yellow-500 mr-2"></i>
-                        Aksi
-                    </h3>
-
-                    <div class="space-y-2">
-                        <a href="{% url 'instructor_course_analytics' course.pk %}"
-                           class="block bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-3 px-4 rounded-xl transition-all duration-200 text-center">
-                            <i class="fas fa-chart-bar mr-2"></i>Kembali ke Analytics
-                        </a>
-                        <button onclick="window.print()"
-                                class="w-full bg-green-50 hover:bg-green-100 text-green-700 font-semibold py-3 px-4 rounded-xl transition-all duration-200">
-                            <i class="fas fa-print mr-2"></i>Cetak Laporan
+                <!-- Actions -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Actions</h3>
+                    <div class="space-y-3">
+                        <button onclick="window.print()" class="w-full flex items-center justify-center gap-2 px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors">
+                            <i class="fas fa-print"></i> Print Report
                         </button>
                     </div>
                 </div>
 
-                <!-- Achievement Badge -->
-                {% if enrollment.status == 'completed' %}
-                    <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl shadow-xl p-6 text-white">
-                        <div class="text-center">
-                            <i class="fas fa-trophy text-5xl mb-3"></i>
-                            <h3 class="text-lg font-bold mb-2">Kursus Selesai!</h3>
-                            <p class="text-sm text-yellow-100">
-                                Siswa ini telah menyelesaikan kursus
-                            </p>
+                 {% if enrollment.status == 'completed' %}
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-6 text-center">
+                        <div class="h-12 w-12 bg-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm text-amber-500 text-xl">
+                            <i class="fas fa-trophy"></i>
                         </div>
+                        <h3 class="font-bold text-amber-900 mb-1">Course Completed!</h3>
+                        <p class="text-xs text-amber-700">This student has successfully finished all requirements.</p>
                     </div>
-                {% endif %}
+                 {% endif %}
+
             </div>
+
         </div>
     </div>
+</div>
 {% endblock %}
-

@@ -680,8 +680,18 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
 
         # Filter by status if provided
         status = self.request.GET.get('status')
-        if status and status in dict(CourseEnrollment.STATUS_CHOICES):
-            queryset = queryset.filter(status=status)
+        valid_statuses = ['pending', 'enrolled', 'completed', 'paused', 'withdrawn', 'rejected']
+        if status and status in valid_statuses:
+            if status == 'enrolled':
+                # Active courses must be enrolled AND (paid OR free)
+                queryset = queryset.filter(
+                    status='enrolled',
+                    payment_status__in=['paid', 'free']
+                )
+            elif status == 'completed':
+                queryset = queryset.filter(status='completed')
+            else:
+                queryset = queryset.filter(status=status)
 
         return queryset
 
@@ -694,7 +704,10 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
 
         context['total_courses'] = all_enrollments.count()
         context['accessible_courses'] = len(accessible_enrollments)
-        context['active_courses'] = all_enrollments.filter(status='enrolled').count()
+        context['active_courses'] = all_enrollments.filter(
+            status='enrolled',
+            payment_status__in=['paid', 'free']
+        ).count()
         context['completed_courses'] = all_enrollments.filter(status='completed').count()
         context['avg_progress'] = all_enrollments.aggregate(
             avg=Avg('progress_percentage')

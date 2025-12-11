@@ -40,7 +40,7 @@ urlpatterns = [
     path("student/<int:pk>/waitlist/", views.StudentJoinWaitlistView.as_view(), name="student_join_waitlist"),
     path("student/<int:pk>/", views.StudentCourseDetailView.as_view(), name="student_course_detail"),
     # Module detail page removed - navigation now goes directly from course to content with sidebar
-    # path("student/<int:pk>/module/<int:module_pk>/", views.StudentModuleDetailView.as_view(), name="student_module_detail"),
+    path("student/<int:pk>/module/<int:module_pk>/", views.StudentModuleDetailView.as_view(), name="student_module_detail"),
     path("student/<int:pk>/module/<int:module_pk>/content/<int:content_pk>/", views.StudentContentView.as_view(), name="student_content_view"),
     path("student/<int:pk>/module/<int:module_pk>/content/<int:content_pk>/complete/", views.MarkContentCompleteView.as_view(), name="mark_content_complete"),
 

@@ -1,542 +1,215 @@
 {% extends "base.html" %}
 {% load course %}
 {% load embed_video_tags %}
+{% load static %}
 
 {% block title %}{{ content.title }} - {{ module.title }} - Ta3lem{% endblock %}
 
 {% block extra_css %}
-    <style>
-        /* Sidebar Styles */
-        .module-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .module-content.expanded {
-            max-height: 2000px;
-        }
-
-        .chevron-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .chevron-icon.rotated {
-            transform: rotate(180deg);
-        }
-
-        /* Custom Scrollbar */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-
-        /* Mobile Overlay Sidebar */
-        .sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 40;
-        }
-
-        .sidebar-overlay.active {
-            display: block;
-        }
-
-        @media (max-width: 1024px) {
-            #courseSidebar {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                height: 100vh;
-                z-index: 50;
-                transition: left 0.3s ease-in-out;
-                background: white;
-                overflow-y: auto;
-            }
-
-            #courseSidebar.mobile-open {
-                left: 0;
-            }
-
-            #collapsedSidebar {
-                display: none !important;
-            }
-        }
-
-        /* Content Area Responsive */
-        .content-wrapper {
-            width: 100%;
-        }
-
-        /* Responsive Video/Image Containers */
-        .content-wrapper img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.75rem;
-        }
-
-        .content-wrapper iframe {
-            max-width: 100%;
-            aspect-ratio: 16/9;
-        }
-
-        /* Better touch targets for mobile */
-        @media (max-width: 640px) {
-            .module-item, .content-item {
-                min-height: 44px;
-            }
-        }
-    </style>
+<style>
+    /* Custom Scrollbar for Sidebar */
+    .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+    .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .sidebar-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
 {% endblock %}
 
 {% block content %}
-    <!-- Mobile Sidebar Overlay -->
-    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+<div class="bg-slate-50 min-h-screen flex flex-col lg:flex-row h-screen overflow-hidden" x-data="{ sidebarOpen: false }">
+    
+    <!-- Mobile Header -->
+    <div class="lg:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between shrink-0 z-20">
+        <div class="flex items-center gap-3 overflow-hidden">
+            <a href="{% url 'student_course_detail' course.pk %}" class="text-slate-400 hover:text-slate-600">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <h1 class="font-semibold text-slate-900 truncate">{{ content.title }}</h1>
+        </div>
+        <button @click="sidebarOpen = !sidebarOpen" class="text-slate-500 p-2 hover:bg-slate-100 rounded-lg">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
 
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
-        <!-- Breadcrumb - Improved for mobile -->
-        <div class="mb-4 lg:mb-6">
-            <nav class="flex items-center gap-2 text-xs sm:text-sm overflow-x-auto pb-2 scrollbar-hide">
-                <a href="{% url 'student_course_list' %}"
-                   class="text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">
-                    <i class="fas fa-home lg:hidden"></i>
-                    <span class="hidden lg:inline">Kursus Saya</span>
-                </a>
-                <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
-                <a href="{% url 'student_course_detail' course.pk %}"
-                   class="text-blue-600 hover:text-blue-700 font-semibold truncate max-w-[120px] sm:max-w-[200px] lg:max-w-none">{{ course.title }}</a>
-                <i class="fas fa-chevron-right text-gray-400 text-xs hidden sm:inline"></i>
-                <span class="text-gray-600 truncate max-w-[120px] sm:max-w-[200px] lg:max-w-none hidden sm:inline">{{ module.title }}</span>
-                <i class="fas fa-chevron-right text-gray-400 text-xs hidden md:inline"></i>
-                <span class="text-gray-600 truncate max-w-[120px] sm:max-w-[200px] lg:max-w-none hidden md:inline">{{ content.title }}</span>
-            </nav>
+    <!-- Sidebar (Course Navigation) -->
+    <div class="fixed inset-0 z-30 lg:z-auto lg:static lg:w-80 lg:shrink-0 bg-white border-r border-slate-200 flex flex-col transform transition-transform duration-300"
+         :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'">
+        
+        <!-- Sidebar Header -->
+        <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+            <div>
+                <h2 class="font-bold text-slate-900 text-sm mb-1 line-clamp-1">{{ course.title }}</h2>
+                <div class="flex items-center gap-2">
+                    <div class="flex-1 w-24 bg-slate-200 rounded-full h-1.5">
+                        <div class="bg-indigo-600 h-1.5 rounded-full" style="width: {{ enrollment.progress_percentage }}%"></div>
+                    </div>
+                    <span class="text-xs text-slate-500 font-medium">{{ enrollment.progress_percentage|floatformat:0 }}%</span>
+                </div>
+            </div>
+            <button @click="sidebarOpen = false" class="lg:hidden p-2 text-slate-400 hover:text-slate-600">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
 
-        <div class="flex gap-4 lg:gap-6 relative">
-            <!-- Collapsible Sidebar -->
-            <div id="courseSidebar" class="w-80 flex-shrink-0 transition-all duration-300">
-                <div class="sticky top-0 lg:top-20">
-                    <!-- Sidebar Header -->
-                    <div class="bg-white rounded-t-2xl shadow-lg border-b border-gray-200 p-4">
-                        <div class="flex items-center justify-between mb-3">
-                            <h2 class="text-lg font-bold text-gray-900 flex items-center">
-                                <i class="fas fa-list-ul text-blue-600 mr-2"></i>
-                                Kurikulum
-                            </h2>
-                            <div class="flex items-center gap-2">
-                                <!-- Mobile Close Button -->
-                                <button type="button" onclick="closeMobileSidebar()"
-                                        class="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                                        title="Close sidebar">
-                                    <i class="fas fa-times text-gray-600"></i>
-                                </button>
-                                <!-- Desktop Collapse Button -->
-                                <button type="button" onclick="toggleFullSidebar()"
-                                        id="sidebarToggleBtn"
-                                        class="hidden lg:block p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                                        title="Collapse sidebar">
-                                    <i class="fas fa-chevron-left text-gray-600"></i>
-                                </button>
-                            </div>
+        <!-- Sidebar List -->
+        <div class="flex-1 overflow-y-auto sidebar-scroll">
+            <div class="divide-y divide-slate-100">
+                {% for module_data in modules_data %}
+                <div x-data="{ expanded: {% if module_data.module.pk == module.pk %}true{% else %}false{% endif %} }">
+                    <button @click="expanded = !expanded" 
+                            class="w-full text-left p-4 hover:bg-slate-50 transition-colors flex items-start justify-between gap-3">
+                        <div class="min-w-0">
+                            <p class="text-sm font-semibold text-slate-900 line-clamp-1">{{ module_data.module.title }}</p>
+                            <p class="text-xs text-slate-500 mt-0.5">{{ module_data.completed_contents }}/{{ module_data.total_contents }}</p>
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <span class="text-gray-600">{{ modules_data|length }} Modul</span>
-                            <span class="text-blue-600 font-semibold">{{ enrollment.progress_percentage|floatformat:0 }}% Selesai</span>
-                        </div>
-                    </div>
-
-                    <!-- Modules List -->
-                    <div class="bg-white rounded-b-2xl shadow-lg max-h-[calc(100vh-12rem)] overflow-y-auto custom-scrollbar">
-                        {% for module_data in modules_data %}
-                            <div class="module-item border-b border-gray-100 last:border-b-0">
-                                <!-- Module Header -->
-                                <div class="flex items-center justify-between p-4 cursor-pointer hover:bg-blue-50 transition-colors"
-                                     onclick="toggleModule('module{{ forloop.counter }}')">
-                                    <div class="flex items-center gap-3 flex-1">
-                                        <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 {% if module_data.progress.is_completed %}bg-green-500{% else %}bg-blue-500{% endif %}">
-                                            {% if module_data.progress.is_completed %}
-                                                <i class="fas fa-check text-white"></i>
-                                            {% else %}
-                                                <span class="text-white font-bold text-sm">{{ forloop.counter }}</span>
-                                            {% endif %}
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <h3 class="font-semibold text-gray-900 text-sm line-clamp-2">{{ module_data.module.title }}</h3>
-                                            <div class="flex items-center gap-2 mt-1">
-                                                <span class="text-xs text-gray-500">{{ module_data.completed_contents }}/{{ module_data.total_contents }}</span>
-                                                <div class="flex-1 bg-gray-200 rounded-full h-1.5">
-                                                    <div class="{% if module_data.progress.is_completed %}bg-green-500{% else %}bg-blue-500{% endif %} h-1.5 rounded-full transition-all duration-300"
-                                                         style="width: {{ module_data.completion_percentage }}%"></div>
-                                                </div>
-                                                <span class="text-xs font-semibold text-gray-600">{{ module_data.completion_percentage|floatformat:0 }}%</span>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-chevron-down text-gray-400 chevron-icon"
-                                           id="chevron{{ forloop.counter }}"></i>
-                                    </div>
-                                </div>
-
-                                <!-- Module Contents (Collapsible) -->
-                                <div class="module-content {% if module_data.module.pk == module.pk %}expanded{% endif %}"
-                                     id="module{{ forloop.counter }}">
-                                    <div class="bg-gray-50 px-4 py-2">
-                                        {% if module_data.contents_with_progress %}
-                                            {% for item in module_data.contents_with_progress %}
-                                                <a href="{% url 'student_content_view' course.pk module_data.module.pk item.content.pk %}"
-                                                   class="content-item flex items-center gap-3 p-3 rounded-lg transition-all duration-200 group mb-1 {% if item.content.pk == content.pk %}bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg{% else %}hover:bg-white{% endif %}">
-                                                    <div class="w-6 h-6 rounded flex items-center justify-center flex-shrink-0 {% if item.is_completed %}bg-green-500{% elif item.content.pk == content.pk %}bg-white/20{% else %}border-2 border-gray-300{% endif %}">
-                                                        {% if item.is_completed %}
-                                                            <i class="fas fa-check text-white text-xs"></i>
-                                                        {% elif item.content.pk == content.pk %}
-                                                            <i class="fas fa-play text-white text-xs"></i>
-                                                        {% else %}
-                                                            <i class="fas fa-circle text-gray-300 text-xs"></i>
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="flex-1 min-w-0">
-                                                        <p class="text-sm font-medium truncate {% if item.content.pk == content.pk %}text-white{% else %}text-gray-700 group-hover:text-blue-600{% endif %}">{{ item.content.title }}</p>
-                                                        <p class="text-xs {% if item.content.pk == content.pk %}text-white/70{% else %}text-gray-500{% endif %}">{{ item.content.items.count }}
-                                                            item{% if item.content.items.count > 1 %}s{% endif %}</p>
-                                                    </div>
-                                                    <span class="{% if item.content.pk == content.pk %}text-white{% else %}text-gray-400{% endif %} text-xs">{% if item.content.items.count > 1 %}
-                                                        📚{% else %}📄{% endif %}</span>
-                                                </a>
-                                            {% endfor %}
+                        <i class="fas fa-chevron-down text-xs text-slate-400 transition-transform mt-1" 
+                           :class="expanded ? 'rotate-180' : ''"></i>
+                    </button>
+                    
+                    <div x-show="expanded" x-collapse>
+                        <div class="bg-slate-50/50 pb-2">
+                            {% if module_data.contents_with_progress %}
+                                {% for item in module_data.contents_with_progress %}
+                                <a href="{% url 'student_content_view' course.pk module_data.module.pk item.content.pk %}"
+                                   class="flex items-center gap-3 px-4 py-2.5 text-sm transition-colors border-l-2
+                                          {% if item.content.pk == content.pk %}
+                                            bg-indigo-50 border-indigo-600 text-indigo-700 font-medium
+                                          {% else %}
+                                            border-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900
+                                          {% endif %}">
+                                    <div class="flex-shrink-0 w-4">
+                                        {% if item.is_completed %}
+                                            <i class="fas fa-check-circle text-emerald-500 text-xs"></i>
+                                        {% elif item.content.pk == content.pk %}
+                                            {% if item.content.item.content_type == 'video' %}<i class="fas fa-play text-indigo-500 text-xs"></i>
+                                            {% else %}<i class="fas fa-circle text-indigo-500 text-[8px]"></i>{% endif %}
                                         {% else %}
-                                            <p class="text-xs text-gray-500 text-center py-2">Belum ada konten</p>
+                                            <i class="far fa-circle text-slate-300 text-[10px]"></i>
                                         {% endif %}
                                     </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Collapsed Sidebar State -->
-            <div id="collapsedSidebar" class="hidden w-16 flex-shrink-0">
-                <div class="sticky top-20">
-                    <div class="bg-white rounded-2xl shadow-lg p-3 flex flex-col items-center gap-3">
-                        <button onclick="toggleFullSidebar()"
-                                class="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                                title="Expand sidebar">
-                            <i class="fas fa-chevron-right text-gray-600"></i>
-                        </button>
-                        <div class="h-px bg-gray-200 w-full"></div>
-                        {% for module_data in modules_data %}
-                            <div class="relative group">
-                                <div class="w-10 h-10 rounded-lg flex items-center justify-center {% if module_data.progress.is_completed %}bg-green-500{% else %}bg-blue-500{% endif %} cursor-pointer"
-                                     title="{{ module_data.module.title }}">
-                                    {% if module_data.progress.is_completed %}
-                                        <i class="fas fa-check text-white text-sm"></i>
-                                    {% else %}
-                                        <span class="text-white font-bold text-xs">{{ forloop.counter }}</span>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content Area -->
-            <div class="flex-1 min-w-0">
-                <!-- Content Header -->
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 text-white">
-                    <div class="flex items-start justify-between gap-3 mb-2 sm:mb-3">
-                        <div class="flex-1 min-w-0">
-                            <p class="text-xs sm:text-sm text-blue-100 mb-2 flex items-center">
-                                <i class="fas fa-layer-group mr-2"></i>
-                                <span class="truncate">{{ module.title }}</span>
-                            </p>
-                            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-2 break-words">{{ content.title }}</h1>
-                            <p class="text-xs sm:text-sm text-blue-100">{{ content.items.count }} item
-                                {% if content.items.count > 1 %}s{% endif %}</p>
-                        </div>
-                        {% if content_progress.is_completed %}
-                            <div class="flex-shrink-0">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg">
-                                    <i class="fas fa-check text-lg sm:text-xl lg:text-2xl text-white"></i>
-                                </div>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <!-- Content Items Display -->
-                <div class="space-y-4 sm:space-y-6">
-                    {% for item in content.items.all %}
-                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border border-gray-100 content-wrapper">
-                            {{ item.item.render|safe }}
-                        </div>
-                    {% empty %}
-                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-100 text-center">
-                            <i class="fas fa-inbox text-4xl text-gray-400 mb-4"></i>
-                            <p class="text-gray-600">Belum ada konten untuk ditampilkan.</p>
-                        </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Mark as Complete Button -->
-                {% if not content_progress.is_completed %}
-                    <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-4 sm:p-6 mb-4 sm:mb-6 border mt-6 sm:mt-10 border-gray-100">
-                        <form method="post"
-                              action="{% url 'mark_content_complete' course.pk module.pk content.pk %}"
-                              id="complete-form">
-                            {% csrf_token %}
-                            <div class="flex flex-col sm:flex-row items-center gap-4">
-                                <div class="flex-1 text-center sm:text-left">
-                                    <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-1">Selesai
-                                        Mempelajari?</h3>
-                                    <p class="text-xs sm:text-sm text-gray-600">Tandai konten ini sebagai selesai untuk
-                                        melanjutkan.</p>
-                                </div>
-                                <button type="submit"
-                                        class="w-full sm:w-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 sm:px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center">
-                                    <i class="fas fa-check-circle mr-2"></i>Tandai Selesai
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                {% else %}
-                    <div class="bg-green-50 border-2 border-green-300 rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 mt-6 sm:mt-10">
-                        <div class="flex items-center">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-full flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
-                                <i class="fas fa-check text-white text-lg sm:text-xl"></i>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-base sm:text-lg font-bold text-green-700 truncate">Konten Selesai!</h3>
-                                <p class="text-xs sm:text-sm text-green-600">Diselesaikan
-                                    pada {{ content_progress.completed_at|date:"d M Y, H:i" }}</p>
-                            </div>
+                                    <span class="truncate">{{ item.content.title }}</span>
+                                </a>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
-                {% endif %}
-
-                <!-- Navigation -->
-                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                    {% if previous_content %}
-                        <a href="{% url 'student_content_view' course.pk module.pk previous_content.pk %}"
-                           class="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-4 sm:px-6 rounded-xl border-2 border-gray-300 transition-all duration-200 flex items-center justify-center">
-                            <i class="fas fa-arrow-left mr-2"></i>Sebelumnya
-                        </a>
-                    {% else %}
-                        <a href="{% url 'student_course_detail' course.pk %}"
-                           class="flex-1 bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-4 sm:px-6 rounded-xl border-2 border-gray-300 transition-all duration-200 flex items-center justify-center">
-                            <i class="fas fa-home mr-2"></i>Kembali ke Kursus
-                        </a>
-                    {% endif %}
-
-                    {% if next_content %}
-                        {% if next_module %}
-                            <a href="{% url 'student_content_view' course.pk next_module.pk next_content.pk %}"
-                               class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center">
-                                Selanjutnya<i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        {% else %}
-                            <a href="{% url 'student_content_view' course.pk module.pk next_content.pk %}"
-                               class="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center">
-                                Selanjutnya<i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <a href="{% url 'student_course_detail' course.pk %}"
-                           class="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center">
-                            Selesai!<i class="fas fa-trophy ml-2"></i>
-                        </a>
-                    {% endif %}
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-white lg:bg-slate-50/50">
+        
+        <!-- Desktop content header (hidden on mobile) -->
+        <div class="hidden lg:flex items-center justify-between px-8 py-6 bg-white border-b border-slate-200 sticky top-0 z-10">
+             <div class="min-w-0">
+                 <div class="flex items-center text-xs text-slate-500 mb-1">
+                     <a href="{% url 'student_course_detail' course.pk %}" class="hover:text-indigo-600 transition-colors">Course</a>
+                     <i class="fas fa-chevron-right text-[10px] mx-2"></i>
+                     <span class="truncate max-w-[200px]">{{ module.title }}</span>
+                 </div>
+                 <h1 class="text-xl font-bold text-slate-900 truncate">{{ content.title }}</h1>
+             </div>
+             
+             <div class="flex items-center gap-3">
+                 {% if previous_content %}
+                 <a href="{% url 'student_content_view' course.pk module.pk previous_content.pk %}" 
+                    class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:border-indigo-300 hover:text-indigo-600 transition-colors nav-prev"
+                    title="Previous Lesson">
+                     <i class="fas fa-chevron-left"></i>
+                 </a>
+                 {% endif %}
+                 
+                 {% if next_content %}
+                     {% if next_module %}
+                     <a href="{% url 'student_content_view' course.pk next_module.pk next_content.pk %}" 
+                        class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:border-indigo-300 hover:text-indigo-600 transition-colors nav-next"
+                        title="Next: {{ next_module.title }}">
+                         <i class="fas fa-chevron-right"></i>
+                     </a>
+                     {% else %}
+                     <a href="{% url 'student_content_view' course.pk module.pk next_content.pk %}" 
+                        class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-slate-500 hover:border-indigo-300 hover:text-indigo-600 transition-colors nav-next"
+                        title="Next Lesson">
+                         <i class="fas fa-chevron-right"></i>
+                     </a>
+                     {% endif %}
+                 {% endif %}
+             </div>
+        </div>
 
+        <!-- Content Viewer -->
+        <div class="flex-1 p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full">
+            
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+                <!-- Content Render Block -->
+                <div class="prose prose-slate max-w-none p-6 sm:p-8 [&_iframe]:aspect-video [&_iframe]:w-full [&_iframe]:h-auto [&_iframe]:rounded-lg [&_img]:rounded-lg">
+                    {% for content_item in content.items.all %}
+                        {{ content_item.item.render|safe }}
+                    {% empty %}
+                        <p class="text-slate-500 italic">No content available to display.</p>
+                    {% endfor %}
+                </div>
+            </div>
 
-    <script>
-        // Define global functions immediately for inline onclick handlers
-        // Toggle individual module content
-        window.toggleModule = function (moduleId) {
-            let moduleContent = document.getElementById(moduleId);
-            let chevronId = 'chevron' + moduleId.replace('module', '');
-            let chevron = document.getElementById(chevronId);
+            <!-- Complete Action -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 bg-indigo-50 rounded-xl p-6 border border-indigo-100">
+                <div>
+                     <h3 class="font-bold text-indigo-900 text-lg">Finished watching?</h3>
+                     <p class="text-indigo-700/80 text-sm">Mark this lesson as complete to track your progress.</p>
+                </div>
 
-            if (moduleContent && chevron) {
-                moduleContent.classList.toggle('expanded');
-                chevron.classList.toggle('rotated');
-            }
-        };
+                {% if not content_progress.is_completed %}
+                    <form method="post" action="{% url 'mark_content_complete' course.pk module.pk content.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-6 rounded-lg shadow-sm transition-all flex items-center gap-2">
+                             <i class="fas fa-check"></i> Mark as Complete
+                        </button>
+                    </form>
+                {% else %}
+                    <div class="flex items-center gap-2 text-emerald-600 font-bold bg-white px-4 py-2 rounded-lg border border-emerald-100">
+                         <i class="fas fa-check-circle"></i> Completed
+                    </div>
+                {% endif %}
+            </div>
 
-        // Toggle between full and collapsed sidebar (desktop)
-        window.toggleFullSidebar = function () {
-            let fullSidebar = document.getElementById('courseSidebar');
-            let collapsedSidebar = document.getElementById('collapsedSidebar');
+             <!-- Bottom Navigation (Mobile) -->
+             <div class="lg:hidden mt-8 flex items-center justify-between gap-4">
+                 {% if previous_content %}
+                     <a href="{% url 'student_content_view' course.pk module.pk previous_content.pk %}" 
+                        class="flex-1 py-3 px-4 rounded-lg border border-slate-200 text-center font-medium text-slate-700 hover:bg-slate-50">
+                         Previous
+                     </a>
+                 {% else %}
+                    <div class="flex-1"></div>
+                 {% endif %}
 
-            if (fullSidebar && collapsedSidebar) {
-                fullSidebar.classList.toggle('hidden');
-                collapsedSidebar.classList.toggle('hidden');
-            }
-        };
+                 {% if next_content %}
+                     {% if next_module %}
+                      <a href="{% url 'student_content_view' course.pk next_module.pk next_content.pk %}" 
+                        class="flex-1 py-3 px-4 rounded-lg bg-indigo-600 text-center font-medium text-white hover:bg-indigo-700 shadow-sm">
+                         Next
+                     </a>
+                     {% else %}
+                      <a href="{% url 'student_content_view' course.pk module.pk next_content.pk %}" 
+                        class="flex-1 py-3 px-4 rounded-lg bg-indigo-600 text-center font-medium text-white hover:bg-indigo-700 shadow-sm">
+                         Next
+                     </a>
+                     {% endif %}
+                 {% endif %}
+             </div>
 
-        // Open mobile sidebar
-        window.openMobileSidebar = function () {
-            let sidebar = document.getElementById('courseSidebar');
-            let overlay = document.getElementById('sidebarOverlay');
+        </div>
+    </div>
+    
+    <!-- Backdrop for mobile sidebar -->
+    <div x-show="sidebarOpen" 
+         @click="sidebarOpen = false"
+         class="fixed inset-0 bg-slate-900/50 z-20 lg:hidden transition-opacity"
+         x-transition.opacity>
+    </div>
 
-            if (sidebar && overlay) {
-                sidebar.classList.add('mobile-open');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        };
-
-        // Close mobile sidebar
-        window.closeMobileSidebar = function () {
-            let sidebar = document.getElementById('courseSidebar');
-            let overlay = document.getElementById('sidebarOverlay');
-
-            if (sidebar && overlay) {
-                sidebar.classList.remove('mobile-open');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-
-                // Reset hamburger icon only if it exists and was changed
-                let navbarHamburger = document.getElementById('mobile-menu-btn');
-                if (navbarHamburger) {
-                    let icon = navbarHamburger.querySelector('i');
-                    if (icon && icon.classList.contains('fa-times')) {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-            }
-        };
-
-        // Wrap initialization in IIFE to avoid variable conflicts with HTMX
-        (function () {
-            'use strict';
-
-            // Initialize on DOM ready
-            function initContentDetail() {
-                // Override navbar hamburger button untuk membuka course sidebar
-                let navbarHamburger = document.getElementById('mobile-menu-btn');
-
-                if (navbarHamburger && window.innerWidth <= 1024) {
-                    // Remove HTMX attributes and inline onclick to prevent conflicts
-                    navbarHamburger.removeAttribute('hx-get');
-                    navbarHamburger.removeAttribute('hx-target');
-                    navbarHamburger.removeAttribute('hx-swap');
-                    navbarHamburger.removeAttribute('hx-trigger');
-                    navbarHamburger.removeAttribute('onclick');
-
-                    navbarHamburger.onclick = function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-
-                        let sidebar = document.getElementById('courseSidebar');
-                        let isOpen = sidebar && sidebar.classList.contains('mobile-open');
-
-                        if (isOpen) {
-                            window.closeMobileSidebar();
-                        } else {
-                            window.openMobileSidebar();
-                            // Ubah icon ke times
-                            let icon = this.querySelector('i');
-                            if (icon) {
-                                icon.classList.remove('fa-bars');
-                                icon.classList.add('fa-times');
-                            }
-                        }
-                    };
-                }
-
-                // Auto-expand current module on load
-                let currentModuleContent = document.querySelector('.module-content.expanded');
-                if (currentModuleContent) {
-                    let moduleId = currentModuleContent.id;
-                    let chevronId = 'chevron' + moduleId.replace('module', '');
-                    let chevron = document.getElementById(chevronId);
-                    if (chevron) {
-                        chevron.classList.add('rotated');
-                    }
-                }
-
-                // Close sidebar when clicking on a content link on mobile
-                let contentLinks = document.querySelectorAll('.content-item');
-                contentLinks.forEach(function (link) {
-                    link.addEventListener('click', function () {
-                        if (window.innerWidth <= 1024) {
-                            window.closeMobileSidebar();
-                        }
-                    });
-                });
-
-                // Close sidebar on escape key (use once to avoid multiple listeners)
-                let escapeHandler = function (e) {
-                    if (e.key === 'Escape') {
-                        window.closeMobileSidebar();
-                    }
-                };
-                document.removeEventListener('keydown', escapeHandler);
-                document.addEventListener('keydown', escapeHandler);
-
-                // Auto-submit complete form with AJAX
-                let completeForm = document.getElementById('complete-form');
-                if (completeForm && !completeForm.dataset.initialized) {
-                    completeForm.dataset.initialized = 'true';
-                    completeForm.addEventListener('submit', function (e) {
-                        e.preventDefault();
-
-                        fetch(this.action, {
-                            method: 'POST',
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRFToken': this.querySelector('[name=csrfmiddlewaretoken]').value
-                            }
-                        })
-                            .then(function (response) {
-                                return response.json();
-                            })
-                            .then(function (data) {
-                                if (data.success) {
-                                    window.location.reload();
-                                }
-                            })
-                            .catch(function (error) {
-                                console.error('Error:', error);
-                                completeForm.submit();
-                            });
-                    });
-                }
-            }
-
-            // Run on DOMContentLoaded
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', initContentDetail);
-            } else {
-                initContentDetail();
-            }
-
-            // Re-run on htmx:afterSwap for HTMX compatibility
-            document.body.addEventListener('htmx:afterSwap', initContentDetail);
-        })();
-    </script>
+</div>
 {% endblock %}

@@ -577,7 +577,8 @@ class CourseEnrollment(models.Model):
         # Update progress percentage
         self.progress_percentage = pct
         # If fully completed, set status and completed_on
-        if pct >= 100 and self.status != 'completed':
+        # Use epsilon for float comparison to handle potential rounding issues
+        if pct >= 99.99 and self.status != 'completed':
             self.status = 'completed'
             self.completed_on = timezone.now()
             self.save(update_fields=['status', 'completed_on', 'progress_percentage'])
@@ -635,7 +636,8 @@ class ContentProgress(models.Model):
                                                                             module=self.content.module)
 
             # Check if module is now completed
-            module_progress.mark_completed()
+            if module_progress.calculate_completion():
+                module_progress.mark_completed()
 
 
 class ModuleProgress(models.Model):
