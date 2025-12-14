@@ -200,11 +200,14 @@
                                                    class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 px-4 rounded-lg text-center shadow-sm transition-all text-sm">
                                                     Complete Payment
                                                 </a>
-                                            {% elif payment == "paid" and status == "enrolled" %}
-                                                <!-- Enrolled State -->
-                                                {% partial enroll-state %}
-                                            {% elif payment == "paid" and status == "completed" %}
-                                                {% partial enroll-state %}
+                                            {% elif status == "enrolled" %}
+                                                {% if payment == "paid" or payment == "free" %}
+                                                    {% partial enroll-state %}
+                                                {% endif %}
+                                            {% elif status == "completed" %}
+                                                {% if payment == "paid" or payment == "free" %}
+                                                    {% partial enroll-state %}
+                                                {% endif %}
                                             {% endif %}
                                         {% endwith %}
                                     {% else %}

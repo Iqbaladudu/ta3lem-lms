@@ -1,5 +1,6 @@
 import re
 from django import template
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -249,4 +250,52 @@ def video_thumbnail(url, size='default'):
 def markdown_format(text):
     import markdown
     return mark_safe(markdown.markdown(text))
+
+
+@register.filter
+def timeago(value):
+    """
+    Convert a datetime to a human-readable "time ago" string.
+    
+    Usage:
+        {{ datetime_value|timeago }}
+    
+    Examples:
+        "just now", "5 minutes ago", "2 hours ago", "3 days ago", etc.
+    """
+    if not value:
+        return ''
+    
+    now = timezone.now()
+    
+    # Ensure both datetimes are timezone-aware or naive
+    if timezone.is_aware(now) and timezone.is_naive(value):
+        value = timezone.make_aware(value)
+    elif timezone.is_naive(now) and timezone.is_aware(value):
+        value = timezone.make_naive(value)
+    
+    diff = now - value
+    seconds = diff.total_seconds()
+    
+    if seconds < 60:
+        return 'just now'
+    elif seconds < 3600:
+        minutes = int(seconds // 60)
+        return f'{minutes} minute{"s" if minutes != 1 else ""} ago'
+    elif seconds < 86400:
+        hours = int(seconds // 3600)
+        return f'{hours} hour{"s" if hours != 1 else ""} ago'
+    elif seconds < 604800:
+        days = int(seconds // 86400)
+        return f'{days} day{"s" if days != 1 else ""} ago'
+    elif seconds < 2592000:
+        weeks = int(seconds // 604800)
+        return f'{weeks} week{"s" if weeks != 1 else ""} ago'
+    elif seconds < 31536000:
+        months = int(seconds // 2592000)
+        return f'{months} month{"s" if months != 1 else ""} ago'
+    else:
+        years = int(seconds // 31536000)
+        return f'{years} year{"s" if years != 1 else ""} ago'
+
 
