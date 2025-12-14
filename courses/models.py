@@ -244,11 +244,11 @@ class Course(models.Model):
         ]
         constraints = [
             models.CheckConstraint(
-                check=models.Q(max_capacity__isnull=True) | models.Q(max_capacity__gt=0),
+                condition=models.Q(max_capacity__isnull=True) | models.Q(max_capacity__gt=0),
                 name='positive_capacity'
             ),
             models.CheckConstraint(
-                check=(
+                condition=(
                         models.Q(is_free=True, price__isnull=True) |
                         models.Q(is_free=False, price__isnull=False, price__gt=0)
                 ),
@@ -496,15 +496,15 @@ class CourseEnrollment(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['student', 'course'], name='unique_enrollment'),
             models.CheckConstraint(
-                check=models.Q(progress_percentage__gte=0) & models.Q(progress_percentage__lte=100),
+                condition=models.Q(progress_percentage__gte=0) & models.Q(progress_percentage__lte=100),
                 name='valid_progress_percentage'
             ),
             models.CheckConstraint(
-                check=models.Q(engagement_score__gte=0.0) & models.Q(engagement_score__lte=1.0),
+                condition=models.Q(engagement_score__gte=0.0) & models.Q(engagement_score__lte=1.0),
                 name='valid_engagement_score'
             ),
             models.CheckConstraint(
-                check=(
+                condition=(
                         models.Q(payment_status='free', payment_amount__isnull=True) |
                         models.Q(payment_status__in=['pending', 'paid', 'failed', 'refunded'],
                                  payment_amount__isnull=False)
