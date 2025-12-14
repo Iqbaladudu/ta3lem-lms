@@ -1,3 +1,5 @@
+import datetime
+
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib import messages  # Added for enrollment messages
@@ -85,6 +87,7 @@ class CourseDetailView(DetailView):
             initial={'course': self.object}
         )
         if self.request.user.is_authenticated:
+            context['user'] = self.request.user
             context['user_enrollment'] = CourseEnrollment.objects.filter(
                 course=self.object,
                 student=self.request.user
@@ -1356,8 +1359,9 @@ class InstructorStudentsOverviewView(LoginRequiredMixin, TemplateResponseMixin, 
                 processed_students.add(student.id)
 
         # Sort by last accessed (most recent first)
-        students_data.sort(key=lambda x: x['last_accessed'] or timezone.datetime.min.replace(tzinfo=timezone.utc),
-                           reverse=True)
+        students_data.sort(
+            key=lambda x: x['last_accessed'] or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc),
+            reverse=True)
 
         # Pagination with multiples of 5
         per_page = request.GET.get('per_page', '5')
