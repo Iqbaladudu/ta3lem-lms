@@ -1,4 +1,3 @@
-import mistune
 import re
 from django import template
 from django.utils import timezone
