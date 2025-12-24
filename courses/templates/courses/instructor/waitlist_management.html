@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Manage Waitlist - {{ course.title }} - Ta3lem{% endblock %}
+{% block title %}Kelola Waitlist - {{ course.title }} - Ta3lem{% endblock %}
 
 {% block content %}
-<div class="bg-slate-50 min-h-screen pb-12" x-data="{ activeTab: 'pending' }">
+<div class="bg-primary-50 min-h-screen pb-12" x-data="{ activeTab: 'pending' }">
     
     <!-- Header -->
-    <div class="bg-white border-b border-slate-200">
+    <div class="bg-white border-b border-primary-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="mb-4">
                 <a href="{% url 'instructor_course_analytics' course.pk %}"
-                   class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                   class="inline-flex items-center text-sm font-medium text-primary-500 hover:text-primary-900 transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
-                    <span>Back to Analytics</span>
+                    <span>Kembali ke Analytics</span>
                 </a>
             </div>
             
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">Waitlist & Enrollments</h1>
-            <p class="text-slate-500">Manage pending approvals and waitlist priorities for {{ course.title }}.</p>
+            <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-primary-900 mb-1">Waitlist & Pendaftaran</h1>
+            <p class="text-primary-500">Kelola persetujuan pendaftaran dan prioritas waitlist untuk {{ course.title }}.</p>
         </div>
     </div>
 
@@ -25,57 +25,57 @@
         
         <!-- Stats Summary -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Enrolled</p>
-                 <p class="mt-1 text-2xl font-bold text-slate-900">{{ current_enrolled }}</p>
-                 <p class="text-xs text-slate-400 mt-1">{% if course.max_capacity %}of {{ course.max_capacity }} capacity{% else %}Unlimited capacity{% endif %}</p>
+             <div class="card p-5">
+                 <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Terdaftar</p>
+                 <p class="mt-1 text-2xl font-semibold text-primary-900 tabular-nums">{{ current_enrolled }}</p>
+                 <p class="text-xs text-primary-400 mt-1">{% if course.max_capacity %}dari {{ course.max_capacity }} kapasitas{% else %}Kapasitas tidak terbatas{% endif %}</p>
              </div>
-             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Waitlist</p>
-                 <p class="mt-1 text-2xl font-bold text-amber-600">{{ waitlist_count }}</p>
-                 <p class="text-xs text-slate-400 mt-1">students waiting</p>
+             <div class="card p-5">
+                 <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Waitlist</p>
+                 <p class="mt-1 text-2xl font-semibold text-warning-600 tabular-nums">{{ waitlist_count }}</p>
+                 <p class="text-xs text-primary-400 mt-1">siswa menunggu</p>
              </div>
-             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pending</p>
-                 <p class="mt-1 text-2xl font-bold text-yellow-600">{{ pending_count }}</p>
-                 <p class="text-xs text-slate-400 mt-1">needs approval</p>
+             <div class="card p-5">
+                 <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Pending</p>
+                 <p class="mt-1 text-2xl font-semibold text-warning-500 tabular-nums">{{ pending_count }}</p>
+                 <p class="text-xs text-primary-400 mt-1">butuh persetujuan</p>
              </div>
-             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Remaining Spots</p>
-                 <p class="mt-1 text-2xl font-bold {% if has_capacity %}text-emerald-600{% else %}text-red-600{% endif %}">
+             <div class="card p-5">
+                 <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider">Sisa Slot</p>
+                 <p class="mt-1 text-2xl font-semibold {% if has_capacity %}text-success-600{% else %}text-error-600{% endif %} tabular-nums">
                      {% if capacity_remaining is not None %}{{ capacity_remaining }}{% else %}∞{% endif %}
                  </p>
-                 <p class="text-xs text-slate-400 mt-1">available</p>
+                 <p class="text-xs text-primary-400 mt-1">tersedia</p>
              </div>
         </div>
 
         <!-- Management Area -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden min-h-[500px]">
+        <div class="card overflow-hidden min-h-[500px]">
             
             <!-- Tabs -->
-            <div class="border-b border-slate-200 bg-slate-50/50 px-6">
+            <div class="border-b border-primary-200 bg-primary-50 px-6">
                 <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                     <button @click="activeTab = 'pending'" 
-                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'pending', 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300': activeTab !== 'pending' }"
+                            :class="{ 'border-primary-900 text-primary-900': activeTab === 'pending', 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300': activeTab !== 'pending' }"
                             class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center">
                         <i class="fas fa-hourglass-half mr-2"></i>
-                        Pending Approval
-                        <span class="ml-2 py-0.5 px-2.5 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{{ pending_count }}</span>
+                        Menunggu Persetujuan
+                        <span class="ml-2 py-0.5 px-2.5 text-xs font-semibold bg-warning-100 text-warning-800 rounded-full">{{ pending_count }}</span>
                     </button>
 
                     <button @click="activeTab = 'waitlist'" 
-                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'waitlist', 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300': activeTab !== 'waitlist' }"
+                            :class="{ 'border-primary-900 text-primary-900': activeTab === 'waitlist', 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300': activeTab !== 'waitlist' }"
                             class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center">
                         <i class="fas fa-list-ol mr-2"></i>
                         Waitlist
-                        <span class="ml-2 py-0.5 px-2.5 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full">{{ waitlist_count }}</span>
+                        <span class="ml-2 py-0.5 px-2.5 text-xs font-semibold bg-warning-100 text-warning-800 rounded-full">{{ waitlist_count }}</span>
                     </button>
 
                     <button @click="activeTab = 'rejected'" 
-                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'rejected', 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300': activeTab !== 'rejected' }"
+                            :class="{ 'border-primary-900 text-primary-900': activeTab === 'rejected', 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300': activeTab !== 'rejected' }"
                             class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center">
                         <i class="fas fa-user-times mr-2"></i>
-                        Rejected History
+                        Riwayat Ditolak
                     </button>
                 </nav>
             </div>
@@ -87,17 +87,17 @@
                     {% if pending_enrollments %}
                         <div class="space-y-4">
                             {% for enrollment in pending_enrollments %}
-                                <div class="bg-yellow-50/50 border border-yellow-100 rounded-xl p-6 transition-all hover:bg-yellow-50 hover:shadow-sm">
+                                <div class="bg-warning-50/50 border border-warning-100 rounded-xl p-6 transition-all hover:bg-warning-50 hover:shadow-sm">
                                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                         <div class="flex items-start gap-4">
-                                            <div class="h-12 w-12 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold shadow-sm">
+                                            <div class="h-12 w-12 rounded-full bg-warning-100 text-warning-700 flex items-center justify-center font-semibold shadow-sm">
                                                 {{ enrollment.student.first_name|first|upper }}{{ enrollment.student.last_name|first|upper }}
                                             </div>
                                             <div>
-                                                <h3 class="text-lg font-bold text-slate-900">{{ enrollment.student.get_full_name }}</h3>
-                                                <p class="text-sm text-slate-600">{{ enrollment.student.email }}</p>
-                                                <div class="flex items-center text-xs text-slate-500 mt-1 space-x-2">
-                                                    <span>requested {{ enrollment.approval_requested_at|timesince }} ago</span>
+                                                <h3 class="text-lg font-semibold text-primary-900">{{ enrollment.student.get_full_name }}</h3>
+                                                <p class="text-sm text-primary-600">{{ enrollment.student.email }}</p>
+                                                <div class="flex items-center text-xs text-primary-500 mt-1 space-x-2">
+                                                    <span>diminta {{ enrollment.approval_requested_at|timesince }} lalu</span>
                                                     <span>&bull;</span>
                                                     <span>{{ enrollment.approval_requested_at|date:"d M Y" }}</span>
                                                 </div>
@@ -108,13 +108,13 @@
                                                 {% csrf_token %}
                                                 <button type="submit" 
                                                         {% if not has_capacity %}disabled{% endif %}
-                                                        class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-semibold rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-colors">
-                                                    <i class="fas fa-check mr-2"></i> Approve
+                                                        class="btn btn-success py-2 px-4 text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                                                    <i class="fas fa-check mr-2"></i> Setujui
                                                 </button>
                                             </form>
                                             <button onclick="showRejectModal({{ enrollment.pk }}, '{{ enrollment.student.get_full_name|escapejs }}')"
-                                                    class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors">
-                                                <i class="fas fa-times mr-2"></i> Reject
+                                                    class="btn btn-secondary py-2 px-4 text-sm">
+                                                <i class="fas fa-times mr-2"></i> Tolak
                                             </button>
                                         </div>
                                     </div>
@@ -123,9 +123,9 @@
                         </div>
                     {% else %}
                         <div class="text-center py-12">
-                            <i class="fas fa-check-circle text-slate-300 text-4xl mb-3"></i>
-                            <h3 class="text-lg font-medium text-slate-900">All caught up!</h3>
-                            <p class="text-slate-500">No pending enrollment requests.</p>
+                            <i class="fas fa-check-circle text-primary-300 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-medium text-primary-900">Semua sudah diproses!</h3>
+                            <p class="text-primary-500">Tidak ada permintaan pendaftaran yang menunggu.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -135,23 +135,23 @@
                     {% if waitlist_entries %}
                         <div class="space-y-4">
                             {% for entry in waitlist_entries %}
-                                <div class="bg-amber-50/30 border border-amber-100 rounded-xl p-6 transition-all hover:bg-amber-50/50 hover:shadow-sm relative overflow-hidden">
+                                <div class="bg-warning-50/30 border border-warning-100 rounded-xl p-6 transition-all hover:bg-warning-50/50 hover:shadow-sm relative overflow-hidden">
                                      <!-- Position Badge -->
-                                    <div class="absolute -right-6 -top-6 h-20 w-20 bg-amber-100 rounded-full flex items-end justify-start p-4 text-amber-700 font-bold opacity-20 text-3xl">
+                                    <div class="absolute -right-6 -top-6 h-20 w-20 bg-warning-100 rounded-full flex items-end justify-start p-4 text-warning-700 font-bold opacity-20 text-3xl">
                                         {{ entry.get_position }}
                                     </div>
                                     
                                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
                                         <div class="flex items-start gap-4">
-                                            <div class="h-12 w-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-sm text-lg">
+                                            <div class="h-12 w-12 rounded-full bg-warning-100 text-warning-700 flex items-center justify-center font-semibold shadow-sm text-lg">
                                                 #{{ entry.get_position }}
                                             </div>
                                             <div>
-                                                <h3 class="text-lg font-bold text-slate-900">{{ entry.student.get_full_name }}</h3>
-                                                <p class="text-sm text-slate-600">{{ entry.student.email }}</p>
-                                                <div class="flex items-center text-xs text-slate-500 mt-1">
-                                                    <span>Joined waitlist {{ entry.joined_waitlist|date:"d M Y" }}</span>
-                                                    <span class="ml-2 px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-[10px] font-bold uppercase">Priority {{ entry.priority }}</span>
+                                                <h3 class="text-lg font-semibold text-primary-900">{{ entry.student.get_full_name }}</h3>
+                                                <p class="text-sm text-primary-600">{{ entry.student.email }}</p>
+                                                <div class="flex items-center text-xs text-primary-500 mt-1">
+                                                    <span>Bergabung waitlist {{ entry.joined_waitlist|date:"d M Y" }}</span>
+                                                    <span class="ml-2 px-2 py-0.5 bg-warning-100 text-warning-700 rounded-full text-[10px] font-bold uppercase">Prioritas {{ entry.priority }}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,13 +160,13 @@
                                                 {% csrf_token %}
                                                 <button type="submit" 
                                                         {% if not has_capacity %}disabled{% endif %}
-                                                        class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-colors">
-                                                    <i class="fas fa-user-plus mr-2"></i> Accept
+                                                        class="btn btn-primary py-2 px-4 text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                                                    <i class="fas fa-user-plus mr-2"></i> Terima
                                                 </button>
                                             </form>
                                             <button onclick="showRemoveModal({{ entry.pk }}, '{{ entry.student.get_full_name|escapejs }}')"
-                                                    class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors">
-                                                <i class="fas fa-trash-alt mr-2 text-red-500"></i> Remove
+                                                    class="btn btn-secondary py-2 px-4 text-sm">
+                                                <i class="fas fa-trash-alt mr-2 text-error-500"></i> Hapus
                                             </button>
                                         </div>
                                     </div>
@@ -175,9 +175,9 @@
                         </div>
                     {% else %}
                          <div class="text-center py-12">
-                            <i class="fas fa-list-ol text-slate-300 text-4xl mb-3"></i>
-                            <h3 class="text-lg font-medium text-slate-900">Waitlist is empty</h3>
-                            <p class="text-slate-500">No students are currently waiting.</p>
+                            <i class="fas fa-list-ol text-primary-300 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-medium text-primary-900">Waitlist kosong</h3>
+                            <p class="text-primary-500">Tidak ada siswa yang sedang menunggu.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -187,20 +187,20 @@
                     {% if rejected_enrollments %}
                         <div class="space-y-4">
                             {% for enrollment in rejected_enrollments %}
-                                <div class="bg-red-50/30 border border-slate-200 rounded-xl p-6 opacity-75 hover:opacity-100 transition-opacity">
+                                <div class="bg-error-50/30 border border-primary-200 rounded-xl p-6 opacity-75 hover:opacity-100 transition-opacity">
                                     <div class="flex flex-col sm:flex-row gap-4">
                                         <div class="flex items-start gap-4">
-                                            <div class="h-10 w-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold">
+                                            <div class="h-10 w-10 rounded-full bg-primary-100 text-primary-500 flex items-center justify-center font-semibold">
                                                  {{ enrollment.student.first_name|first|upper }}{{ enrollment.student.last_name|first|upper }}
                                             </div>
                                             <div>
-                                                <h3 class="font-bold text-slate-900">{{ enrollment.student.get_full_name }}</h3>
-                                                <div class="flex items-center text-xs text-slate-500 mt-0.5">
-                                                     <i class="fas fa-user-times mr-1 text-red-500"></i>
-                                                     Rejected by {{ enrollment.approved_by.get_full_name }} on {{ enrollment.approved_at|date:"d M Y" }}
+                                                <h3 class="font-semibold text-primary-900">{{ enrollment.student.get_full_name }}</h3>
+                                                <div class="flex items-center text-xs text-primary-500 mt-0.5">
+                                                     <i class="fas fa-user-times mr-1 text-error-500"></i>
+                                                     Ditolak oleh {{ enrollment.approved_by.get_full_name }} pada {{ enrollment.approved_at|date:"d M Y" }}
                                                 </div>
                                                 {% if enrollment.rejection_reason %}
-                                                    <div class="mt-2 p-3 bg-red-50 rounded-lg text-sm text-red-800 border-l-4 border-red-300">
+                                                    <div class="mt-2 p-3 bg-error-50 rounded-lg text-sm text-error-800 border-l-4 border-error-300">
                                                         "{{ enrollment.rejection_reason }}"
                                                     </div>
                                                 {% endif %}
@@ -212,9 +212,9 @@
                         </div>
                     {% else %}
                         <div class="text-center py-12">
-                            <i class="fas fa-history text-slate-300 text-4xl mb-3"></i>
-                            <h3 class="text-lg font-medium text-slate-900">No rejection history</h3>
-                            <p class="text-slate-500">No rejected enrollments found.</p>
+                            <i class="fas fa-history text-primary-300 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-medium text-primary-900">Tidak ada riwayat penolakan</h3>
+                            <p class="text-primary-500">Tidak ditemukan pendaftaran yang ditolak.</p>
                         </div>
                     {% endif %}
                 </div>
@@ -224,68 +224,68 @@
     </div>
 
     <!-- Reject Modal -->
-    <div id="rejectModal" class="fixed inset-0 bg-slate-900/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="rejectModal" class="fixed inset-0 bg-primary-900/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden md:max-w-md transform transition-all">
-            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-slate-900">Reject Enrollment</h3>
-                <button onclick="hideRejectModal()" class="text-slate-400 hover:text-slate-500">
+            <div class="px-6 py-4 border-b border-primary-100 bg-primary-50 flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-primary-900">Tolak Pendaftaran</h3>
+                <button onclick="hideRejectModal()" class="text-primary-400 hover:text-primary-500">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form id="rejectForm" method="post">
                 {% csrf_token %}
                 <div class="p-6">
-                    <p class="text-slate-600 mb-4 text-sm">
-                        Are you sure you want to reject <strong id="rejectStudentName" class="text-slate-900"></strong>? This action cannot be easily undone.
+                    <p class="text-primary-600 mb-4 text-sm">
+                        Apakah Anda yakin ingin menolak <strong id="rejectStudentName" class="text-primary-900"></strong>? Tindakan ini tidak dapat dibatalkan dengan mudah.
                     </p>
                     <div class="mb-4">
-                        <label for="rejection_reason" class="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">
-                            Reason (Optional)
+                        <label for="rejection_reason" class="block text-xs font-semibold text-primary-700 uppercase tracking-wider mb-2">
+                            Alasan (Opsional)
                         </label>
                         <textarea id="rejection_reason" 
                                   name="rejection_reason" 
                                   rows="3" 
-                                  class="block w-full rounded-md border-0 py-1.5 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                  placeholder="Briefly explain why..."></textarea>
+                                  class="input w-full"
+                                  placeholder="Jelaskan alasannya..."></textarea>
                     </div>
                 </div>
-                <div class="bg-slate-50 px-6 py-4 flex flex-row-reverse gap-3">
-                    <button type="submit" class="inline-flex justify-center rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:w-auto">Reject Enrollment</button>
-                    <button type="button" onclick="hideRejectModal()" class="inline-flex justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 sm:w-auto">Cancel</button>
+                <div class="bg-primary-50 px-6 py-4 flex flex-row-reverse gap-3">
+                    <button type="submit" class="btn bg-error-600 hover:bg-error-700 text-white py-2 px-4 text-sm">Tolak Pendaftaran</button>
+                    <button type="button" onclick="hideRejectModal()" class="btn btn-secondary py-2 px-4 text-sm">Batal</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Remove Modal -->
-    <div id="removeModal" class="fixed inset-0 bg-slate-900/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+    <div id="removeModal" class="fixed inset-0 bg-primary-900/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden md:max-w-md transform transition-all">
-            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
-                <h3 class="text-lg font-bold text-slate-900">Remove from Waitlist</h3>
-                <button onclick="hideRemoveModal()" class="text-slate-400 hover:text-slate-500">
+            <div class="px-6 py-4 border-b border-primary-100 bg-primary-50 flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-primary-900">Hapus dari Waitlist</h3>
+                <button onclick="hideRemoveModal()" class="text-primary-400 hover:text-primary-500">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <form id="removeForm" method="post">
                 {% csrf_token %}
                 <div class="p-6">
-                    <p class="text-slate-600 mb-4 text-sm">
-                        Are you sure you want to remove <strong id="removeStudentName" class="text-slate-900"></strong> from the waitlist?
+                    <p class="text-primary-600 mb-4 text-sm">
+                        Apakah Anda yakin ingin menghapus <strong id="removeStudentName" class="text-primary-900"></strong> dari waitlist?
                     </p>
                     <div class="mb-4">
-                        <label for="removal_reason" class="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">
-                             Reason (Optional)
+                        <label for="removal_reason" class="block text-xs font-semibold text-primary-700 uppercase tracking-wider mb-2">
+                             Alasan (Opsional)
                         </label>
                         <textarea id="removal_reason" 
                                   name="removal_reason" 
                                   rows="3" 
-                                  class="block w-full rounded-md border-0 py-1.5 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                  placeholder="Briefly explain why..."></textarea>
+                                  class="input w-full"
+                                  placeholder="Jelaskan alasannya..."></textarea>
                     </div>
                 </div>
-                <div class="bg-slate-50 px-6 py-4 flex flex-row-reverse gap-3">
-                     <button type="submit" class="inline-flex justify-center rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:w-auto">Remove</button>
-                    <button type="button" onclick="hideRemoveModal()" class="inline-flex justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 sm:w-auto">Cancel</button>
+                <div class="bg-primary-50 px-6 py-4 flex flex-row-reverse gap-3">
+                     <button type="submit" class="btn bg-error-600 hover:bg-error-700 text-white py-2 px-4 text-sm">Hapus</button>
+                    <button type="button" onclick="hideRemoveModal()" class="btn btn-secondary py-2 px-4 text-sm">Batal</button>
                 </div>
             </form>
         </div>

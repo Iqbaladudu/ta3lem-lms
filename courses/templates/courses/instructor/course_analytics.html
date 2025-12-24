@@ -4,38 +4,38 @@
 {% block title %}Analytics - {{ course.title }} - Ta3lem{% endblock %}
 
 {% block content %}
-<div class="bg-slate-50 min-h-screen pb-12">
+<div class="bg-primary-50 min-h-screen pb-12">
     
     <!-- Header -->
-    <div class="bg-white border-b border-slate-200">
+    <div class="bg-white border-b border-primary-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="mb-4">
                 <a href="{% url 'manage_course_list' %}"
-                   class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+                   class="inline-flex items-center text-sm font-medium text-primary-500 hover:text-primary-900 transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
-                    <span>Back to Manage Courses</span>
+                    <span>Kembali ke Kelola Kursus</span>
                 </a>
             </div>
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">Analytics: {{ course.title }}</h1>
-                    <p class="text-slate-500">Track student performance and course engagement.</p>
+                    <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-primary-900 mb-1">Analytics: {{ course.title }}</h1>
+                    <p class="text-primary-500">Pantau performa siswa dan keterlibatan kursus.</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
                      <a href="{% url 'course_waitlist_management' course.pk %}" 
-                        class="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <i class="fas fa-list-ol mr-2 text-slate-400"></i>
+                        class="btn btn-secondary py-2 px-4 text-sm">
+                        <i class="fas fa-list-ol mr-2"></i>
                         Waitlist
                     </a>
                     <a href="{% url 'instructor_course_students' course.pk %}" 
-                       class="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        <i class="fas fa-users mr-2 text-slate-400"></i>
-                        Student Details
+                       class="btn btn-secondary py-2 px-4 text-sm">
+                        <i class="fas fa-users mr-2"></i>
+                        Detail Siswa
                     </a>
                     <a href="{% url 'course_edit' course.pk %}" 
-                       class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                       class="btn btn-primary py-2 px-4 text-sm">
                         <i class="fas fa-edit mr-2"></i>
-                        Edit Course
+                        Edit Kursus
                     </a>
                 </div>
             </div>
@@ -47,46 +47,46 @@
         <!-- Statistics Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             <!-- Total Students -->
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
-                <div class="h-12 w-12 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl">
+            <div class="card p-6 flex items-center gap-4">
+                <div class="h-12 w-12 rounded-xl bg-primary-100 text-primary-600 flex items-center justify-center text-xl">
                     <i class="fas fa-users"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500">Total Students</p>
-                    <p class="text-2xl font-bold text-slate-900">{{ total_students }}</p>
+                    <p class="text-sm font-medium text-primary-500">Total Siswa</p>
+                    <p class="text-2xl font-semibold text-primary-900 tabular-nums">{{ total_students }}</p>
                 </div>
             </div>
 
             <!-- Active Students -->
-             <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
-                <div class="h-12 w-12 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
+             <div class="card p-6 flex items-center gap-4">
+                <div class="h-12 w-12 rounded-xl bg-success-100 text-success-600 flex items-center justify-center text-xl">
                     <i class="fas fa-user-check"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500">Active Students</p>
-                    <p class="text-2xl font-bold text-slate-900">{{ active_students }}</p>
+                    <p class="text-sm font-medium text-primary-500">Siswa Aktif</p>
+                    <p class="text-2xl font-semibold text-primary-900 tabular-nums">{{ active_students }}</p>
                 </div>
             </div>
 
             <!-- Completed Students -->
-             <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
-                <div class="h-12 w-12 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
+             <div class="card p-6 flex items-center gap-4">
+                <div class="h-12 w-12 rounded-xl bg-warning-100 text-warning-600 flex items-center justify-center text-xl">
                     <i class="fas fa-trophy"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500">Completed</p>
-                    <p class="text-2xl font-bold text-slate-900">{{ completed_students }}</p>
+                    <p class="text-sm font-medium text-primary-500">Selesai</p>
+                    <p class="text-2xl font-semibold text-primary-900 tabular-nums">{{ completed_students }}</p>
                 </div>
             </div>
             
             <!-- Avg Progress -->
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
-                <div class="h-12 w-12 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
+            <div class="card p-6 flex items-center gap-4">
+                <div class="h-12 w-12 rounded-xl bg-info-100 text-info-600 flex items-center justify-center text-xl">
                      <i class="fas fa-chart-line"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-medium text-slate-500">Avg. Progress</p>
-                    <p class="text-2xl font-bold text-slate-900">{{ avg_progress|floatformat:0 }}%</p>
+                    <p class="text-sm font-medium text-primary-500">Rata-rata Progres</p>
+                    <p class="text-2xl font-semibold text-primary-900 tabular-nums">{{ avg_progress|floatformat:0 }}%</p>
                 </div>
             </div>
         </div>
@@ -97,9 +97,9 @@
             <div class="lg:col-span-2 space-y-8">
                 
                 <!-- Module Completion Rates -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="px-6 py-5 border-b border-slate-200 bg-slate-50/50">
-                        <h2 class="text-lg font-bold text-slate-900">Completion Rate by Module</h2>
+                <div class="card overflow-hidden">
+                    <div class="px-6 py-5 border-b border-primary-200 bg-primary-50">
+                        <h2 class="text-lg font-semibold text-primary-900">Tingkat Penyelesaian per Modul</h2>
                     </div>
                     <div class="p-6">
                         {% if modules_data %}
@@ -108,61 +108,61 @@
                                     <div>
                                         <div class="flex items-center justify-between mb-2">
                                             <div>
-                                                 <h3 class="text-sm font-semibold text-slate-900">{{ module_data.module.title }}</h3>
-                                                 <p class="text-xs text-slate-500">{{ module_data.total_contents }} items</p>
+                                                 <h3 class="text-sm font-semibold text-primary-900">{{ module_data.module.title }}</h3>
+                                                 <p class="text-xs text-primary-500">{{ module_data.total_contents }} item</p>
                                             </div>
                                             <div class="text-right">
-                                                 <span class="text-sm font-bold text-indigo-600">{{ module_data.completion_rate|floatformat:1 }}%</span>
-                                                 <p class="text-xs text-slate-500">{{ module_data.completed_count }}/{{ total_students }} completed</p>
+                                                 <span class="text-sm font-semibold text-primary-700 tabular-nums">{{ module_data.completion_rate|floatformat:1 }}%</span>
+                                                 <p class="text-xs text-primary-500">{{ module_data.completed_count }}/{{ total_students }} selesai</p>
                                             </div>
                                         </div>
-                                        <div class="w-full bg-slate-100 rounded-full h-2.5">
-                                            <div class="bg-indigo-600 h-2.5 rounded-full transition-all duration-500"
+                                        <div class="w-full bg-primary-100 rounded-full h-2.5">
+                                            <div class="bg-primary-900 h-2.5 rounded-full transition-all duration-500"
                                                  style="width: {{ module_data.completion_rate }}%"></div>
                                         </div>
                                     </div>
                                 {% endfor %}
                             </div>
                         {% else %}
-                            <div class="text-center py-8 text-slate-500">
-                                No modules data available.
+                            <div class="text-center py-8 text-primary-500">
+                                Tidak ada data modul tersedia.
                             </div>
                         {% endif %}
                     </div>
                 </div>
 
                 <!-- Recent Enrollments -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex items-center justify-between">
-                         <h2 class="text-lg font-bold text-slate-900">Recent Enrollments</h2>
-                         <a href="{% url 'instructor_course_students' course.pk %}" class="text-sm font-medium text-indigo-600 hover:text-indigo-700">View All</a>
+                <div class="card overflow-hidden">
+                    <div class="px-6 py-5 border-b border-primary-200 bg-primary-50 flex items-center justify-between">
+                         <h2 class="text-lg font-semibold text-primary-900">Pendaftaran Terbaru</h2>
+                         <a href="{% url 'instructor_course_students' course.pk %}" class="text-sm font-medium text-primary-600 hover:text-primary-900 transition-colors">Lihat Semua</a>
                     </div>
                     
                     {% if recent_enrollments %}
-                        <div class="divide-y divide-slate-100">
+                        <div class="divide-y divide-primary-100">
                             {% for enrollment in recent_enrollments %}
-                                <div class="px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                                <div class="px-6 py-4 flex items-center justify-between hover:bg-primary-50 transition-colors">
                                     <div class="flex items-center gap-3">
-                                        <div class="h-10 w-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-sm">
+                                        <div class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 font-semibold text-sm">
                                             {{ enrollment.student.username.0|upper }}
                                         </div>
                                         <div>
-                                            <p class="text-sm font-semibold text-slate-900">{{ enrollment.student.username }}</p>
-                                            <p class="text-xs text-slate-500">{{ enrollment.enrolled_on|date:"d M Y" }}</p>
+                                            <p class="text-sm font-semibold text-primary-900">{{ enrollment.student.username }}</p>
+                                            <p class="text-xs text-primary-500">{{ enrollment.enrolled_on|date:"d M Y" }}</p>
                                         </div>
                                     </div>
                                     <div class="flex items-center gap-4">
                                         <div class="text-right">
-                                            <p class="text-sm font-bold text-slate-900">{{ enrollment.progress_percentage|floatformat:0 }}%</p>
-                                            <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium 
-                                                {% if enrollment.status == 'enrolled' %}bg-green-50 text-green-700
-                                                {% elif enrollment.status == 'completed' %}bg-amber-50 text-amber-700
-                                                {% else %}bg-slate-100 text-slate-700{% endif %}">
+                                            <p class="text-sm font-semibold text-primary-900 tabular-nums">{{ enrollment.progress_percentage|floatformat:0 }}%</p>
+                                            <span class="badge 
+                                                {% if enrollment.status == 'enrolled' %}badge-success
+                                                {% elif enrollment.status == 'completed' %}badge-warning
+                                                {% else %}badge-default{% endif %}">
                                                 {{ enrollment.status|title }}
                                             </span>
                                         </div>
                                         <a href="{% url 'instructor_student_progress' course.pk enrollment.student.pk %}" 
-                                           class="text-slate-400 hover:text-indigo-600 transition-colors">
+                                           class="text-primary-400 hover:text-primary-600 transition-colors">
                                             <i class="fas fa-chevron-right"></i>
                                         </a>
                                     </div>
@@ -170,8 +170,8 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <div class="p-8 text-center text-slate-500">
-                            No students enrolled yet.
+                        <div class="p-8 text-center text-primary-500">
+                            Belum ada siswa terdaftar.
                         </div>
                     {% endif %}
                 </div>
@@ -182,34 +182,34 @@
             <div class="lg:col-span-1 space-y-6">
                 
                 <!-- Course Info Card -->
-                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Course Info</h3>
+                 <div class="card p-6">
+                    <h3 class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-4">Info Kursus</h3>
                     
                     <div class="space-y-4">
-                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                            <span class="text-sm text-slate-600">Total Modules</span>
-                            <span class="text-sm font-bold text-slate-900">{{ course.modules.count }}</span>
+                        <div class="flex justify-between items-center py-2 border-b border-primary-100">
+                            <span class="text-sm text-primary-600">Total Modul</span>
+                            <span class="text-sm font-semibold text-primary-900 tabular-nums">{{ course.modules.count }}</span>
                         </div>
-                        <div class="flex justify-between items-center py-2 border-b border-slate-100">
-                             <span class="text-sm text-slate-600">Total Sessions</span>
-                             <span class="text-sm font-bold text-slate-900">{{ total_sessions }}</span>
+                        <div class="flex justify-between items-center py-2 border-b border-primary-100">
+                             <span class="text-sm text-primary-600">Total Sesi</span>
+                             <span class="text-sm font-semibold text-primary-900 tabular-nums">{{ total_sessions }}</span>
                         </div>
                         <div class="flex justify-between items-center py-2">
-                             <span class="text-sm text-slate-600">Created On</span>
-                             <span class="text-sm font-bold text-slate-900">{{ course.created|date:"d M Y" }}</span>
+                             <span class="text-sm text-primary-600">Dibuat Pada</span>
+                             <span class="text-sm font-semibold text-primary-900">{{ course.created|date:"d M Y" }}</span>
                         </div>
                     </div>
                  </div>
 
                  <!-- Quick Actions -->
-                 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                     <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Actions</h3>
+                 <div class="card p-6">
+                     <h3 class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-4">Aksi</h3>
                      <div class="space-y-3">
-                         <a href="{% url 'course_module_update' course.pk %}" class="block w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg text-center transition-colors">
-                             Manage Modules
+                         <a href="{% url 'course_module_update' course.pk %}" class="block w-full py-2.5 px-4 bg-primary-50 hover:bg-primary-100 text-primary-700 text-sm font-medium rounded-lg text-center transition-colors">
+                             Kelola Modul
                          </a>
-                         <a href="{% url 'course_detail' course.slug %}" target="_blank" class="block w-full py-2 px-4 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg text-center transition-colors">
-                             View Public Page <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                         <a href="{% url 'course_detail' course.slug %}" target="_blank" class="block w-full py-2.5 px-4 bg-primary-50 hover:bg-primary-100 text-primary-700 text-sm font-medium rounded-lg text-center transition-colors">
+                             Lihat Halaman Publik <i class="fas fa-external-link-alt ml-1 text-xs"></i>
                          </a>
                      </div>
                  </div>
@@ -218,60 +218,60 @@
         </div>
         
         <!-- All Students Table -->
-        <div id="all-students" class="mt-8 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-             <div class="px-6 py-5 border-b border-slate-200 bg-slate-50/50 flex items-center justify-between">
-                 <h2 class="text-lg font-bold text-slate-900">All Students ({{ enrollments.count }})</h2>
+        <div id="all-students" class="mt-8 card overflow-hidden">
+             <div class="px-6 py-5 border-b border-primary-200 bg-primary-50 flex items-center justify-between">
+                 <h2 class="text-lg font-semibold text-primary-900">Semua Siswa ({{ enrollments.count }})</h2>
              </div>
              
              {% if enrollments %}
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-slate-200">
-                        <thead class="bg-slate-50">
+                    <table class="min-w-full divide-y divide-primary-200">
+                        <thead class="bg-primary-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Student</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Enrolled On</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Progress</th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-primary-500 uppercase tracking-wider">Siswa</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-primary-500 uppercase tracking-wider">Tanggal Daftar</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-primary-500 uppercase tracking-wider">Progres</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-primary-500 uppercase tracking-wider">Status</th>
                                 <th scope="col" class="relative px-6 py-3">
-                                    <span class="sr-only">Actions</span>
+                                    <span class="sr-only">Aksi</span>
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-slate-200">
+                        <tbody class="bg-white divide-y divide-primary-100">
                             {% for enrollment in enrollments %}
-                            <tr class="hover:bg-slate-50 transition-colors">
+                            <tr class="hover:bg-primary-50 transition-colors">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-xs ring-2 ring-white">
+                                        <div class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 font-semibold text-xs ring-2 ring-white">
                                             {{ enrollment.student.username.0|upper }}
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-slate-900">{{ enrollment.student.username }}</div>
-                                            <div class="text-xs text-slate-500">{{ enrollment.student.email }}</div>
+                                            <div class="text-sm font-medium text-primary-900">{{ enrollment.student.username }}</div>
+                                            <div class="text-xs text-primary-500">{{ enrollment.student.email }}</div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-primary-500">
                                     {{ enrollment.enrolled_on|date:"d M Y" }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="w-full max-w-xs flex items-center gap-3">
-                                         <div class="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                             <div class="h-full bg-indigo-600 rounded-full" style="width: {{ enrollment.progress_percentage }}%"></div>
+                                         <div class="flex-1 h-1.5 bg-primary-100 rounded-full overflow-hidden">
+                                             <div class="h-full bg-primary-900 rounded-full" style="width: {{ enrollment.progress_percentage }}%"></div>
                                          </div>
-                                         <span class="text-xs font-medium text-slate-700">{{ enrollment.progress_percentage|floatformat:0 }}%</span>
+                                         <span class="text-xs font-medium text-primary-700 tabular-nums">{{ enrollment.progress_percentage|floatformat:0 }}%</span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium 
-                                                {% if enrollment.status == 'enrolled' %}bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20
-                                                {% elif enrollment.status == 'completed' %}bg-amber-50 text-amber-700 ring-1 ring-inset ring-amber-600/20
-                                                {% else %}bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-600/20{% endif %}">
+                                    <span class="badge 
+                                                {% if enrollment.status == 'enrolled' %}badge-success
+                                                {% elif enrollment.status == 'completed' %}badge-warning
+                                                {% else %}badge-default{% endif %}">
                                         {{ enrollment.status|title }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="{% url 'instructor_student_progress' course.pk enrollment.student.pk %}" class="text-indigo-600 hover:text-indigo-900">Details</a>
+                                    <a href="{% url 'instructor_student_progress' course.pk enrollment.student.pk %}" class="text-primary-600 hover:text-primary-900 transition-colors">Detail</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -279,8 +279,8 @@
                     </table>
                 </div>
              {% else %}
-                 <div class="p-12 text-center text-slate-500">
-                     No students enrolled found.
+                 <div class="p-12 text-center text-primary-500">
+                     Tidak ditemukan siswa terdaftar.
                  </div>
              {% endif %}
         </div>

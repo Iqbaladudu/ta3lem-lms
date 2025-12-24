@@ -10,7 +10,7 @@
             <video controls class="w-full h-full absolute inset-0" {% if item.auto_play %}autoplay{% endif %}>
                 <source src="{{ item.file.url }}" type="video/mp4">
                 <track kind="captions" src="#" srclang="en" label="English" />
-                <p class="text-white p-4">Your browser does not support HTML5 video.</p>
+                <p class="text-white p-4">Browser Anda tidak mendukung video HTML5.</p>
             </video>
         {% endif %}
     </div>
@@ -19,16 +19,16 @@
     <div class="p-6">
         <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
             <div>
-                <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">{{ item.title }}</h3>
-                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+                <h3 class="text-lg sm:text-xl font-semibold text-primary-900 mb-2">{{ item.title }}</h3>
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-primary-500">
                     {% if item.duration %}
                         <div class="flex items-center">
-                            <i class="fas fa-clock mr-1.5 text-slate-400"></i>
+                            <i class="fas fa-clock mr-1.5 text-primary-400"></i>
                             <span>
                                 {% if item.duration >= 3600 %}
-                                    {{ item.duration|floatformat:0|div:3600|floatformat:0 }}h {{ item.duration|floatformat:0|mod:3600|div:60|floatformat:0 }}m
+                                    {{ item.duration|floatformat:0|div:3600|floatformat:0 }}j {{ item.duration|floatformat:0|mod:3600|div:60|floatformat:0 }}m
                                 {% else %}
-                                    {{ item.duration|floatformat:0|div:60|floatformat:0 }}m {{ item.duration|floatformat:0|mod:60|floatformat:0 }}s
+                                    {{ item.duration|floatformat:0|div:60|floatformat:0 }}m {{ item.duration|floatformat:0|mod:60|floatformat:0 }}d
                                 {% endif %}
                             </span>
                         </div>
@@ -36,7 +36,7 @@
                     
                     {% if item.video_platform %}
                          <div class="flex items-center">
-                            <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10">
+                            <span class="badge badge-default text-xs">
                                 {{ item.get_video_platform_display }}
                             </span>
                          </div>
@@ -47,23 +47,23 @@
             <div class="flex flex-wrap gap-2">
                  {% if item.url %}
                     <a href="{{ item.url }}" target="_blank" 
-                       class="inline-flex items-center px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
+                       class="btn btn-secondary py-2 px-3 text-sm">
                         <i class="fas fa-external-link-alt mr-2"></i>
-                        Open Original
+                        Buka Asli
                     </a>
                 {% elif item.file %}
                     <a href="{{ item.file.url }}" target="_blank" download
-                       class="inline-flex items-center px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
+                       class="btn btn-secondary py-2 px-3 text-sm">
                         <i class="fas fa-download mr-2"></i>
-                        Download
+                        Unduh
                     </a>
                 {% endif %}
                 
                 {% if item.transcript %}
                     <button onclick="toggleTranscript('{{ item.id }}')"
-                            class="inline-flex items-center px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
-                        <i class="fas fa-file-alt mr-2 text-slate-400"></i>
-                        Transcript
+                            class="btn btn-secondary py-2 px-3 text-sm">
+                        <i class="fas fa-file-alt mr-2 text-primary-400"></i>
+                        Transkrip
                     </button>
                 {% endif %}
             </div>
@@ -72,12 +72,12 @@
         {% if item.transcript %}
             <div id="transcript-{{ item.id }}" class="hidden relative">
                 <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                    <div class="w-full border-t border-slate-200"></div>
+                    <div class="w-full border-t border-primary-200"></div>
                 </div>
                 <div class="relative flex justify-center mb-4">
-                    <span class="bg-white px-2 text-sm text-slate-500">Video Transcript</span>
+                    <span class="bg-white px-2 text-sm text-primary-500">Transkrip Video</span>
                 </div>
-                <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-600 leading-relaxed max-h-60 overflow-y-auto border border-slate-200">
+                <div class="bg-primary-50 rounded-xl p-4 text-sm text-primary-600 leading-relaxed max-h-60 overflow-y-auto border border-primary-200">
                     {{ item.transcript|linebreaks }}
                 </div>
             </div>

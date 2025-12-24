@@ -20,13 +20,14 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
-from courses.views import CourseListView
+from courses.views import CourseListView, LandingPageView
 
 urlpatterns = [
     path('accounts/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('course/', include('courses.urls')),
-    path('', CourseListView.as_view(), name='course_list'),
+    path('courses/', CourseListView.as_view(), name='course_list'),
+    path('', LandingPageView.as_view(), name='landing'),
 ]
 
 if settings.DEBUG:

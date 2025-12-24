@@ -4,26 +4,27 @@
 
 {% block content %}
     <!-- Header Section -->
-    <div class="relative bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white py-12 sm:py-16 overflow-hidden">
-        <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/20"></div>
+    <div class="relative bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white py-12 sm:py-16 overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+        </div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
-                        <i class="fas fa-chalkboard-teacher mr-3"></i>
+                    <h1 class="text-3xl sm:text-4xl font-semibold mb-3 leading-tight">
+                        <i class="fas fa-chalkboard-teacher mr-3 opacity-80"></i>
                         Dashboard Instruktur
                     </h1>
-                    <p class="text-xl text-indigo-50">Kelola kursus dan pantau pembelajaran siswa</p>
+                    <p class="text-lg text-primary-200">Kelola kursus dan pantau pembelajaran siswa</p>
                 </div>
                 <div class="flex gap-3">
                     <a href="{% url 'instructor_students_overview' %}"
-                       class="inline-flex items-center bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 shadow-2xl hover:shadow-3xl hover:scale-105 border border-white/20">
+                       class="btn btn-secondary bg-white/10 border-white/20 text-white hover:bg-white/20 py-3 px-6 backdrop-blur-sm">
                         <i class="fas fa-users mr-2"></i>
                         Kelola Siswa
                     </a>
                     <a href="{% url 'course_create' %}"
-                       class="inline-flex items-center bg-white text-indigo-600 hover:bg-indigo-50 font-bold py-3 px-6 sm:px-8 rounded-xl transition-all duration-200 shadow-2xl hover:shadow-3xl hover:scale-105">
+                       class="btn bg-white text-primary-900 hover:bg-primary-50 font-semibold py-3 px-6 shadow-lg">
                         <i class="fas fa-plus-circle mr-2"></i>
                         Buat Kursus Baru
                     </a>
@@ -36,118 +37,98 @@
         <!-- Statistics Overview -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" id="stats-container">
             <!-- Total Kursus Card -->
-            <div class="relative bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-book text-3xl text-white"></i>
-                        </div>
-                    </div>
+            <div class="card p-6 border-l-4 border-l-primary-500">
+                <div class="flex items-start justify-between">
                     <div>
-                        <p class="text-blue-100 text-sm font-semibold mb-1">Total Kursus</p>
-                        <p class="text-5xl font-extrabold text-white mb-1" id="total-courses">{{ total_courses }}</p>
-                        <p class="text-xs text-blue-100 opacity-90">Kursus yang dibuat</p>
+                        <p class="text-sm font-medium text-primary-500 mb-1">Total Kursus</p>
+                        <p class="text-4xl font-semibold text-primary-900 tabular-nums" id="total-courses">{{ total_courses }}</p>
+                        <p class="text-xs text-primary-400 mt-1">Kursus yang dibuat</p>
+                    </div>
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-book text-xl text-primary-600"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Total Siswa Card -->
-            <a href="{% url 'instructor_students_overview' %}" class="relative bg-gradient-to-br from-green-500 to-green-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105 block">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-users text-3xl text-white"></i>
-                        </div>
-                    </div>
+            <a href="{% url 'instructor_students_overview' %}" class="card p-6 border-l-4 border-l-success-500 hover:bg-primary-50/50">
+                <div class="flex items-start justify-between">
                     <div>
-                        <p class="text-green-100 text-sm font-semibold mb-1">Total Siswa</p>
-                        <p class="text-5xl font-extrabold text-white mb-1" id="total-students">{{ total_students }}</p>
-                        <p class="text-xs text-green-100 opacity-90">Siswa terdaftar <i class="fas fa-arrow-right ml-1"></i></p>
+                        <p class="text-sm font-medium text-primary-500 mb-1">Total Siswa</p>
+                        <p class="text-4xl font-semibold text-primary-900 tabular-nums" id="total-students">{{ total_students }}</p>
+                        <p class="text-xs text-primary-400 mt-1">Siswa terdaftar <i class="fas fa-arrow-right ml-1"></i></p>
+                    </div>
+                    <div class="w-12 h-12 bg-success-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-users text-xl text-success-600"></i>
                     </div>
                 </div>
             </a>
 
             <!-- Total Modul Card -->
-            <div class="relative bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-list-check text-3xl text-white"></i>
-                        </div>
-                    </div>
+            <div class="card p-6 border-l-4 border-l-warning-500">
+                <div class="flex items-start justify-between">
                     <div>
-                        <p class="text-purple-100 text-sm font-semibold mb-1">Total Modul</p>
-                        <p class="text-5xl font-extrabold text-white mb-1" id="total-modules">{{ total_modules }}</p>
-                        <p class="text-xs text-purple-100 opacity-90">Modul pembelajaran</p>
+                        <p class="text-sm font-medium text-primary-500 mb-1">Total Modul</p>
+                        <p class="text-4xl font-semibold text-primary-900 tabular-nums" id="total-modules">{{ total_modules }}</p>
+                        <p class="text-xs text-primary-400 mt-1">Modul pembelajaran</p>
+                    </div>
+                    <div class="w-12 h-12 bg-warning-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-list-check text-xl text-warning-600"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Total Konten Card -->
-            <div class="relative bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl shadow-xl p-6 overflow-hidden group hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                <div class="relative z-10">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg">
-                            <i class="fas fa-file-alt text-3xl text-white"></i>
-                        </div>
-                    </div>
+            <div class="card p-6 border-l-4 border-l-info-500">
+                <div class="flex items-start justify-between">
                     <div>
-                        <p class="text-orange-100 text-sm font-semibold mb-1">Total Konten</p>
-                        <p class="text-5xl font-extrabold text-white mb-1" id="total-contents">{{ total_contents }}</p>
-                        <p class="text-xs text-orange-100 opacity-90">Materi pembelajaran</p>
+                        <p class="text-sm font-medium text-primary-500 mb-1">Total Konten</p>
+                        <p class="text-4xl font-semibold text-primary-900 tabular-nums" id="total-contents">{{ total_contents }}</p>
+                        <p class="text-xs text-primary-400 mt-1">Materi pembelajaran</p>
+                    </div>
+                    <div class="w-12 h-12 bg-info-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-file-alt text-xl text-info-600"></i>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Course List Section -->
-        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 px-6 sm:px-8 py-6 border-b border-indigo-100">
-                <h2 class="text-2xl font-extrabold text-gray-900 flex items-center">
-                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mr-3">
-                        <i class="fas fa-book text-white"></i>
+        <div class="card overflow-hidden">
+            <div class="bg-primary-50 px-6 sm:px-8 py-6 border-b border-primary-100">
+                <h2 class="text-xl font-semibold text-primary-900 flex items-center">
+                    <div class="w-10 h-10 bg-primary-900 rounded-xl flex items-center justify-center mr-3">
+                        <i class="fas fa-book text-white text-sm"></i>
                     </div>
                     Daftar Kursus
                 </h2>
-                <p class="text-gray-600 mt-2 text-sm">Kelola semua kursus yang Anda buat</p>
+                <p class="text-primary-600 mt-2 text-sm">Kelola semua kursus yang Anda buat</p>
             </div>
 
             <div class="p-6 sm:p-8" id="course-list-container" hx-get="{% url 'manage_course_list' %}"
                  hx-trigger="load" hx-select="#course-grid" hx-swap="innerHTML">
-                <!-- Course list will be loaded here via HTMX -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="course-grid">
                     {% for course in object_list %}
-                        <article
-                                class="bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group border border-gray-100"
-                                id="course-{{ course.id }}">
+                        <article class="card p-0 overflow-hidden group" id="course-{{ course.id }}">
                             <!-- Course Header -->
-                            <div class="relative h-48 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 overflow-hidden">
-                                <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-all duration-300"></div>
+                            <div class="relative h-40 bg-gradient-to-br from-primary-200 to-primary-100 overflow-hidden">
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-graduation-cap text-6xl text-white opacity-20"></i>
+                                    <i class="fas fa-graduation-cap text-5xl text-primary-300 group-hover:text-primary-400 transition-colors"></i>
                                 </div>
                                 <div class="absolute top-4 left-4 right-4 flex justify-between items-start">
-                    <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        <i class="fas fa-star mr-1"></i>{{ course.subject.title }}
-                    </span>
-                                    <span class="bg-white bg-opacity-90 text-gray-800 px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        <i class="fas fa-users mr-1"></i>{{ course.students.count }}
-                    </span>
+                                    <span class="badge badge-default">
+                                        <i class="fas fa-folder mr-1"></i>{{ course.subject.title }}
+                                    </span>
+                                    <span class="badge bg-white text-primary-900 border border-primary-200">
+                                        <i class="fas fa-users mr-1"></i>{{ course.students.count }}
+                                    </span>
                                 </div>
                                 <!-- Course Stats Bar -->
-                                <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 backdrop-blur-sm px-4 py-2">
+                                <div class="absolute bottom-0 left-0 right-0 bg-primary-900/80 backdrop-blur-sm px-4 py-2">
                                     <div class="flex items-center justify-between text-white text-xs font-medium">
                                         <span><i class="fas fa-book mr-1"></i>{{ course.modules.count }} modul</span>
                                         <span>
-                            <i class="fas fa-file-alt mr-1"></i>
+                                            <i class="fas fa-file-alt mr-1"></i>
                                             {% with course.modules.all as modules %}
                                                 {{ modules|length|add:"0" }}
                                                 {% for module in modules %}
@@ -155,96 +136,89 @@
                                                 {% endfor %}
                                             {% endwith %}
                                             konten
-                        </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Course Info -->
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-indigo-600 transition line-clamp-2 min-h-[3.5rem]">
+                                <h3 class="text-lg font-semibold text-primary-900 mb-2 group-hover:text-primary-700 transition line-clamp-2 min-h-[3rem]">
                                     {{ course.title }}
                                 </h3>
 
-                                <p class="text-gray-600 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
+                                <p class="text-primary-600 text-sm mb-4 line-clamp-2 min-h-[2.5rem]">
                                     {{ course.overview|truncatewords:15 }}
                                 </p>
 
-                                <div class="flex items-center text-sm text-gray-500 mb-4 pb-4 border-b border-gray-100">
-                                    <i class="fas fa-calendar-alt mr-2 text-indigo-500"></i>
+                                <div class="flex items-center text-sm text-primary-500 mb-4 pb-4 border-b border-primary-100">
+                                    <i class="fas fa-calendar-alt mr-2 text-primary-400"></i>
                                     <span>Dibuat {{ course.created|date:"d M Y" }}</span>
                                 </div>
 
                                 <!-- Course Status & Enrollment Info -->
-                                <div class="mb-4 space-y-2">
-                                    <!-- Status Badge -->
+                                <div class="mb-4 space-y-2 text-sm">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-xs font-medium text-gray-600">Status:</span>
+                                        <span class="text-primary-500">Status:</span>
                                         {% if course.status == 'published' %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <span class="badge badge-success">
                                                 <i class="fas fa-check-circle mr-1"></i>Published
                                             </span>
                                         {% elif course.status == 'draft' %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                            <span class="badge badge-warning">
                                                 <i class="fas fa-edit mr-1"></i>Draft
                                             </span>
                                         {% elif course.status == 'archived' %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                            <span class="badge badge-default">
                                                 <i class="fas fa-archive mr-1"></i>Archived
                                             </span>
                                         {% endif %}
                                     </div>
 
-                                    <!-- Enrollment Type -->
                                     <div class="flex items-center justify-between">
-                                        <span class="text-xs font-medium text-gray-600">Pendaftaran:</span>
+                                        <span class="text-primary-500">Pendaftaran:</span>
                                         {% if course.enrollment_type == 'open' %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            <span class="badge badge-success">
                                                 <i class="fas fa-door-open mr-1"></i>Terbuka
                                             </span>
                                         {% elif course.enrollment_type == 'approval' %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                            <span class="badge badge-warning">
                                                 <i class="fas fa-hand-paper mr-1"></i>Persetujuan
                                             </span>
                                         {% elif course.enrollment_type == 'restricted' %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                            <span class="badge badge-error">
                                                 <i class="fas fa-lock mr-1"></i>Terbatas
                                             </span>
                                         {% endif %}
                                     </div>
 
-                                    <!-- Pricing Info -->
                                     <div class="flex items-center justify-between">
-                                        <span class="text-xs font-medium text-gray-600">Harga:</span>
+                                        <span class="text-primary-500">Harga:</span>
                                         {% if course.is_free %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            <span class="badge badge-success">
                                                 <i class="fas fa-gift mr-1"></i>Gratis
                                             </span>
                                         {% else %}
-                                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                <i class="fas fa-money-bill-wave mr-1"></i>{{ course.get_formatted_price }}
-                                            </span>
+                                            <span class="font-semibold text-primary-900">{{ course.get_formatted_price }}</span>
                                         {% endif %}
                                     </div>
 
-                                    <!-- Capacity Info -->
                                     {% if course.max_capacity %}
                                         <div class="flex items-center justify-between">
-                                            <span class="text-xs font-medium text-gray-600">Kapasitas:</span>
-                                            <span class="text-xs font-medium {% if course.is_full %}text-red-600{% else %}text-gray-800{% endif %}">
+                                            <span class="text-primary-500">Kapasitas:</span>
+                                            <span class="font-medium {% if course.is_full %}text-error-600{% else %}text-primary-900{% endif %}">
                                                 {{ course.get_enrollment_count }}/{{ course.max_capacity }}
-                                                {% if course.is_full %}<i class="fas fa-exclamation-triangle ml-1 text-red-500"></i>{% endif %}
+                                                {% if course.is_full %}<i class="fas fa-exclamation-triangle ml-1 text-error-500"></i>{% endif %}
                                             </span>
                                         </div>
                                         
-                                        <!-- Waitlist Info -->
                                         {% if course.waitlist_enabled %}
                                             <div class="flex items-center justify-between">
-                                                <span class="text-xs font-medium text-gray-600">Daftar Tunggu:</span>
-                                                <span class="text-xs font-medium text-purple-600">
+                                                <span class="text-primary-500">Daftar Tunggu:</span>
+                                                <span class="font-medium text-warning-600">
                                                     {{ course.waitlist_entries.count }} siswa
                                                     {% if course.waitlist_entries.count > 0 %}
-                                                        <a href="{% url 'course_waitlist_management' course.id %}" class="text-purple-700 hover:text-purple-800 ml-1">
+                                                        <a href="{% url 'course_waitlist_management' course.id %}" class="hover:text-warning-700 ml-1">
                                                             <i class="fas fa-external-link-alt"></i>
                                                         </a>
                                                     {% endif %}
@@ -253,8 +227,8 @@
                                         {% endif %}
                                     {% else %}
                                         <div class="flex items-center justify-between">
-                                            <span class="text-xs font-medium text-gray-600">Kapasitas:</span>
-                                            <span class="text-xs font-medium text-gray-800">Tidak terbatas</span>
+                                            <span class="text-primary-500">Kapasitas:</span>
+                                            <span class="font-medium text-primary-900">Tidak terbatas</span>
                                         </div>
                                     {% endif %}
                                 </div>
@@ -262,40 +236,33 @@
                                 <!-- Action Buttons -->
                                 <div class="grid grid-cols-2 gap-2 mb-3">
                                     <a href="{% url 'course_edit' course.id %}"
-                                       class="flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                        <i class="fas fa-edit mr-2"></i>
-                                        Edit
+                                       class="btn btn-secondary text-sm py-2">
+                                        <i class="fas fa-edit mr-1"></i> Edit
                                     </a>
                                     <a href="{% url 'course_module_update' course.id %}"
-                                       class="flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                        <i class="fas fa-layer-group mr-2"></i>
-                                        Modul
+                                       class="btn btn-secondary text-sm py-2">
+                                        <i class="fas fa-layer-group mr-1"></i> Modul
                                     </a>
                                 </div>
 
                                 <div class="grid grid-cols-2 gap-2 mb-3">
                                     {% if course.modules.count > 0 %}
                                         <a href="{% url 'module_content_list' course.modules.first.id %}"
-                                           class="flex items-center justify-center bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                            <i class="fas fa-folder-open mr-2"></i>
-                                            Konten
+                                           class="btn btn-secondary text-sm py-2">
+                                            <i class="fas fa-folder-open mr-1"></i> Konten
                                         </a>
                                     {% else %}
-                                        <button disabled
-                                                class="flex items-center justify-center bg-gray-300 text-gray-500 text-sm font-medium py-2 px-3 rounded-lg cursor-not-allowed">
-                                            <i class="fas fa-folder-open mr-2"></i>
-                                            Konten
+                                        <button disabled class="btn text-sm py-2 bg-primary-100 text-primary-400 cursor-not-allowed">
+                                            <i class="fas fa-folder-open mr-1"></i> Konten
                                         </button>
                                     {% endif %}
                                     <a href="{% url 'instructor_course_analytics' course.id %}"
-                                       class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                        <i class="fas fa-chart-bar mr-2"></i>
-                                        Analytics
+                                       class="btn btn-secondary text-sm py-2">
+                                        <i class="fas fa-chart-bar mr-1"></i> Analytics
                                     </a>
                                 </div>
 
                                 <!-- Quick Status Actions -->
-                                <!-- TODO: Create beautiful alert -->
                                 {% if course.status != 'published' %}
                                     <div class="mb-3">
                                         <form method="post" action="{% url 'course_quick_status' course.id %}" class="inline w-full">
@@ -303,7 +270,7 @@
                                             <input type="hidden" name="status" value="published">
                                             <button type="submit" 
                                                     onclick="return confirm('Publikasikan kursus \'{{ course.title }}\'? Kursus akan terlihat oleh siswa.')"
-                                                    class="w-full flex items-center justify-center bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
+                                                    class="btn btn-success w-full text-sm py-2">
                                                 <i class="fas fa-rocket mr-2"></i>
                                                 Publikasikan Kursus
                                             </button>
@@ -316,9 +283,8 @@
                                             <input type="hidden" name="status" value="draft">
                                             <button type="submit" 
                                                     onclick="return confirm('Ubah kursus ke draft? Kursus tidak akan terlihat oleh siswa baru.')"
-                                                    class="w-full flex items-center justify-center bg-yellow-600 hover:bg-yellow-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
-                                                <i class="fas fa-edit mr-1"></i>
-                                                <span class="text-xs">Draft</span>
+                                                    class="btn bg-warning-500 hover:bg-warning-600 text-white w-full text-sm py-2">
+                                                <i class="fas fa-edit mr-1"></i> Draft
                                             </button>
                                         </form>
                                         <form method="post" action="{% url 'course_quick_status' course.id %}" class="inline">
@@ -326,28 +292,25 @@
                                             <input type="hidden" name="status" value="archived">
                                             <button type="submit" 
                                                     onclick="return confirm('Arsipkan kursus? Kursus tidak akan terlihat di publik.')"
-                                                    class="w-full flex items-center justify-center bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
-                                                <i class="fas fa-archive mr-1"></i>
-                                                <span class="text-xs">Arsip</span>
+                                                    class="btn btn-secondary w-full text-sm py-2">
+                                                <i class="fas fa-archive mr-1"></i> Arsip
                                             </button>
                                         </form>
                                     </div>
                                 {% endif %}
 
-                                {% comment %} Determine grid layout based on waitlist status {% endcomment %}
                                 {% if course.waitlist_enabled and course.waitlist_entries.count > 0 %}
-                                    <!-- Layout with Waitlist Management Button -->
                                     <div class="grid grid-cols-3 gap-2">
                                         <a href="{% url 'instructor_course_students' course.id %}"
-                                           class="flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
+                                           class="btn btn-secondary text-sm py-2">
                                             <i class="fas fa-users mr-1"></i>
                                             <span class="hidden sm:inline">Siswa</span>
                                         </a>
                                         <a href="{% url 'course_waitlist_management' course.id %}"
-                                           class="flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md relative">
+                                           class="btn bg-warning-500 hover:bg-warning-600 text-white text-sm py-2 relative">
                                             <i class="fas fa-list mr-1"></i>
                                             <span class="hidden sm:inline">Waitlist</span>
-                                            <span class="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                                            <span class="absolute -top-1 -right-1 bg-error-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-semibold">
                                                 {{ course.waitlist_entries.count }}
                                             </span>
                                         </a>
@@ -356,27 +319,24 @@
                                                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                                                 hx-target="#course-{{ course.id }}"
                                                 hx-swap="delete swap:500ms"
-                                                class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-2 rounded-lg transition shadow-sm hover:shadow-md">
+                                                class="btn btn-danger text-sm py-2">
                                             <i class="fas fa-trash-alt mr-1"></i>
                                             <span class="hidden sm:inline">Hapus</span>
                                         </button>
                                     </div>
                                 {% else %}
-                                    <!-- Standard Layout -->
                                     <div class="grid grid-cols-2 gap-2">
                                         <a href="{% url 'instructor_course_students' course.id %}"
-                                           class="flex items-center justify-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                            <i class="fas fa-users mr-2"></i>
-                                            Siswa
+                                           class="btn btn-secondary text-sm py-2">
+                                            <i class="fas fa-users mr-2"></i> Siswa
                                         </a>
                                         <button hx-delete="{% url 'course_delete' course.id %}"
                                                 hx-confirm="Apakah Anda yakin ingin menghapus kursus '{{ course.title }}'? Semua modul dan konten akan dihapus!"
                                                 hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
                                                 hx-target="#course-{{ course.id }}"
                                                 hx-swap="delete swap:500ms"
-                                                class="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition shadow-sm hover:shadow-md">
-                                            <i class="fas fa-trash-alt mr-2"></i>
-                                            Hapus
+                                                class="btn btn-danger text-sm py-2">
+                                            <i class="fas fa-trash-alt mr-2"></i> Hapus
                                         </button>
                                     </div>
                                 {% endif %}
@@ -387,17 +347,15 @@
 
                 {% if not object_list %}
                     <!-- Empty State -->
-                    <div class="bg-white rounded-xl shadow-sm p-12 text-center" id="empty-state">
-                        <div class="w-24 h-24 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-chalkboard-teacher text-5xl text-indigo-600"></i>
+                    <div class="text-center py-16" id="empty-state">
+                        <div class="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-chalkboard-teacher text-3xl text-primary-500"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Mulai Berbagi Ilmu Anda</h3>
-                        <p class="text-gray-600 mb-8 max-w-md mx-auto">
-                            Anda belum membuat kursus apapun. Mulai ciptakan pengalaman pembelajaran yang luar biasa
-                            untuk siswa Anda.
+                        <h3 class="text-xl font-semibold text-primary-900 mb-3">Mulai Berbagi Ilmu Anda</h3>
+                        <p class="text-primary-600 mb-8 max-w-md mx-auto">
+                            Anda belum membuat kursus apapun. Mulai ciptakan pengalaman pembelajaran yang luar biasa untuk siswa Anda.
                         </p>
-                        <a href="{% url 'course_create' %}"
-                           class="inline-flex items-center bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition shadow-lg hover:shadow-xl">
+                        <a href="{% url 'course_create' %}" class="btn btn-primary px-8 py-3">
                             <i class="fas fa-plus-circle mr-2"></i>
                             Buat Kursus Pertama
                         </a>

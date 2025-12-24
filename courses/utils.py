@@ -1,5 +1,76 @@
 from django.contrib.contenttypes.models import ContentType
 
+landing_page_features = [
+        {
+            'icon': 'globe',
+            'title': 'Akses Kursus Darimana Saja',
+            'description': 'Belajar kapan saja dan dimana saja melalui desktop, tablet, atau smartphone Anda.'
+        },
+        {
+            'icon': 'chart-line',
+            'title': 'Tracking Progres',
+            'description': 'Pantau kemajuan belajar Anda dengan dashboard analitik yang intuitif dan real-time.'
+        },
+        {
+            'icon': 'certificate',
+            'title': 'Sertifikat',
+            'description': 'Dapatkan sertifikat resmi yang dapat diverifikasi setelah menyelesaikan kursus.'
+        },
+        {
+            'icon': 'comments',
+            'title': 'Forum Diskusi',
+            'description': 'Diskusikan materi pelajaran dengan instruktur dan sesama siswa dalam komunitas belajar.'
+        },
+        {
+            'icon': 'book-open',
+            'title': 'Materi Berlimpah',
+            'description': 'Akses beragam materi pembelajaran mulai dari teks, video, file, dan dokumen pendukung.'
+        },
+        {
+            'icon': 'chalkboard-teacher',
+            'title': 'Instruktur Profesional',
+            'description': 'Belajar dari instruktur berpengalaman dan ahli di bidangnya masing-masing.'
+        }
+    ]
+
+landing_page_testimonials = [
+    {
+        'name': 'Budi Santoso',
+        'role': 'Fullstack Developer',
+        'content': 'Belajar di Ta3lem sangat menyenangkan. Materinya sangat terstruktur dan mudah diikuti bahkan bagi pemula sekalipun.',
+        'initials': 'BS'
+    },
+    {
+        'name': 'Siti Aminah',
+        'role': 'Data Scientist',
+        'content': 'Platform ini membantu saya meningkatkan keahlian data science saya dengan cepat. Instrukturnya sangat ahli.',
+        'initials': 'SA'
+    },
+    {
+        'name': 'Andi Wijaya',
+        'role': 'UI/UX Designer',
+        'content': 'Sangat merekomendasikan Ta3lem untuk siapa saja yang ingin memulai karir di bidang desain. Kursusnya sangat komprehensif.',
+        'initials': 'AW'
+    },
+    {
+        'name': 'Rina Permata',
+        'role': 'Digital Marketer',
+        'content': 'Berkat Ta3lem, saya bisa memahami konsep digital marketing dengan lebih mendalam dan langsung mempraktikkannya.',
+        'initials': 'RP'
+    },
+    {
+        'name': 'Joko Susilo',
+        'role': 'Mobile Developer',
+        'content': 'Kurikulumnya selalu up-to-date dengan perkembangan teknologi terbaru. Sangat membantu dalam pekerjaan sehari-hari.',
+        'initials': 'JS'
+    },
+    {
+        'name': 'Maya Sari',
+        'role': 'Product Manager',
+        'content': 'Fleksibilitas waktu belajarnya sangat cocok untuk profesional yang sibuk seperti saya. Kualitas videonya juga sangat baik.',
+        'initials': 'MS'
+    }
+]
 
 def invalidate_page_cache(request, url_name):
     """

@@ -1,0 +1,89 @@
+<!-- Pricing Section -->
+<section aria-labelledby="pricing-heading" class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl sm:text-center">
+            <h2 id="pricing-heading" class="text-3xl font-bold tracking-tight text-primary-900 sm:text-4xl">Harga Paket</h2>
+            <p class="mt-6 text-lg leading-8 text-primary-600">Pilih paket yang sesuai dengan kebutuhan belajar Anda.</p>
+        </div>
+        <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+            <!-- Free Tier -->
+            <div class="p-8 sm:p-10 lg:flex-auto">
+                <h3 class="text-2xl font-bold tracking-tight text-primary-900">Free</h3>
+                <p class="mt-6 text-base leading-7 text-gray-600">Akses dasar untuk mulai belajar.</p>
+                <div class="mt-10 flex items-center gap-x-4">
+                    <h4 class="flex-none text-sm font-semibold leading-6 text-primary-600">Apa yang termasuk</h4>
+                    <div class="h-px flex-auto bg-gray-100"></div>
+                </div>
+                <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
+                    <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
+                        Akses ke 5 kursus gratis
+                    </li>
+                    <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
+                        Forum diskusi komunitas
+                    </li>
+                     <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
+                        Akses konten dasar
+                    </li>
+                </ul>
+            </div>
+             <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+                <div class="rounded-2xl bg-primary-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+                    <div class="mx-auto max-w-xs px-8">
+                        <p class="text-base font-semibold text-primary-600">Gratis Selamanya</p>
+                        <p class="mt-6 flex items-baseline justify-center gap-x-2">
+                            <span class="text-5xl font-bold tracking-tight text-primary-900">Rp 0</span>
+                            <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/bulan</span>
+                        </p>
+                        <a href="{% url 'student_registration' %}" class="mt-10 block w-full rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">Daftar Sekarang</a>
+                        <p class="mt-6 text-xs leading-5 text-gray-600">Syarat dan ketentuan berlaku</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- Premium Tier Highlight -->
+         <div class="mx-auto mt-8 max-w-2xl rounded-3xl bg-primary-900 ring-1 ring-primary-900 sm:mt-10 lg:mx-0 lg:flex lg:max-w-none">
+            <div class="p-8 sm:p-10 lg:flex-auto">
+                <h3 class="text-2xl font-bold tracking-tight text-white">Premium</h3>
+                <p class="mt-6 text-base leading-7 text-primary-200">Akses tanpa batas dan fitur eksklusif.</p>
+                <div class="mt-10 flex items-center gap-x-4">
+                    <h4 class="flex-none text-sm font-semibold leading-6 text-primary-100">Semua fitur Free, ditambah:</h4>
+                    <div class="h-px flex-auto bg-primary-800"></div>
+                </div>
+                <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-primary-200 sm:grid-cols-2 sm:gap-6">
+                    <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
+                        Akses ke semua kursus
+                    </li>
+                    <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
+                        Sertifikat terverifikasi
+                    </li>
+                     <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
+                        Download materi offline
+                    </li>
+                    <li class="flex gap-x-3">
+                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
+                        Prioritas dukungan instruktur
+                    </li>
+                </ul>
+            </div>
+             <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+                <div class="rounded-2xl bg-white/10 py-10 text-center ring-1 ring-inset ring-white/10 lg:flex lg:flex-col lg:justify-center lg:py-16">
+                    <div class="mx-auto max-w-xs px-8">
+                        <p class="text-base font-semibold text-primary-200">Rekomendasi</p>
+                        <p class="mt-6 flex items-baseline justify-center gap-x-2">
+                            <span class="text-5xl font-bold tracking-tight text-white">Rp 99rb</span>
+                            <span class="text-sm font-semibold leading-6 tracking-wide text-primary-200">/bulan</span>
+                        </p>
+                        <a href="#" class="mt-10 block w-full rounded-md bg-white px-3 py-2 text-center text-sm font-semibold text-primary-900 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Upgrade Sekarang</a>
+                        <p class="mt-6 text-xs leading-5 text-primary-200">Batalkan kapan saja</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

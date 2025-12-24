@@ -1,0 +1,37 @@
+{# Definisikan partial untuk feature item #}
+
+{% partialdef feature-item %}
+<div class="flex flex-col">
+    <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-primary-900">
+        <i class="fas fa-{{ feature.icon }} h-5 w-5 flex-none text-primary-600" aria-hidden="true"></i>
+        {{ feature.title }}
+    </dt>
+    <dd class="mt-4 flex flex-auto flex-col text-base leading-7 text-primary-600">
+        <p class="flex-auto">{{ feature.description }}</p>
+    </dd>
+</div>
+{% endpartialdef feature-item %}
+
+{% block features %}
+    <section id="features" aria-labelledby="features-heading" class="bg-primary-50 py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl lg:text-center">
+                <h2 id="features-heading" class="text-base font-semibold leading-7 text-primary-600">Kenapa Memilih Kami?</h2>
+                <p class="mt-2 text-3xl font-bold tracking-tight text-primary-900 sm:text-4xl">
+                    Semua yang Anda butuhkan untuk belajar
+                </p>
+                <p class="mt-6 text-lg leading-8 text-primary-600">
+                    Platform kami dirancang untuk memberikan pengalaman belajar terbaik dengan fitur-fitur modern yang mendukung perkembangan Anda.
+                </p>
+            </div>
+<div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+                <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+        {% for feature in features %}
+            {% partial feature-item %}
+        {% endfor %}
+    </dl>
+</div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

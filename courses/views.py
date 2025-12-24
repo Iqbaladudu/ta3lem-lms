@@ -20,10 +20,39 @@ from django.views.generic.list import ListView
 
 from users.forms import CourseEnrollForm
 from .forms import ModuleFormSets
+from users.models import User
 from .models import (
     Course, Module, Content, ContentItem, Subject, CourseEnrollment,
     ContentProgress, ModuleProgress, LearningSession, CourseWaitlist
 )
+
+from courses.utils import landing_page_features, landing_page_testimonials
+
+
+class LandingPageView(TemplateResponseMixin, View):
+    template_name = 'landing/index.html'
+
+    def get(self, request):
+        # Featured courses (published only)
+        featured_courses = Course.objects.filter(status='published').annotate(
+            total_modules=Count('modules')
+        ).order_by('-created')[:6]
+
+        # Statistics
+        total_students = User.objects.count()
+        total_courses = Course.objects.filter(status='published').count()
+        total_instructors = User.objects.filter(role='instructor').count()
+
+
+        context = {
+            'featured_courses': featured_courses,
+            'total_students': total_students,
+            'total_courses': total_courses,
+            'total_instructors': total_instructors,
+            'features': landing_page_features,
+            'testimonials': landing_page_testimonials,
+        }
+        return self.render_to_response(context)
 
 
 class CourseListView(ListView):

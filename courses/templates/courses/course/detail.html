@@ -4,31 +4,31 @@
 {% partialdef enroll-state %}
     {% if status == "completed" %}
         <div class="text-center mb-6">
-            <div class="mx-auto h-12 w-12 bg-blue-50 rounded-full flex items-center justify-center mb-3">
-                <i class="fas fa-trophy text-blue-500 text-xl"></i>
+            <div class="mx-auto h-12 w-12 bg-info-50 rounded-full flex items-center justify-center mb-3">
+                <i class="fas fa-trophy text-info-500 text-xl"></i>
             </div>
-            <h3 class="text-base font-semibold text-slate-900">
-                Course Completed
+            <h3 class="text-base font-semibold text-primary-900">
+                Kursus Selesai
             </h3>
-            <p class="text-sm text-slate-500 mt-1">You have finished this course successfully.</p>
+            <p class="text-sm text-primary-500 mt-1">Anda telah menyelesaikan kursus ini dengan sukses.</p>
         </div>
         <a href="{% url 'student_course_detail' course.id %}"
-           class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg text-center shadow-sm transition-all text-sm">
-            Review Course
+           class="btn btn-primary w-full py-2.5 text-sm">
+            Tinjau Kursus
         </a>
     {% else %}
         <div class="text-center mb-6">
-            <div class="mx-auto h-12 w-12 bg-emerald-50 rounded-full flex items-center justify-center mb-3">
-                <i class="fas fa-check text-emerald-500 text-xl"></i>
+            <div class="mx-auto h-12 w-12 bg-success-50 rounded-full flex items-center justify-center mb-3">
+                <i class="fas fa-check text-success-500 text-xl"></i>
             </div>
-            <h3 class="text-base font-semibold text-slate-900">
-                You are enrolled
+            <h3 class="text-base font-semibold text-primary-900">
+                Anda sudah terdaftar
             </h3>
-            <p class="text-sm text-slate-500 mt-1">Continue where you left off.</p>
+            <p class="text-sm text-primary-500 mt-1">Lanjutkan dari terakhir.</p>
         </div>
         <a href="{% url 'student_course_detail' course.id %}"
-           class="block w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 px-4 rounded-lg text-center shadow-sm transition-all text-sm">
-            Go to Course
+           class="btn btn-success w-full py-2.5 text-sm">
+            Masuk ke Kursus
         </a>
     {% endif %}
 {% endpartialdef %}
@@ -37,19 +37,19 @@
 {% block title %}{{ course.title }} - Ta3lem{% endblock %}
 
 {% block content %}
-    <div class="bg-slate-50 min-h-screen pb-12">
+    <div class="bg-primary-50 min-h-screen pb-12">
         <!-- Breadcrumb -->
-        <div class="bg-white border-b border-slate-200">
+        <div class="bg-white border-b border-primary-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                <nav class="flex text-sm font-medium text-slate-500" aria-label="Breadcrumb">
+                <nav class="flex text-sm font-medium text-primary-500" aria-label="Breadcrumb">
                     <ol class="flex items-center space-x-2">
-                        <li><a href="{% url 'course_list' %}" class="hover:text-slate-900 transition-colors">Courses</a>
+                        <li><a href="{% url 'course_list' %}" class="hover:text-primary-900 transition-colors">Kursus</a>
                         </li>
-                        <li><i class="fas fa-chevron-right text-xs text-slate-300"></i></li>
+                        <li><i class="fas fa-chevron-right text-xs text-primary-300"></i></li>
                         <li><a href="{% url 'course_list_subject' course.subject.slug %}"
-                               class="hover:text-slate-900 transition-colors">{{ course.subject.title }}</a></li>
-                        <li><i class="fas fa-chevron-right text-xs text-slate-300"></i></li>
-                        <li class="text-slate-900 truncate max-w-[200px]" aria-current="page">{{ course.title }}</li>
+                               class="hover:text-primary-900 transition-colors">{{ course.subject.title }}</a></li>
+                        <li><i class="fas fa-chevron-right text-xs text-primary-300"></i></li>
+                        <li class="text-primary-900 truncate max-w-[200px]" aria-current="page">{{ course.title }}</li>
                     </ol>
                 </nav>
             </div>
@@ -62,111 +62,111 @@
                 <div class="lg:col-span-2 space-y-8">
 
                     <!-- Course Header -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                    <div class="card p-6 sm:p-8">
                         <div class="flex items-center gap-3 mb-6">
-                        <span class="inline-flex items-center rounded-md bg-indigo-50 px-2.5 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
+                        <span class="badge badge-default">
                             {{ course.subject.title }}
                         </span>
-                            <span class="text-xs text-slate-500 flex items-center gap-1">
-                            <i class="fas fa-clock text-slate-400"></i>
-                            Updated {{ course.updated|date:"M Y" }}
+                            <span class="text-xs text-primary-500 flex items-center gap-1">
+                            <i class="fas fa-clock text-primary-400"></i>
+                            Diperbarui {{ course.updated|date:"M Y" }}
                         </span>
                         </div>
 
-                        <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">{{ course.title }}</h1>
-                        <p class="text-lg text-slate-600 leading-relaxed mb-8">{{ course.overview }}</p>
+                        <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-primary-900 mb-4">{{ course.title }}</h1>
+                        <p class="text-lg text-primary-600 leading-relaxed mb-8">{{ course.overview }}</p>
 
                         <!-- Stats Grid -->
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-slate-100">
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-primary-100">
                             <div>
-                                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
-                                    Instructor</p>
+                                <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-2">
+                                    Instruktur</p>
                                 <div class="flex items-center gap-2">
-                                    <div class="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 ring-1 ring-slate-200">
+                                    <div class="h-6 w-6 rounded-full bg-primary-100 flex items-center justify-center text-xs font-semibold text-primary-600 ring-1 ring-primary-200">
                                         {{ course.owner.username.0|upper }}
                                     </div>
-                                    <span class="text-sm font-medium text-slate-900 truncate">{{ course.owner.username }}</span>
+                                    <span class="text-sm font-medium text-primary-900 truncate">{{ course.owner.username }}</span>
                                 </div>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Modules</p>
+                                <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-2">Modul</p>
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-layer-group text-slate-400"></i>
-                                    <span class="text-sm font-medium text-slate-900">{{ course.modules.count }}</span>
+                                    <i class="fas fa-layer-group text-primary-400"></i>
+                                    <span class="text-sm font-medium text-primary-900 tabular-nums">{{ course.modules.count }}</span>
                                 </div>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
-                                    Enrolled</p>
+                                <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-2">
+                                    Terdaftar</p>
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-users text-slate-400"></i>
-                                    <span class="text-sm font-medium text-slate-900">{{ course.students.count }}</span>
+                                    <i class="fas fa-users text-primary-400"></i>
+                                    <span class="text-sm font-medium text-primary-900 tabular-nums">{{ course.students.count }}</span>
                                 </div>
                             </div>
                             <div>
-                                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
-                                    Certificate</p>
+                                <p class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-2">
+                                    Sertifikat</p>
                                 <div class="flex items-center gap-2">
-                                    <i class="fas fa-certificate text-slate-400"></i>
-                                    <span class="text-sm font-medium text-slate-900">Included</span>
+                                    <i class="fas fa-certificate text-primary-400"></i>
+                                    <span class="text-sm font-medium text-primary-900">Termasuk</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Syllabus -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                        <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                            <h2 class="text-lg font-semibold text-slate-900">Course Content</h2>
-                            <span class="text-sm text-slate-500 font-medium">{{ course.modules.count }} Modules</span>
+                    <div class="card overflow-hidden">
+                        <div class="p-6 border-b border-primary-100 flex items-center justify-between bg-primary-50">
+                            <h2 class="text-lg font-semibold text-primary-900">Konten Kursus</h2>
+                            <span class="text-sm text-primary-500 font-medium">{{ course.modules.count }} Modul</span>
                         </div>
 
-                        <div class="divide-y divide-slate-100">
+                        <div class="divide-y divide-primary-100">
                             {% for module in course.modules.all %}
-                                <div class="p-4 sm:p-5 hover:bg-slate-50 transition-colors group">
+                                <div class="p-4 sm:p-5 hover:bg-primary-50 transition-colors group">
                                     <div class="flex items-start gap-4">
-                                <span class="flex-shrink-0 h-8 w-8 rounded flex items-center justify-center text-sm font-bold bg-slate-100 text-slate-500 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                                <span class="flex-shrink-0 h-8 w-8 rounded-lg flex items-center justify-center text-sm font-semibold bg-primary-100 text-primary-500 group-hover:bg-primary-900 group-hover:text-white transition-colors">
                                     {{ forloop.counter }}
                                 </span>
                                         <div class="flex-1 min-w-0">
-                                            <h3 class="text-base font-medium text-slate-900 group-hover:text-indigo-600 transition-colors">
+                                            <h3 class="text-base font-medium text-primary-900 group-hover:text-primary-700 transition-colors">
                                                 {{ module.title }}
                                             </h3>
                                             {% if module.description %}
-                                                <p class="mt-1 text-sm text-slate-500 line-clamp-2">{{ module.description }}</p>
+                                                <p class="mt-1 text-sm text-primary-500 line-clamp-2">{{ module.description }}</p>
                                             {% endif %}
-                                            <div class="mt-2 flex items-center text-xs text-slate-400 gap-3">
+                                            <div class="mt-2 flex items-center text-xs text-primary-400 gap-3">
                                         <span class="flex items-center gap-1">
-                                            <i class="fas fa-file-alt"></i> {{ module.contents.count }} Lessons
+                                            <i class="fas fa-file-alt"></i> {{ module.contents.count }} Pelajaran
                                         </span>
                                             </div>
                                         </div>
-                                        <i class="fas fa-chevron-down text-slate-300 text-xs mt-2 group-hover:text-slate-400 transition-colors"></i>
+                                        <i class="fas fa-chevron-down text-primary-300 text-xs mt-2 group-hover:text-primary-400 transition-colors"></i>
                                     </div>
                                 </div>
                             {% empty %}
                                 <div class="p-12 text-center">
-                                    <div class="mx-auto h-12 w-12 text-slate-300 mb-3">
+                                    <div class="mx-auto h-12 w-12 text-primary-300 mb-3">
                                         <i class="fas fa-box-open text-3xl"></i>
                                     </div>
-                                    <p class="text-slate-500">No modules available yet.</p>
+                                    <p class="text-primary-500">Belum ada modul tersedia.</p>
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
 
                     <!-- Instructor -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                        <h2 class="text-lg font-semibold text-slate-900 mb-4">About the Instructor</h2>
+                    <div class="card p-6">
+                        <h2 class="text-lg font-semibold text-primary-900 mb-4">Tentang Instruktur</h2>
                         <div class="flex items-start gap-4">
-                            <div class="h-12 w-12 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold shrink-0">
+                            <div class="h-12 w-12 rounded-full bg-primary-900 flex items-center justify-center text-white font-semibold shrink-0">
                                 {{ course.owner.username.0|upper }}
                             </div>
                             <div>
-                                <p class="text-base font-semibold text-slate-900">{{ course.owner.username }}</p>
-                                <p class="text-sm text-slate-500 mb-2">Senior Instructor</p>
-                                <p class="text-sm text-slate-600">Passionate about teaching and helping students achieve
-                                    their goals through high-quality education.</p>
+                                <p class="text-base font-semibold text-primary-900">{{ course.owner.username }}</p>
+                                <p class="text-sm text-primary-500 mb-2">Instruktur Senior</p>
+                                <p class="text-sm text-primary-600">Bersemangat dalam mengajar dan membantu siswa mencapai
+                                    tujuan mereka melalui pendidikan berkualitas tinggi.</p>
                             </div>
                         </div>
                     </div>
@@ -178,27 +178,26 @@
                     <div class="sticky top-24 space-y-6">
 
                         <!-- Action Card -->
-                        <div class="bg-white rounded-xl shadow-lg shadow-slate-200/50 border border-slate-200 overflow-hidden">
+                        <div class="card shadow-lg overflow-hidden">
                             <div class="p-6">
                                 {% if user.is_authenticated %}
                                     {% if user_enrollment %}
                                         {% with status=user_enrollment.status payment=user_enrollment.payment_status %}
                                             {% if status == "pending" and payment == "pending" %}
                                                 <div class="text-center mb-6">
-                                                    <div class="mx-auto h-12 w-12 bg-amber-50 rounded-full flex items-center justify-center mb-3">
-                                                        <i class="fas fa-clock text-amber-500 text-xl"></i>
+                                                    <div class="mx-auto h-12 w-12 bg-warning-50 rounded-full flex items-center justify-center mb-3">
+                                                        <i class="fas fa-clock text-warning-500 text-xl"></i>
                                                     </div>
-                                                    <h3 class="text-base font-semibold text-slate-900">Payment
-                                                        Pending</h3>
-                                                    <p class="text-sm text-slate-500 mt-1">Complete payment to access
-                                                        the
-                                                        course.</p>
+                                                    <h3 class="text-base font-semibold text-primary-900">Menunggu
+                                                        Pembayaran</h3>
+                                                    <p class="text-sm text-primary-500 mt-1">Selesaikan pembayaran untuk
+                                                        mengakses
+                                                        kursus.</p>
                                                 </div>
 
-                                                <!-- TODO: create complete payment page -->
                                                 <a href="{% url 'student_course_detail' course.id %}"
-                                                   class="block w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2.5 px-4 rounded-lg text-center shadow-sm transition-all text-sm">
-                                                    Complete Payment
+                                                   class="btn bg-warning-500 hover:bg-warning-600 text-white w-full py-2.5 text-sm">
+                                                    Selesaikan Pembayaran
                                                 </a>
                                             {% elif status == "enrolled" %}
                                                 {% if payment == "paid" or payment == "free" %}
@@ -215,49 +214,49 @@
                                         <div class="mb-6">
                                             <div class="flex items-baseline gap-1 mb-2">
                                                 {% if course.is_free %}
-                                                    <span class="text-3xl font-bold text-slate-900">Free</span>
+                                                    <span class="text-3xl font-semibold text-primary-900">Gratis</span>
                                                 {% else %}
-                                                    <span class="text-3xl font-bold text-slate-900">{{ course.get_formatted_price }}</span>
+                                                    <span class="text-3xl font-semibold text-primary-900">{{ course.get_formatted_price }}</span>
                                                 {% endif %}
                                             </div>
-                                            <p class="text-sm text-slate-500">Full lifetime access</p>
+                                            <p class="text-sm text-primary-500">Akses seumur hidup</p>
                                         </div>
 
                                         <form action="{% url 'student_enroll_course' course.id %}" method="post">
                                             {% csrf_token %}
                                             <button type="submit"
-                                                    class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-4 rounded-lg text-center shadow-sm transition-all text-sm">
+                                                    class="btn btn-primary w-full py-2.5 text-sm">
                                                 {% if course.is_free %}
-                                                    Enroll Now
+                                                    Daftar Sekarang
                                                 {% else %}
-                                                    Buy Course
+                                                    Beli Kursus
                                                 {% endif %}
                                             </button>
                                         </form>
                                     {% endif %}
                                 {% else %}
                                     <a href="{% url 'student_login' %}?next={{ request.path }}"
-                                       class="block w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-2.5 px-4 rounded-lg text-center shadow-sm transition-all text-sm mb-3">
-                                        Login to Enroll
+                                       class="btn btn-primary w-full py-2.5 text-sm mb-3">
+                                        Masuk untuk Mendaftar
                                     </a>
                                     <a href="{% url 'student_registration' %}"
-                                       class="block w-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold py-2.5 px-4 rounded-lg text-center transition-all text-sm">
-                                        Create Account
+                                       class="btn btn-secondary w-full py-2.5 text-sm">
+                                        Buat Akun
                                     </a>
                                 {% endif %}
 
-                                <ul class="mt-6 space-y-3 pt-6 border-t border-slate-100">
-                                    <li class="flex items-center gap-3 text-sm text-slate-600">
-                                        <i class="fas fa-check-circle text-indigo-500/70"></i>
-                                        <span>Lifetime access</span>
+                                <ul class="mt-6 space-y-3 pt-6 border-t border-primary-100">
+                                    <li class="flex items-center gap-3 text-sm text-primary-600">
+                                        <i class="fas fa-check-circle text-primary-400"></i>
+                                        <span>Akses seumur hidup</span>
                                     </li>
-                                    <li class="flex items-center gap-3 text-sm text-slate-600">
-                                        <i class="fas fa-check-circle text-indigo-500/70"></i>
-                                        <span>Access on mobile</span>
+                                    <li class="flex items-center gap-3 text-sm text-primary-600">
+                                        <i class="fas fa-check-circle text-primary-400"></i>
+                                        <span>Akses di mobile</span>
                                     </li>
-                                    <li class="flex items-center gap-3 text-sm text-slate-600">
-                                        <i class="fas fa-check-circle text-indigo-500/70"></i>
-                                        <span>Certificate of completion</span>
+                                    <li class="flex items-center gap-3 text-sm text-primary-600">
+                                        <i class="fas fa-check-circle text-primary-400"></i>
+                                        <span>Sertifikat penyelesaian</span>
                                     </li>
                                 </ul>
                             </div>
@@ -265,11 +264,11 @@
 
                         <!-- Warning for Full Course -->
                         {% if course.max_capacity and course.get_enrollment_count >= course.max_capacity %}
-                            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 flex gap-3">
-                                <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5"></i>
+                            <div class="bg-warning-50 border border-warning-200 rounded-xl p-4 flex gap-3">
+                                <i class="fas fa-exclamation-triangle text-warning-500 mt-0.5"></i>
                                 <div>
-                                    <h4 class="text-sm font-semibold text-amber-800">Course Full</h4>
-                                    <p class="text-xs text-amber-700 mt-1">Registration is currently closed.</p>
+                                    <h4 class="text-sm font-semibold text-warning-800">Kursus Penuh</h4>
+                                    <p class="text-xs text-warning-700 mt-1">Pendaftaran saat ini ditutup.</p>
                                 </div>
                             </div>
                         {% endif %}

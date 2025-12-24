@@ -22,6 +22,7 @@ dependencies = [
     "mdx-cite",
     "markdown-emdash>=0.2.0",
     "mdx-unimoji>=1.1",
+    "djlint>=1.36.4",
 ]
 
 [tool.uv.sources]

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ta3lem - Platform Belajar Online Terdepan{% endblock %}
+{% block content %}
+    <!-- Skip Navigation for Accessibility -->
+    <a href="#main-content"
+       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary-900 focus:text-white focus:rounded-lg focus:shadow-lg">Skip to main content</a>
+    <main id="main-content" role="main" class="bg-white">
+        {% include 'landing/hero.html' %}
+        {% include 'landing/stats.html' %}
+        {% include 'landing/features.html' %}
+        {% include 'landing/how_it_works.html' %}
+        {% include 'landing/featured_courses.html' %}
+        {% include 'landing/testimonials.html' %}
+        {% include 'landing/pricing.html' %}
+        {% include 'landing/cta.html' %}
+    </main>
+{% endblock %}

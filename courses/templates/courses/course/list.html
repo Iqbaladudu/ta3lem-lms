@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Course Catalog - Ta3lem{% endblock %}
+{% block title %}Katalog Kursus - Ta3lem{% endblock %}
 
 {% block content %}
-    <div class="bg-slate-50 min-h-screen">
+    <div class="bg-primary-50 min-h-screen">
         <!-- Hero Section -->
-        <div class="bg-white border-b border-slate-200">
+        <div class="bg-white border-b border-primary-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
                 <div class="max-w-3xl">
-                    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">
-                        Explore Our Courses
+                    <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-primary-900 mb-4">
+                        Jelajahi Kursus Kami
                     </h1>
-                    <p class="text-lg text-slate-600 leading-relaxed">
-                        Master new skills with our professionally designed curriculum.
-                        From basics to advanced topics, find the right path for your career.
+                    <p class="text-lg text-primary-600 leading-relaxed">
+                        Kuasai keahlian baru dengan kurikulum yang dirancang secara profesional.
+                        Dari dasar hingga lanjutan, temukan jalur yang tepat untuk karier Anda.
                     </p>
                 </div>
             </div>
@@ -27,10 +27,10 @@
                 <!-- Mobile Filter Toggle -->
                 <div class="lg:hidden">
                     <button @click="filtersOpen = !filtersOpen"
-                            class="w-full flex items-center justify-between px-4 py-3 bg-white border border-slate-200 rounded-lg shadow-sm text-slate-700 font-medium hover:bg-slate-50 transition-colors">
+                            class="w-full flex items-center justify-between px-4 py-3 bg-white border border-primary-200 rounded-xl shadow-sm text-primary-700 font-medium hover:bg-primary-50 transition-colors">
                     <span class="flex items-center gap-2">
-                        <i class="fas fa-filter text-slate-400"></i>
-                        Filter Courses
+                        <i class="fas fa-filter text-primary-400"></i>
+                        Filter Kursus
                     </span>
                         <i class="fas fa-chevron-down transition-transform duration-200"
                            :class="{ 'rotate-180': filtersOpen }"></i>
@@ -41,17 +41,17 @@
                 <aside class="lg:w-64 flex-shrink-0 hidden lg:block" :class="{ '!block': filtersOpen }">
                     <div class="sticky top-24 space-y-8">
                         <div>
-                            <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wider mb-4 px-2">
-                                Categories
+                            <h3 class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-4 px-2">
+                                Kategori
                             </h3>
                             <nav class="space-y-1">
                                 <a href="{% url 'course_list' %}"
                                    hx-get="{% url 'course_list' %}"
                                    hx-target="#course-grid-container"
                                    hx-push-url="true"
-                                   class="group flex items-center px-3 py-2 text-sm font-medium rounded-md {% if not subject %}bg-indigo-50 text-indigo-700{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %} transition-colors">
-                                    <span class="truncate">All Courses</span>
-                                    <span class="ml-auto inline-block py-0.5 px-2 text-xs rounded-full {% if not subject %}bg-indigo-100 text-indigo-600{% else %}bg-slate-100 text-slate-500 group-hover:bg-slate-200{% endif %}">
+                                   class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg {% if not subject %}bg-primary-900 text-white{% else %}text-primary-600 hover:bg-primary-100 hover:text-primary-900{% endif %} transition-colors">
+                                    <span class="truncate">Semua Kursus</span>
+                                    <span class="ml-auto inline-block py-0.5 px-2.5 text-xs rounded-full {% if not subject %}bg-white/20 text-white{% else %}bg-primary-100 text-primary-500 group-hover:bg-primary-200{% endif %}">
                                     {{ courses.paginator.count }}
                                 </span>
                                 </a>
@@ -60,9 +60,9 @@
                                        hx-get="{% url 'course_list_subject' s.slug %}"
                                        hx-target="#course-grid-container"
                                        hx-push-url="true"
-                                       class="group flex items-center px-3 py-2 text-sm font-medium rounded-md {% if subject.slug == s.slug %}bg-indigo-50 text-indigo-700{% else %}text-slate-600 hover:bg-slate-50 hover:text-slate-900{% endif %} transition-colors">
+                                       class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg {% if subject.slug == s.slug %}bg-primary-900 text-white{% else %}text-primary-600 hover:bg-primary-100 hover:text-primary-900{% endif %} transition-colors">
                                         <span class="truncate">{{ s.title }}</span>
-                                        <span class="ml-auto inline-block py-0.5 px-2 text-xs rounded-full {% if subject.slug == s.slug %}bg-indigo-100 text-indigo-600{% else %}bg-slate-100 text-slate-500 group-hover:bg-slate-200{% endif %}">
+                                        <span class="ml-auto inline-block py-0.5 px-2.5 text-xs rounded-full {% if subject.slug == s.slug %}bg-white/20 text-white{% else %}bg-primary-100 text-primary-500 group-hover:bg-primary-200{% endif %}">
                                     {{ s.total_courses }}
                                 </span>
                                     </a>
@@ -77,13 +77,13 @@
                     <!-- Active Filter Indicator -->
                     {% if subject %}
                         <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-xl font-semibold text-slate-900">{{ subject.title }}</h2>
+                            <h2 class="text-xl font-semibold text-primary-900">{{ subject.title }}</h2>
                             <a href="{% url 'course_list' %}"
                                hx-get="{% url 'course_list' %}"
                                hx-target="#course-grid-container"
                                hx-push-url="true"
-                               class="text-sm text-slate-500 hover:text-indigo-600 font-medium flex items-center gap-1">
-                                Clear filter <i class="fas fa-times"></i>
+                               class="text-sm text-primary-500 hover:text-primary-700 font-medium flex items-center gap-1 transition-colors">
+                                Hapus filter <i class="fas fa-times"></i>
                             </a>
                         </div>
                     {% endif %}
@@ -91,14 +91,13 @@
                     {% if courses %}
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                             {% for course in courses %}
-                                <div class="group h-full flex flex-col bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-200 overflow-hidden">
+                                <div class="card p-0 h-full flex flex-col overflow-hidden group hover:border-primary-300">
                                     <!-- Card Header/Image Placeholder -->
-                                    <div class="relative h-48 bg-slate-100 group-hover:bg-indigo-50/50 transition-colors duration-200 flex items-center justify-center border-b border-slate-100">
-                                        <!-- Using icon as placeholder since no image field in model shown yet -->
-                                        <i class="fas fa-book-open text-4xl text-slate-300 group-hover:text-indigo-300 transition-colors duration-200"></i>
+                                    <div class="relative h-48 bg-gradient-to-br from-primary-100 to-primary-50 group-hover:from-primary-200/60 transition-colors duration-200 flex items-center justify-center border-b border-primary-100">
+                                        <i class="fas fa-book-open text-4xl text-primary-300 group-hover:text-primary-400 transition-colors duration-200"></i>
 
                                         <div class="absolute top-4 right-4">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-white text-slate-700 shadow-sm border border-slate-100">
+                                    <span class="badge bg-white/95 text-primary-700 border border-primary-200 backdrop-blur-sm">
                                         {{ course.subject.title }}
                                     </span>
                                         </div>
@@ -106,28 +105,28 @@
 
                                     <!-- Card Content -->
                                     <div class="flex-1 p-5 flex flex-col">
-                                        <h3 class="relative text-lg font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors mb-2 line-clamp-2">
+                                        <h3 class="relative text-lg font-semibold text-primary-900 group-hover:text-primary-700 transition-colors mb-2 line-clamp-2">
                                             <a href="{% url 'course_detail' course.slug %}">
                                                 <span class="absolute inset-0"></span>
                                                 {{ course.title }}
                                             </a>
                                         </h3>
 
-                                        <p class="text-sm text-slate-600 mb-4 line-clamp-2 flex-1">
+                                        <p class="text-sm text-primary-600 mb-4 line-clamp-2 flex-1">
                                             {{ course.overview }}
                                         </p>
 
                                         <!-- Meta Info -->
-                                        <div class="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
-                                            <div class="flex items-center text-sm text-slate-500">
-                                                <div class="h-6 w-6 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-600 mr-2 ring-1 ring-white">
+                                        <div class="flex items-center justify-between pt-4 border-t border-primary-100 mt-auto">
+                                            <div class="flex items-center text-sm text-primary-500">
+                                                <div class="h-7 w-7 rounded-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center text-xs font-semibold text-primary-700 mr-2 ring-1 ring-white">
                                                     {{ course.owner.username.0|upper }}
                                                 </div>
                                                 <span class="truncate max-w-[100px]">{{ course.owner.username }}</span>
                                             </div>
-                                            <div class="flex items-center text-xs font-medium text-slate-500 bg-slate-50 px-2 py-1 rounded">
-                                                <i class="fas fa-layer-group mr-1.5 text-slate-400"></i>
-                                                {{ course.total_modules }} Modules
+                                            <div class="flex items-center text-xs font-medium text-primary-500 bg-primary-50 px-2.5 py-1 rounded-lg">
+                                                <i class="fas fa-layer-group mr-1.5 text-primary-400"></i>
+                                                {{ course.total_modules }} Modul
                                             </div>
                                         </div>
                                     </div>
@@ -137,82 +136,72 @@
 
                         <!-- Pagination -->
                         {% if is_paginated %}
-                            <div class="mt-8 flex items-center justify-between border-t border-slate-200 pt-6">
+                            <div class="mt-8 flex items-center justify-between border-t border-primary-200 pt-6">
                                 <div class="flex flex-1 justify-between sm:hidden">
                                     {% if page_obj.has_previous %}
-                                        <a href="?page=
-                                                {{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
-                                           hx-get="?page=
-                                                   {{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                        <a href="?page={{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                           hx-get="?page={{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
                                            hx-target="#course-grid-container"
                                            hx-push-url="true"
-                                           class="relative inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Previous</a>
+                                           class="btn btn-secondary py-2 px-4 text-sm">Sebelumnya</a>
                                     {% else %}
                                         <span></span>
                                     {% endif %}
 
                                     {% if page_obj.has_next %}
-                                        <a href="?page=
-                                                {{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
-                                           hx-get="?page=
-                                                   {{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                        <a href="?page={{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                           hx-get="?page={{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
                                            hx-target="#course-grid-container"
                                            hx-push-url="true"
-                                           class="relative ml-3 inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">Next</a>
+                                           class="btn btn-secondary py-2 px-4 text-sm">Berikutnya</a>
                                     {% endif %}
                                 </div>
 
                                 <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
                                     <div>
-                                        <p class="text-sm text-slate-700">
-                                            Showing
-                                            <span class="font-medium">{{ page_obj.start_index }}</span>
-                                            to
-                                            <span class="font-medium">{{ page_obj.end_index }}</span>
-                                            of
-                                            <span class="font-medium">{{ page_obj.paginator.count }}</span>
-                                            results
+                                        <p class="text-sm text-primary-600">
+                                            Menampilkan
+                                            <span class="font-semibold text-primary-900">{{ page_obj.start_index }}</span>
+                                            -
+                                            <span class="font-semibold text-primary-900">{{ page_obj.end_index }}</span>
+                                            dari
+                                            <span class="font-semibold text-primary-900">{{ page_obj.paginator.count }}</span>
+                                            hasil
                                         </p>
                                     </div>
                                     <div>
-                                        <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                                        <nav class="isolate inline-flex -space-x-px rounded-lg overflow-hidden shadow-sm"
                                              aria-label="Pagination">
                                             {% if page_obj.has_previous %}
-                                                <a href="?page=
-                                                        {{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
-                                                   hx-get="?page=
-                                                           {{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                                <a href="?page={{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                                   hx-get="?page={{ page_obj.previous_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
                                                    hx-target="#course-grid-container"
                                                    hx-push-url="true"
-                                                   class="relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0">
-                                                    <span class="sr-only">Previous</span>
+                                                   class="relative inline-flex items-center px-3 py-2 text-primary-500 bg-white border border-primary-200 hover:bg-primary-50 transition-colors">
+                                                    <span class="sr-only">Sebelumnya</span>
                                                     <i class="fas fa-chevron-left h-5 w-5 flex items-center justify-center"></i>
                                                 </a>
                                             {% endif %}
 
                                             {% for num in page_obj.paginator.page_range %}
                                                 {% if page_obj.number == num %}
-                                                    <span class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ num }}</span>
+                                                    <span class="relative z-10 inline-flex items-center bg-primary-900 px-4 py-2 text-sm font-semibold text-white">{{ num }}</span>
                                                 {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                                    <a href="?page=
-                                                            {{ num }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
-                                                       hx-get="?page=
-                                                               {{ num }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                                    <a href="?page={{ num }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                                       hx-get="?page={{ num }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
                                                        hx-target="#course-grid-container"
                                                        hx-push-url="true"
-                                                       class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0">{{ num }}</a>
+                                                       class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-primary-900 bg-white border-y border-primary-200 hover:bg-primary-50 transition-colors">{{ num }}</a>
                                                 {% endif %}
                                             {% endfor %}
 
                                             {% if page_obj.has_next %}
-                                                <a href="?page=
-                                                        {{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
-                                                   hx-get="?page=
-                                                           {{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                                <a href="?page={{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
+                                                   hx-get="?page={{ page_obj.next_page_number }}{% if subject %}&subject={{ subject.slug }}{% endif %}"
                                                    hx-target="#course-grid-container"
                                                    hx-push-url="true"
-                                                   class="relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 hover:bg-slate-50 focus:z-20 focus:outline-offset-0">
-                                                    <span class="sr-only">Next</span>
+                                                   class="relative inline-flex items-center px-3 py-2 text-primary-500 bg-white border border-primary-200 hover:bg-primary-50 transition-colors">
+                                                    <span class="sr-only">Berikutnya</span>
                                                     <i class="fas fa-chevron-right h-5 w-5 flex items-center justify-center"></i>
                                                 </a>
                                             {% endif %}
@@ -224,24 +213,22 @@
 
                     {% else %}
                         <!-- Empty State -->
-                        <div class="text-center py-24 bg-white rounded-xl border border-slate-200 border-dashed">
-                            <div class="mx-auto h-12 w-12 text-slate-400">
-                                <i class="fas fa-search text-4xl"></i>
+                        <div class="text-center py-24 bg-white rounded-xl border border-primary-200 border-dashed">
+                            <div class="mx-auto h-16 w-16 text-primary-300 flex items-center justify-center rounded-full bg-primary-50 mb-4">
+                                <i class="fas fa-search text-2xl"></i>
                             </div>
-                            <h3 class="mt-2 text-sm font-semibold text-slate-900">No courses found</h3>
-                            <p class="mt-1 text-sm text-slate-500">
+                            <h3 class="text-base font-semibold text-primary-900">Kursus tidak ditemukan</h3>
+                            <p class="mt-2 text-sm text-primary-500">
                                 {% if subject %}
-                                    It looks like there are no courses in the <strong>{{ subject.title }}</strong>
-                                    category yet.
+                                    Sepertinya belum ada kursus di kategori <strong>{{ subject.title }}</strong>.
                                 {% else %}
-                                    Get started by creating a new course.
+                                    Mulai dengan menjelajahi kursus tersedia.
                                 {% endif %}
                             </p>
                             {% if not subject %}
                                 <div class="mt-6">
-                                    <a href="{% url 'course_list' %}"
-                                       class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        <i class="fas fa-plus mr-2"></i> Browse all
+                                    <a href="{% url 'course_list' %}" class="btn btn-primary px-5 py-2.5 text-sm">
+                                        <i class="fas fa-search mr-2"></i> Jelajahi Semua
                                     </a>
                                 </div>
                             {% endif %}

@@ -4,22 +4,22 @@
 {% block title %}{{ module.title }} - {{ course.title }} - Ta3lem{% endblock %}
 
 {% block content %}
-<div class="bg-slate-50 min-h-screen pb-12">
+<div class="bg-primary-50 min-h-screen pb-12">
     
     <!-- Breadcrumb Header -->
-    <div class="bg-white border-b border-slate-200">
+    <div class="bg-white border-b border-primary-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <nav class="flex text-sm font-medium text-slate-500 mb-4" aria-label="Breadcrumb">
+            <nav class="flex text-sm font-medium text-primary-500 mb-4" aria-label="Breadcrumb">
                 <ol class="flex items-center space-x-2">
-                    <li><a href="{% url 'student_course_detail' course.pk %}" class="hover:text-slate-900 transition-colors">Course</a></li>
-                    <li><i class="fas fa-chevron-right text-xs text-slate-300"></i></li>
-                    <li class="text-slate-900 truncate max-w-[300px]" aria-current="page">{{ module.title }}</li>
+                    <li><a href="{% url 'student_course_detail' course.pk %}" class="hover:text-primary-900 transition-colors">Kursus</a></li>
+                    <li><i class="fas fa-chevron-right text-xs text-primary-300"></i></li>
+                    <li class="text-primary-900 truncate max-w-[300px]" aria-current="page">{{ module.title }}</li>
                 </ol>
             </nav>
 
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-3">{{ module.title }}</h1>
+            <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight text-primary-900 mb-3">{{ module.title }}</h1>
             {% if module.description %}
-            <p class="text-slate-600 max-w-3xl leading-relaxed">{{ module.description }}</p>
+            <p class="text-primary-600 max-w-3xl leading-relaxed">{{ module.description }}</p>
             {% endif %}
         </div>
     </div>
@@ -30,26 +30,26 @@
             <!-- Left Column: Content List -->
             <div class="lg:col-span-2 space-y-6">
                 
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                    <div class="px-6 py-4 border-b border-slate-200 bg-slate-50/50 flex items-center justify-between">
-                        <h2 class="font-bold text-slate-900">Module Content</h2>
+                <div class="card overflow-hidden">
+                    <div class="px-6 py-4 border-b border-primary-200 bg-primary-50 flex items-center justify-between">
+                        <h2 class="font-semibold text-primary-900">Konten Modul</h2>
                         {% if module_progress %}
-                            <span class="inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
-                                {% if module_progress.is_completed %}Completed{% else %}ln Progress{% endif %}
+                            <span class="badge {% if module_progress.is_completed %}badge-success{% else %}badge-default{% endif %}">
+                                {% if module_progress.is_completed %}Selesai{% else %}Dalam Progres{% endif %}
                             </span>
                         {% endif %}
                     </div>
 
                     {% if contents_data %}
-                        <div class="divide-y divide-slate-100">
+                        <div class="divide-y divide-primary-100">
                             {% for content_data in contents_data %}
-                            <div class="group relative hover:bg-slate-50 transition-colors p-4 sm:p-5 flex items-start gap-4">
+                            <div class="group relative hover:bg-primary-50 transition-colors p-4 sm:p-5 flex items-start gap-4">
                                 <a href="{% url 'student_content_view' course.pk module.pk content_data.content.pk %}" class="absolute inset-0 z-0"></a>
                                 
                                 <!-- Icon -->
                                 <div class="relative z-10 flex-shrink-0">
-                                    <div class="h-10 w-10 rounded-lg flex items-center justify-center 
-                                        {% if content_data.is_completed %}bg-emerald-100 text-emerald-600{% else %}bg-slate-100 text-slate-500 group-hover:bg-indigo-50 group-hover:text-indigo-600{% endif %} 
+                                    <div class="h-10 w-10 rounded-xl flex items-center justify-center 
+                                        {% if content_data.is_completed %}bg-success-100 text-success-600{% else %}bg-primary-100 text-primary-500 group-hover:bg-primary-900 group-hover:text-white{% endif %} 
                                         transition-colors">
                                         {% if content_data.is_completed %}
                                             <i class="fas fa-check"></i>
@@ -64,19 +64,19 @@
                                 </div>
 
                                 <div class="flex-1 min-w-0 z-10 pointer-events-none">
-                                    <h3 class="text-base font-semibold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                                    <h3 class="text-base font-semibold text-primary-900 group-hover:text-primary-700 transition-colors">
                                         {{ content_data.content.item.title }}
                                     </h3>
-                                    <p class="text-xs text-slate-500 mt-1 capitalize">
-                                        {{ content_data.content.item.content_type }} Lesson
-                                        {% if content_data.is_completed %} &bull; Completed {{ content_data.progress.completed_at|date:"M d" }}{% endif %}
+                                    <p class="text-xs text-primary-500 mt-1 capitalize">
+                                        {{ content_data.content.item.content_type }} Pelajaran
+                                        {% if content_data.is_completed %} &bull; Selesai {{ content_data.progress.completed_at|date:"M d" }}{% endif %}
                                     </p>
                                 </div>
 
                                 <div class="relative z-10 flex-shrink-0 self-center">
                                     {% if not content_data.is_completed %}
-                                    <span class="inline-flex items-center justify-center rounded-lg bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50">
-                                        Start
+                                    <span class="btn btn-secondary py-1.5 px-3 text-xs">
+                                        Mulai
                                     </span>
                                     {% endif %}
                                 </div>
@@ -84,8 +84,8 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <div class="p-12 text-center text-slate-500">
-                            No content available in this module yet.
+                        <div class="p-12 text-center text-primary-500">
+                            Belum ada konten tersedia di modul ini.
                         </div>
                     {% endif %}
                 </div>
@@ -97,17 +97,17 @@
                 <div class="sticky top-24 space-y-6">
                     
                     <!-- Navigation -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-                        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Module Navigation</h3>
+                    <div class="card p-6">
+                        <h3 class="text-xs font-semibold text-primary-500 uppercase tracking-wider mb-4">Navigasi Modul</h3>
                         
                         <div class="space-y-3">
                             {% if previous_module %}
                             <a href="{% url 'student_module_detail' course.pk previous_module.pk %}"
-                               class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 hover:border-indigo-300 hover:bg-slate-50 transition-all text-left group">
-                                <i class="fas fa-arrow-left text-slate-400 group-hover:text-indigo-500"></i>
+                               class="flex items-center gap-3 p-3 rounded-xl border border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-all text-left group">
+                                <i class="fas fa-arrow-left text-primary-400 group-hover:text-primary-700"></i>
                                 <div>
-                                    <span class="block text-xs text-slate-500">Previous</span>
-                                    <span class="block text-sm font-medium text-slate-900 group-hover:text-indigo-700 line-clamp-1">
+                                    <span class="block text-xs text-primary-500">Sebelumnya</span>
+                                    <span class="block text-sm font-medium text-primary-900 group-hover:text-primary-700 line-clamp-1">
                                         {{ previous_module.title }}
                                     </span>
                                 </div>
@@ -116,39 +116,39 @@
 
                             {% if next_module %}
                             <a href="{% url 'student_module_detail' course.pk next_module.pk %}"
-                               class="flex items-center gap-3 p-3 rounded-lg border border-slate-200 hover:border-indigo-300 hover:bg-slate-50 transition-all text-right justify-end group">
+                               class="flex items-center gap-3 p-3 rounded-xl border border-primary-200 hover:border-primary-400 hover:bg-primary-50 transition-all text-right justify-end group">
                                 <div>
-                                    <span class="block text-xs text-slate-500">Next</span>
-                                    <span class="block text-sm font-medium text-slate-900 group-hover:text-indigo-700 line-clamp-1">
+                                    <span class="block text-xs text-primary-500">Selanjutnya</span>
+                                    <span class="block text-sm font-medium text-primary-900 group-hover:text-primary-700 line-clamp-1">
                                         {{ next_module.title }}
                                     </span>
                                 </div>
-                                <i class="fas fa-arrow-right text-slate-400 group-hover:text-indigo-500"></i>
+                                <i class="fas fa-arrow-right text-primary-400 group-hover:text-primary-700"></i>
                             </a>
                             {% endif %}
                             
                             <a href="{% url 'student_course_detail' course.pk %}"
-                               class="block w-full text-center py-2 text-sm text-indigo-600 font-medium hover:text-indigo-700 hover:bg-indigo-50 rounded-lg transition-colors mt-4">
-                                View Course Overview
+                               class="block w-full text-center py-2 text-sm text-primary-600 font-medium hover:text-primary-900 hover:bg-primary-100 rounded-xl transition-colors mt-4">
+                                Lihat Gambaran Kursus
                             </a>
                         </div>
                     </div>
 
                     <!-- Progress -->
-                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                     <div class="card p-6">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm font-medium text-slate-700">Completion</span>
-                            <span class="text-sm font-bold text-indigo-600">
+                            <span class="text-sm font-medium text-primary-700">Penyelesaian</span>
+                            <span class="text-sm font-semibold text-primary-900 tabular-nums">
                                 {% if module_progress.is_completed %}100%
                                 {% else %}{% widthratio module_progress.completed_contents_count module_progress.total_contents_count 100 %}%{% endif %}
                             </span>
                         </div>
-                        <div class="w-full bg-slate-100 rounded-full h-2">
-                             <div class="bg-indigo-600 h-2 rounded-full transition-all"
+                        <div class="w-full bg-primary-100 rounded-full h-2">
+                             <div class="bg-primary-900 h-2 rounded-full transition-all"
                                   style="width: {% if module_progress.is_completed %}100{% else %}{% widthratio module_progress.completed_contents_count module_progress.total_contents_count 100 %}{% endif %}%"></div>
                         </div>
-                        <p class="text-xs text-slate-500 mt-2">
-                            {{ module_progress.completed_contents_count|default:"0" }} of {{ contents_data|length }} items completed
+                        <p class="text-xs text-primary-500 mt-2">
+                            {{ module_progress.completed_contents_count|default:"0" }} dari {{ contents_data|length }} item selesai
                         </p>
                     </div>
 
