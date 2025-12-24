@@ -17,8 +17,6 @@ dependencies = [
     "django-htmx>=1.26.0",
     "psycopg2-binary>=2.9.11",
     "nh3>=0.3.2",
-    "marko[codehilite,toc]>=2.2.1",
-    "mistune>=3.2.0",
     "markdown>=3.10",
     "py-gfm>=2.0.0",
     "mdx-cite",
