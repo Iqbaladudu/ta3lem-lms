@@ -153,17 +153,27 @@
                                          class="bg-white rounded-lg shadow p-4 mb-4 border-2 border-gray-200 hover:border-green-300 transition">
                                         <!-- Content Header -->
                                         <div class="flex justify-between items-center border-b pb-3 mb-3">
-                                            <div class="flex items-center">
+                                            <div class="flex items-center group">
                                                 <input type="checkbox" 
                                                        class="content-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 mr-3" 
                                                        value="{{ content.id }}"
                                                        onchange="updateBulkOperations()">
                                                 <i class="fas fa-grip-vertical text-gray-400 cursor-move mr-3"></i>
-                                                <h3 class="font-semibold text-lg text-gray-900">{{ content.title }}</h3>
+                                                <!-- Inline editable title -->
+                                                <h3 class="font-semibold text-lg text-gray-900 content-title-display" 
+                                                    hx-get="{% url 'content_title_update' content.id %}" 
+                                                    hx-swap="outerHTML" 
+                                                    hx-trigger="click"
+                                                    title="Klik untuk edit judul" 
+                                                    style="cursor: pointer;">
+                                                    {{ content.title }}
+                                                    <i class="fas fa-pencil-alt text-gray-400 text-xs ml-2 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                </h3>
                                                 <span class="ml-2 text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                                                     {{ content.items.count }} item
                                                 </span>
                                             </div>
+
                                             <div class="flex items-center gap-2">
                                                 <!-- Dropdown tambah item -->
                                                 <div class="relative" x-data="{ open: false }">

@@ -24,9 +24,12 @@ urlpatterns = [
          name="content_item_create"),
     path("content/<int:content_id>/item/<int:item_id>/delete/", views.ContentItemDeleteView.as_view(),
          name="content_item_delete"),
+    path("content/<int:content_id>/title/", views.ContentTitleUpdateView.as_view(),
+         name="content_title_update"),
     path("content-item/order/", views.ContentItemOrderView.as_view(), name="content_item_order"),
     # Content delete
     path("content/<int:id>/delete/", views.ContentDeleteView.as_view(), name="module_content_delete"),
+
     path("module/<int:module_id>/", views.ModuleContentListView.as_view(), name="module_content_list"),
     path("module/<int:module_id>/bulk/", views.BulkContentOperationsView.as_view(), name="bulk_content_operations"),
     path("content/<int:content_id>/bulk/", views.BulkContentItemOperationsView.as_view(), name="bulk_content_item_operations"),

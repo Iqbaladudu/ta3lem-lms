@@ -295,6 +295,7 @@
                                 </div>
 
                                 <!-- Quick Status Actions -->
+                                <!-- TODO: Create beautiful alert -->
                                 {% if course.status != 'published' %}
                                     <div class="mb-3">
                                         <form method="post" action="{% url 'course_quick_status' course.id %}" class="inline w-full">

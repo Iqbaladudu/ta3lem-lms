@@ -1,3 +1,4 @@
+import mistune
 import re
 from django import template
 from django.utils import timezone
@@ -140,11 +141,8 @@ def _render_youtube_player(video_id, height, width_attr, min_height, autoplay, m
     if params:
         embed_url += "?" + "&".join(params)
     
-    html = f'''<div class="{container_class} relative" style="min-height: {min_height};">
-    <div class="absolute top-2 right-2 z-10">
-        <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">YouTube</span>
-    </div>
-    <iframe class="w-full rounded-lg" height="{height}" {width_attr} src="{embed_url}" title="{title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    html = f'''<div class="{container_class}">
+    <iframe class="w-full h-full absolute inset-0 rounded-xl" src="{embed_url}" title="{title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>'''
     
     return mark_safe(html)
@@ -167,11 +165,8 @@ def _render_vimeo_player(video_id, height, width_attr, min_height, autoplay, mut
     if params:
         embed_url += "?" + "&".join(params)
     
-    html = f'''<div class="{container_class} relative" style="min-height: {min_height};">
-    <div class="absolute top-2 right-2 z-10">
-        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Vimeo</span>
-    </div>
-    <iframe class="w-full rounded-lg" height="{height}" {width_attr} src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    html = f'''<div class="{container_class}">
+    <iframe class="w-full h-full absolute inset-0 rounded-xl" src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 </div>'''
     
     return mark_safe(html)
@@ -194,11 +189,8 @@ def _render_dailymotion_player(video_id, height, width_attr, min_height, autopla
     if params:
         embed_url += "?" + "&".join(params)
     
-    html = f'''<div class="{container_class} relative" style="min-height: {min_height};">
-    <div class="absolute top-2 right-2 z-10">
-        <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded">Dailymotion</span>
-    </div>
-    <iframe class="w-full rounded-lg" height="{height}" {width_attr} src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    html = f'''<div class="{container_class}">
+    <iframe class="w-full h-full absolute inset-0 rounded-xl" src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>'''
     
     return mark_safe(html)
@@ -248,8 +240,12 @@ def video_thumbnail(url, size='default'):
 
 @register.filter(name='markdown')
 def markdown_format(text):
+    """Convert Markdown text to HTML with extended features."""
+    if not text:
+        return ''
     import markdown
-    return mark_safe(markdown.markdown(text))
+    html = markdown.markdown(text, extensions=['extra', 'toc', 'abbr', 'attr_list', 'def_list', 'fenced_code', 'footnotes', 'md_in_html', 'admonition', 'tables', 'codehilite', 'legacy_em', 'legacy_attrs', 'meta', 'nl2br', 'sane_lists', 'smarty', 'mdx_gfm', 'mdx_cite', 'mdx_emdash'])
+    return mark_safe(html)
 
 
 @register.filter

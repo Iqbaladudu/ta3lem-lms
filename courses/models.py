@@ -354,6 +354,10 @@ class Module(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['course', 'order']),
+        ]
+
 
     def get_previous_in_order(self):
         """Get the previous module in the course by order"""
@@ -376,9 +380,26 @@ class Content(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['module', 'order']),
+        ]
+
 
     def __str__(self):
         return self.title
+
+    def get_first_item(self):
+        """Get the first ContentItem's actual item (Text/Video/Image/File)"""
+        first_content_item = self.items.first()
+        return first_content_item.item if first_content_item else None
+
+    def get_primary_content_type(self):
+        """Get the content type model name of the first item for icon display"""
+        first_content_item = self.items.first()
+        if first_content_item:
+            return first_content_item.content_type.model
+        return None
+
 
 
 class ContentItem(models.Model):
@@ -393,6 +414,10 @@ class ContentItem(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['content', 'order']),
+        ]
+
 
 
 class CourseWaitlist(models.Model):

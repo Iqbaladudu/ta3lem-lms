@@ -3,10 +3,19 @@
 {% load embed_video_tags %}
 {% load static %}
 
-{% block title %}{{ content.title }} - {{ module.title }} - Ta3lem{% endblock %}
+{% block title %}{% firstof content.title content.get_first_item.title "Lesson" %} - {{ module.title }} - Ta3lem{% endblock %}
+
+{% block footer %}{% endblock %}
+{% block navbar %}{% endblock %}
 
 {% block extra_css %}
 <style>
+    /* Disable page scroll - content scrolls within main area */
+    html, body {
+        overflow: hidden;
+        height: 100%;
+    }
+
     /* Custom Scrollbar for Sidebar */
     .sidebar-scroll::-webkit-scrollbar { width: 4px; }
     .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -90,7 +99,7 @@
 </a>
 
 <!-- Reading Progress Bar -->
-<div class="reading-progress lg:block hidden" 
+<div class="reading-progress block" 
      x-data="{ 
          progress: 0,
          updateProgress() {
@@ -102,9 +111,12 @@
          }
      }"
      x-init="updateProgress()"
-     @scroll.window="updateProgress()"
+     @scroll.window.throttle.100ms="updateProgress()"
      :style="{ width: progress + '%' }">
 </div>
+
+<!-- Live Region for Announcements -->
+<div id="live-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 
 <div class="bg-slate-50 min-h-screen flex flex-col lg:flex-row h-screen overflow-hidden" 
      x-data="{ 
@@ -112,33 +124,43 @@
          desktopSidebarOpen: true,
          markingComplete: false,
          showSuccess: false,
+         showError: false,
+         errorMessage: '',
+         announce(message) {
+             const el = document.getElementById('live-announcer');
+             if (el) { el.textContent = ''; setTimeout(() => el.textContent = message, 100); }
+         },
          navigate(selector) {
              if (document.activeElement?.matches('input, textarea')) return;
              document.querySelector(selector)?.click();
+         },
+         async submitComplete(event) {
+             event.preventDefault();
+             this.markingComplete = true;
+             this.showError = false;
+             try {
+                 const form = event.target;
+                 const response = await fetch(form.action, {
+                     method: 'POST',
+                     body: new FormData(form),
+                     headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                 });
+                 if (!response.ok) throw new Error('Network error');
+                 this.showSuccess = true;
+                 this.announce('Lesson marked as complete');
+                 setTimeout(() => window.location.reload(), 800);
+             } catch (error) {
+                 this.markingComplete = false;
+                 this.showError = true;
+                 this.errorMessage = 'Failed to save. Please try again.';
+                 this.announce('Error: Failed to save progress');
+             }
          }
      }"
      @keydown.left.window="navigate('.nav-prev')"
      @keydown.right.window="navigate('.nav-next')">
     
-    <!-- Mobile Header -->
-    <header class="lg:hidden bg-white border-b border-slate-200 p-4 flex items-center justify-between shrink-0 z-20" role="banner">
-        <div class="flex items-center gap-3 overflow-hidden">
-            <a href="{% url 'student_course_detail' course.pk %}" 
-               class="text-slate-400 hover:text-slate-600 p-1 rounded-md focus-ring transition-colors"
-               aria-label="Back to course overview">
-                <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                <span class="sr-only">Back to course</span>
-            </a>
-            <h1 class="font-semibold text-slate-900 truncate">{{ content.title }}</h1>
-        </div>
-        <button @click="sidebarOpen = !sidebarOpen" 
-                class="text-slate-500 p-2 hover:bg-slate-100 rounded-lg focus-ring transition-colors"
-                :aria-expanded="sidebarOpen.toString()"
-                aria-controls="course-sidebar"
-                aria-label="Toggle course navigation">
-            <i class="fas" :class="sidebarOpen ? 'fa-times' : 'fa-bars'" aria-hidden="true"></i>
-        </button>
-    </header>
+
 
     <!-- Sidebar (Course Navigation) -->
     <aside id="course-sidebar"
@@ -149,13 +171,15 @@
               'lg:w-80': desktopSidebarOpen,
               'lg:w-0 lg:border-r-0 lg:overflow-hidden': !desktopSidebarOpen
            }"
+           x-trap.noscroll="sidebarOpen"
+           @keydown.escape.window="sidebarOpen = false"
            role="navigation"
            aria-label="Course content navigation">
         
         <!-- Sidebar Header -->
         <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/50" 
              :class="{'lg:hidden': !desktopSidebarOpen}">
-            <div class="min-w-0">
+            <div class="min-w-0 flex-1">
                 <h2 class="font-bold text-slate-900 text-sm mb-1 line-clamp-1">{{ course.title }}</h2>
                 <div class="flex items-center gap-2">
                     <div class="flex-1 w-24 bg-slate-200 rounded-full h-1.5"
@@ -170,12 +194,21 @@
                     <span class="text-xs text-slate-500 font-medium">{{ enrollment.progress_percentage|floatformat:0 }}%</span>
                 </div>
             </div>
+            <!-- Mobile: Close button -->
             <button @click="sidebarOpen = false" 
-                    class="lg:hidden p-2 text-slate-500 hover:text-slate-700 bg-white rounded-md shadow-sm border border-slate-200 focus-ring transition-colors"
-                    aria-label="Close navigation">
+                    class="lg:hidden p-2 text-slate-500 hover:text-slate-700 bg-white rounded-md shadow-sm border border-slate-200 focus-ring transition-colors ml-3"
+                    aria-label="Tutup navigasi">
                 <i class="fas fa-times" aria-hidden="true"></i>
             </button>
+            <!-- Desktop: Collapse button -->
+            <button @click="desktopSidebarOpen = false" 
+                    class="hidden lg:flex p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-md transition-colors ml-3"
+                    title="Sembunyikan sidebar"
+                    aria-label="Collapse sidebar">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
         </div>
+
 
         <!-- Sidebar List -->
         <div class="flex-1 overflow-y-auto sidebar-scroll" :class="{'lg:hidden': !desktopSidebarOpen}">
@@ -244,19 +277,28 @@
         </div>
     </aside>
 
+    <!-- Floating Sidebar Toggle (appears when sidebar is collapsed on desktop) -->
+    <button x-show="!desktopSidebarOpen"
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-x-4"
+            x-transition:enter-end="opacity-100 translate-x-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-x-0"
+            x-transition:leave-end="opacity-0 -translate-x-4"
+            @click="desktopSidebarOpen = true"
+            class="hidden lg:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 p-3 bg-white hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 rounded-full shadow-lg border border-slate-200 hover:border-indigo-300 transition-all duration-200"
+            title="Tampilkan sidebar"
+            aria-label="Expand sidebar">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+    </button>
+
     <!-- Main Content Area -->
-    <main id="main-content" class="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-white lg:bg-slate-50/50" role="main">
+
+    <main id="main-content" class="flex-1 flex flex-col h-full min-w-0 overflow-y-auto bg-white lg:bg-slate-50/50">
         
         <!-- Desktop content header (hidden on mobile) -->
-        <header class="hidden lg:flex items-center justify-between px-8 py-6 bg-white border-b border-slate-200 sticky top-0 z-10">
+        <header class="hidden lg:flex items-center justify-between px-8 py-4 bg-white border-b border-slate-200 sticky top-0 z-10">
              <div class="flex items-center gap-4 min-w-0">
-                 <button @click="desktopSidebarOpen = !desktopSidebarOpen" 
-                         class="text-slate-400 hover:text-slate-600 transition-colors p-2 rounded-lg hover:bg-slate-100 focus-ring"
-                         :aria-expanded="desktopSidebarOpen.toString()"
-                         aria-controls="course-sidebar"
-                         :aria-label="desktopSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'">
-                     <i class="fas" :class="desktopSidebarOpen ? 'fa-angle-double-left' : 'fa-angle-double-right'" aria-hidden="true"></i>
-                 </button>
                  <div class="min-w-0">
                      <nav class="flex items-center text-xs text-slate-500 mb-1" aria-label="Breadcrumb">
                          <ol class="flex items-center">
@@ -265,11 +307,16 @@
                              </li>
                              <li class="flex items-center">
                                  <i class="fas fa-chevron-right text-[10px] mx-2" aria-hidden="true"></i>
-                                 <span class="truncate max-w-[200px]">{{ module.title }}</span>
+                                 <a href="{% url 'student_module_detail' course.pk module.pk %}" 
+                                    class="hover:text-indigo-600 transition-colors focus-ring rounded truncate max-w-[200px]">
+                                     {{ module.title }}
+                                 </a>
                              </li>
                          </ol>
                      </nav>
-                     <h1 class="text-xl font-bold text-slate-900 truncate">{{ content.title }}</h1>
+                     <h1 class="text-xl font-bold text-slate-900 truncate">
+                         {% firstof content.title content.get_first_item.title "Untitled" %}
+                     </h1>
                  </div>
              </div>
              
@@ -319,70 +366,208 @@
         </header>
 
         <!-- Content Viewer -->
-        <article class="flex-1 p-4 sm:p-6 lg:p-10 max-w-5xl mx-auto w-full pb-32 lg:pb-10">
+        <article class="flex-1 flex flex-col min-h-0 p-2 sm:p-4 lg:p-6 pb-24 lg:pb-6">
             
-            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-                <!-- Content Render Block -->
-                <div class="prose prose-slate max-w-none p-6 sm:p-8 [&_iframe]:!w-full [&_iframe]:!aspect-video [&_iframe]:!rounded-xl [&_iframe]:shadow-lg [&_iframe]:bg-slate-100 [&_img]:!rounded-xl [&_img]:shadow-sm">
-                    {% for content_item in content.items.all %}
-                        {{ content_item.item.render|safe }}
-                    {% empty %}
-                        <!-- Enhanced Empty State -->
-                        <div class="text-center py-16" role="status">
-                            <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-inbox text-2xl text-slate-400" aria-hidden="true"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold text-slate-700 mb-2">No content available</h3>
-                            <p class="text-slate-500 text-sm max-w-xs mx-auto">
-                                This lesson is currently being prepared. Please check back later or contact your instructor.
-                            </p>
-                        </div>
-                    {% endfor %}
-                </div>
+            <!-- Mobile Content Title Header -->
+            <div class="lg:hidden mb-4 px-2 shrink-0">
+                <a href="{% url 'student_course_detail' course.pk %}" 
+                   class="inline-flex items-center gap-2 text-indigo-600 bg-indigo-50/50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all mb-2 border border-indigo-100/50">
+                    <i class="fas fa-arrow-left text-[10px]"></i>
+                    Kembali ke Kursus
+                </a>
+                <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                    {% firstof content.title content.get_first_item.title "Untitled" %}
+                </h1>
             </div>
 
-            <!-- Complete Action -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-6 bg-indigo-50 rounded-xl p-6 border border-indigo-100"
-                 :class="{ 'success-pulse': showSuccess }">
-                <div>
-                     <h3 class="font-bold text-indigo-900 text-lg">Finished with this lesson?</h3>
-                     <p class="text-indigo-700/80 text-sm">Mark this lesson as complete to track your progress.</p>
+            <!-- Scrollable Content Area -->
+            <div class="flex-1 min-h-0 overflow-y-auto rounded-xl">
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <!-- Content Render Block -->
+                    <div class="prose prose-slate max-w-none p-4 sm:p-6 lg:p-8 [&_iframe]:!w-full [&_iframe]:!aspect-video [&_iframe]:!rounded-xl [&_iframe]:shadow-lg [&_iframe]:bg-slate-100 [&_img]:!rounded-xl [&_img]:shadow-sm">
+
+                        {% for content_item in content.items.all %}
+                            <div class="py-12 first:pt-0 last:pb-0">
+                                {{ content_item.item.render|safe }}
+                            </div>
+                            
+                            {% if not forloop.last %}
+                            <div class="flex items-center gap-6 py-8 not-prose">
+                                <div class="h-0.5 bg-slate-200 flex-1 rounded-full"></div>
+                                <div class="flex gap-1.5">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                                    <div class="w-1.5 h-1.5 rounded-full bg-slate-300"></div>
+                                </div>
+                                <div class="h-0.5 bg-slate-200 flex-1 rounded-full"></div>
+                            </div>
+                            {% endif %}
+                        {% empty %}
+                            <!-- Enhanced Empty State -->
+                            <div class="text-center py-16" role="status">
+                                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-inbox text-2xl text-slate-400" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="text-lg font-semibold text-slate-700 mb-2">No content available</h3>
+                                <p class="text-slate-500 text-sm max-w-xs mx-auto">
+                                    This lesson is currently being prepared. Please check back later or contact your instructor.
+                                </p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
 
-                {% if not content_progress.is_completed %}
-                    <form method="post" 
-                          action="{% url 'mark_content_complete' course.pk module.pk content.pk %}"
-                          @submit="markingComplete = true; setTimeout(() => showSuccess = true, 500)">
-                        {% csrf_token %}
-                        <button type="submit" 
-                                class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 px-6 rounded-lg shadow-sm transition-all flex items-center gap-2 focus-ring disabled:opacity-70 disabled:cursor-not-allowed"
-                                :disabled="markingComplete"
-                                aria-label="Mark this lesson as complete">
-                            <template x-if="!markingComplete">
-                                <span class="flex items-center gap-2">
-                                    <i class="fas fa-check" aria-hidden="true"></i> 
-                                    <span>Mark as Complete</span>
-                                </span>
-                            </template>
-                            <template x-if="markingComplete">
-                                <span class="flex items-center gap-2">
-                                    <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 
-                                    <span>Saving...</span>
-                                </span>
-                            </template>
-                        </button>
-                    </form>
-                {% else %}
-                    <div class="flex items-center gap-2 text-emerald-600 font-bold bg-white px-4 py-2.5 rounded-lg border border-emerald-200 shadow-sm" role="status">
-                         <i class="fas fa-check-circle" aria-hidden="true"></i>
-                         <span>Completed</span>
-                         <span class="sr-only">This lesson has been marked as complete</span>
+                <!-- Desktop Complete Action (hidden on mobile) -->
+                <div class="hidden lg:flex items-center justify-between gap-6 bg-slate-50 rounded-xl p-6 border border-slate-200 mt-8 shrink-0 transition-smooth"
+                     :class="{ 'success-pulse': showSuccess }">
+                    <div>
+                         <h3 class="font-bold text-slate-900 text-lg">Finished with this lesson?</h3>
+                         <p class="text-slate-500 text-sm">Mark as complete to track your progress.</p>
                     </div>
-                {% endif %}
+
+                    {% if not content_progress.is_completed %}
+                        <!-- Error Message -->
+                        <div x-show="showError" 
+                             x-transition
+                             class="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm flex items-center gap-2"
+                             role="alert">
+                            <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                            <span x-text="errorMessage"></span>
+                            <button @click="showError = false" class="ml-2 text-red-500 hover:text-red-700" aria-label="Dismiss error">
+                                <i class="fas fa-times text-xs" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        
+                        <form method="post" 
+                              action="{% url 'mark_content_complete' course.pk module.pk content.pk %}"
+                              @submit="submitComplete($event)">
+                            {% csrf_token %}
+                            <button type="submit" 
+                                    class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-xl shadow-md shadow-emerald-200 transition-all flex items-center gap-2 focus-ring disabled:opacity-70 disabled:cursor-not-allowed"
+                                    :disabled="markingComplete"
+                                    aria-label="Mark this lesson as complete">
+                                <template x-if="!markingComplete">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-check" aria-hidden="true"></i> 
+                                        <span>Mark as Complete</span>
+                                    </span>
+                                </template>
+                                <template x-if="markingComplete">
+                                    <span class="flex items-center gap-2">
+                                        <i class="fas fa-spinner fa-spin" aria-hidden="true"></i> 
+                                        <span>Saving...</span>
+                                    </span>
+                                </template>
+                            </button>
+                        </form>
+                    {% else %}
+                        <div class="flex items-center gap-2 text-emerald-600 font-bold bg-emerald-50 px-6 py-3.5 rounded-xl border border-emerald-200" role="status">
+                             <i class="fas fa-check-circle text-xl" aria-hidden="true"></i>
+                             <span>Completed</span>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
 
         </article>
     </main>
+    <!-- Sticky Bottom Navigation (Mobile) -->
+    <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-4 py-2 safe-area-bottom z-30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]" 
+         role="navigation" 
+         aria-label="Lesson navigation">
+        
+        <!-- Error Message for Mobile -->
+        <div x-show="showError" 
+             x-transition
+             class="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-lg text-xs flex items-center gap-2 mb-2"
+             role="alert">
+            <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+            <span x-text="errorMessage" class="flex-1"></span>
+            <button @click="showError = false" class="text-red-500 hover:text-red-700" aria-label="Dismiss error">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        
+        <div class="flex items-center gap-2 max-w-lg mx-auto">
+            <!-- Sidebar Toggle Button -->
+            <button @click="sidebarOpen = !sidebarOpen" 
+                    class="shrink-0 w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 focus-ring transition-all"
+                    :aria-expanded="sidebarOpen.toString()"
+                    aria-controls="course-sidebar"
+                    aria-label="Daftar Pelajaran">
+                <i class="fas fa-list-ul text-sm" aria-hidden="true"></i>
+            </button>
+            
+            <!-- Previous Button -->
+            {% if previous_content %}
+                <a href="{% url 'student_content_view' course.pk module.pk previous_content.pk %}" 
+                   class="flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 focus-ring transition-all nav-prev"
+                   aria-label="Go to previous lesson">
+                    <i class="fas fa-chevron-left text-sm" aria-hidden="true"></i>
+                </a>
+            {% else %}
+                <div class="flex items-center justify-center w-10 h-10 rounded-xl border border-slate-100 text-slate-300 cursor-not-allowed" aria-disabled="true">
+                    <i class="fas fa-chevron-left text-sm" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+            
+            <!-- Mark Complete / Completed Status -->
+            {% if not content_progress.is_completed %}
+                <form method="post" 
+                      action="{% url 'mark_content_complete' course.pk module.pk content.pk %}"
+                      @submit="submitComplete($event)"
+                      class="flex-1">
+                    {% csrf_token %}
+                    <button type="submit" 
+                            class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 shadow-md shadow-emerald-200 focus-ring transition-all"
+                            :disabled="markingComplete"
+                            :class="{ 'opacity-70 cursor-not-allowed': markingComplete }"
+                            aria-label="Mark this lesson as complete">
+                        <template x-if="!markingComplete">
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-check text-xs" aria-hidden="true"></i>
+                                <span class="text-sm">Selesai</span>
+                            </span>
+                        </template>
+                        <template x-if="markingComplete">
+                            <span class="flex items-center gap-2">
+                                <i class="fas fa-spinner fa-spin text-xs" aria-hidden="true"></i>
+                                <span class="text-sm">Menyimpan...</span>
+                            </span>
+                        </template>
+                    </button>
+                </form>
+            {% else %}
+                <div class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-50 text-emerald-600 font-bold border border-emerald-200" role="status">
+                    <i class="fas fa-check-circle text-xs" aria-hidden="true"></i>
+                    <span class="text-sm">Selesai</span>
+                </div>
+            {% endif %}
+
+            <!-- Next Button -->
+            {% if next_content %}
+                {% if next_module %}
+                 <a href="{% url 'student_content_view' course.pk next_module.pk next_content.pk %}" 
+                   class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-md shadow-indigo-200 focus-ring transition-all nav-next"
+                   aria-label="Go to next lesson">
+                    <span class="text-sm">Lanjut</span>
+                    <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                </a>
+                {% else %}
+                 <a href="{% url 'student_content_view' course.pk module.pk next_content.pk %}" 
+                   class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 shadow-md shadow-indigo-200 focus-ring transition-all nav-next"
+                   aria-label="Go to next lesson">
+                    <span class="text-sm">Lanjut</span>
+                    <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+            {% else %}
+                <div class="flex items-center justify-center w-10 h-10 rounded-xl border border-slate-100 text-slate-300 cursor-not-allowed" aria-disabled="true">
+                    <i class="fas fa-chevron-right text-sm" aria-hidden="true"></i>
+                </div>
+            {% endif %}
+        </div>
+    </nav>
     
     <!-- Backdrop for mobile sidebar -->
     <div x-show="sidebarOpen" 
@@ -393,48 +578,4 @@
     </div>
 
 </div>
-
-<!-- Sticky Bottom Navigation (Mobile) -->
-<nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 safe-area-bottom z-30" 
-     role="navigation" 
-     aria-label="Lesson navigation">
-    <div class="flex items-center justify-between gap-3 max-w-lg mx-auto">
-        {% if previous_content %}
-            <a href="{% url 'student_content_view' course.pk module.pk previous_content.pk %}" 
-               class="flex-1 py-3 px-4 rounded-lg border border-slate-200 text-center font-medium text-slate-700 hover:bg-slate-50 focus-ring transition-colors nav-prev"
-               aria-label="Go to previous lesson">
-                <i class="fas fa-chevron-left mr-2 text-sm" aria-hidden="true"></i>
-                <span>Previous</span>
-            </a>
-        {% else %}
-            <div class="flex-1 py-3 px-4 rounded-lg border border-slate-100 text-center font-medium text-slate-300 cursor-not-allowed" aria-disabled="true">
-                <i class="fas fa-chevron-left mr-2 text-sm" aria-hidden="true"></i>
-                <span>Previous</span>
-            </div>
-        {% endif %}
-
-        {% if next_content %}
-            {% if next_module %}
-             <a href="{% url 'student_content_view' course.pk next_module.pk next_content.pk %}" 
-               class="flex-1 py-3 px-4 rounded-lg bg-indigo-600 text-center font-medium text-white hover:bg-indigo-700 shadow-sm focus-ring transition-colors nav-next"
-               aria-label="Go to next lesson">
-                <span>Next</span>
-                <i class="fas fa-chevron-right ml-2 text-sm" aria-hidden="true"></i>
-            </a>
-            {% else %}
-             <a href="{% url 'student_content_view' course.pk module.pk next_content.pk %}" 
-               class="flex-1 py-3 px-4 rounded-lg bg-indigo-600 text-center font-medium text-white hover:bg-indigo-700 shadow-sm focus-ring transition-colors nav-next"
-               aria-label="Go to next lesson">
-                <span>Next</span>
-                <i class="fas fa-chevron-right ml-2 text-sm" aria-hidden="true"></i>
-            </a>
-            {% endif %}
-        {% else %}
-            <div class="flex-1 py-3 px-4 rounded-lg bg-slate-100 text-center font-medium text-slate-400 cursor-not-allowed" aria-disabled="true">
-                <span>Next</span>
-                <i class="fas fa-chevron-right ml-2 text-sm" aria-hidden="true"></i>
-            </div>
-        {% endif %}
-    </div>
-</nav>
 {% endblock %}
