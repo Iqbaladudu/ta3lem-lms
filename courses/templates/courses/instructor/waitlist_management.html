@@ -1,438 +1,329 @@
 {% extends 'base.html' %}
 
-{% block title %}Kelola Waitlist - {{ course.title }} - Ta3lem{% endblock %}
+{% block title %}Manage Waitlist - {{ course.title }} - Ta3lem{% endblock %}
 
 {% block content %}
-    <!-- Hero Section -->
-    <div class="relative bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 text-white py-8 sm:py-12 lg:py-16 overflow-hidden">
-        <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/30"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-slate-50 min-h-screen pb-12" x-data="{ activeTab: 'pending' }">
+    
+    <!-- Header -->
+    <div class="bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="mb-4">
                 <a href="{% url 'instructor_course_analytics' course.pk %}"
-                   class="inline-flex items-center text-white/90 hover:text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-200">
+                   class="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
                     <i class="fas fa-arrow-left mr-2"></i>
-                    <span>Kembali ke Analytics</span>
+                    <span>Back to Analytics</span>
                 </a>
             </div>
-            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 leading-tight">
-                Kelola Waitlist & Pendaftaran
-            </h1>
-            <p class="text-sm sm:text-base lg:text-xl text-blue-50 leading-relaxed">
-                Kelola daftar tunggu dan persetujuan pendaftaran untuk {{ course.title }}
-            </p>
+            
+            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 mb-1">Waitlist & Enrollments</h1>
+            <p class="text-slate-500">Manage pending approvals and waitlist priorities for {{ course.title }}.</p>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
-        <!-- Course Capacity Statistics -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
-            <!-- Current Enrolled -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-users text-white text-2xl"></i>
-                    </div>
-                    <span class="text-4xl font-extrabold text-gray-900">{{ current_enrolled }}</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Siswa Terdaftar</p>
-                {% if course.max_capacity %}
-                    <p class="text-xs text-gray-500 mt-1">dari {{ course.max_capacity }} kapasitas</p>
-                {% endif %}
-            </div>
-
-            <!-- Waitlist -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-clock text-white text-2xl"></i>
-                    </div>
-                    <span class="text-4xl font-extrabold text-gray-900">{{ waitlist_count }}</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Daftar Tunggu</p>
-                <p class="text-xs text-gray-500 mt-1">menunggu tempat</p>
-            </div>
-
-            <!-- Pending Approval -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
-                        <i class="fas fa-hourglass-half text-white text-2xl"></i>
-                    </div>
-                    <span class="text-4xl font-extrabold text-gray-900">{{ pending_count }}</span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">Menunggu Persetujuan</p>
-                <p class="text-xs text-gray-500 mt-1">butuh review</p>
-            </div>
-
-            <!-- Capacity Status -->
-            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-14 h-14 bg-gradient-to-br {% if has_capacity %}from-green-500 to-emerald-500{% else %}from-red-500 to-pink-500{% endif %} rounded-2xl flex items-center justify-center shadow-lg">
-                        <i class="fas {% if has_capacity %}fa-check-circle{% else %}fa-times-circle{% endif %} text-white text-2xl"></i>
-                    </div>
-                    <span class="text-4xl font-extrabold text-gray-900">
-                        {% if capacity_remaining is not None %}
-                            {{ capacity_remaining }}
-                        {% else %}
-                            ∞
-                        {% endif %}
-                    </span>
-                </div>
-                <p class="text-sm font-semibold text-gray-600">
-                    {% if course.max_capacity %}Sisa Kapasitas{% else %}Tanpa Batas{% endif %}
-                </p>
-                <p class="text-xs text-gray-500 mt-1">
-                    {% if capacity_remaining is not None %}
-                        tempat tersisa
-                    {% else %}
-                        unlimited
-                    {% endif %}
-                </p>
-            </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Stats Summary -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Enrolled</p>
+                 <p class="mt-1 text-2xl font-bold text-slate-900">{{ current_enrolled }}</p>
+                 <p class="text-xs text-slate-400 mt-1">{% if course.max_capacity %}of {{ course.max_capacity }} capacity{% else %}Unlimited capacity{% endif %}</p>
+             </div>
+             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Waitlist</p>
+                 <p class="mt-1 text-2xl font-bold text-amber-600">{{ waitlist_count }}</p>
+                 <p class="text-xs text-slate-400 mt-1">students waiting</p>
+             </div>
+             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Pending</p>
+                 <p class="mt-1 text-2xl font-bold text-yellow-600">{{ pending_count }}</p>
+                 <p class="text-xs text-slate-400 mt-1">needs approval</p>
+             </div>
+             <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                 <p class="text-xs font-bold text-slate-500 uppercase tracking-wide">Remaining Spots</p>
+                 <p class="mt-1 text-2xl font-bold {% if has_capacity %}text-emerald-600{% else %}text-red-600{% endif %}">
+                     {% if capacity_remaining is not None %}{{ capacity_remaining }}{% else %}∞{% endif %}
+                 </p>
+                 <p class="text-xs text-slate-400 mt-1">available</p>
+             </div>
         </div>
 
-        <!-- Management Interface -->
-        <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <!-- Tab Navigation -->
-            <div class="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
-                <div class="px-6 sm:px-8">
-                    <nav class="flex space-x-8" aria-label="Tabs">
-                        <button onclick="showTab('pending')" 
-                                id="pending-tab"
-                                class="tab-btn tab-active py-4 px-1 border-b-2 font-medium text-sm focus:outline-none transition-all duration-200">
-                            <div class="flex items-center">
-                                <i class="fas fa-hourglass-half mr-2"></i>
-                                Persetujuan Pending
-                                <span class="ml-2 py-1 px-2 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{{ pending_count }}</span>
-                            </div>
-                        </button>
-                        <button onclick="showTab('waitlist')" 
-                                id="waitlist-tab"
-                                class="tab-btn py-4 px-1 border-b-2 font-medium text-sm focus:outline-none transition-all duration-200">
-                            <div class="flex items-center">
-                                <i class="fas fa-list-ol mr-2"></i>
-                                Daftar Tunggu
-                                <span class="ml-2 py-1 px-2 text-xs font-semibold bg-orange-100 text-orange-800 rounded-full">{{ waitlist_count }}</span>
-                            </div>
-                        </button>
-                        <button onclick="showTab('rejected')" 
-                                id="rejected-tab"
-                                class="tab-btn py-4 px-1 border-b-2 font-medium text-sm focus:outline-none transition-all duration-200">
-                            <div class="flex items-center">
-                                <i class="fas fa-user-times mr-2"></i>
-                                Riwayat Penolakan
-                            </div>
-                        </button>
-                    </nav>
-                </div>
+        <!-- Management Area -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden min-h-[500px]">
+            
+            <!-- Tabs -->
+            <div class="border-b border-slate-200 bg-slate-50/50 px-6">
+                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <button @click="activeTab = 'pending'" 
+                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'pending', 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300': activeTab !== 'pending' }"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center">
+                        <i class="fas fa-hourglass-half mr-2"></i>
+                        Pending Approval
+                        <span class="ml-2 py-0.5 px-2.5 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">{{ pending_count }}</span>
+                    </button>
+
+                    <button @click="activeTab = 'waitlist'" 
+                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'waitlist', 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300': activeTab !== 'waitlist' }"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center">
+                        <i class="fas fa-list-ol mr-2"></i>
+                        Waitlist
+                        <span class="ml-2 py-0.5 px-2.5 text-xs font-semibold bg-amber-100 text-amber-800 rounded-full">{{ waitlist_count }}</span>
+                    </button>
+
+                    <button @click="activeTab = 'rejected'" 
+                            :class="{ 'border-indigo-500 text-indigo-600': activeTab === 'rejected', 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300': activeTab !== 'rejected' }"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm flex items-center">
+                        <i class="fas fa-user-times mr-2"></i>
+                        Rejected History
+                    </button>
+                </nav>
             </div>
 
-            <!-- Tab Content -->
-            <div class="p-6 sm:p-8">
-                <!-- Pending Approvals Tab -->
-                <div id="pending-content" class="tab-content">
+            <div class="p-6">
+                
+                <!-- Pending Content -->
+                <div x-show="activeTab === 'pending'" style="display: none;">
                     {% if pending_enrollments %}
                         <div class="space-y-4">
                             {% for enrollment in pending_enrollments %}
-                            <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl p-6 border border-yellow-200 hover:shadow-md transition-all duration-200">
-                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                                    <div class="flex items-center space-x-4 mb-4 sm:mb-0">
-                                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
-                                            <span class="text-white font-bold text-sm">
+                                <div class="bg-yellow-50/50 border border-yellow-100 rounded-xl p-6 transition-all hover:bg-yellow-50 hover:shadow-sm">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="h-12 w-12 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center font-bold shadow-sm">
                                                 {{ enrollment.student.first_name|first|upper }}{{ enrollment.student.last_name|first|upper }}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-lg font-bold text-gray-900">{{ enrollment.student.get_full_name }}</h3>
-                                            <p class="text-sm text-gray-600">{{ enrollment.student.email }}</p>
-                                            <div class="flex items-center text-xs text-gray-500 mt-1">
-                                                <i class="fas fa-calendar mr-1"></i>
-                                                Diajukan {{ enrollment.approval_requested_at|date:"d M Y" }}
-                                                <span class="ml-2 px-2 py-1 bg-yellow-200 text-yellow-800 rounded-full font-medium">
-                                                    {{ enrollment.approval_requested_at|timesince }} lalu
-                                                </span>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-bold text-slate-900">{{ enrollment.student.get_full_name }}</h3>
+                                                <p class="text-sm text-slate-600">{{ enrollment.student.email }}</p>
+                                                <div class="flex items-center text-xs text-slate-500 mt-1 space-x-2">
+                                                    <span>requested {{ enrollment.approval_requested_at|timesince }} ago</span>
+                                                    <span>&bull;</span>
+                                                    <span>{{ enrollment.approval_requested_at|date:"d M Y" }}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="flex space-x-2">
-                                        <form method="post" action="{% url 'approve_enrollment' enrollment.pk %}" class="inline">
-                                            {% csrf_token %}
-                                            <button type="submit" 
-                                                    class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-200 shadow-lg hover:shadow-xl {% if not has_capacity %}opacity-50 cursor-not-allowed{% endif %}"
-                                                    {% if not has_capacity %}disabled title="Tidak ada kapasitas tersisa"{% endif %}>
-                                                <i class="fas fa-check mr-2"></i>
-                                                Setujui
+                                        <div class="flex gap-2 self-end sm:self-center">
+                                            <form method="post" action="{% url 'approve_enrollment' enrollment.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" 
+                                                        {% if not has_capacity %}disabled{% endif %}
+                                                        class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white text-sm font-semibold rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-colors">
+                                                    <i class="fas fa-check mr-2"></i> Approve
+                                                </button>
+                                            </form>
+                                            <button onclick="showRejectModal({{ enrollment.pk }}, '{{ enrollment.student.get_full_name|escapejs }}')"
+                                                    class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors">
+                                                <i class="fas fa-times mr-2"></i> Reject
                                             </button>
-                                        </form>
-                                        <button onclick="showRejectModal({{ enrollment.pk }}, '{{ enrollment.student.get_full_name|escapejs }}')" 
-                                                class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm font-semibold rounded-lg hover:from-red-600 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl">
-                                            <i class="fas fa-times mr-2"></i>
-                                            Tolak
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
                         </div>
                     {% else %}
                         <div class="text-center py-12">
-                            <div class="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-check-circle text-gray-400 text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Tidak Ada Pending Request</h3>
-                            <p class="text-gray-600">Semua permintaan pendaftaran telah diproses.</p>
+                            <i class="fas fa-check-circle text-slate-300 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-medium text-slate-900">All caught up!</h3>
+                            <p class="text-slate-500">No pending enrollment requests.</p>
                         </div>
                     {% endif %}
                 </div>
 
-                <!-- Waitlist Tab -->
-                <div id="waitlist-content" class="tab-content hidden">
+                <!-- Waitlist Content -->
+                <div x-show="activeTab === 'waitlist'" style="display: none;">
                     {% if waitlist_entries %}
                         <div class="space-y-4">
                             {% for entry in waitlist_entries %}
-                            <div class="bg-gradient-to-r from-orange-50 to-amber-50 rounded-xl p-6 border border-orange-200 hover:shadow-md transition-all duration-200">
-                                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-                                    <div class="flex items-center space-x-4 mb-4 sm:mb-0">
-                                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center shadow-lg">
-                                            <div class="text-center">
-                                                <div class="text-white font-bold text-lg">#{{ entry.get_position }}</div>
-                                                <div class="text-orange-100 text-xs">posisi</div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-lg font-bold text-gray-900">{{ entry.student.get_full_name }}</h3>
-                                            <p class="text-sm text-gray-600">{{ entry.student.email }}</p>
-                                            <div class="flex items-center text-xs text-gray-500 mt-1">
-                                                <i class="fas fa-clock mr-1"></i>
-                                                Bergabung {{ entry.joined_waitlist|date:"d M Y" }}
-                                                <span class="ml-2 px-2 py-1 bg-orange-200 text-orange-800 rounded-full font-medium">
-                                                    Prioritas: {{ entry.priority }}
-                                                </span>
-                                            </div>
-                                        </div>
+                                <div class="bg-amber-50/30 border border-amber-100 rounded-xl p-6 transition-all hover:bg-amber-50/50 hover:shadow-sm relative overflow-hidden">
+                                     <!-- Position Badge -->
+                                    <div class="absolute -right-6 -top-6 h-20 w-20 bg-amber-100 rounded-full flex items-end justify-start p-4 text-amber-700 font-bold opacity-20 text-3xl">
+                                        {{ entry.get_position }}
                                     </div>
-                                    <div class="flex space-x-2">
-                                        <form method="post" action="{% url 'approve_waitlist_entry' entry.pk %}" class="inline">
-                                            {% csrf_token %}
-                                            <button type="submit" 
-                                                    class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-sm font-semibold rounded-lg hover:from-green-600 hover:to-emerald-600 transition-all duration-200 shadow-lg hover:shadow-xl {% if not has_capacity %}opacity-50 cursor-not-allowed{% endif %}"
-                                                    {% if not has_capacity %}disabled title="Tidak ada kapasitas tersisa"{% endif %}>
-                                                <i class="fas fa-user-plus mr-2"></i>
-                                                Terima
+                                    
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+                                        <div class="flex items-start gap-4">
+                                            <div class="h-12 w-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-sm text-lg">
+                                                #{{ entry.get_position }}
+                                            </div>
+                                            <div>
+                                                <h3 class="text-lg font-bold text-slate-900">{{ entry.student.get_full_name }}</h3>
+                                                <p class="text-sm text-slate-600">{{ entry.student.email }}</p>
+                                                <div class="flex items-center text-xs text-slate-500 mt-1">
+                                                    <span>Joined waitlist {{ entry.joined_waitlist|date:"d M Y" }}</span>
+                                                    <span class="ml-2 px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-[10px] font-bold uppercase">Priority {{ entry.priority }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2 self-end sm:self-center">
+                                            <form method="post" action="{% url 'approve_waitlist_entry' entry.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" 
+                                                        {% if not has_capacity %}disabled{% endif %}
+                                                        class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-colors">
+                                                    <i class="fas fa-user-plus mr-2"></i> Accept
+                                                </button>
+                                            </form>
+                                            <button onclick="showRemoveModal({{ entry.pk }}, '{{ entry.student.get_full_name|escapejs }}')"
+                                                    class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 text-slate-700 text-sm font-medium rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors">
+                                                <i class="fas fa-trash-alt mr-2 text-red-500"></i> Remove
                                             </button>
-                                        </form>
-                                        <button onclick="showRemoveModal({{ entry.pk }}, '{{ entry.student.get_full_name|escapejs }}')" 
-                                                class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white text-sm font-semibold rounded-lg hover:from-gray-600 hover:to-gray-700 transition-all duration-200 shadow-lg hover:shadow-xl">
-                                            <i class="fas fa-user-minus mr-2"></i>
-                                            Hapus
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
                         </div>
                     {% else %}
-                        <div class="text-center py-12">
-                            <div class="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-list text-gray-400 text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Daftar Tunggu Kosong</h3>
-                            <p class="text-gray-600">Belum ada siswa yang bergabung dalam daftar tunggu.</p>
+                         <div class="text-center py-12">
+                            <i class="fas fa-list-ol text-slate-300 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-medium text-slate-900">Waitlist is empty</h3>
+                            <p class="text-slate-500">No students are currently waiting.</p>
                         </div>
                     {% endif %}
                 </div>
 
-                <!-- Rejected Tab -->
-                <div id="rejected-content" class="tab-content hidden">
+                <!-- Rejected Content -->
+                <div x-show="activeTab === 'rejected'" style="display: none;">
                     {% if rejected_enrollments %}
                         <div class="space-y-4">
                             {% for enrollment in rejected_enrollments %}
-                            <div class="bg-gradient-to-r from-red-50 to-pink-50 rounded-xl p-6 border border-red-200">
-                                <div class="flex items-center space-x-4">
-                                    <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                                        <span class="text-white font-bold text-sm">
-                                            {{ enrollment.student.first_name|first|upper }}{{ enrollment.student.last_name|first|upper }}
-                                        </span>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h3 class="text-lg font-bold text-gray-900">{{ enrollment.student.get_full_name }}</h3>
-                                        <p class="text-sm text-gray-600">{{ enrollment.student.email }}</p>
-                                        <div class="flex items-center text-xs text-gray-500 mt-1">
-                                            <i class="fas fa-user-times mr-1"></i>
-                                            Ditolak oleh {{ enrollment.approved_by.get_full_name }} pada {{ enrollment.approved_at|date:"d M Y" }}
-                                        </div>
-                                        {% if enrollment.rejection_reason %}
-                                            <div class="mt-2 p-2 bg-red-100 rounded-lg">
-                                                <p class="text-sm text-red-800">
-                                                    <i class="fas fa-quote-left mr-1"></i>
-                                                    {{ enrollment.rejection_reason }}
-                                                </p>
+                                <div class="bg-red-50/30 border border-slate-200 rounded-xl p-6 opacity-75 hover:opacity-100 transition-opacity">
+                                    <div class="flex flex-col sm:flex-row gap-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="h-10 w-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center font-bold">
+                                                 {{ enrollment.student.first_name|first|upper }}{{ enrollment.student.last_name|first|upper }}
                                             </div>
-                                        {% endif %}
+                                            <div>
+                                                <h3 class="font-bold text-slate-900">{{ enrollment.student.get_full_name }}</h3>
+                                                <div class="flex items-center text-xs text-slate-500 mt-0.5">
+                                                     <i class="fas fa-user-times mr-1 text-red-500"></i>
+                                                     Rejected by {{ enrollment.approved_by.get_full_name }} on {{ enrollment.approved_at|date:"d M Y" }}
+                                                </div>
+                                                {% if enrollment.rejection_reason %}
+                                                    <div class="mt-2 p-3 bg-red-50 rounded-lg text-sm text-red-800 border-l-4 border-red-300">
+                                                        "{{ enrollment.rejection_reason }}"
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endfor %}
                         </div>
                     {% else %}
                         <div class="text-center py-12">
-                            <div class="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <i class="fas fa-user-check text-gray-400 text-3xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Tidak Ada Penolakan</h3>
-                            <p class="text-gray-600">Belum ada permintaan pendaftaran yang ditolak baru-baru ini.</p>
+                            <i class="fas fa-history text-slate-300 text-4xl mb-3"></i>
+                            <h3 class="text-lg font-medium text-slate-900">No rejection history</h3>
+                            <p class="text-slate-500">No rejected enrollments found.</p>
                         </div>
                     {% endif %}
                 </div>
+
             </div>
         </div>
     </div>
 
     <!-- Reject Modal -->
-    <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
-            <div class="p-6 border-b border-gray-200">
-                <h3 class="text-xl font-bold text-gray-900">Tolak Pendaftaran</h3>
+    <div id="rejectModal" class="fixed inset-0 bg-slate-900/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden md:max-w-md transform transition-all">
+            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-slate-900">Reject Enrollment</h3>
+                <button onclick="hideRejectModal()" class="text-slate-400 hover:text-slate-500">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <form id="rejectForm" method="post">
                 {% csrf_token %}
                 <div class="p-6">
-                    <p class="text-gray-600 mb-4">
-                        Apakah Anda yakin ingin menolak pendaftaran dari <strong id="rejectStudentName"></strong>?
+                    <p class="text-slate-600 mb-4 text-sm">
+                        Are you sure you want to reject <strong id="rejectStudentName" class="text-slate-900"></strong>? This action cannot be easily undone.
                     </p>
                     <div class="mb-4">
-                        <label for="rejection_reason" class="block text-sm font-medium text-gray-700 mb-2">
-                            Alasan penolakan (opsional):
+                        <label for="rejection_reason" class="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">
+                            Reason (Optional)
                         </label>
                         <textarea id="rejection_reason" 
                                   name="rejection_reason" 
                                   rows="3" 
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                                  placeholder="Berikan alasan mengapa pendaftaran ditolak..."></textarea>
+                                  class="block w-full rounded-md border-0 py-1.5 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  placeholder="Briefly explain why..."></textarea>
                     </div>
                 </div>
-                <div class="flex justify-end space-x-3 p-6 bg-gray-50 rounded-b-2xl">
-                    <button type="button" onclick="hideRejectModal()" 
-                            class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium">
-                        Batal
-                    </button>
-                    <button type="submit" 
-                            class="px-6 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white font-semibold rounded-lg hover:from-red-600 hover:to-pink-600 transition-all duration-200">
-                        Tolak Pendaftaran
-                    </button>
+                <div class="bg-slate-50 px-6 py-4 flex flex-row-reverse gap-3">
+                    <button type="submit" class="inline-flex justify-center rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:w-auto">Reject Enrollment</button>
+                    <button type="button" onclick="hideRejectModal()" class="inline-flex justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 sm:w-auto">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Remove Modal -->
-    <div id="removeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
-            <div class="p-6 border-b border-gray-200">
-                <h3 class="text-xl font-bold text-gray-900">Hapus dari Daftar Tunggu</h3>
+    <div id="removeModal" class="fixed inset-0 bg-slate-900/50 hidden z-50 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden md:max-w-md transform transition-all">
+            <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-slate-900">Remove from Waitlist</h3>
+                <button onclick="hideRemoveModal()" class="text-slate-400 hover:text-slate-500">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <form id="removeForm" method="post">
                 {% csrf_token %}
                 <div class="p-6">
-                    <p class="text-gray-600 mb-4">
-                        Apakah Anda yakin ingin menghapus <strong id="removeStudentName"></strong> dari daftar tunggu?
+                    <p class="text-slate-600 mb-4 text-sm">
+                        Are you sure you want to remove <strong id="removeStudentName" class="text-slate-900"></strong> from the waitlist?
                     </p>
                     <div class="mb-4">
-                        <label for="removal_reason" class="block text-sm font-medium text-gray-700 mb-2">
-                            Alasan penghapusan (opsional):
+                        <label for="removal_reason" class="block text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">
+                             Reason (Optional)
                         </label>
                         <textarea id="removal_reason" 
                                   name="removal_reason" 
                                   rows="3" 
-                                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
-                                  placeholder="Berikan alasan mengapa dihapus dari daftar tunggu..."></textarea>
+                                  class="block w-full rounded-md border-0 py-1.5 text-slate-900 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                  placeholder="Briefly explain why..."></textarea>
                     </div>
                 </div>
-                <div class="flex justify-end space-x-3 p-6 bg-gray-50 rounded-b-2xl">
-                    <button type="button" onclick="hideRemoveModal()" 
-                            class="px-4 py-2 text-gray-600 hover:text-gray-800 font-medium">
-                        Batal
-                    </button>
-                    <button type="submit" 
-                            class="px-6 py-2 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-semibold rounded-lg hover:from-gray-600 hover:to-gray-700 transition-all duration-200">
-                        Hapus dari Waitlist
-                    </button>
+                <div class="bg-slate-50 px-6 py-4 flex flex-row-reverse gap-3">
+                     <button type="submit" class="inline-flex justify-center rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:w-auto">Remove</button>
+                    <button type="button" onclick="hideRemoveModal()" class="inline-flex justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 hover:bg-slate-50 sm:w-auto">Cancel</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script>
-        // Tab functionality
-        function showTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            
-            // Remove active class from all tab buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('tab-active');
-            });
-            
-            // Show selected tab content
-            document.getElementById(tabName + '-content').classList.remove('hidden');
-            document.getElementById(tabName + '-tab').classList.add('tab-active');
-        }
+</div>
 
-        // Modal functions
-        function showRejectModal(enrollmentId, studentName) {
-            document.getElementById('rejectStudentName').textContent = studentName;
-            document.getElementById('rejectForm').action = `{% url 'reject_enrollment' 0 %}`.replace('0', enrollmentId);
-            document.getElementById('rejectModal').classList.remove('hidden');
-        }
+<script>
+    function showRejectModal(enrollmentId, studentName) {
+        document.getElementById('rejectStudentName').textContent = studentName;
+        document.getElementById('rejectForm').action = `{% url 'reject_enrollment' 0 %}`.replace('0', enrollmentId);
+        document.getElementById('rejectModal').classList.remove('hidden');
+    }
 
-        function hideRejectModal() {
-            document.getElementById('rejectModal').classList.add('hidden');
-            document.getElementById('rejection_reason').value = '';
-        }
+    function hideRejectModal() {
+        document.getElementById('rejectModal').classList.add('hidden');
+        document.getElementById('rejection_reason').value = '';
+    }
 
-        function showRemoveModal(entryId, studentName) {
-            document.getElementById('removeStudentName').textContent = studentName;
-            document.getElementById('removeForm').action = `{% url 'remove_waitlist_entry' 0 %}`.replace('0', entryId);
-            document.getElementById('removeModal').classList.remove('hidden');
-        }
+    function showRemoveModal(entryId, studentName) {
+        document.getElementById('removeStudentName').textContent = studentName;
+        document.getElementById('removeForm').action = `{% url 'remove_waitlist_entry' 0 %}`.replace('0', entryId);
+        document.getElementById('removeModal').classList.remove('hidden');
+    }
 
-        function hideRemoveModal() {
-            document.getElementById('removeModal').classList.add('hidden');
-            document.getElementById('removal_reason').value = '';
-        }
+    function hideRemoveModal() {
+        document.getElementById('removeModal').classList.add('hidden');
+        document.getElementById('removal_reason').value = '';
+    }
 
-        // Close modal when clicking outside
-        document.getElementById('rejectModal').addEventListener('click', function(e) {
-            if (e.target === this) hideRejectModal();
-        });
-
-        document.getElementById('removeModal').addEventListener('click', function(e) {
-            if (e.target === this) hideRemoveModal();
-        });
-
-        // ESC key to close modals
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                hideRejectModal();
-                hideRemoveModal();
-            }
-        });
-    </script>
-
-    <style>
-        .tab-btn {
-            @apply border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300;
+    // Close on click outside
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('rejectModal')) {
+            hideRejectModal();
         }
-        
-        .tab-active {
-            @apply border-blue-500 text-blue-600;
+        if (event.target == document.getElementById('removeModal')) {
+            hideRemoveModal();
         }
-        
-        .bg-grid-white\/\[0\.05\] {
-            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-        }
-    </style>
+    }
+</script>
 {% endblock %}

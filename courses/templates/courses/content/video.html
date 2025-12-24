@@ -1,112 +1,88 @@
 {% load static %}
 {% load course %}
-<div class="video-container bg-gray-50 rounded-xl p-4 sm:p-6">
-    <div class="flex items-start justify-between mb-4">
-        <h3 class="text-lg sm:text-xl font-bold text-gray-900 flex-1">{{ item.title }}</h3>
-        {% if item.video_platform %}
-            <span class="ml-2 px-2 py-1 text-xs font-medium rounded-full 
-                         {% if item.video_platform == 'youtube' %}bg-red-100 text-red-800
-                         {% elif item.video_platform == 'vimeo' %}bg-blue-100 text-blue-800  
-                         {% elif item.video_platform == 'dailymotion' %}bg-orange-100 text-orange-800
-                         {% elif item.video_platform == 'uploaded' %}bg-green-100 text-green-800
-                         {% else %}bg-gray-100 text-gray-800{% endif %}">
-                {{ item.get_video_platform_display }}
-            </span>
-        {% endif %}
-    </div>
+<div class="video-container bg-transparent rounded-xl overflow-hidden">
     
-    {% if item.url %}
-    <!-- Embedded video with enhanced player -->
-    <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden shadow-lg mb-4">
-        {% video_player item.url height=400 min_height="400px" container_class="w-full" autoplay=item.auto_play %}
-    </div>
-    {% elif item.file %}
-    <!-- Uploaded video file -->
-    <div class="bg-black rounded-lg overflow-hidden shadow-lg mb-4">
-        <video controls class="w-full rounded-lg min-h-[400px]" {% if item.auto_play %}autoplay{% endif %}>
-            <source src="{{ item.file.url }}" type="video/mp4">
-            <track kind="captions" src="#" srclang="id" label="Indonesian" />
-            <p class="text-white p-4">Browser Anda tidak mendukung pemutaran video HTML5.</p>
-        </video>
-    </div>
-    {% endif %}
-    
-    <!-- Video metadata and controls -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-        {% if item.duration %}
-        <div class="flex items-center text-sm text-gray-600">
-            <i class="fas fa-clock mr-2 text-blue-600"></i>
-            <span>
-                Durasi: 
-                {% if item.duration >= 3600 %}
-                    {{ item.duration|floatformat:0|div:3600|floatformat:0 }}j {{ item.duration|floatformat:0|mod:3600|div:60|floatformat:0 }}m
-                {% else %}
-                    {{ item.duration|floatformat:0|div:60|floatformat:0 }}m {{ item.duration|floatformat:0|mod:60|floatformat:0 }}s
-                {% endif %}
-            </span>
-        </div>
-        {% endif %}
-        
-        {% if item.captions_enabled %}
-        <div class="flex items-center text-sm text-green-600">
-            <i class="fas fa-closed-captioning mr-2"></i>
-            <span>Subtitel tersedia</span>
-        </div>
-        {% endif %}
-        
-        {% if item.minimum_watch_percentage and item.minimum_watch_percentage != 80 %}
-        <div class="flex items-center text-sm text-gray-600">
-            <i class="fas fa-eye mr-2 text-purple-600"></i>
-            <span>Minimum tonton: {{ item.minimum_watch_percentage }}%</span>
-        </div>
-        {% endif %}
-    </div>
-    
-    <!-- Video actions -->
-    <div class="flex flex-wrap items-center justify-between gap-3">
-        <div class="flex flex-wrap items-center gap-3">
-            {% if item.url %}
-                <a href="{{ item.url }}" target="_blank" 
-                   class="inline-flex items-center px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                    <i class="fas fa-external-link-alt mr-2"></i>
-                    Buka di {{ item.get_video_platform_display|default:"Platform Asli" }}
-                </a>
-            {% elif item.file %}
-                <a href="{{ item.file.url }}" target="_blank"
-                   class="inline-flex items-center px-3 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                    <i class="fas fa-download mr-2"></i>
-                    Download Video
-                </a>
-            {% endif %}
-            
-            {% if item.transcript %}
-                <button onclick="toggleTranscript('{{ item.id }}')"
-                        class="inline-flex items-center px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded-lg transition-colors duration-200">
-                    <i class="fas fa-file-alt mr-2"></i>
-                    Lihat Transkrip
-                </button>
-            {% endif %}
-        </div>
-        
-        <!-- Video quality indicator -->
+    <!-- Player Wrapper -->
+    <div class="bg-black relative aspect-video w-full flex items-center justify-center">
         {% if item.url %}
-            {% with thumbnail_url=item.get_thumbnail_url %}
-                {% if thumbnail_url %}
-                    <div class="hidden">
-                        <img src="{{ thumbnail_url }}" alt="Video thumbnail" class="w-16 h-12 rounded object-cover">
-                    </div>
-                {% endif %}
-            {% endwith %}
+            {% video_player item.url height=400 min_height="400px" container_class="w-full h-full absolute inset-0" autoplay=item.auto_play %}
+        {% elif item.file %}
+            <video controls class="w-full h-full absolute inset-0" {% if item.auto_play %}autoplay{% endif %}>
+                <source src="{{ item.file.url }}" type="video/mp4">
+                <track kind="captions" src="#" srclang="en" label="English" />
+                <p class="text-white p-4">Your browser does not support HTML5 video.</p>
+            </video>
         {% endif %}
     </div>
-    
-    <!-- Transcript section (collapsible) -->
-    {% if item.transcript %}
-    <div id="transcript-{{ item.id }}" class="hidden mt-4 p-4 bg-white border border-gray-200 rounded-lg">
-        <h4 class="font-semibold text-gray-900 mb-2">Transkrip Video</h4>
-        <div class="text-sm text-gray-700 whitespace-pre-line max-h-60 overflow-y-auto">{{ item.transcript }}</div>
+
+    <!-- Video Metadata & Controls -->
+    <div class="p-6">
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
+            <div>
+                <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2">{{ item.title }}</h3>
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+                    {% if item.duration %}
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-1.5 text-slate-400"></i>
+                            <span>
+                                {% if item.duration >= 3600 %}
+                                    {{ item.duration|floatformat:0|div:3600|floatformat:0 }}h {{ item.duration|floatformat:0|mod:3600|div:60|floatformat:0 }}m
+                                {% else %}
+                                    {{ item.duration|floatformat:0|div:60|floatformat:0 }}m {{ item.duration|floatformat:0|mod:60|floatformat:0 }}s
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endif %}
+                    
+                    {% if item.video_platform %}
+                         <div class="flex items-center">
+                            <span class="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 text-xs font-medium text-slate-600 ring-1 ring-inset ring-slate-500/10">
+                                {{ item.get_video_platform_display }}
+                            </span>
+                         </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+                 {% if item.url %}
+                    <a href="{{ item.url }}" target="_blank" 
+                       class="inline-flex items-center px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
+                        <i class="fas fa-external-link-alt mr-2"></i>
+                        Open Original
+                    </a>
+                {% elif item.file %}
+                    <a href="{{ item.file.url }}" target="_blank" download
+                       class="inline-flex items-center px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
+                        <i class="fas fa-download mr-2"></i>
+                        Download
+                    </a>
+                {% endif %}
+                
+                {% if item.transcript %}
+                    <button onclick="toggleTranscript('{{ item.id }}')"
+                            class="inline-flex items-center px-3 py-2 bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-medium rounded-lg border border-slate-200 transition-colors">
+                        <i class="fas fa-file-alt mr-2 text-slate-400"></i>
+                        Transcript
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if item.transcript %}
+            <div id="transcript-{{ item.id }}" class="hidden relative">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-slate-200"></div>
+                </div>
+                <div class="relative flex justify-center mb-4">
+                    <span class="bg-white px-2 text-sm text-slate-500">Video Transcript</span>
+                </div>
+                <div class="bg-slate-50 rounded-lg p-4 text-sm text-slate-600 leading-relaxed max-h-60 overflow-y-auto border border-slate-200">
+                    {{ item.transcript|linebreaks }}
+                </div>
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 
 <script>
@@ -120,4 +96,3 @@ function toggleTranscript(itemId) {
     }
 }
 </script>
-

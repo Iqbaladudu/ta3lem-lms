@@ -105,6 +105,9 @@ class CourseForm(forms.ModelForm):
         
         # Make slug field optional and auto-generate from title
         self.fields['slug'].required = False
+        
+        # Make currency not required - it will use default when is_free=True
+        self.fields['currency'].required = False
     
     def clean_max_capacity(self):
         max_capacity = self.cleaned_data.get('max_capacity')
@@ -124,25 +127,41 @@ class CourseForm(forms.ModelForm):
         waitlist_enabled = cleaned_data.get('waitlist_enabled')
         is_free = cleaned_data.get('is_free')
         price = cleaned_data.get('price')
+        currency = cleaned_data.get('currency')
         
         # If waitlist is enabled but no max capacity is set, show warning
         if waitlist_enabled and not max_capacity:
             self.add_error('waitlist_enabled', 
                 'Daftar tunggu hanya dapat diaktifkan jika ada batas kapasitas maksimal.')
         
-        # Validate pricing logic
-        if not is_free and (price is None or price <= 0):
-            self.add_error('price', 
-                'Harga harus diisi dan lebih dari 0 untuk kursus berbayar.')
-        
-        if is_free and price is not None and price > 0:
-            self.add_error('is_free', 
-                'Kursus tidak dapat gratis jika ada harga yang ditetapkan.')
+        # Handle pricing logic:
+        # If course is free, clear price and set default currency
+        if is_free:
+            cleaned_data['price'] = None
+            # Ensure currency has a default value (required by model)
+            if not currency:
+                cleaned_data['currency'] = 'IDR'
+        else:
+            # Paid course must have a valid price
+            if price is None or price <= 0:
+                self.add_error('price', 
+                    'Harga harus diisi dan lebih dari 0 untuk kursus berbayar.')
+            # Paid course must have currency
+            if not currency:
+                self.add_error('currency',
+                    'Mata uang harus dipilih untuk kursus berbayar.')
         
         return cleaned_data
     
     def save(self, commit=True):
         instance = super().save(commit=False)
+        
+        # CRITICAL: Ensure price is None when is_free is True
+        # This satisfies the database constraint 'valid_pricing' which requires:
+        # - is_free=True AND price IS NULL, OR
+        # - is_free=False AND price IS NOT NULL AND price > 0
+        if instance.is_free:
+            instance.price = None
         
         # Auto-generate slug from title if not provided
         if not instance.slug and instance.title:

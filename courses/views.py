@@ -1,3 +1,5 @@
+import datetime
+
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.apps import apps
 from django.contrib import messages  # Added for enrollment messages
@@ -35,6 +37,7 @@ class CourseListView(ListView):
         # Include 'published' in cache key to avoid cache pollution between admin and public views
         cache_key = f"course_list_published_{subject_slug}" if subject_slug else "course_list_published"
         queryset = cache.get(cache_key)
+        
         if queryset is None:
             # SECURITY: Only show published courses to the public
             # This ensures draft and archived courses are not visible to students/public
@@ -66,6 +69,19 @@ class CourseListView(ListView):
 
         return context
 
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+        if request.headers.get('HX-Request'):
+            # Use partial template for HTMX requests to avoid page duplication
+            return self.response_class(
+                request=self.request,
+                template='courses/course/list_partial.html',
+                context=context,
+                using=self.template_engine,
+            )
+        return self.render_to_response(context)
+
 
 # @method_decorator(cache_page(60 * 15), name='dispatch')
 class CourseDetailView(DetailView):
@@ -84,6 +100,12 @@ class CourseDetailView(DetailView):
         context['enroll_form'] = CourseEnrollForm(
             initial={'course': self.object}
         )
+        if self.request.user.is_authenticated:
+            context['user'] = self.request.user
+            context['user_enrollment'] = CourseEnrollment.objects.filter(
+                course=self.object,
+                student=self.request.user
+            ).first()
         return context
 
 
@@ -279,6 +301,62 @@ class ContentDeleteView(View):
             )
 
         return redirect('module_content_list', module.id)
+
+
+class ContentTitleUpdateView(View):
+    """HTMX view untuk update Content.title secara inline"""
+    
+    def get(self, request, content_id):
+        """Return inline edit form"""
+        content = get_object_or_404(Content, id=content_id, module__course__owner=request.user)
+        html = f'''
+        <form hx-post="{request.path}" hx-swap="outerHTML" hx-headers='{{"X-CSRFToken": "{request.META.get("CSRF_COOKIE", "")}"}}' class="flex items-center gap-2">
+            <input type="text" name="title" value="{content.title}" 
+                   class="flex-1 px-3 py-1.5 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-lg font-semibold"
+                   autofocus>
+            <button type="submit" class="px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">
+                <i class="fas fa-check"></i>
+            </button>
+            <button type="button" hx-get="{request.path}?cancel=1" hx-swap="outerHTML" class="px-3 py-1.5 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm">
+                <i class="fas fa-times"></i>
+            </button>
+        </form>
+        '''
+        
+        # If cancel, return just the title display
+        if request.GET.get('cancel'):
+            html = f'''
+            <h3 class="font-semibold text-lg text-gray-900 content-title-display" 
+                hx-get="{request.path}" hx-swap="outerHTML" hx-trigger="click"
+                title="Klik untuk edit judul" style="cursor: pointer;">
+                {content.title}
+                <i class="fas fa-pencil-alt text-gray-400 text-xs ml-2 opacity-0 group-hover:opacity-100"></i>
+            </h3>
+            '''
+        
+        return HttpResponse(html)
+    
+    def post(self, request, content_id):
+        """Update Content.title"""
+        content = get_object_or_404(Content, id=content_id, module__course__owner=request.user)
+        new_title = request.POST.get('title', '').strip()
+        
+        if new_title:
+            content.title = new_title
+            content.save(update_fields=['title'])
+        
+        # Return updated title display
+        html = f'''
+        <h3 class="font-semibold text-lg text-gray-900 content-title-display" 
+            hx-get="{request.path}" hx-swap="outerHTML" hx-trigger="click"
+            title="Klik untuk edit judul" style="cursor: pointer;">
+            {content.title}
+            <i class="fas fa-pencil-alt text-gray-400 text-xs ml-2 opacity-0 group-hover:opacity-100"></i>
+        </h3>
+        '''
+        
+        return HttpResponse(html, headers={'HX-Trigger': 'contentTitleUpdated'})
+
 
 
 class ContentItemDeleteView(View):
@@ -492,13 +570,14 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
                     payment_status='pending',
                     payment_amount=course.price
                 )
-                
-                messages.info(request, 
-                    f'Untuk menyelesaikan pendaftaran kursus "{course.title}", '
-                    f'silakan lakukan pembayaran sebesar {course.get_formatted_price()}. '
-                    'Link pembayaran akan dikirim ke email Anda.')
-                return redirect('course_detail', slug=course.slug)
-            
+
+                messages.info(request,
+                              f'Untuk menyelesaikan pendaftaran kursus "{course.title}", '
+                              f'silakan lakukan pembayaran sebesar {course.get_formatted_price()}. '
+                              'Link pembayaran akan dikirim ke email Anda.')
+                # Redirect to student dashboard for this course (not public page)
+                return redirect('student_course_detail', pk=course.pk)
+
             # For free courses, proceed with normal enrollment
             enrollment_data = {
                 'student': user,
@@ -674,18 +753,34 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
 
         # Filter by status if provided
         status = self.request.GET.get('status')
-        if status and status in dict(CourseEnrollment.STATUS_CHOICES):
-            queryset = queryset.filter(status=status)
+        valid_statuses = ['pending', 'enrolled', 'completed', 'paused', 'withdrawn', 'rejected']
+        if status and status in valid_statuses:
+            if status == 'enrolled':
+                # Active courses must be enrolled AND (paid OR free)
+                queryset = queryset.filter(
+                    status='enrolled',
+                    payment_status__in=['paid', 'free']
+                )
+            elif status == 'completed':
+                queryset = queryset.filter(status='completed')
+            else:
+                queryset = queryset.filter(status=status)
 
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Add statistics
+        # Add statistics - only count accessible courses
         all_enrollments = CourseEnrollment.objects.filter(student=self.request.user)
+        accessible_enrollments = [e for e in all_enrollments if e.can_access_course()]
+
         context['total_courses'] = all_enrollments.count()
-        context['active_courses'] = all_enrollments.filter(status='enrolled').count()
+        context['accessible_courses'] = len(accessible_enrollments)
+        context['active_courses'] = all_enrollments.filter(
+            status='enrolled',
+            payment_status__in=['paid', 'free']
+        ).count()
         context['completed_courses'] = all_enrollments.filter(status='completed').count()
         context['avg_progress'] = all_enrollments.aggregate(
             avg=Avg('progress_percentage')
@@ -711,13 +806,13 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
         course = get_object_or_404(Course, pk=pk)
 
         # Check if user is enrolled in this course
-        is_enrolled = CourseEnrollment.objects.filter(
+        enrollment = CourseEnrollment.objects.filter(
             student=self.request.user,
             course=course
-        ).exists()
+        ).first()
 
         # If course is not published and user is not enrolled, deny access
-        if course.status != 'published' and not is_enrolled:
+        if course.status != 'published' and not enrollment:
             raise Http404("Course not found or not available.")
 
         return course
@@ -736,59 +831,34 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
         if created:
             course.students.add(self.request.user)
 
+        # Check if user can access this course based on enrollment and payment status
+        if not enrollment.can_access_course():
+            raise Http404("You do not have access to this course. Please check your enrollment and payment status.")
+
         # Update last accessed
         enrollment.last_accessed = timezone.now()
         enrollment.save(update_fields=['last_accessed'])
 
         context['enrollment'] = enrollment
 
-        # Get modules with progress
-        modules = course.modules.prefetch_related('contents').all()
-        modules_data = []
-
-        # Get all content progress for this enrollment at once (optimization)
-        all_content_progress = {
-            cp.content_id: cp
-            for cp in ContentProgress.objects.filter(
-                enrollment=enrollment
-            ).select_related('content')
-        }
-
-        # Collect all contents with their completion status
-        all_contents_data = []
-
-        for module in modules:
-            module_progress = ModuleProgress.objects.filter(
-                enrollment=enrollment,
-                module=module
-            ).first()
-
-            # Get content progress for this module
-            total_contents = module.contents.count()
-            completed_contents = 0
-
-            for content in module.contents.all():
-                content_progress = all_content_progress.get(content.id)
-                is_completed = content_progress.is_completed if content_progress else False
-                if is_completed:
-                    completed_contents += 1
-
-                all_contents_data.append({
-                    'content': content,
-                    'progress': content_progress,
-                    'is_completed': is_completed
-                })
-
-            modules_data.append({
-                'module': module,
-                'progress': module_progress if module_progress else type('obj', (object,), {'is_completed': False})(),
-                'total_contents': total_contents,
-                'completed_contents': completed_contents,
-                'completion_percentage': (completed_contents / total_contents * 100) if total_contents > 0 else 0,
-                'first_content': module.contents.first()  # Add first content for direct navigation
-            })
-
+        # Use optimized utility function to get all modules data with progress (fixes N+1 queries)
+        from .utils import get_prefetched_modules_data, bulk_prefetch_content_progress
+        
+        modules_data = get_prefetched_modules_data(course, enrollment)
         context['modules_data'] = modules_data
+
+        # Get all content progress for contents_data
+        content_progress_map, _ = bulk_prefetch_content_progress(enrollment, course)
+        
+        all_contents_data = []
+        for module_data in modules_data:
+            for content_item in module_data['contents_with_progress']:
+                all_contents_data.append({
+                    'content': content_item['content'],
+                    'progress': content_progress_map.get(content_item['content'].id),
+                    'is_completed': content_item['is_completed']
+                })
+        
         context['contents_data'] = all_contents_data
 
         current_module = enrollment.get_current_module()
@@ -799,6 +869,7 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
             context['current_module_first_content'] = current_module.contents.first()
 
         return context
+
 
 
 class StudentModuleDetailView(LoginRequiredMixin, DetailView):
@@ -825,21 +896,25 @@ class StudentModuleDetailView(LoginRequiredMixin, DetailView):
             course=course
         )
 
+        # Check if user can access this course
+        if not enrollment.can_access_course():
+            raise Http404("You do not have access to this course. Please check your enrollment and payment status.")
+
         # Get or create module progress
         module_progress, created = ModuleProgress.objects.get_or_create(
             enrollment=enrollment,
             module=module
         )
 
-        # Get content progress
+        # Use bulk prefetch for content progress (fixes N+1 queries)
+        from .utils import bulk_prefetch_content_progress
+        content_progress_map, _ = bulk_prefetch_content_progress(enrollment, course)
+
+        # Get content progress using prefetched data
         contents_data = []
         completed_count = 0
         for content in module.contents.all():
-            content_progress = ContentProgress.objects.filter(
-                enrollment=enrollment,
-                content=content
-            ).first()
-
+            content_progress = content_progress_map.get(content.id)
             is_completed = content_progress.is_completed if content_progress else False
             if is_completed:
                 completed_count += 1
@@ -862,6 +937,7 @@ class StudentModuleDetailView(LoginRequiredMixin, DetailView):
         context['next_module'] = module.get_next_in_order()
 
         return context
+
 
 
 class StudentContentView(LoginRequiredMixin, DetailView):
@@ -904,6 +980,11 @@ class StudentContentView(LoginRequiredMixin, DetailView):
             course=course
         )
 
+        # Check if user can access this course
+        if not enrollment.can_access_course():
+            raise Http404(
+                "You do not have access to this course content. Please check your enrollment and payment status.")
+
         # Get or create content progress
         content_progress, created = ContentProgress.objects.get_or_create(
             enrollment=enrollment,
@@ -938,58 +1019,22 @@ class StudentContentView(LoginRequiredMixin, DetailView):
         else:
             next_module_context = None
 
-        # Get all modules with contents and progress for sidebar
-        modules_data = []
-        all_content_ids = []
-
-        for mod in course.modules.all().prefetch_related('contents'):
-            module_progress, _ = ModuleProgress.objects.get_or_create(
-                enrollment=enrollment,
-                module=mod
-            )
-
-            contents_with_progress = []
-            completed_count = 0
-            total_count = mod.contents.count()
-
-            for cont in mod.contents.all():
-                cont_progress = ContentProgress.objects.filter(
-                    enrollment=enrollment,
-                    content=cont
-                ).first()
-
-                is_completed = cont_progress.is_completed if cont_progress else False
-                if is_completed:
-                    completed_count += 1
-
-                contents_with_progress.append({
-                    'content': cont,
-                    'is_completed': is_completed
-                })
-                all_content_ids.append(cont.pk)
-
-            completion_percentage = (completed_count / total_count * 100) if total_count > 0 else 0
-
-            modules_data.append({
-                'module': mod,
-                'progress': module_progress,
-                'contents_with_progress': contents_with_progress,
-                'completed_contents': completed_count,
-                'total_contents': total_count,
-                'completion_percentage': completion_percentage
-            })
-
-        # Get all contents data for quick lookup
+        # Use optimized utility function for sidebar data (fixes N+1 queries)
+        from .utils import get_prefetched_modules_data, bulk_prefetch_content_progress
+        
+        modules_data = get_prefetched_modules_data(course, enrollment)
+        
+        # Build contents_data from prefetched modules_data
+        content_progress_map, _ = bulk_prefetch_content_progress(enrollment, course)
+        
         contents_data = []
-        for content_id in all_content_ids:
-            cont_prog = ContentProgress.objects.filter(
-                enrollment=enrollment,
-                content_id=content_id
-            ).first()
-            contents_data.append({
-                'content_id': content_id,
-                'is_completed': cont_prog.is_completed if cont_prog else False
-            })
+        for module_data in modules_data:
+            for content_item in module_data['contents_with_progress']:
+                cont_id = content_item['content'].id
+                contents_data.append({
+                    'content_id': cont_id,
+                    'is_completed': content_item['is_completed']
+                })
 
         context['enrollment'] = enrollment
         context['content_progress'] = content_progress
@@ -1003,6 +1048,7 @@ class StudentContentView(LoginRequiredMixin, DetailView):
         context['contents_data'] = contents_data
 
         return context
+
 
 
 class MarkContentCompleteView(LoginRequiredMixin, View):
@@ -1321,8 +1367,9 @@ class InstructorStudentsOverviewView(LoginRequiredMixin, TemplateResponseMixin, 
                 processed_students.add(student.id)
 
         # Sort by last accessed (most recent first)
-        students_data.sort(key=lambda x: x['last_accessed'] or timezone.datetime.min.replace(tzinfo=timezone.utc),
-                           reverse=True)
+        students_data.sort(
+            key=lambda x: x['last_accessed'] or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc),
+            reverse=True)
 
         # Pagination with multiples of 5
         per_page = request.GET.get('per_page', '5')

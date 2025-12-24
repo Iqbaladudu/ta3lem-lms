@@ -1,4 +1,5 @@
 from datetime import timedelta
+
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -53,13 +54,14 @@ class Image(ItemBase):
 
 class Video(ItemBase):
     """Enhanced video model with multiple platform support and metadata"""
-    url = EmbedVideoField(blank=True, null=True, help_text='Video URL from YouTube, Vimeo, Dailymotion, or other platforms')
+    url = EmbedVideoField(blank=True, null=True,
+                          help_text='Video URL from YouTube, Vimeo, Dailymotion, or other platforms')
     file = models.FileField(upload_to='videos', blank=True, null=True, help_text='Upload video file directly')
-    
+
     # Enhanced video metadata
     duration = models.PositiveIntegerField(
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         help_text='Video duration in seconds'
     )
     video_platform = models.CharField(
@@ -74,7 +76,7 @@ class Video(ItemBase):
         blank=True,
         help_text='Auto-detected from URL or set manually'
     )
-    
+
     # Video quality and accessibility
     transcript = models.TextField(
         blank=True,
@@ -88,20 +90,20 @@ class Video(ItemBase):
         default=False,
         help_text='Auto-play video when content is viewed'
     )
-    
+
     # Learning analytics
     minimum_watch_percentage = models.PositiveIntegerField(
         default=80,
         validators=[MinValueValidator(1), MaxValueValidator(100)],
         help_text='Minimum percentage to watch for completion (default: 80%)'
     )
-    
+
     class Meta:
         indexes = [
             models.Index(fields=['video_platform']),
             models.Index(fields=['owner', 'created']),
         ]
-    
+
     def save(self, *args, **kwargs):
         # Auto-detect video platform from URL
         if self.url and not self.video_platform:
@@ -111,36 +113,36 @@ class Video(ItemBase):
                 self.video_platform = platform
         elif self.file and not self.video_platform:
             self.video_platform = 'uploaded'
-        
+
         super().save(*args, **kwargs)
-    
+
     def get_thumbnail_url(self):
         """Get video thumbnail URL"""
         if self.url and self.video_platform:
             from .templatetags.course import video_thumbnail
             return video_thumbnail(str(self.url))
         return None
-    
+
     def get_embed_code(self, **kwargs):
         """Get video embed HTML"""
         if self.url:
             from .templatetags.course import video_player
             return video_player(
-                str(self.url), 
+                str(self.url),
                 autoplay=self.auto_play,
                 **kwargs
             )
         return None
-    
+
     def clean(self):
         from django.core.exceptions import ValidationError
-        
+
         if not self.url and not self.file:
             raise ValidationError('Either URL or file must be provided.')
-        
+
         if self.url and self.file:
             raise ValidationError('Provide either URL or file, not both.')
-        
+
         super().clean()
 
 
@@ -163,7 +165,7 @@ class Course(models.Model):
     overview = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
-    
+
     # Pricing information
     is_free = models.BooleanField(
         default=True,
@@ -186,7 +188,7 @@ class Course(models.Model):
         ],
         help_text='Currency for pricing'
     )
-    
+
     # Enhanced fields from clarifications
     enrollment_type = models.CharField(
         max_length=20,
@@ -198,15 +200,15 @@ class Course(models.Model):
         default='open'
     )
     max_capacity = models.PositiveIntegerField(
-        blank=True, 
-        null=True, 
+        blank=True,
+        null=True,
         help_text='Optional enrollment limit'
     )
     waitlist_enabled = models.BooleanField(
-        default=True, 
+        default=True,
         help_text='Enable waitlist when capacity reached'
     )
-    
+
     # Course metadata
     difficulty_level = models.CharField(
         max_length=20,
@@ -219,7 +221,7 @@ class Course(models.Model):
     )
     estimated_hours = models.PositiveIntegerField(blank=True, null=True)
     certificate_enabled = models.BooleanField(default=False)
-    
+
     # Course status
     status = models.CharField(
         max_length=20,
@@ -242,13 +244,13 @@ class Course(models.Model):
         ]
         constraints = [
             models.CheckConstraint(
-                check=models.Q(max_capacity__isnull=True) | models.Q(max_capacity__gt=0),
+                condition=models.Q(max_capacity__isnull=True) | models.Q(max_capacity__gt=0),
                 name='positive_capacity'
             ),
             models.CheckConstraint(
-                check=(
-                    models.Q(is_free=True, price__isnull=True) |
-                    models.Q(is_free=False, price__isnull=False, price__gt=0)
+                condition=(
+                        models.Q(is_free=True, price__isnull=True) |
+                        models.Q(is_free=False, price__isnull=False, price__gt=0)
                 ),
                 name='valid_pricing'
             ),
@@ -256,34 +258,34 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def get_enrollment_count(self):
         """Get current enrollment count including active enrollments"""
         return self.course_enrollments.filter(
             status__in=['enrolled', 'completed']
         ).count()
-    
+
     def get_pending_approvals_count(self):
         """Get number of pending approval requests"""
         return self.course_enrollments.filter(status='pending').count()
-    
+
     def get_available_spots(self):
         """Get number of available enrollment spots"""
         if not self.max_capacity:
             return None  # Unlimited
         return max(0, self.max_capacity - self.get_enrollment_count())
-    
+
     def is_full(self):
         """Check if course has reached capacity"""
         if not self.max_capacity:
             return False
         return self.get_enrollment_count() >= self.max_capacity
-    
+
     def get_formatted_price(self):
         """Get formatted price string"""
         if self.is_free:
             return "Gratis"
-        
+
         if self.currency == 'IDR':
             return f"Rp {self.price:,.0f}".replace(',', '.')
         elif self.currency == 'USD':
@@ -291,7 +293,7 @@ class Course(models.Model):
         elif self.currency == 'EUR':
             return f"€{self.price:,.2f}"
         return f"{self.price} {self.currency}"
-    
+
     def get_enrollment_button_text(self):
         """Get appropriate button text based on enrollment type and pricing"""
         if self.enrollment_type == 'approval':
@@ -300,33 +302,39 @@ class Course(models.Model):
             return "Daftar Kursus Gratis"
         else:
             return f"Beli Kursus - {self.get_formatted_price()}"
-    
+
     def can_enroll(self, user):
         """Check if user can enroll in course"""
         # Check if user is already enrolled
         if self.course_enrollments.filter(
-            student=user, 
-            status__in=['enrolled', 'completed', 'pending']
+                student=user,
+                status__in=['enrolled', 'completed', 'pending']
         ).exists():
             enrollment = self.course_enrollments.filter(student=user).first()
             if enrollment.status == 'pending':
                 return False, "Approval request pending"
             elif enrollment.status in ['enrolled', 'completed']:
                 return False, "Already enrolled"
-            
+
         # Check capacity
         if self.is_full():
             if self.waitlist_enabled:
                 return False, "Course full - can join waitlist"
             else:
                 return False, "Course full - no waitlist"
-        
+
         # Check enrollment type
+        # For restricted courses: allow if it's a paid course (payment acts as access control)
         if self.enrollment_type == 'restricted':
-            return False, "Restricted course - contact instructor"
-        
+            if not self.is_free:
+                # Paid restricted courses can be purchased (approval after payment)
+                return True, "Can purchase restricted course"
+            else:
+                # Free restricted courses require instructor invite
+                return False, "Restricted course - contact instructor"
+
         return True, "Can enroll"
-    
+
     def save(self, *args, **kwargs):
         # Auto-set published_at when status changes to published
         if self.status == 'published' and not self.published_at:
@@ -346,6 +354,10 @@ class Module(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['course', 'order']),
+        ]
+
 
     def get_previous_in_order(self):
         """Get the previous module in the course by order"""
@@ -368,9 +380,26 @@ class Content(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['module', 'order']),
+        ]
+
 
     def __str__(self):
         return self.title
+
+    def get_first_item(self):
+        """Get the first ContentItem's actual item (Text/Video/Image/File)"""
+        first_content_item = self.items.first()
+        return first_content_item.item if first_content_item else None
+
+    def get_primary_content_type(self):
+        """Get the content type model name of the first item for icon display"""
+        first_content_item = self.items.first()
+        if first_content_item:
+            return first_content_item.content_type.model
+        return None
+
 
 
 class ContentItem(models.Model):
@@ -385,6 +414,11 @@ class ContentItem(models.Model):
 
     class Meta:
         ordering = ['order']
+        indexes = [
+            models.Index(fields=['content', 'order']),
+        ]
+
+
 
 class CourseWaitlist(models.Model):
     """Waitlist for courses that have reached capacity"""
@@ -393,7 +427,7 @@ class CourseWaitlist(models.Model):
     joined_waitlist = models.DateTimeField(auto_now_add=True)
     notified_of_opening = models.BooleanField(default=False)
     priority = models.PositiveIntegerField(default=1)  # Lower numbers = higher priority
-    
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['course', 'student'], name='unique_course_waitlist')
@@ -402,10 +436,10 @@ class CourseWaitlist(models.Model):
         indexes = [
             models.Index(fields=['course', 'priority', 'joined_waitlist']),
         ]
-    
+
     def __str__(self):
         return f"{self.student.username} waitlisted for {self.course.title}"
-    
+
     def get_position(self):
         """Get position in waitlist (1-indexed)"""
         return self.course.waitlist_entries.filter(
@@ -416,7 +450,7 @@ class CourseWaitlist(models.Model):
 
 class CourseEnrollment(models.Model):
     """Enhanced enrollment model with approval workflow and payment tracking"""
-    
+
     STATUS_CHOICES = [
         ('pending', 'Pending Approval'),
         ('enrolled', 'Enrolled'),
@@ -425,7 +459,7 @@ class CourseEnrollment(models.Model):
         ('withdrawn', 'Withdrawn'),
         ('rejected', 'Rejected')  # New status for approval workflow
     ]
-    
+
     PAYMENT_STATUS_CHOICES = [
         ('pending', 'Payment Pending'),
         ('paid', 'Paid'),
@@ -441,44 +475,44 @@ class CourseEnrollment(models.Model):
     completed_on = models.DateTimeField(null=True, blank=True)
     progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     last_accessed = models.DateTimeField(null=True, blank=True)
-    
+
     # Payment tracking
     payment_status = models.CharField(
-        max_length=15, 
-        choices=PAYMENT_STATUS_CHOICES, 
+        max_length=15,
+        choices=PAYMENT_STATUS_CHOICES,
         default='free'
     )
     payment_amount = models.DecimalField(
-        max_digits=10, 
-        decimal_places=2, 
-        null=True, 
+        max_digits=10,
+        decimal_places=2,
+        null=True,
         blank=True
     )
     payment_date = models.DateTimeField(null=True, blank=True)
     payment_reference = models.CharField(
-        max_length=100, 
+        max_length=100,
         blank=True,
         help_text='Payment gateway reference or transaction ID'
     )
-    
+
     # Enhanced fields for approval workflow
     approval_requested_at = models.DateTimeField(blank=True, null=True)
     approved_by = models.ForeignKey(
-        User, 
-        on_delete=models.SET_NULL, 
-        null=True, 
-        blank=True, 
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name='approved_enrollments'
     )
     approved_at = models.DateTimeField(blank=True, null=True)
     rejection_reason = models.TextField(blank=True)
-    
+
     # Learning analytics
     total_time_spent = models.DurationField(default=timedelta)
     last_activity = models.DateTimeField(auto_now=True)
     engagement_score = models.DecimalField(
-        max_digits=3, 
-        decimal_places=2, 
+        max_digits=3,
+        decimal_places=2,
         default=0.0,
         help_text='Engagement score from 0.0 to 1.0'
     )
@@ -487,17 +521,18 @@ class CourseEnrollment(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['student', 'course'], name='unique_enrollment'),
             models.CheckConstraint(
-                check=models.Q(progress_percentage__gte=0) & models.Q(progress_percentage__lte=100),
+                condition=models.Q(progress_percentage__gte=0) & models.Q(progress_percentage__lte=100),
                 name='valid_progress_percentage'
             ),
             models.CheckConstraint(
-                check=models.Q(engagement_score__gte=0.0) & models.Q(engagement_score__lte=1.0),
+                condition=models.Q(engagement_score__gte=0.0) & models.Q(engagement_score__lte=1.0),
                 name='valid_engagement_score'
             ),
             models.CheckConstraint(
-                check=(
-                    models.Q(payment_status='free', payment_amount__isnull=True) |
-                    models.Q(payment_status__in=['pending', 'paid', 'failed', 'refunded'], payment_amount__isnull=False)
+                condition=(
+                        models.Q(payment_status='free', payment_amount__isnull=True) |
+                        models.Q(payment_status__in=['pending', 'paid', 'failed', 'refunded'],
+                                 payment_amount__isnull=False)
                 ),
                 name='valid_payment_data'
             ),
@@ -513,12 +548,12 @@ class CourseEnrollment(models.Model):
 
     def __str__(self):
         return f'{self.student.username} enrolled in {self.course.title} ({self.status})'
-    
+
     def save(self, *args, **kwargs):
         # Auto-set completion date when status changes to completed
         if self.status == 'completed' and not self.completed_on:
             self.completed_on = timezone.now()
-        
+
         # Set default payment status based on course pricing
         if not self.pk:
             if self.course.is_free:
@@ -526,13 +561,66 @@ class CourseEnrollment(models.Model):
             else:
                 self.payment_status = 'pending'
                 self.payment_amount = self.course.price
-        
+
         # Set default enrollment status based on course enrollment type
         if not self.pk and self.course.enrollment_type == 'approval':
             self.status = 'pending'
             self.approval_requested_at = timezone.now()
-        
+
         super().save(*args, **kwargs)
+
+    # Add helper methods used by views/tests for progress tracking
+    def get_current_module(self):
+        """Return the next module the student should work on.
+
+        Strategy:
+        - Iterate course modules in order.
+        - If ModuleProgress exists and is not completed -> return that module.
+        - If no ModuleProgress exists for a module -> return that module (first not started).
+        - If all modules completed -> return None.
+        """
+        for module in self.course.modules.order_by('order'):
+            mp = ModuleProgress.objects.filter(enrollment=self, module=module).first()
+            if not mp or not mp.is_completed:
+                return module
+        return None
+
+    def calculate_progress(self):
+        """Compute progress percentage across all contents for this enrollment.
+
+        Returns a float (0.0 - 100.0). Does not persist the value.
+        """
+        total_contents = Content.objects.filter(module__course=self.course).count()
+        if total_contents == 0:
+            return 0.0
+        completed = ContentProgress.objects.filter(enrollment=self, is_completed=True).count()
+        return round((completed / total_contents) * 100, 2)
+
+    def update_progress(self):
+        """Recalculate and persist progress_percentage and update enrollment status if complete."""
+        pct = self.calculate_progress()
+        # Update progress percentage
+        self.progress_percentage = pct
+        # If fully completed, set status and completed_on
+        # Use epsilon for float comparison to handle potential rounding issues
+        if pct >= 99.99 and self.status != 'completed':
+            self.status = 'completed'
+            self.completed_on = timezone.now()
+            self.save(update_fields=['status', 'completed_on', 'progress_percentage'])
+        else:
+            # Persist only progress percentage
+            self.save(update_fields=['progress_percentage'])
+
+    def can_access_course(self):
+        """
+        Returns True if the course can be accessed/opened by the user according to:
+        - status is 'enrolled', 'completed', or 'paused'
+        - payment_status is 'paid' or 'free'
+        """
+        return (
+                self.status in ['enrolled', 'completed', 'paused'] and
+                self.payment_status in ['paid', 'free']
+        )
 
 
 class ContentProgress(models.Model):
@@ -557,7 +645,10 @@ class ContentProgress(models.Model):
         verbose_name_plural = 'Content Progresses'
 
     def __str__(self):
-        return f"{self.enrollment.student.username} - {self.content.item.title} ({'Completed' if self.is_completed else 'In Progress'})"
+        # Use content.title as a safe fallback; some codebases previously stored an `item` relation
+        content_title = getattr(self.content, 'title', None) or getattr(getattr(self.content, 'item', None), 'title',
+                                                                        'Content')
+        return f"{self.enrollment.student.username} - {content_title} ({'Completed' if self.is_completed else 'In Progress'})"
 
     def mark_completed(self):
         if not self.is_completed:
@@ -566,11 +657,12 @@ class ContentProgress(models.Model):
             self.save()
 
             # get or create module progress
-            module_progress, created = ModuleProgress.objects.get_or_create(enrollment=self.enrollment, module=self.content.module)
+            module_progress, created = ModuleProgress.objects.get_or_create(enrollment=self.enrollment,
+                                                                            module=self.content.module)
 
             # Check if module is now completed
-            module_progress.mark_completed()
-
+            if module_progress.calculate_completion():
+                module_progress.mark_completed()
 
 
 class ModuleProgress(models.Model):
@@ -600,7 +692,8 @@ class ModuleProgress(models.Model):
         if total_contents == 0:
             return False
 
-        completed_contents = ContentProgress.objects.filter(enrollment=self.enrollment, content__module=self.module, is_completed=True).count()
+        completed_contents = ContentProgress.objects.filter(enrollment=self.enrollment, content__module=self.module,
+                                                            is_completed=True).count()
 
         return total_contents == completed_contents
 
@@ -613,10 +706,12 @@ class ModuleProgress(models.Model):
             # Update overall courseprogress
             self.enrollment.update_progress()
 
+
 class LearningSession(models.Model):
     """ Track individual learning sessions for students """
     enrollment = models.ForeignKey(CourseEnrollment, on_delete=models.CASCADE, related_name='learning_sessions')
-    content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='learning_sessions', null=True, blank=True)
+    content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='learning_sessions', null=True,
+                                blank=True)
 
     started_at = models.DateTimeField(auto_now_add=True)
     ended_at = models.DateTimeField(null=True, blank=True)

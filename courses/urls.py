@@ -24,9 +24,12 @@ urlpatterns = [
          name="content_item_create"),
     path("content/<int:content_id>/item/<int:item_id>/delete/", views.ContentItemDeleteView.as_view(),
          name="content_item_delete"),
+    path("content/<int:content_id>/title/", views.ContentTitleUpdateView.as_view(),
+         name="content_title_update"),
     path("content-item/order/", views.ContentItemOrderView.as_view(), name="content_item_order"),
     # Content delete
     path("content/<int:id>/delete/", views.ContentDeleteView.as_view(), name="module_content_delete"),
+
     path("module/<int:module_id>/", views.ModuleContentListView.as_view(), name="module_content_list"),
     path("module/<int:module_id>/bulk/", views.BulkContentOperationsView.as_view(), name="bulk_content_operations"),
     path("content/<int:content_id>/bulk/", views.BulkContentItemOperationsView.as_view(), name="bulk_content_item_operations"),
@@ -40,7 +43,7 @@ urlpatterns = [
     path("student/<int:pk>/waitlist/", views.StudentJoinWaitlistView.as_view(), name="student_join_waitlist"),
     path("student/<int:pk>/", views.StudentCourseDetailView.as_view(), name="student_course_detail"),
     # Module detail page removed - navigation now goes directly from course to content with sidebar
-    # path("student/<int:pk>/module/<int:module_pk>/", views.StudentModuleDetailView.as_view(), name="student_module_detail"),
+    path("student/<int:pk>/module/<int:module_pk>/", views.StudentModuleDetailView.as_view(), name="student_module_detail"),
     path("student/<int:pk>/module/<int:module_pk>/content/<int:content_pk>/", views.StudentContentView.as_view(), name="student_content_view"),
     path("student/<int:pk>/module/<int:module_pk>/content/<int:content_pk>/complete/", views.MarkContentCompleteView.as_view(), name="mark_content_complete"),
 

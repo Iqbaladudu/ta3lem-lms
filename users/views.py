@@ -37,7 +37,7 @@ class StudentCourseDetailView(LoginRequiredMixin, StudentOnlyRedirectMixin, Deta
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(students__in=[self.request.user])
+        return qs.filter(course_enrollments__student=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,6 +48,9 @@ class StudentCourseDetailView(LoginRequiredMixin, StudentOnlyRedirectMixin, Deta
             context['module'] = course.modules.get(id=self.kwargs['module_id'])
         else:
             context['module'] = course.modules.all()[0]
+        
+        # Add enrollment object to context
+        context['enrollment'] = course.course_enrollments.filter(student=self.request.user).first()
         return context
 
 
@@ -57,7 +60,7 @@ class StudentCourseListView(LoginRequiredMixin, StudentOnlyRedirectMixin, ListVi
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(students__in=[self.request.user])
+        return qs.filter(course_enrollments__student=self.request.user)
 
 
 class StudentEnrollCourseView(LoginRequiredMixin, StudentOnlyRedirectMixin, FormView):

@@ -1,5 +1,7 @@
+import mistune
 import re
 from django import template
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 
 register = template.Library()
@@ -139,11 +141,8 @@ def _render_youtube_player(video_id, height, width_attr, min_height, autoplay, m
     if params:
         embed_url += "?" + "&".join(params)
     
-    html = f'''<div class="{container_class} relative" style="min-height: {min_height};">
-    <div class="absolute top-2 right-2 z-10">
-        <span class="bg-red-600 text-white text-xs px-2 py-1 rounded">YouTube</span>
-    </div>
-    <iframe class="w-full rounded-lg" height="{height}" {width_attr} src="{embed_url}" title="{title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    html = f'''<div class="{container_class}">
+    <iframe class="w-full h-full absolute inset-0 rounded-xl" src="{embed_url}" title="{title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>'''
     
     return mark_safe(html)
@@ -166,11 +165,8 @@ def _render_vimeo_player(video_id, height, width_attr, min_height, autoplay, mut
     if params:
         embed_url += "?" + "&".join(params)
     
-    html = f'''<div class="{container_class} relative" style="min-height: {min_height};">
-    <div class="absolute top-2 right-2 z-10">
-        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Vimeo</span>
-    </div>
-    <iframe class="w-full rounded-lg" height="{height}" {width_attr} src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    html = f'''<div class="{container_class}">
+    <iframe class="w-full h-full absolute inset-0 rounded-xl" src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 </div>'''
     
     return mark_safe(html)
@@ -193,11 +189,8 @@ def _render_dailymotion_player(video_id, height, width_attr, min_height, autopla
     if params:
         embed_url += "?" + "&".join(params)
     
-    html = f'''<div class="{container_class} relative" style="min-height: {min_height};">
-    <div class="absolute top-2 right-2 z-10">
-        <span class="bg-orange-500 text-white text-xs px-2 py-1 rounded">Dailymotion</span>
-    </div>
-    <iframe class="w-full rounded-lg" height="{height}" {width_attr} src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    html = f'''<div class="{container_class}">
+    <iframe class="w-full h-full absolute inset-0 rounded-xl" src="{embed_url}" title="{title}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>'''
     
     return mark_safe(html)
@@ -243,3 +236,62 @@ def video_thumbnail(url, size='default'):
         return f"https://www.dailymotion.com/thumbnail/video/{video_id}"
     
     return None
+
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    """Convert Markdown text to HTML with extended features."""
+    if not text:
+        return ''
+    import markdown
+    html = markdown.markdown(text, extensions=['extra', 'toc', 'abbr', 'attr_list', 'def_list', 'fenced_code', 'footnotes', 'md_in_html', 'admonition', 'tables', 'codehilite', 'legacy_em', 'legacy_attrs', 'meta', 'nl2br', 'sane_lists', 'smarty', 'mdx_gfm', 'mdx_cite', 'mdx_emdash'])
+    return mark_safe(html)
+
+
+@register.filter
+def timeago(value):
+    """
+    Convert a datetime to a human-readable "time ago" string.
+    
+    Usage:
+        {{ datetime_value|timeago }}
+    
+    Examples:
+        "just now", "5 minutes ago", "2 hours ago", "3 days ago", etc.
+    """
+    if not value:
+        return ''
+    
+    now = timezone.now()
+    
+    # Ensure both datetimes are timezone-aware or naive
+    if timezone.is_aware(now) and timezone.is_naive(value):
+        value = timezone.make_aware(value)
+    elif timezone.is_naive(now) and timezone.is_aware(value):
+        value = timezone.make_naive(value)
+    
+    diff = now - value
+    seconds = diff.total_seconds()
+    
+    if seconds < 60:
+        return 'just now'
+    elif seconds < 3600:
+        minutes = int(seconds // 60)
+        return f'{minutes} minute{"s" if minutes != 1 else ""} ago'
+    elif seconds < 86400:
+        hours = int(seconds // 3600)
+        return f'{hours} hour{"s" if hours != 1 else ""} ago'
+    elif seconds < 604800:
+        days = int(seconds // 86400)
+        return f'{days} day{"s" if days != 1 else ""} ago'
+    elif seconds < 2592000:
+        weeks = int(seconds // 604800)
+        return f'{weeks} week{"s" if weeks != 1 else ""} ago'
+    elif seconds < 31536000:
+        months = int(seconds // 2592000)
+        return f'{months} month{"s" if months != 1 else ""} ago'
+    else:
+        years = int(seconds // 31536000)
+        return f'{years} year{"s" if years != 1 else ""} ago'
+
+

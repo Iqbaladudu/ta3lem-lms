@@ -16,4 +16,13 @@ dependencies = [
     "honcho>=2.0.0",
     "django-htmx>=1.26.0",
     "psycopg2-binary>=2.9.11",
+    "nh3>=0.3.2",
+    "markdown>=3.10",
+    "py-gfm>=2.0.0",
+    "mdx-cite",
+    "markdown-emdash>=0.2.0",
+    "mdx-unimoji>=1.1",
 ]
+
+[tool.uv.sources]
+mdx-cite = { git = "https://github.com/triopter/mdx-3-cite.git" }
