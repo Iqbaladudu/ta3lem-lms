@@ -211,28 +211,104 @@
                                         {% endwith %}
                                     {% else %}
                                         <!-- Not Enrolled -->
-                                        <div class="mb-6">
-                                            <div class="flex items-baseline gap-1 mb-2">
-                                                {% if course.is_free %}
-                                                    <span class="text-3xl font-semibold text-primary-900">Gratis</span>
-                                                {% else %}
-                                                    <span class="text-3xl font-semibold text-primary-900">{{ course.get_formatted_price }}</span>
-                                                {% endif %}
-                                            </div>
-                                            <p class="text-sm text-primary-500">Akses seumur hidup</p>
-                                        </div>
+                                        {% if course.pricing_type == 'subscription_only' %}
+                                            <!-- Subscription Only Course -->
+                                            {% if has_active_subscription %}
+                                                <!-- User has subscription, show enroll button -->
+                                                <div class="mb-6">
+                                                    <div class="flex items-center gap-2 mb-2">
+                                                        <i class="fas fa-crown text-yellow-500"></i>
+                                                        <span class="text-lg font-semibold text-primary-900">Tersedia dengan Langganan Anda</span>
+                                                    </div>
+                                                    <p class="text-sm text-primary-500">Kursus ini termasuk dalam paket langganan Anda</p>
+                                                </div>
 
-                                        <form action="{% url 'student_enroll_course' course.id %}" method="post">
-                                            {% csrf_token %}
-                                            <button type="submit"
-                                                    class="btn btn-primary w-full py-2.5 text-sm">
-                                                {% if course.is_free %}
-                                                    Daftar Sekarang
-                                                {% else %}
-                                                    Beli Kursus
-                                                {% endif %}
-                                            </button>
-                                        </form>
+                                                <form action="{% url 'student_enroll_course' course.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-primary w-full py-2.5 text-sm">
+                                                        <i class="fas fa-play mr-2"></i>
+                                                        Mulai Belajar
+                                                    </button>
+                                                </form>
+                                            {% else %}
+                                                <!-- User doesn't have subscription -->
+                                                <div class="mb-6">
+                                                    <div class="flex items-center gap-2 mb-2">
+                                                        <i class="fas fa-crown text-yellow-500"></i>
+                                                        <span class="text-lg font-semibold text-primary-900">Khusus Pelanggan</span>
+                                                    </div>
+                                                    <p class="text-sm text-primary-500">Kursus ini hanya tersedia untuk member yang berlangganan</p>
+                                                </div>
+
+                                                <a href="{% url 'subscriptions:plans' %}" class="btn btn-primary w-full py-2.5 text-sm">
+                                                    <i class="fas fa-crown mr-2"></i>
+                                                    Lihat Paket Langganan
+                                                </a>
+                                            {% endif %}
+                                        {% elif course.pricing_type == 'both' %}
+                                            <!-- Both Options -->
+                                            {% if has_active_subscription %}
+                                                <!-- User has subscription, can enroll for free -->
+                                                <div class="mb-6">
+                                                    <div class="flex items-center gap-2 mb-2">
+                                                        <i class="fas fa-crown text-yellow-500"></i>
+                                                        <span class="text-lg font-semibold text-primary-900">Termasuk dalam Langganan</span>
+                                                    </div>
+                                                    <p class="text-sm text-primary-500">Akses dengan langganan Anda atau beli sekali <strong>{{ course.get_formatted_price }}</strong></p>
+                                                </div>
+
+                                                <form action="{% url 'student_enroll_course' course.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-primary w-full py-2.5 text-sm">
+                                                        <i class="fas fa-play mr-2"></i>
+                                                        Mulai Belajar (Gratis dengan Langganan)
+                                                    </button>
+                                                </form>
+                                            {% else %}
+                                                <!-- User doesn't have subscription -->
+                                                <div class="mb-6">
+                                                    <div class="flex items-baseline gap-1 mb-2">
+                                                        <span class="text-3xl font-semibold text-primary-900">{{ course.get_formatted_price }}</span>
+                                                    </div>
+                                                    <p class="text-sm text-primary-500">Atau akses dengan langganan</p>
+                                                </div>
+
+                                                <form action="{% url 'student_enroll_course' course.id %}" method="post" class="space-y-2">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-primary w-full py-2.5 text-sm">
+                                                        Beli Sekali - {{ course.get_formatted_price }}
+                                                    </button>
+                                                </form>
+                                                <a href="{% url 'subscriptions:plans' %}" class="btn btn-secondary w-full py-2.5 text-sm mt-2">
+                                                    <i class="fas fa-crown mr-2"></i>
+                                                    Atau Berlangganan
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            <!-- Free or One-time Purchase -->
+                                            <div class="mb-6">
+                                                <div class="flex items-baseline gap-1 mb-2">
+                                                    {% if course.is_free %}
+                                                        <span class="text-3xl font-semibold text-primary-900">Gratis</span>
+                                                    {% else %}
+                                                        <span class="text-3xl font-semibold text-primary-900">{{ course.get_formatted_price }}</span>
+                                                    {% endif %}
+                                                </div>
+                                                <p class="text-sm text-primary-500">Akses seumur hidup</p>
+                                            </div>
+
+                                            <form action="{% url 'student_enroll_course' course.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit"
+                                                        class="btn btn-primary w-full py-2.5 text-sm">
+                                                    {% if course.is_free %}
+                                                        Daftar Sekarang
+                                                    {% else %}
+                                                        Beli Kursus
+                                                    {% endif %}
+                                                </button>
+                                            </form>
+                                        {% endif %}
                                     {% endif %}
                                 {% else %}
                                     <a href="{% url 'student_login' %}?next={{ request.path }}"

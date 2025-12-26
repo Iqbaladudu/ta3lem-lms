@@ -43,6 +43,28 @@ class CheckoutView(LoginRequiredMixin, View):
         item = self._get_purchasable_item(order_type, item_id)
         if not item:
             raise Http404("Item not found")
+        
+        # VALIDATION: Check if course supports one-time purchase
+        if order_type == 'course':
+            from courses.models import Course
+            if isinstance(item, Course):
+                pricing_type = item.pricing_type
+                
+                # Block checkout for subscription-only courses
+                if pricing_type == 'subscription_only':
+                    messages.error(request, 
+                        f'Kursus "{item.title}" hanya dapat diakses melalui subscription. '
+                        'Silakan berlangganan terlebih dahulu.')
+                    return redirect('subscriptions:plans')
+                
+                # Check if one-time purchase is enabled globally
+                from core.utils import is_feature_enabled
+                if not is_feature_enabled('one_time_purchase'):
+                    if pricing_type == 'one_time' or pricing_type == 'both':
+                        messages.error(request, 
+                            'Pembelian kursus satuan tidak tersedia saat ini. '
+                            'Silakan berlangganan untuk mengakses kursus.')
+                        return redirect('subscriptions:plans')
 
         # Get price from item
         if hasattr(item, 'get_price'):

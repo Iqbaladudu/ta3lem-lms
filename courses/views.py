@@ -154,6 +154,16 @@ class CourseDetailView(DetailView):
                 course=self.object,
                 student=self.request.user
             ).first()
+            
+            # Check subscription status
+            from subscriptions.models import UserSubscription
+            active_sub = UserSubscription.objects.filter(
+                user=self.request.user,
+                status__in=['active', 'trial'],
+                current_period_end__gt=timezone.now()
+            ).first()
+            context['has_active_subscription'] = active_sub is not None
+            context['user_subscription'] = active_sub
         return context
 
 
@@ -607,49 +617,149 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
         can_enroll, message = course.can_enroll(user)
 
         if can_enroll:
-            # For paid courses, redirect to payment checkout
-            if not course.is_free:
-                # Redirect to payment checkout page for course purchase
-                return redirect('payments:checkout', order_type='course', item_id=course.pk)
-
-            # For free courses, proceed with normal enrollment
-            enrollment_data = {
-                'student': user,
-                'course': course,
-                'status': 'enrolled' if course.enrollment_type == 'open' else 'pending',
-                'payment_status': 'free',
-                'access_type': 'free',  # Track that this is free access
-            }
-
-            # Set approval_requested_at for pending enrollments
-            if course.enrollment_type in ['approval', 'restricted']:
-                enrollment_data['approval_requested_at'] = timezone.now()
-
-            enrollment = CourseEnrollment.objects.create(**enrollment_data)
-
-            if course.enrollment_type == 'open':
-                # Add student to course's students M2M field
-                course.students.add(user)
-
-                # Create initial module progress for first module
-                first_module = course.modules.order_by('order').first()
-                if first_module:
-                    ModuleProgress.objects.create(
-                        enrollment=enrollment,
-                        module=first_module
-                    )
-
-                messages.success(request, f'Selamat! Anda berhasil mendaftar di kursus "{course.title}" secara gratis!')
-                return redirect('student_course_detail', pk=course.pk)
-            else:
-                # Approval required
-                if course.enrollment_type == 'approval':
-                    messages.info(request,
-                                  f'Permintaan pendaftaran Anda untuk kursus "{course.title}" telah dikirim. '
-                                  'Instruktur akan meninjau dan memberikan persetujuan.')
+            # Handle different pricing types
+            pricing_type = course.pricing_type
+            
+            # FREE COURSE
+            if pricing_type == 'free' or course.is_free:
+                # Enroll directly for free
+                enrollment_data = {
+                    'student': user,
+                    'course': course,
+                    'status': 'enrolled' if course.enrollment_type == 'open' else 'pending',
+                    'payment_status': 'free',
+                    'access_type': 'free',
+                }
+                
+                if course.enrollment_type in ['approval', 'restricted']:
+                    enrollment_data['approval_requested_at'] = timezone.now()
+                
+                enrollment = CourseEnrollment.objects.create(**enrollment_data)
+                
+                if course.enrollment_type == 'open':
+                    course.students.add(user)
+                    first_module = course.modules.order_by('order').first()
+                    if first_module:
+                        ModuleProgress.objects.create(
+                            enrollment=enrollment,
+                            module=first_module
+                        )
+                    messages.success(request, f'Selamat! Anda berhasil mendaftar di kursus "{course.title}" secara gratis!')
+                    return redirect('student_course_detail', pk=course.pk)
                 else:
                     messages.info(request,
-                                  f'Permintaan akses Anda untuk kursus terbatas "{course.title}" telah dikirim.')
+                                  f'Permintaan pendaftaran Anda untuk kursus "{course.title}" telah dikirim.')
+                    return redirect('course_detail', slug=course.slug)
+            
+            # SUBSCRIPTION ONLY
+            elif pricing_type == 'subscription_only':
+                # Check if subscriptions feature is enabled
+                from core.utils import is_feature_enabled
+                if not is_feature_enabled('subscriptions'):
+                    messages.error(request, 'Fitur subscription tidak tersedia saat ini.')
+                    return redirect('course_detail', slug=course.slug)
+                
+                # Check if user has active subscription
+                from subscriptions.services import SubscriptionService
+                if SubscriptionService.user_has_active_subscription(user):
+                    # User has subscription, determine enrollment status based on enrollment_type
+                    enrollment_status = 'enrolled' if course.enrollment_type == 'open' else 'pending'
+                    
+                    enrollment_data = {
+                        'student': user,
+                        'course': course,
+                        'status': enrollment_status,
+                        'payment_status': 'subscription',
+                        'access_type': 'subscription',
+                    }
+                    
+                    if course.enrollment_type in ['approval', 'restricted']:
+                        enrollment_data['approval_requested_at'] = timezone.now()
+                    
+                    enrollment = CourseEnrollment.objects.create(**enrollment_data)
+                    
+                    if course.enrollment_type == 'open':
+                        course.students.add(user)
+                        # Create initial module progress
+                        first_module = course.modules.order_by('order').first()
+                        if first_module:
+                            ModuleProgress.objects.create(
+                                enrollment=enrollment,
+                                module=first_module
+                            )
+                        messages.success(request, 
+                            f'Selamat! Anda dapat mengakses "{course.title}" dengan subscription Anda!')
+                        return redirect('student_course_detail', pk=course.pk)
+                    else:
+                        messages.info(request,
+                            f'Permintaan pendaftaran Anda untuk kursus "{course.title}" telah dikirim.')
+                        return redirect('course_detail', slug=course.slug)
+                else:
+                    # User needs to subscribe first
+                    messages.info(request, 
+                        f'Kursus "{course.title}" memerlukan subscription aktif. Silakan berlangganan terlebih dahulu.')
+                    return redirect('subscriptions:plans')
+            
+            # ONE-TIME PURCHASE ONLY  
+            elif pricing_type == 'one_time':
+                # Check if one-time purchase is enabled
+                from core.utils import is_feature_enabled
+                if not is_feature_enabled('one_time_purchase'):
+                    messages.error(request, 'Pembelian kursus tidak tersedia saat ini.')
+                    return redirect('course_detail', slug=course.slug)
+                
+                # Redirect to payment checkout
+                return redirect('payments:checkout', order_type='course', item_id=course.pk)
+            
+            # BOTH (Subscription OR One-Time)
+            elif pricing_type == 'both':
+                # Check if user already has subscription
+                from subscriptions.services import SubscriptionService
+                from core.utils import is_feature_enabled
+                
+                if is_feature_enabled('subscriptions') and SubscriptionService.user_has_active_subscription(user):
+                    # User has subscription, determine enrollment status based on enrollment_type
+                    enrollment_status = 'enrolled' if course.enrollment_type == 'open' else 'pending'
+                    
+                    enrollment_data = {
+                        'student': user,
+                        'course': course,
+                        'status': enrollment_status,
+                        'payment_status': 'subscription',
+                        'access_type': 'subscription',
+                    }
+                    
+                    if course.enrollment_type in ['approval', 'restricted']:
+                        enrollment_data['approval_requested_at'] = timezone.now()
+                    
+                    enrollment = CourseEnrollment.objects.create(**enrollment_data)
+                    
+                    if course.enrollment_type == 'open':
+                        course.students.add(user)
+                        # Create initial module progress
+                        first_module = course.modules.order_by('order').first()
+                        if first_module:
+                            ModuleProgress.objects.create(
+                                enrollment=enrollment,
+                                module=first_module
+                            )
+                        messages.success(request, 
+                            f'Selamat! Anda dapat mengakses "{course.title}" dengan subscription Anda!')
+                        return redirect('student_course_detail', pk=course.pk)
+                    else:
+                        messages.info(request,
+                            f'Permintaan pendaftaran Anda untuk kursus "{course.title}" telah dikirim.')
+                        return redirect('course_detail', slug=course.slug)
+                else:
+                    # No subscription, allow one-time purchase
+                    if is_feature_enabled('one_time_purchase'):
+                        return redirect('payments:checkout', order_type='course', item_id=course.pk)
+                    else:
+                        messages.error(request, 'Pembelian kursus tidak tersedia. Silakan berlangganan.')
+                        return redirect('subscriptions:plans')
+            
+            else:
+                messages.error(request, 'Tipe pembayaran kursus tidak valid.')
                 return redirect('course_detail', slug=course.slug)
 
         elif message == "Course full - can join waitlist":
@@ -700,78 +810,6 @@ class StudentJoinWaitlistView(LoginRequiredMixin, View):
         position = waitlist_entry.get_position()
         messages.success(request, f'You have been added to the waitlist at position {position}.')
         return redirect('course_detail', slug=course.slug)
-
-
-class ApproveEnrollmentView(LoginRequiredMixin, View):
-    """Approve a pending enrollment"""
-
-    def post(self, request, pk):
-        enrollment = get_object_or_404(CourseEnrollment, pk=pk)
-        course = enrollment.course
-
-        # Check if user is course owner or staff
-        if not (request.user == course.owner or request.user.is_staff):
-            messages.error(request, 'You do not have permission to approve enrollments.')
-            return redirect('course_detail', slug=course.slug)
-
-        if enrollment.status != 'pending':
-            messages.error(request, 'Only pending enrollments can be approved.')
-            return redirect('instructor_course_analytics', pk=course.pk)
-
-        # Check course capacity
-        if course.is_full():
-            messages.error(request, 'Cannot approve: course is at capacity.')
-            return redirect('instructor_course_analytics', pk=course.pk)
-
-        # Approve enrollment
-        enrollment.status = 'enrolled'
-        enrollment.approved_by = request.user
-        enrollment.approved_at = timezone.now()
-        enrollment.save()
-
-        # Add to course students
-        course.students.add(enrollment.student)
-
-        # Create initial module progress
-        first_module = course.modules.order_by('order').first()
-        if first_module:
-            ModuleProgress.objects.get_or_create(
-                enrollment=enrollment,
-                module=first_module
-            )
-
-        messages.success(request, f'Approved enrollment for {enrollment.student.get_full_name()}.')
-        return redirect('instructor_course_analytics', pk=course.pk)
-
-
-class RejectEnrollmentView(LoginRequiredMixin, View):
-    """Reject a pending enrollment"""
-
-    def post(self, request, pk):
-        enrollment = get_object_or_404(CourseEnrollment, pk=pk)
-        course = enrollment.course
-
-        # Check if user is course owner or staff
-        if not (request.user == course.owner or request.user.is_staff):
-            messages.error(request, 'You do not have permission to reject enrollments.')
-            return redirect('course_detail', slug=course.slug)
-
-        if enrollment.status != 'pending':
-            messages.error(request, 'Only pending enrollments can be rejected.')
-            return redirect('instructor_course_analytics', pk=course.pk)
-
-        # Get rejection reason from form
-        rejection_reason = request.POST.get('rejection_reason', 'No reason provided')
-
-        # Reject enrollment
-        enrollment.status = 'rejected'
-        enrollment.approved_by = request.user
-        enrollment.approved_at = timezone.now()
-        enrollment.rejection_reason = rejection_reason
-        enrollment.save()
-
-        messages.success(request, f'Rejected enrollment for {enrollment.student.get_full_name()}.')
-        return redirect('instructor_course_analytics', pk=course.pk)
 
 
 class StudentCourseListView(LoginRequiredMixin, ListView):
@@ -1586,103 +1624,7 @@ class InstructorCourseStudentsView(LoginRequiredMixin, TemplateResponseMixin, Vi
         return self.render_to_response(context)
 
 
-class CourseWaitlistManagementView(LoginRequiredMixin, TemplateResponseMixin, View):
-    """Manage course waitlist and approve enrollments from waitlist"""
-    template_name = 'courses/instructor/waitlist_management.html'
 
-    def get(self, request, pk):
-        course = get_object_or_404(Course, pk=pk, owner=request.user)
-
-        # Get waitlist entries
-        waitlist_entries = CourseWaitlist.objects.filter(
-            course=course
-        ).select_related('student').order_by('priority', 'joined_waitlist')
-
-        # Get pending enrollments
-        pending_enrollments = CourseEnrollment.objects.filter(
-            course=course,
-            status='pending'
-        ).select_related('student').order_by('enrolled_on')
-
-        # Get recent rejected enrollments
-        rejected_enrollments = CourseEnrollment.objects.filter(
-            course=course,
-            status='rejected'
-        ).select_related('student', 'approved_by').order_by('-approved_at')[:10]
-
-        # Calculate capacity statistics
-        current_enrolled = course.get_enrollment_count()
-        capacity_remaining = (course.max_capacity - current_enrolled) if course.max_capacity else None
-
-        context = {
-            'course': course,
-            'waitlist_entries': waitlist_entries,
-            'pending_enrollments': pending_enrollments,
-            'rejected_enrollments': rejected_enrollments,
-            'current_enrolled': current_enrolled,
-            'capacity_remaining': capacity_remaining,
-            'has_capacity': course.max_capacity is None or capacity_remaining > 0,
-            'waitlist_count': waitlist_entries.count(),
-            'pending_count': pending_enrollments.count(),
-        }
-
-        return self.render_to_response(context)
-
-
-class ApproveWaitlistEntryView(LoginRequiredMixin, View):
-    """Approve a waitlist entry and create enrollment"""
-
-    def post(self, request, pk):
-        waitlist_entry = get_object_or_404(CourseWaitlist, pk=pk)
-        course = waitlist_entry.course
-        student = waitlist_entry.student
-
-        # Check permissions
-        if not (request.user == course.owner or request.user.is_staff):
-            messages.error(request, 'You do not have permission to approve waitlist entries.')
-            return redirect('course_waitlist_management', pk=course.pk)
-
-        # Check if course has capacity
-        if course.is_full():
-            messages.error(request, 'Cannot approve: course is at capacity.')
-            return redirect('course_waitlist_management', pk=course.pk)
-
-        # Check if student is already enrolled
-        if CourseEnrollment.objects.filter(student=student, course=course, status__in=['enrolled', 'pending']).exists():
-            messages.error(request, 'Student is already enrolled or has pending enrollment.')
-            waitlist_entry.delete()
-            return redirect('course_waitlist_management', pk=course.pk)
-
-        # Create enrollment
-        enrollment = CourseEnrollment.objects.create(
-            student=student,
-            course=course,
-            status='enrolled' if course.enrollment_type == 'open' else 'pending',
-            approved_by=request.user,
-            approved_at=timezone.now()
-        )
-
-        if course.enrollment_type == 'open':
-            # Direct enrollment for open courses
-            course.students.add(student)
-
-            # Create initial module progress
-            first_module = course.modules.order_by('order').first()
-            if first_module:
-                ModuleProgress.objects.create(
-                    enrollment=enrollment,
-                    module=first_module
-                )
-
-            messages.success(request, f'Approved and enrolled {student.get_full_name()} from waitlist.')
-        else:
-            # Requires additional approval for restricted courses
-            messages.success(request, f'Moved {student.get_full_name()} from waitlist to pending approval.')
-
-        # Remove from waitlist
-        waitlist_entry.delete()
-
-        return redirect('course_waitlist_management', pk=course.pk)
 
 
 class CourseQuickStatusView(LoginRequiredMixin, View):
@@ -1917,25 +1859,4 @@ class BulkContentItemOperationsView(LoginRequiredMixin, View):
         return redirect('module_content_list', module_id=content.module.id)
 
 
-class RemoveWaitlistEntryView(LoginRequiredMixin, View):
-    """Remove a student from waitlist"""
 
-    def post(self, request, pk):
-        waitlist_entry = get_object_or_404(CourseWaitlist, pk=pk)
-        course = waitlist_entry.course
-        student = waitlist_entry.student
-
-        # Check permissions
-        if not (request.user == course.owner or request.user.is_staff):
-            messages.error(request, 'You do not have permission to manage waitlist.')
-            return redirect('course_waitlist_management', pk=course.pk)
-
-        # Get removal reason
-        removal_reason = request.POST.get('removal_reason', 'No reason provided')
-
-        # Remove from waitlist
-        waitlist_entry.delete()
-
-        messages.success(request, f'Removed {student.get_full_name()} from waitlist.')
-
-        return redirect('course_waitlist_management', pk=course.pk)

@@ -51,12 +51,7 @@ urlpatterns = [
     path("analytics/<int:pk>/", views.InstructorCourseAnalyticsView.as_view(), name="instructor_course_analytics"),
     path("analytics/<int:pk>/student/<int:student_id>/", views.StudentProgressDetailView.as_view(), name="instructor_student_progress"),
     
-    # Enrollment Management
-    path("enrollment/<int:pk>/approve/", views.ApproveEnrollmentView.as_view(), name="approve_enrollment"),
-    path("enrollment/<int:pk>/reject/", views.RejectEnrollmentView.as_view(), name="reject_enrollment"),
-    path("waitlist/<int:pk>/manage/", views.CourseWaitlistManagementView.as_view(), name="course_waitlist_management"),
-    path("waitlist/entry/<int:pk>/approve/", views.ApproveWaitlistEntryView.as_view(), name="approve_waitlist_entry"),
-    path("waitlist/entry/<int:pk>/remove/", views.RemoveWaitlistEntryView.as_view(), name="remove_waitlist_entry"),
+
 
     # Instructor Student Management
     path("students/overview/", views.InstructorStudentsOverviewView.as_view(), name="instructor_students_overview"),

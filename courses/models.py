@@ -262,8 +262,14 @@ class Course(models.Model):
             ),
             models.CheckConstraint(
                 condition=(
-                        models.Q(is_free=True, price__isnull=True) |
-                        models.Q(is_free=False, price__isnull=False, price__gt=0)
+                    # Free courses: is_free=True, price=None
+                    models.Q(pricing_type='free', is_free=True, price__isnull=True) |
+                    # Subscription only: is_free=True, price=None
+                    models.Q(pricing_type='subscription_only', is_free=True, price__isnull=True) |
+                    # One-time purchase: is_free=False, price > 0
+                    models.Q(pricing_type='one_time', is_free=False, price__isnull=False, price__gt=0) |
+                    # Both: is_free=False, price > 0
+                    models.Q(pricing_type='both', is_free=False, price__isnull=False, price__gt=0)
                 ),
                 name='valid_pricing'
             ),

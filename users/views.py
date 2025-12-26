@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
@@ -38,6 +39,29 @@ class StudentCourseDetailView(LoginRequiredMixin, StudentOnlyRedirectMixin, Deta
     def get_queryset(self):
         qs = super().get_queryset()
         return qs.filter(course_enrollments__student=self.request.user)
+    
+    def dispatch(self, request, *args, **kwargs):
+        """Check if user has valid access to the course"""
+        from courses.access_service import CourseAccessService
+        
+        # Get the course first
+        self.object = self.get_object()
+        
+        # Check access
+        can_access, reason = CourseAccessService.can_access_course(request.user, self.object)
+        
+        if not can_access:
+            if reason == 'subscription_expired':
+                messages.warning(request, 'Langganan Anda telah berakhir. Silakan perpanjang untuk melanjutkan akses.')
+                return redirect('subscriptions:plans')
+            elif reason == 'not_enrolled':
+                messages.warning(request, 'Anda belum terdaftar di kursus ini.')
+                return redirect('course_detail', pk=self.object.id)
+            else:
+                messages.error(request, 'Anda tidak memiliki akses ke kursus ini.')
+                return redirect('student_course_list')
+        
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,8 +92,43 @@ class StudentEnrollCourseView(LoginRequiredMixin, StudentOnlyRedirectMixin, Form
     form_class = CourseEnrollForm
 
     def form_valid(self, form):
+        from courses.access_service import EnrollmentService
+        from subscriptions.services import SubscriptionService
+        from django.contrib import messages
+        
         self.course = form.cleaned_data['course']
-        self.course.students.add(self.request.user)
+        
+        # Check pricing type and handle accordingly
+        if self.course.pricing_type == 'free':
+            # Free course - enroll directly
+            EnrollmentService.enroll_free(self.request.user, self.course)
+            messages.success(self.request, f'Berhasil mendaftar ke kursus {self.course.title}')
+            
+        elif self.course.pricing_type == 'subscription_only':
+            # Subscription only - must have active subscription
+            subscription = SubscriptionService.get_active_subscription(self.request.user)
+            if subscription:
+                EnrollmentService.enroll_with_subscription(
+                    self.request.user, 
+                    self.course, 
+                    subscription
+                )
+                messages.success(self.request, f'Berhasil mendaftar ke kursus {self.course.title}')
+            else:
+                # No active subscription - redirect to subscription page
+                messages.warning(self.request, 'Kursus ini hanya tersedia untuk pelanggan. Silakan pilih paket langganan.')
+                return redirect('subscriptions:plans')
+                
+        elif self.course.pricing_type == 'one_time':
+            # One-time purchase - redirect to payment
+            messages.info(self.request, 'Silakan lakukan pembayaran untuk mengakses kursus ini.')
+            return redirect('course_detail', pk=self.course.id)
+            
+        elif self.course.pricing_type == 'both':
+            # Both options - need to choose
+            messages.info(self.request, 'Silakan pilih metode pembayaran: beli sekali atau berlangganan.')
+            return redirect('course_detail', pk=self.course.id)
+        
         return super().form_valid(form)
 
     def get_success_url(self):

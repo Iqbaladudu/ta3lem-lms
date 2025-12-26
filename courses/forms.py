@@ -140,7 +140,7 @@ class CourseForm(forms.ModelForm):
                 'Daftar tunggu hanya dapat diaktifkan jika ada batas kapasitas maksimal.')
         
         # Sync is_free based on pricing_type
-        is_free = pricing_type == 'free'
+        is_free = pricing_type in ['free', 'subscription_only']
         cleaned_data['is_free'] = is_free
         
         # Handle pricing logic based on pricing_type:
