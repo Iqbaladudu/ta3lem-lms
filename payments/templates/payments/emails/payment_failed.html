@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pembayaran Gagal</title>
+    </head>
+    <body style="font-family: Arial, sans-serif;
+                 line-height: 1.6;
+                 color: #333;
+                 max-width: 600px;
+                 margin: 0 auto;
+                 padding: 20px">
+        <div style="background: linear-gradient(135deg, #ef4444, #dc2626);
+                    padding: 30px;
+                    text-align: center;
+                    border-radius: 10px 10px 0 0">
+            <h1 style="color: white; margin: 0;">✕ Pembayaran Gagal</h1>
+        </div>
+        <div style="background: #f9fafb;
+                    padding: 30px;
+                    border-radius: 0 0 10px 10px">
+            <p>
+                Halo <strong>{{ user.first_name|default:user.username }}</strong>,
+            </p>
+            <p>
+                Maaf, pembayaran untuk order <strong>{{ order.order_number }}</strong> tidak dapat diproses.
+            </p>
+            {% if reason %}
+                <div style="background: #fef2f2;
+                            border-left: 4px solid #ef4444;
+                            padding: 15px;
+                            margin: 20px 0">
+                    <strong>Alasan:</strong> {{ reason }}
+                </div>
+            {% endif %}
+            <div style="background: white;
+                        padding: 20px;
+                        border-radius: 8px;
+                        margin: 20px 0">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;">Order Number</td>
+                        <td style="padding: 10px 0;
+                                   border-bottom: 1px solid #e5e7eb;
+                                   text-align: right;
+                                   font-family: monospace">{{ order.order_number }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;">Item</td>
+                        <td style="padding: 10px 0;
+                                   border-bottom: 1px solid #e5e7eb;
+                                   text-align: right">{{ order.item }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 0;">Total</td>
+                        <td style="padding: 10px 0; text-align: right; font-weight: bold;">{{ order.get_formatted_total }}</td>
+                    </tr>
+                </table>
+            </div>
+            <p>Silakan coba lagi atau hubungi tim support kami jika masalah berlanjut.</p>
+            <p style="margin-top: 30px;">
+                Salam,
+                <br>
+                <strong>Tim Ta3lem</strong>
+            </p>
+        </div>
+    </body>
+</html>

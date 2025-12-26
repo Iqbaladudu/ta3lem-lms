@@ -58,6 +58,14 @@ class User(AbstractUser):
     def is_instructor(self):
         return self.role == self.INSTRUCTOR
 
+    def has_active_subscription(self):
+        """Check if user has an active subscription"""
+        try:
+            from subscriptions.services import SubscriptionService
+            return SubscriptionService.user_has_active_subscription(self)
+        except ImportError:
+            return False
+
     def is_staff_member(self):
         return self.is_staff
 

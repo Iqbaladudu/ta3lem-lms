@@ -4,7 +4,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LogoutView
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, FormView
 from django.shortcuts import redirect, get_object_or_404, render
 from courses.models import Course
@@ -229,3 +229,22 @@ class ResendEmailVerificationView(FormView):
         if self.request.htmx:
             return self.render_to_response(self.get_context_data(form=form))
         return super().form_invalid(form)
+
+
+class StudentDashboardView(LoginRequiredMixin, StudentOnlyRedirectMixin, TemplateView):
+    """Dashboard view with subscription info for students"""
+    template_name = 'users/student/dashboard.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Get enrolled courses
+        enrolled_courses = Course.objects.filter(
+            course_enrollments__student=self.request.user
+        )[:3]  # Show latest 3
+        
+        context['enrolled_courses'] = enrolled_courses
+        context['total_courses'] = enrolled_courses.count()
+        
+        return context
+

@@ -1,14 +1,78 @@
 <!-- CTA Section -->
-<section aria-labelledby="cta-heading" class="bg-primary-900">
-    <div class="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
+<section aria-labelledby="cta-heading" class="relative bg-gradient-to-br from-primary-900 via-purple-900 to-pink-900 overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]"></div>
+    <div class="absolute top-0 right-0 -translate-y-12 translate-x-12">
+        <div class="h-96 w-96 rounded-full bg-purple-500/20 blur-3xl"></div>
+    </div>
+    <div class="absolute bottom-0 left-0 translate-y-12 -translate-x-12">
+        <div class="h-96 w-96 rounded-full bg-pink-500/20 blur-3xl"></div>
+    </div>
+
+    <div class="relative px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
-            <h2 id="cta-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Siap untuk memulai?</h2>
+            <h2 id="cta-heading" class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Siap Mulai Perjalanan Belajar Anda?
+            </h2>
             <p class="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-200">
-                Bergabunglah sekarang dan dapatkan akses ke ribuan materi pembelajaran berkualitas.
+                Bergabunglah dengan ribuan pelajar yang sudah meningkatkan skill mereka. 
+                Mulai gratis atau upgrade ke premium untuk akses unlimited.
             </p>
-            <div class="mt-10 flex items-center justify-center gap-x-6">
-                <a href="{% url 'student_registration' %}" class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-primary-600 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Daftar Gratis</a>
-                <a href="#features" class="text-sm font-semibold leading-6 text-white">Pelajari Lebih Lanjut <span aria-hidden="true">→</span></a>
+
+            <!-- Two CTA Buttons -->
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                {% if user.is_authenticated %}
+                    {% if not user_has_subscription %}
+                        <a href="{% url 'subscriptions:plans' %}" 
+                           class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-base font-semibold text-white shadow-xl hover:from-purple-700 hover:to-pink-700 transition-all hover:scale-105">
+                            <i class="fas fa-crown"></i>
+                            <span>Upgrade ke Premium</span>
+                        </a>
+                        <a href="{% url 'course_list' %}" 
+                           class="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-base font-semibold text-white hover:bg-white/20 transition-all border border-white/20">
+                            <i class="fas fa-search"></i>
+                            <span>Jelajahi Kursus</span>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'course_list' %}" 
+                           class="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-primary-900 shadow-xl hover:bg-primary-50 transition-all hover:scale-105">
+                            <i class="fas fa-rocket"></i>
+                            <span>Mulai Belajar</span>
+                        </a>
+                        <a href="{% url 'student_course_list' %}" 
+                           class="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-base font-semibold text-white hover:bg-white/20 transition-all border border-white/20">
+                            <i class="fas fa-book-reader"></i>
+                            <span>Kursus Saya</span>
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'student_registration' %}" 
+                       class="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-semibold text-primary-900 shadow-xl hover:bg-primary-50 transition-all hover:scale-105">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Daftar Gratis Sekarang</span>
+                    </a>
+                    <a href="{% url 'subscriptions:plans' %}" 
+                       class="inline-flex items-center gap-2 rounded-xl bg-white/10 backdrop-blur-sm px-8 py-4 text-base font-semibold text-white hover:bg-white/20 transition-all border border-white/20">
+                        <i class="fas fa-crown"></i>
+                        <span>Lihat Paket Premium</span>
+                    </a>
+                {% endif %}
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="mt-12 flex flex-wrap items-center justify-center gap-8 text-primary-300">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-green-400"></i>
+                    <span class="text-sm">Gratis untuk memulai</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-green-400"></i>
+                    <span class="text-sm">Tidak perlu kartu kredit</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-green-400"></i>
+                    <span class="text-sm">Batalkan kapan saja</span>
+                </div>
             </div>
         </div>
     </div>

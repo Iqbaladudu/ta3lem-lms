@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Instruksi Transfer - {{ order.order_number }}{% endblock %}
+{% block extra_css %}
+    <style>
+    /* Copy button animation */
+    @keyframes copySuccess {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    .copy-success {
+        animation: copySuccess 0.3s ease;
+    }
+    
+    /* Card hover effect */
+    .bank-card {
+        transition: all 0.3s ease;
+    }
+    
+    .bank-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Step indicator pulse */
+    @keyframes stepPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    
+    .step-active {
+        animation: stepPulse 2s ease-in-out infinite;
+    }
+    
+    /* Amount highlight */
+    .amount-glow {
+        text-shadow: 0 0 20px rgba(22, 163, 74, 0.3);
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 py-8 sm:py-12">
+        <div class="max-w-2xl mx-auto px-4">
+            <!-- Back Button -->
+            <div class="mb-6">
+                <a href="{% url 'payments:checkout' 'course' order.object_id %}"
+                   class="inline-flex items-center text-sm font-medium text-primary-500 hover:text-primary-900 transition-colors group">
+                    <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+                    <span>Kembali ke Checkout</span>
+                </a>
+            </div>
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-green-100">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-green-600 via-green-700 to-emerald-700 p-6 sm:p-8 text-white relative overflow-hidden">
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,255,255,0.1),transparent)]"></div>
+                    <div class="relative flex items-center gap-4">
+                        <div class="h-14 w-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                            <i class="fas fa-university text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl sm:text-2xl font-bold">Instruksi Pembayaran</h1>
+                            <p class="text-green-200">Order #{{ order.order_number }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Amount Section -->
+                <div class="p-6 sm:p-8 bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-100 text-center">
+                    <p class="text-primary-500 text-sm mb-2">Total Pembayaran</p>
+                    <p class="text-4xl sm:text-5xl font-bold text-green-700 amount-glow">{{ order.get_formatted_total }}</p>
+                    <!-- Copy Amount Button -->
+                    <button type="button"
+                            onclick="copyToClipboard('{{ order.total_amount|floatformat:0 }}', this)"
+                            class="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-white text-green-700 font-medium text-sm rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
+                        <i class="fas fa-copy"></i>
+                        <span>Salin Jumlah</span>
+                    </button>
+                    {% if order.expires_at %}
+                        <div class="mt-6 inline-flex items-center gap-2 px-5 py-3 bg-amber-100 text-amber-800 rounded-2xl border border-amber-200">
+                            <i class="fas fa-clock text-amber-600"></i>
+                            <span class="font-medium">Bayar sebelum {{ order.expires_at|date:"d M Y, H:i" }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- Bank Accounts -->
+                <div class="p-6 sm:p-8">
+                    <h2 class="font-bold text-lg text-primary-900 mb-6 flex items-center gap-2">
+                        <span class="h-8 w-8 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
+                            <i class="fas fa-building-columns text-sm"></i>
+                        </span>
+                        Transfer ke salah satu rekening
+                    </h2>
+                    <div class="space-y-4">
+                        {% for bank in bank_accounts %}
+                            <div class="bank-card border-2 border-primary-100 rounded-2xl p-5 hover:border-green-300 bg-white">
+                                <div class="flex items-start gap-4">
+                                    {% if bank.logo %}
+                                        <img src="{{ bank.logo.url }}"
+                                             alt="{{ bank.bank_name }}"
+                                             class="h-12 w-auto">
+                                    {% else %}
+                                        <div class="h-12 w-16 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center shadow-inner">
+                                            <span class="font-bold text-green-700">{{ bank.bank_code }}</span>
+                                        </div>
+                                    {% endif %}
+                                    <div class="flex-1 min-w-0">
+                                        <p class="font-bold text-primary-900 text-lg">{{ bank.bank_name }}</p>
+                                        <div class="flex items-center gap-3 mt-2 flex-wrap">
+                                            <span class="text-2xl font-mono font-bold text-green-700 tracking-wider">{{ bank.account_number }}</span>
+                                            <button type="button"
+                                                    onclick="copyToClipboard('{{ bank.account_number }}', this)"
+                                                    class="copy-btn flex items-center gap-1 px-3 py-1.5 bg-green-100 hover:bg-green-200 text-green-700 rounded-lg text-sm font-medium transition-colors"
+                                                    title="Salin nomor rekening">
+                                                <i class="fas fa-copy"></i>
+                                                <span>Salin</span>
+                                            </button>
+                                        </div>
+                                        <p class="text-primary-500 mt-2">
+                                            a.n. <span class="font-medium text-primary-700">{{ bank.account_holder }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                {% if bank.instructions %}
+                                    <div class="mt-4 p-3 bg-primary-50 rounded-xl text-sm text-primary-600 border border-primary-100">
+                                        <i class="fas fa-info-circle text-primary-400 mr-2"></i>
+                                        {{ bank.instructions }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% empty %}
+                            <div class="text-center py-8 text-primary-500">
+                                <i class="fas fa-exclamation-circle text-3xl mb-3 text-primary-300"></i>
+                                <p>Tidak ada rekening bank yang tersedia</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Instructions Steps -->
+                <div class="p-6 sm:p-8 bg-gradient-to-r from-blue-50 to-indigo-50 border-t border-blue-100">
+                    <h3 class="font-bold text-blue-900 mb-6 flex items-center gap-2">
+                        <span class="h-8 w-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600">
+                            <i class="fas fa-list-ol text-sm"></i>
+                        </span>
+                        Langkah Selanjutnya
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <span class="flex-shrink-0 h-10 w-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-bold shadow-lg step-active">1</span>
+                            <div class="pt-1">
+                                <p class="font-semibold text-blue-900">Transfer ke rekening</p>
+                                <p class="text-sm text-blue-700 mt-0.5">Transfer sesuai jumlah di atas ke salah satu rekening yang tersedia</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="flex-shrink-0 h-10 w-10 bg-blue-200 rounded-xl flex items-center justify-center text-blue-600 font-bold">2</span>
+                            <div class="pt-1">
+                                <p class="font-semibold text-blue-900">Simpan bukti transfer</p>
+                                <p class="text-sm text-blue-700 mt-0.5">Screenshot atau foto struk transfer sebagai bukti pembayaran</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="flex-shrink-0 h-10 w-10 bg-blue-200 rounded-xl flex items-center justify-center text-blue-600 font-bold">3</span>
+                            <div class="pt-1">
+                                <p class="font-semibold text-blue-900">Upload bukti transfer</p>
+                                <p class="text-sm text-blue-700 mt-0.5">Klik tombol di bawah untuk mengunggah bukti pembayaran Anda</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="flex-shrink-0 h-10 w-10 bg-blue-200 rounded-xl flex items-center justify-center text-blue-600 font-bold">4</span>
+                            <div class="pt-1">
+                                <p class="font-semibold text-blue-900">Tunggu verifikasi</p>
+                                <p class="text-sm text-blue-700 mt-0.5">Tim kami akan memverifikasi pembayaran dalam maksimal 1x24 jam kerja</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="p-6 sm:p-8 space-y-3">
+                    <a href="{% url 'payments:upload_proof' order.order_number %}"
+                       class="block w-full bg-gradient-to-r from-green-600 via-green-700 to-emerald-700 hover:from-green-700 hover:via-green-800 hover:to-emerald-800 text-white font-bold py-4 rounded-2xl text-center shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 text-lg">
+                        <i class="fas fa-upload mr-2"></i>
+                        Upload Bukti Transfer
+                    </a>
+                    <a href="{% url 'payments:payment_status' order.order_number %}"
+                       class="block w-full text-center text-primary-600 hover:text-primary-900 font-medium py-3 transition-colors">
+                        <i class="fas fa-search mr-2"></i>
+                        Cek Status Pembayaran
+                    </a>
+                </div>
+                <!-- Help -->
+                <div class="p-6 text-center border-t border-primary-100 bg-primary-50">
+                    <p class="text-sm text-primary-500 mb-2">Butuh bantuan atau ada pertanyaan?</p>
+                    <a href="mailto:support@ta3lem.com"
+                       class="text-primary-600 hover:text-primary-800 font-semibold inline-flex items-center gap-2 transition-colors">
+                        <i class="fas fa-headset"></i>
+                        Hubungi Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-4 right-4 z-50 space-y-2"></div>
+    <script>
+function copyToClipboard(text, button) {
+    navigator.clipboard.writeText(text).then(() => {
+        // Add success animation to button
+        if (button) {
+            button.classList.add('copy-success');
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> <span>Disalin!</span>';
+            button.classList.add('bg-green-500', 'text-white');
+            button.classList.remove('bg-green-100', 'text-green-700');
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('copy-success', 'bg-green-500', 'text-white');
+                button.classList.add('bg-green-100', 'text-green-700');
+            }, 2000);
+        }
+        
+        // Show toast notification
+        showToast('Berhasil disalin ke clipboard!', 'success');
+    }).catch(err => {
+        showToast('Gagal menyalin. Silakan salin manual.', 'error');
+    });
+}
+
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    
+    const bgColor = type === 'success' ? 'bg-green-600' : 'bg-red-600';
+    const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+    
+    toast.className = `${bgColor} text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transform translate-x-full transition-transform duration-300`;
+    toast.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+    
+    container.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => {
+        toast.classList.remove('translate-x-full');
+    }, 10);
+    
+    // Remove after delay
+    setTimeout(() => {
+        toast.classList.add('translate-x-full');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+    </script>
+{% endblock %}

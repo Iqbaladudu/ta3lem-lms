@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Request Payout - Ta3lem{% endblock %}
+{% block content %}
+    <div class="min-h-screen bg-gradient-to-br from-stone-50 to-stone-100 py-8">
+        <div class="max-w-xl mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-green-600 to-green-700 p-6 text-white">
+                    <h1 class="text-xl font-bold">Request Payout</h1>
+                    <p class="text-green-100 mt-1">Tarik pendapatan Anda ke rekening bank</p>
+                </div>
+                <!-- Balance Info -->
+                <div class="p-4 bg-stone-50 border-b border-stone-200 text-center">
+                    <p class="text-stone-500 text-sm">Saldo Tersedia</p>
+                    <p class="text-3xl font-bold text-green-600">
+                        {% if balance.currency == 'IDR' %}
+                            Rp {{ balance.available_balance|floatformat:0 }}
+                        {% else %}
+                            {{ balance.currency }} {{ balance.available_balance|floatformat:2 }}
+                        {% endif %}
+                    </p>
+                </div>
+                <!-- Form -->
+                <form method="post" class="p-6 space-y-5">
+                    {% csrf_token %}
+                    <!-- Bank Name -->
+                    <div>
+                        <label for="bank_name"
+                               class="block text-sm font-semibold text-stone-700 mb-2">
+                            Nama Bank <span class="text-red-500">*</span>
+                        </label>
+                        <select id="bank_name"
+                                name="bank_name"
+                                required
+                                class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                            <option value="">Pilih Bank...</option>
+                            <option value="BCA">Bank Central Asia (BCA)</option>
+                            <option value="BNI">Bank Negara Indonesia (BNI)</option>
+                            <option value="BRI">Bank Rakyat Indonesia (BRI)</option>
+                            <option value="Mandiri">Bank Mandiri</option>
+                            <option value="CIMB Niaga">CIMB Niaga</option>
+                            <option value="Danamon">Bank Danamon</option>
+                            <option value="Permata">Bank Permata</option>
+                            <option value="OCBC NISP">OCBC NISP</option>
+                            <option value="Lainnya">Bank Lainnya</option>
+                        </select>
+                    </div>
+                    <!-- Account Number -->
+                    <div>
+                        <label for="account_number"
+                               class="block text-sm font-semibold text-stone-700 mb-2">
+                            Nomor Rekening <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text"
+                               id="account_number"
+                               name="account_number"
+                               required
+                               placeholder="1234567890"
+                               class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <!-- Account Holder -->
+                    <div>
+                        <label for="account_holder"
+                               class="block text-sm font-semibold text-stone-700 mb-2">
+                            Nama Pemilik Rekening <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text"
+                               id="account_holder"
+                               name="account_holder"
+                               required
+                               placeholder="Nama sesuai buku rekening"
+                               class="w-full px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                    </div>
+                    <!-- Amount (optional) -->
+                    <div>
+                        <label for="amount" class="block text-sm font-semibold text-stone-700 mb-2">
+                            Jumlah Payout <span class="text-stone-400 font-normal">(opsional, default: semua saldo)</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-500">Rp</span>
+                            <input type="text"
+                                   id="amount"
+                                   name="amount"
+                                   placeholder="{{ balance.available_balance|floatformat:0 }}"
+                                   class="w-full pl-12 pr-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500">
+                        </div>
+                    </div>
+                    <!-- Info -->
+                    <div class="p-4 bg-blue-50 rounded-xl text-sm text-blue-700">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Payout akan diproses dalam 1-3 hari kerja setelah disetujui admin.
+                    </div>
+                    <!-- Submit -->
+                    <button type="submit"
+                            class="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-4 rounded-xl shadow-lg hover:shadow-xl transition">
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        Request Payout
+                    </button>
+                    <a href="{% url 'payments:instructor_earnings' %}"
+                       class="block w-full text-center text-stone-600 hover:text-stone-900 py-2">Kembali</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

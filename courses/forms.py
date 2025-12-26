@@ -11,7 +11,7 @@ class CourseForm(forms.ModelForm):
         model = Course
         fields = [
             'subject', 'title', 'slug', 'overview',
-            'is_free', 'price', 'currency',
+            'pricing_type', 'is_free', 'price', 'currency',
             'status', 'enrollment_type', 'max_capacity', 'waitlist_enabled',
             'difficulty_level', 'estimated_hours', 'certificate_enabled'
         ]
@@ -69,9 +69,13 @@ class CourseForm(forms.ModelForm):
             'currency': forms.Select(attrs={
                 'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition'
             }),
+            'pricing_type': forms.RadioSelect(attrs={
+                'class': 'pricing-type-radio'
+            }),
         }
         help_texts = {
             'slug': 'URL unik untuk kursus. Akan dibuat otomatis dari judul jika dikosongkan.',
+            'pricing_type': 'Pilih bagaimana siswa dapat mengakses kursus ini.',
             'is_free': 'Centang jika kursus ini gratis. Jika tidak, atur harga di bawah.',
             'price': 'Harga kursus (kosongkan jika gratis)',
             'currency': 'Mata uang untuk harga kursus',
@@ -92,6 +96,7 @@ class CourseForm(forms.ModelForm):
         self.fields['title'].label = "Judul Kursus"
         self.fields['slug'].label = "URL Slug"
         self.fields['overview'].label = "Deskripsi Kursus"
+        self.fields['pricing_type'].label = "Tipe Harga"
         self.fields['is_free'].label = "Kursus Gratis"
         self.fields['price'].label = "Harga"
         self.fields['currency'].label = "Mata Uang"
@@ -125,7 +130,7 @@ class CourseForm(forms.ModelForm):
         cleaned_data = super().clean()
         max_capacity = cleaned_data.get('max_capacity')
         waitlist_enabled = cleaned_data.get('waitlist_enabled')
-        is_free = cleaned_data.get('is_free')
+        pricing_type = cleaned_data.get('pricing_type')
         price = cleaned_data.get('price')
         currency = cleaned_data.get('currency')
         
@@ -134,19 +139,30 @@ class CourseForm(forms.ModelForm):
             self.add_error('waitlist_enabled', 
                 'Daftar tunggu hanya dapat diaktifkan jika ada batas kapasitas maksimal.')
         
-        # Handle pricing logic:
-        # If course is free, clear price and set default currency
-        if is_free:
+        # Sync is_free based on pricing_type
+        is_free = pricing_type == 'free'
+        cleaned_data['is_free'] = is_free
+        
+        # Handle pricing logic based on pricing_type:
+        # - 'free': No price needed
+        # - 'subscription_only': No price needed (access via subscription only)
+        # - 'one_time': Price required
+        # - 'both': Price required (subscription OR one-time purchase)
+        
+        needs_price = pricing_type in ['one_time', 'both']
+        
+        if is_free or pricing_type == 'subscription_only':
+            # Clear price for free and subscription-only courses
             cleaned_data['price'] = None
-            # Ensure currency has a default value (required by model)
+            # Ensure currency has a default value
             if not currency:
                 cleaned_data['currency'] = 'IDR'
-        else:
-            # Paid course must have a valid price
+        elif needs_price:
+            # Course with one-time purchase option must have valid price
             if price is None or price <= 0:
                 self.add_error('price', 
                     'Harga harus diisi dan lebih dari 0 untuk kursus berbayar.')
-            # Paid course must have currency
+            # Must have currency
             if not currency:
                 self.add_error('currency',
                     'Mata uang harus dipilih untuk kursus berbayar.')
@@ -156,12 +172,16 @@ class CourseForm(forms.ModelForm):
     def save(self, commit=True):
         instance = super().save(commit=False)
         
-        # CRITICAL: Ensure price is None when is_free is True
-        # This satisfies the database constraint 'valid_pricing' which requires:
-        # - is_free=True AND price IS NULL, OR
-        # - is_free=False AND price IS NOT NULL AND price > 0
-        if instance.is_free:
+        # Sync is_free based on pricing_type
+        # - 'free': is_free=True, price=None
+        # - 'subscription_only': is_free=True, price=None (access via subscription)
+        # - 'one_time': is_free=False, price required
+        # - 'both': is_free=False, price required
+        if instance.pricing_type in ['free', 'subscription_only']:
+            instance.is_free = True
             instance.price = None
+        else:
+            instance.is_free = False
         
         # Auto-generate slug from title if not provided
         if not instance.slug and instance.title:

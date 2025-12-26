@@ -1,86 +1,186 @@
 <!-- Pricing Section -->
-<section aria-labelledby="pricing-heading" class="bg-white py-24 sm:py-32">
+<section aria-labelledby="pricing-heading" class="bg-gradient-to-b from-white to-primary-50 py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl sm:text-center">
-            <h2 id="pricing-heading" class="text-3xl font-bold tracking-tight text-primary-900 sm:text-4xl">Harga Paket</h2>
-            <p class="mt-6 text-lg leading-8 text-primary-600">Pilih paket yang sesuai dengan kebutuhan belajar Anda.</p>
+        <div class="mx-auto max-w-2xl text-center">
+            <h2 id="pricing-heading" class="text-3xl font-bold tracking-tight text-primary-900 sm:text-4xl">
+                <i class="fas fa-crown text-purple-600 mr-2"></i>
+                Pilih Paket Subscription
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-primary-600">
+                Mulai gratis atau upgrade ke premium untuk akses unlimited ke semua kursus.
+            </p>
         </div>
-        <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
-            <!-- Free Tier -->
-            <div class="p-8 sm:p-10 lg:flex-auto">
-                <h3 class="text-2xl font-bold tracking-tight text-primary-900">Free</h3>
-                <p class="mt-6 text-base leading-7 text-gray-600">Akses dasar untuk mulai belajar.</p>
-                <div class="mt-10 flex items-center gap-x-4">
-                    <h4 class="flex-none text-sm font-semibold leading-6 text-primary-600">Apa yang termasuk</h4>
-                    <div class="h-px flex-auto bg-gray-100"></div>
+
+        {% if subscription_plans %}
+            <!-- Dynamic Subscription Plans -->
+            <div class="mx-auto mt-16 grid max-w-lg gap-8 lg:max-w-none lg:grid-cols-3">
+                {% for plan in subscription_plans %}
+                <div class="relative flex flex-col rounded-3xl bg-white shadow-xl ring-1 ring-gray-200 {% if plan.is_featured %}ring-2 ring-purple-600 scale-105 lg:scale-110 z-10{% endif %}">
+                    {% if plan.is_featured %}
+                    <div class="absolute -top-5 left-0 right-0 flex justify-center">
+                        <span class="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-1.5 text-sm font-semibold text-white shadow-lg">
+                            <i class="fas fa-star text-xs"></i>
+                            <span>Paling Populer</span>
+                        </span>
+                    </div>
+                    {% endif %}
+
+                    <div class="p-8 sm:p-10">
+                        <h3 class="text-2xl font-bold text-primary-900">{{ plan.name }}</h3>
+                        <p class="mt-4 text-sm text-gray-600">{{ plan.description|default:"" }}</p>
+                        
+                        <!-- Price -->
+                        <div class="mt-6">
+                            {% if plan.original_price and plan.original_price > plan.price %}
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg text-gray-400 line-through">
+                                    {{ plan.original_price|floatformat:0|stringformat:"s" }}
+                                </span>
+                                <span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                                    Hemat {{ plan.get_savings_percentage }}%
+                                </span>
+                            </div>
+                            {% endif %}
+                            <div class="mt-2 flex items-baseline gap-x-2">
+                                <span class="text-5xl font-bold tracking-tight text-primary-900">
+                                    {% if plan.currency == 'IDR' %}
+                                        Rp {{ plan.price|floatformat:0|stringformat:"s" }}
+                                    {% else %}
+                                        {{ plan.price|floatformat:2 }} {{ plan.currency }}
+                                    {% endif %}
+                                </span>
+                                <span class="text-sm font-semibold text-gray-600">/{{ plan.get_billing_cycle_display|lower }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600">
+                            {% for feature in plan.features %}
+                            <li class="flex gap-x-3">
+                                <i class="fas fa-check h-6 w-5 flex-none text-purple-600" aria-hidden="true"></i>
+                                <span>{{ feature }}</span>
+                            </li>
+                            {% endfor %}
+                            {% if plan.includes_certificate %}
+                            <li class="flex gap-x-3">
+                                <i class="fas fa-check h-6 w-5 flex-none text-purple-600" aria-hidden="true"></i>
+                                <span>Sertifikat Kelulusan</span>
+                            </li>
+                            {% endif %}
+                            {% if plan.priority_support %}
+                            <li class="flex gap-x-3">
+                                <i class="fas fa-check h-6 w-5 flex-none text-purple-600" aria-hidden="true"></i>
+                                <span>Support Prioritas</span>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                        <!-- CTA Button -->
+                        <div class="mt-8">
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'subscriptions:subscribe' plan.slug %}" 
+                                   class="block w-full rounded-lg px-4 py-3 text-center text-sm font-semibold shadow-sm transition-all
+                                   {% if plan.is_featured %}
+                                       bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700
+                                   {% else %}
+                                       bg-primary-600 text-white hover:bg-primary-700
+                                   {% endif %}">
+                                    Pilih {{ plan.name }}
+                                </a>
+                                {% if plan.trial_days > 0 %}
+                                <p class="mt-3 text-center text-xs text-gray-500">
+                                    <i class="fas fa-gift mr-1"></i>
+                                    Trial gratis {{ plan.trial_days }} hari
+                                </p>
+                                {% endif %}
+                            {% else %}
+                                <a href="{% url 'student_registration' %}" 
+                                   class="block w-full rounded-lg px-4 py-3 text-center text-sm font-semibold shadow-sm transition-all
+                                   {% if plan.is_featured %}
+                                       bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700
+                                   {% else %}
+                                       bg-primary-600 text-white hover:bg-primary-700
+                                   {% endif %}">
+                                    Daftar & Pilih Plan
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
-                    <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
-                        Akses ke 5 kursus gratis
-                    </li>
-                    <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
-                        Forum diskusi komunitas
-                    </li>
-                     <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
-                        Akses konten dasar
-                    </li>
-                </ul>
+                {% endfor %}
             </div>
-             <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                <div class="rounded-2xl bg-primary-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-                    <div class="mx-auto max-w-xs px-8">
-                        <p class="text-base font-semibold text-primary-600">Gratis Selamanya</p>
-                        <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                            <span class="text-5xl font-bold tracking-tight text-primary-900">Rp 0</span>
-                            <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/bulan</span>
-                        </p>
-                        <a href="{% url 'student_registration' %}" class="mt-10 block w-full rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600">Daftar Sekarang</a>
-                        <p class="mt-6 text-xs leading-5 text-gray-600">Syarat dan ketentuan berlaku</p>
+
+            <!-- Link to Full Pricing -->
+            <div class="mt-12 text-center">
+                <a href="{% url 'subscriptions:plans' %}" 
+                   class="inline-flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-700 transition-colors">
+                    Lihat Semua Paket & Perbandingan Detail
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        {% else %}
+            <!-- Fallback Static Pricing (if no plans in DB) -->
+            <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+                <!-- Free Tier -->
+                <div class="p-8 sm:p-10 lg:flex-auto">
+                    <h3 class="text-2xl font-bold tracking-tight text-primary-900">Free</h3>
+                    <p class="mt-6 text-base leading-7 text-gray-600">Akses dasar untuk mulai belajar.</p>
+                    <div class="mt-10 flex items-center gap-x-4">
+                        <h4 class="flex-none text-sm font-semibold leading-6 text-primary-600">Apa yang termasuk</h4>
+                        <div class="h-px flex-auto bg-gray-100"></div>
+                    </div>
+                    <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-gray-600 sm:grid-cols-2 sm:gap-6">
+                        <li class="flex gap-x-3">
+                            <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
+                            Akses ke kursus gratis
+                        </li>
+                        <li class="flex gap-x-3">
+                            <i class="fas fa-check h-6 w-5 flex-none text-primary-600" aria-hidden="true"></i>
+                            Forum diskusi komunitas
+                        </li>
+                    </ul>
+                </div>
+                <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
+                    <div class="rounded-2xl bg-primary-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
+                        <div class="mx-auto max-w-xs px-8">
+                            <p class="text-base font-semibold text-primary-600">Gratis Selamanya</p>
+                            <p class="mt-6 flex items-baseline justify-center gap-x-2">
+                                <span class="text-5xl font-bold tracking-tight text-primary-900">Rp 0</span>
+                                <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/bulan</span>
+                            </p>
+                            <a href="{% url 'student_registration' %}" class="mt-10 block w-full rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-primary-500">
+                                Daftar Sekarang
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-         <!-- Premium Tier Highlight -->
-         <div class="mx-auto mt-8 max-w-2xl rounded-3xl bg-primary-900 ring-1 ring-primary-900 sm:mt-10 lg:mx-0 lg:flex lg:max-w-none">
-            <div class="p-8 sm:p-10 lg:flex-auto">
-                <h3 class="text-2xl font-bold tracking-tight text-white">Premium</h3>
-                <p class="mt-6 text-base leading-7 text-primary-200">Akses tanpa batas dan fitur eksklusif.</p>
-                <div class="mt-10 flex items-center gap-x-4">
-                    <h4 class="flex-none text-sm font-semibold leading-6 text-primary-100">Semua fitur Free, ditambah:</h4>
-                    <div class="h-px flex-auto bg-primary-800"></div>
-                </div>
-                <ul role="list" class="mt-8 grid grid-cols-1 gap-4 text-sm leading-6 text-primary-200 sm:grid-cols-2 sm:gap-6">
-                    <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
-                        Akses ke semua kursus
-                    </li>
-                    <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
-                        Sertifikat terverifikasi
-                    </li>
-                     <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
-                        Download materi offline
-                    </li>
-                    <li class="flex gap-x-3">
-                        <i class="fas fa-check h-6 w-5 flex-none text-white" aria-hidden="true"></i>
-                        Prioritas dukungan instruktur
-                    </li>
-                </ul>
-            </div>
-             <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                <div class="rounded-2xl bg-white/10 py-10 text-center ring-1 ring-inset ring-white/10 lg:flex lg:flex-col lg:justify-center lg:py-16">
-                    <div class="mx-auto max-w-xs px-8">
-                        <p class="text-base font-semibold text-primary-200">Rekomendasi</p>
-                        <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                            <span class="text-5xl font-bold tracking-tight text-white">Rp 99rb</span>
-                            <span class="text-sm font-semibold leading-6 tracking-wide text-primary-200">/bulan</span>
-                        </p>
-                        <a href="#" class="mt-10 block w-full rounded-md bg-white px-3 py-2 text-center text-sm font-semibold text-primary-900 shadow-sm hover:bg-primary-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Upgrade Sekarang</a>
-                        <p class="mt-6 text-xs leading-5 text-primary-200">Batalkan kapan saja</p>
+        {% endif %}
+
+        <!-- Trust Indicators -->
+        <div class="mt-16 border-t border-gray-200 pt-12">
+            <div class="mx-auto max-w-4xl">
+                <div class="grid grid-cols-1 gap-8 sm:grid-cols-3 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="rounded-full bg-green-100 p-3 mb-3">
+                            <i class="fas fa-shield-alt text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Pembayaran Aman</h3>
+                        <p class="mt-2 text-sm text-gray-600">Transaksi terenkripsi & aman</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="rounded-full bg-blue-100 p-3 mb-3">
+                            <i class="fas fa-rotate text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Batalkan Kapan Saja</h3>
+                        <p class="mt-2 text-sm text-gray-600">Tanpa biaya pembatalan</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="rounded-full bg-purple-100 p-3 mb-3">
+                            <i class="fas fa-headset text-2xl text-purple-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Support 24/7</h3>
+                        <p class="mt-2 text-sm text-gray-600">Tim siap membantu Anda</p>
                     </div>
                 </div>
             </div>

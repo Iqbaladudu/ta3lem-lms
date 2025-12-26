@@ -24,6 +24,32 @@
             <p class="mt-6 text-lg leading-8 text-primary-600">
                 Gabung dengan ribuan pelajar lainnya di Ta3lem. Akses kursus berkualitas dari instruktur berpengalaman dan mulai perjalanan belajarmu hari ini.
             </p>
+            
+            <!-- Subscription Highlight Banner -->
+            {% if not user.is_authenticated or not user_has_subscription %}
+            <div class="mt-8 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 p-6 shadow-xl">
+                <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm">
+                            <i class="fas fa-crown text-2xl text-white"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-white">Akses Unlimited dengan Premium</h3>
+                        <p class="mt-1 text-sm text-purple-100">Akses semua kursus, sertifikat, dan fitur eksklusif lainnya.</p>
+                        <div class="mt-3 flex items-center gap-3">
+                            <a href="{% url 'subscriptions:plans' %}" 
+                               class="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-purple-600 shadow-sm hover:bg-purple-50 transition-colors">
+                                Lihat Plans
+                                <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                            <span class="text-sm font-medium text-white">Mulai dari Rp 99rb/bulan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
             <div class="mt-10 flex items-center gap-x-6">
                 {% if user.is_authenticated %}
                     <a href="{% url 'course_list' %}"

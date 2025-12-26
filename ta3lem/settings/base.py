@@ -28,8 +28,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core.apps.CoreConfig',  # Global settings and utilities
     'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
+    'payments.apps.PaymentsConfig',
+    'subscriptions.apps.SubscriptionsConfig',
     'vite.apps.ViteConfig',
     'embed_video',
     'django_htmx',
@@ -58,6 +61,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.global_settings',  # Global settings
+                'subscriptions.context_processors.subscription_context',
             ],
         },
     },

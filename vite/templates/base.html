@@ -90,10 +90,27 @@
                             <div class="px-4 py-3 border-b border-primary-100">
                                 <p class="text-sm font-semibold text-primary-900 truncate">{{ user.username }}</p>
                                 <p class="text-xs text-primary-500 truncate mt-0.5">{{ user.email }}</p>
+                                {% if user.is_authenticated and user.role == 'student' %}
+                                    {% if user_has_subscription %}
+                                    <div class="mt-2 inline-flex items-center gap-1.5 px-2 py-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-semibold rounded-full">
+                                        <i class="fas fa-crown text-[10px]"></i>
+                                        <span>Premium</span>
+                                    </div>
+                                    {% else %}
+                                    <div class="mt-2 inline-flex items-center gap-1.5 px-2 py-1 bg-primary-100 text-primary-600 text-xs font-semibold rounded-full">
+                                        <span>Free</span>
+                                    </div>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                             <a href="#" class="block px-4 py-2.5 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
                                 <i class="fas fa-user-circle mr-2 text-primary-400"></i> Profil Saya
                             </a>
+                            {% if user.is_authenticated and user.role == 'student' %}
+                            <a href="{% url 'subscriptions:manage' %}" class="block px-4 py-2.5 text-sm text-primary-700 hover:bg-primary-50 transition-colors">
+                                <i class="fas fa-crown mr-2 text-primary-400"></i> Subscription
+                            </a>
+                            {% endif %}
                             
                              <form action="{% url 'logout' %}" method="post" class="block w-full border-t border-primary-100 mt-1 pt-1">
                                 {% csrf_token %}
@@ -160,6 +177,9 @@
                             {% if user.is_authenticated and user.role == 'student' %}
                             <a href="{% url 'student_course_list' %}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-medium leading-7 text-primary-900 hover:bg-primary-50 transition-colors">
                                 <i class="fas fa-graduation-cap w-6 text-primary-400"></i> Pembelajaran Saya
+                            </a>
+                            <a href="{% url 'subscriptions:manage' %}" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-medium leading-7 text-primary-900 hover:bg-primary-50 transition-colors">
+                                <i class="fas fa-crown w-6 text-primary-400"></i> Subscription
                             </a>
                             {% endif %}
 

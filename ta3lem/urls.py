@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('course/', include('courses.urls')),
     path('courses/', CourseListView.as_view(), name='course_list'),
+    path('payments/', include('payments.urls', namespace='payments')),
+    path('subscriptions/', include('subscriptions.urls', namespace='subscriptions')),
     path('', LandingPageView.as_view(), name='landing'),
 ]
 

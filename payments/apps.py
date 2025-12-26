@@ -1,0 +1,14 @@
+from django.apps import AppConfig 
+
+
+class PaymentsConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'payments'
+    verbose_name = 'Payment Processing'
+
+    def ready(self):
+        # Import signals when app is ready
+        from . import signals  # noqa
+        
+        # Import providers to register them
+        from .providers import manual, stripe, midtrans  # noqa

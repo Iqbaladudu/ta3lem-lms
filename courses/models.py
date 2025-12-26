@@ -188,6 +188,19 @@ class Course(models.Model):
         ],
         help_text='Currency for pricing'
     )
+    
+    # Pricing type for modular pricing system
+    pricing_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('free', 'Gratis'),
+            ('one_time', 'Beli Satuan'),
+            ('subscription_only', 'Hanya Langganan'),
+            ('both', 'Beli/Langganan'),
+        ],
+        default='free',
+        help_text='How this course can be accessed'
+    )
 
     # Enhanced fields from clarifications
     enrollment_type = models.CharField(
@@ -335,6 +348,148 @@ class Course(models.Model):
 
         return True, "Can enroll"
 
+    # Purchasable protocol methods for payment integration
+    def get_price(self):
+        """Implement Purchasable protocol - return price for one-time purchase"""
+        from decimal import Decimal
+        if self.is_free or self.pricing_type == 'free':
+            return Decimal('0')
+        return self.price or Decimal('0')
+
+    def get_currency(self):
+        """Implement Purchasable protocol"""
+        return self.currency
+
+    def get_display_name(self):
+        """Implement Purchasable protocol"""
+        return self.title
+
+    def on_purchase_completed(self, user, order):
+        """
+        Called when a course purchase is completed.
+        Creates or updates enrollment with paid status and lifetime access.
+        """
+        from courses.models import CourseEnrollment
+        
+        enrollment, created = CourseEnrollment.objects.update_or_create(
+            student=user,
+            course=self,
+            defaults={
+                'status': 'enrolled',
+                'payment_status': 'paid',
+                'payment_amount': order.total_amount,
+                'payment_reference': order.order_number,
+                'access_type': 'purchased',  # Lifetime access
+                'order': order,  # Link to order
+                'payment_date': order.completed_at if hasattr(order, 'completed_at') else timezone.now(),
+            }
+        )
+        
+        # Add to students ManyToMany
+        if user not in self.students.all():
+            self.students.add(user)
+        
+        return enrollment
+
+    def supports_subscription(self):
+        """Check if this course can be accessed via subscription"""
+        return self.pricing_type in ['subscription_only', 'both', 'free']
+    
+    def supports_one_time_purchase(self):
+        """Check if this course can be purchased one-time"""
+        return self.pricing_type in ['one_time', 'both']
+    
+    def user_has_access(self, user):
+        """
+        Check if user has access to this course through any method:
+        - Direct enrollment (paid or free)
+        - Active subscription (for subscription-enabled courses)
+        - Course owner
+        """
+        if not user or not user.is_authenticated:
+            return False
+        
+        # Course owner always has access
+        if self.owner == user:
+            return True
+        
+        # Free courses - check for any enrollment
+        if self.pricing_type == 'free':
+            return self.course_enrollments.filter(
+                student=user,
+                status__in=['enrolled', 'completed', 'paused']
+            ).exists()
+        
+        # Check direct enrollment with valid payment
+        has_direct_access = self.course_enrollments.filter(
+            student=user,
+            status__in=['enrolled', 'completed', 'paused'],
+            payment_status__in=['paid', 'free']
+        ).exists()
+        
+        if has_direct_access:
+            return True
+        
+        # Check subscription access for subscription-enabled courses
+        if self.supports_subscription():
+            try:
+                from subscriptions.services import SubscriptionService
+                if SubscriptionService.user_has_active_subscription(user):
+                    return True
+            except ImportError:
+                pass
+        
+        return False
+    
+    def get_access_options(self, user):
+        """
+        Get available access options for a user viewing this course.
+        Returns dict with available options and current status.
+        """
+        options = {
+            'can_purchase': False,
+            'can_subscribe': False,
+            'has_access': False,
+            'access_type': None,
+            'purchase_price': None,
+        }
+        
+        if not user or not user.is_authenticated:
+            options['can_purchase'] = self.supports_one_time_purchase() and not self.is_free
+            options['can_subscribe'] = self.supports_subscription()
+            options['purchase_price'] = self.get_formatted_price() if options['can_purchase'] else None
+            return options
+        
+        # Check current access
+        if self.user_has_access(user):
+            options['has_access'] = True
+            
+            # Determine access type
+            enrollment = self.course_enrollments.filter(student=user).first()
+            if enrollment:
+                if enrollment.payment_status == 'paid':
+                    options['access_type'] = 'purchased'
+                elif enrollment.payment_status == 'free':
+                    options['access_type'] = 'free'
+            
+            # Check if access is via subscription
+            if not options['access_type'] and self.supports_subscription():
+                try:
+                    from subscriptions.services import SubscriptionService
+                    if SubscriptionService.user_has_active_subscription(user):
+                        options['access_type'] = 'subscription'
+                except ImportError:
+                    pass
+            
+            return options
+        
+        # User doesn't have access - show available options
+        options['can_purchase'] = self.supports_one_time_purchase() and not self.is_free
+        options['can_subscribe'] = self.supports_subscription()
+        options['purchase_price'] = self.get_formatted_price() if options['can_purchase'] else None
+        
+        return options
+
     def save(self, *args, **kwargs):
         # Auto-set published_at when status changes to published
         if self.status == 'published' and not self.published_at:
@@ -468,6 +623,12 @@ class CourseEnrollment(models.Model):
         ('free', 'Free Course'),
     ]
 
+    ACCESS_TYPE_CHOICES = [
+        ('free', 'Free Access'),
+        ('purchased', 'One-Time Purchase'),
+        ('subscription', 'Subscription Access'),
+    ]
+
     student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='student_enrollments')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_enrollments')
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='enrolled')
@@ -475,6 +636,30 @@ class CourseEnrollment(models.Model):
     completed_on = models.DateTimeField(null=True, blank=True)
     progress_percentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
     last_accessed = models.DateTimeField(null=True, blank=True)
+
+    # Access control for dual pricing system
+    access_type = models.CharField(
+        max_length=20,
+        choices=ACCESS_TYPE_CHOICES,
+        default='free',
+        help_text='How this enrollment was granted'
+    )
+    subscription = models.ForeignKey(
+        'subscriptions.UserSubscription',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='course_enrollments',
+        help_text='Subscription that grants access (if applicable)'
+    )
+    order = models.ForeignKey(
+        'payments.Order',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='course_enrollments',
+        help_text='Order for one-time purchase (if applicable)'
+    )
 
     # Payment tracking
     payment_status = models.CharField(
@@ -554,13 +739,16 @@ class CourseEnrollment(models.Model):
         if self.status == 'completed' and not self.completed_on:
             self.completed_on = timezone.now()
 
-        # Set default payment status based on course pricing
-        if not self.pk:
+        # Set default payment status based on course pricing - ONLY if not already set
+        # This allows on_purchase_completed to set payment_status='paid' without override
+        if not self.pk and self.payment_status == 'free':
+            # payment_status is still default - apply logic based on course pricing
             if self.course.is_free:
                 self.payment_status = 'free'
             else:
                 self.payment_status = 'pending'
-                self.payment_amount = self.course.price
+                if not self.payment_amount:
+                    self.payment_amount = self.course.price
 
         # Set default enrollment status based on course enrollment type
         if not self.pk and self.course.enrollment_type == 'approval':
@@ -616,11 +804,24 @@ class CourseEnrollment(models.Model):
         Returns True if the course can be accessed/opened by the user according to:
         - status is 'enrolled', 'completed', or 'paused'
         - payment_status is 'paid' or 'free'
+        - OR user has active subscription (for subscription-enabled courses)
         """
-        return (
-                self.status in ['enrolled', 'completed', 'paused'] and
-                self.payment_status in ['paid', 'free']
-        )
+        # Check one-time purchase access
+        if self.status in ['enrolled', 'completed', 'paused'] and self.payment_status in ['paid', 'free']:
+            return True
+        
+        # Check subscription access for courses that support it
+        course_pricing_type = self.course.pricing_type
+        if course_pricing_type in ['subscription_only', 'both', 'free']:
+            try:
+                from subscriptions.services import SubscriptionService
+                if SubscriptionService.user_has_active_subscription(self.student):
+                    return True
+            except ImportError:
+                # subscriptions app not installed
+                pass
+        
+        return False
 
 
 class ContentProgress(models.Model):

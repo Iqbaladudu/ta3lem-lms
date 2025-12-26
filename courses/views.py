@@ -25,6 +25,7 @@ from .models import (
     Course, Module, Content, ContentItem, Subject, CourseEnrollment,
     ContentProgress, ModuleProgress, LearningSession, CourseWaitlist
 )
+from .decorators import CourseAccessMixin  # Added for dual pricing access control
 
 from courses.utils import landing_page_features, landing_page_testimonials
 
@@ -33,16 +34,28 @@ class LandingPageView(TemplateResponseMixin, View):
     template_name = 'landing/index.html'
 
     def get(self, request):
+        from core.utils import get_setting, is_feature_enabled
+        
+        # Get featured courses count from settings
+        featured_count = get_setting('featured_courses_count', 6)
+        
         # Featured courses (published only)
         featured_courses = Course.objects.filter(status='published').annotate(
             total_modules=Count('modules')
-        ).order_by('-created')[:6]
+        ).order_by('-created')[:featured_count]
 
         # Statistics
         total_students = User.objects.count()
         total_courses = Course.objects.filter(status='published').count()
         total_instructors = User.objects.filter(role='instructor').count()
 
+        # Get subscription plans for pricing section (only if enabled)
+        subscription_plans = []
+        if is_feature_enabled('subscriptions') and get_setting('show_pricing', True):
+            from subscriptions.models import SubscriptionPlan
+            subscription_plans = SubscriptionPlan.objects.filter(
+                is_active=True
+            ).order_by('display_order', 'price')[:3]  # Show top 3 plans
 
         context = {
             'featured_courses': featured_courses,
@@ -51,6 +64,12 @@ class LandingPageView(TemplateResponseMixin, View):
             'total_instructors': total_instructors,
             'features': landing_page_features,
             'testimonials': landing_page_testimonials,
+            'subscription_plans': subscription_plans,
+            # Landing page section toggles from global settings
+            'show_stats': get_setting('show_stats_section', True),
+            'show_featured': get_setting('show_featured_courses', True),
+            'show_testimonials': get_setting('show_testimonials', True),
+            'show_pricing': get_setting('show_pricing', True) and is_feature_enabled('subscriptions'),
         }
         return self.render_to_response(context)
 
@@ -588,31 +607,18 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
         can_enroll, message = course.can_enroll(user)
 
         if can_enroll:
-            # For paid courses, we need to initiate payment process
+            # For paid courses, redirect to payment checkout
             if not course.is_free:
-                # TODO: Integrate with payment gateway (Stripe, PayPal, etc.)
-                # For now, we'll create enrollment with payment pending status
-                enrollment = CourseEnrollment.objects.create(
-                    student=user,
-                    course=course,
-                    status='pending',  # Always pending for paid courses until payment
-                    payment_status='pending',
-                    payment_amount=course.price
-                )
-
-                messages.info(request,
-                              f'Untuk menyelesaikan pendaftaran kursus "{course.title}", '
-                              f'silakan lakukan pembayaran sebesar {course.get_formatted_price()}. '
-                              'Link pembayaran akan dikirim ke email Anda.')
-                # Redirect to student dashboard for this course (not public page)
-                return redirect('student_course_detail', pk=course.pk)
+                # Redirect to payment checkout page for course purchase
+                return redirect('payments:checkout', order_type='course', item_id=course.pk)
 
             # For free courses, proceed with normal enrollment
             enrollment_data = {
                 'student': user,
                 'course': course,
                 'status': 'enrolled' if course.enrollment_type == 'open' else 'pending',
-                'payment_status': 'free'
+                'payment_status': 'free',
+                'access_type': 'free',  # Track that this is free access
             }
 
             # Set approval_requested_at for pending enrollments
@@ -820,7 +826,9 @@ class StudentCourseListView(LoginRequiredMixin, ListView):
         return context
 
 
-class StudentCourseDetailView(LoginRequiredMixin, DetailView):
+from courses.decorators import CourseAccessMixin
+
+class StudentCourseDetailView(LoginRequiredMixin, CourseAccessMixin, DetailView):
     """Display course details and progress for enrolled student"""
     model = Course
     template_name = 'courses/student/course_detail.html'
@@ -828,9 +836,6 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         """Override to ensure only published courses are accessible to students"""
-        # Students can access courses if:
-        # 1. Course is published, OR
-        # 2. They are already enrolled (even if course becomes draft later)
         pk = self.kwargs.get('pk')
         course = get_object_or_404(Course, pk=pk)
 
@@ -850,19 +855,15 @@ class StudentCourseDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         course = self.object
 
-        # Get or create enrollment
-        enrollment, created = CourseEnrollment.objects.get_or_create(
+        # Get enrollment (should exist - CourseAccessMixin already checked)
+        enrollment = CourseEnrollment.objects.filter(
             student=self.request.user,
-            course=course,
-            defaults={'status': 'enrolled'}
-        )
+            course=course
+        ).first()
 
-        if created:
-            course.students.add(self.request.user)
-
-        # Check if user can access this course based on enrollment and payment status
-        if not enrollment.can_access_course():
-            raise Http404("You do not have access to this course. Please check your enrollment and payment status.")
+        if not enrollment:
+            # This shouldn't happen if CourseAccessMixin works correctly
+            raise Http404("Enrollment not found")
 
         # Update last accessed
         enrollment.last_accessed = timezone.now()
@@ -1279,6 +1280,35 @@ class InstructorCourseAnalyticsView(LoginRequiredMixin, DetailView):
             'recent_enrollments': recent_enrollments,
             'total_sessions': total_sessions,
         })
+
+        # Add revenue statistics from payment system
+        try:
+            from payments.models import Order
+            from django.contrib.contenttypes.models import ContentType
+            from django.db.models import Sum
+            
+            course_ct = ContentType.objects.get_for_model(Course)
+            orders = Order.objects.filter(
+                content_type=course_ct,
+                object_id=course.pk,
+                status='completed'
+            )
+            
+            total_revenue = orders.aggregate(total=Sum('total_amount'))['total'] or 0
+            total_orders = orders.count()
+            
+            # Recent orders
+            recent_orders = orders.select_related('user').order_by('-paid_at')[:5]
+            
+            context.update({
+                'total_revenue': total_revenue,
+                'total_orders': total_orders,
+                'recent_orders': recent_orders,
+                'currency': course.currency,
+            })
+        except ImportError:
+            # payments app not installed
+            pass
 
         return context
 

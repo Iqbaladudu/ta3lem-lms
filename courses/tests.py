@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from .models import Course, User, CourseEnrollment, Subject
 
@@ -71,7 +72,8 @@ class CourseAccessViewTestCase(TestCase):
         )
 
         self.client.login(username='testuser', password='testpass')
-        response = self.client.get(f'/courses/student/{self.course.pk}/')
+        url = reverse('student_course_detail', args=[self.course.pk])
+        response = self.client.get(url)
 
         # Should not raise 404 - accessible courses return 200 or redirect
         self.assertIn(response.status_code, [200, 302])
@@ -86,7 +88,8 @@ class CourseAccessViewTestCase(TestCase):
         )
 
         self.client.login(username='testuser', password='testpass')
-        response = self.client.get(f'/courses/student/{self.course.pk}/')
+        url = reverse('student_course_detail', args=[self.course.pk])
+        response = self.client.get(url)
 
         # Should return 404 for inaccessible course
         self.assertEqual(response.status_code, 404)
@@ -101,7 +104,8 @@ class CourseAccessViewTestCase(TestCase):
         )
 
         self.client.login(username='testuser', password='testpass')
-        response = self.client.get(f'/courses/student/{self.course.pk}/')
+        url = reverse('student_course_detail', args=[self.course.pk])
+        response = self.client.get(url)
 
         # Should return 404 for inaccessible course
         self.assertEqual(response.status_code, 404)
@@ -116,7 +120,8 @@ class CourseAccessViewTestCase(TestCase):
         )
 
         self.client.login(username='testuser', password='testpass')
-        response = self.client.get(f'/courses/student/{self.course.pk}/')
+        url = reverse('student_course_detail', args=[self.course.pk])
+        response = self.client.get(url)
 
         # Should not raise 404
         self.assertIn(response.status_code, [200, 302])
@@ -131,7 +136,9 @@ class CourseAccessViewTestCase(TestCase):
         )
 
         self.client.login(username='testuser', password='testpass')
-        response = self.client.get(f'/courses/student/{self.course.pk}/')
+        url = reverse('student_course_detail', args=[self.course.pk])
+        response = self.client.get(url)
 
         # Should not raise 404
         self.assertIn(response.status_code, [200, 302])
+

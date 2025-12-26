@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Kelola Subscription{% endblock %}
+{% block content %}
+    <div class="min-h-screen bg-gradient-to-br from-stone-50 to-stone-100 py-8">
+        <div class="max-w-3xl mx-auto px-4">
+            <h1 class="text-3xl font-bold text-stone-900 mb-8">Kelola Subscription</h1>
+            {% if subscription %}
+                <!-- Active Subscription Card -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+                    <div class="bg-gradient-to-r from-primary-600 to-primary-700 p-6 text-white">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-primary-100 text-sm">Plan Anda</p>
+                                <h2 class="text-2xl font-bold">{{ subscription.plan.name }}</h2>
+                            </div>
+                            <div class="text-right">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-sm">{{ subscription.get_status_display }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between py-3 border-b border-stone-100">
+                            <span class="text-stone-500">Periode Saat Ini</span>
+                            <span class="font-medium">
+                                {{ subscription.current_period_start|date:"d M Y" }} -
+                                {{ subscription.current_period_end|date:"d M Y" }}
+                            </span>
+                        </div>
+                        <div class="flex justify-between py-3 border-b border-stone-100">
+                            <span class="text-stone-500">Sisa Waktu</span>
+                            <span class="font-medium">
+                                {% if stats.days_remaining > 0 %}
+                                    {{ stats.days_remaining }} hari
+                                {% else %}
+                                    <span class="text-red-500">Expired</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="flex justify-between py-3 border-b border-stone-100">
+                            <span class="text-stone-500">Harga</span>
+                            <span class="font-medium">
+                                {{ subscription.plan.get_formatted_price }}/{{ subscription.plan.get_billing_cycle_display|lower }}
+                            </span>
+                        </div>
+                        {% if subscription.cancel_at_period_end %}
+                            <div class="bg-orange-50 text-orange-700 p-4 rounded-xl">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>
+                                Subscription akan berakhir pada {{ subscription.current_period_end|date:"d M Y" }}
+                                dan tidak akan diperpanjang.
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="p-6 bg-stone-50 flex gap-4">
+                        {% if not subscription.cancel_at_period_end %}
+                            <a href="{% url 'subscriptions:cancel' %}"
+                               class="flex-1 text-center py-3 border border-red-300 text-red-600 hover:bg-red-50 rounded-xl font-medium transition">
+                                Batalkan Subscription
+                            </a>
+                        {% endif %}
+                        <a href="{% url 'subscriptions:plans' %}"
+                           class="flex-1 text-center py-3 bg-primary-600 text-white hover:bg-primary-700 rounded-xl font-medium transition">
+                            Lihat Plans Lain
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <!-- No Active Subscription -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 text-center mb-8">
+                    <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-crown text-2xl text-stone-400"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-stone-900 mb-2">Belum Berlangganan</h2>
+                    <p class="text-stone-600 mb-6">Mulai berlangganan untuk akses semua kursus premium.</p>
+                    <a href="{% url 'subscriptions:plans' %}"
+                       class="inline-block px-8 py-3 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-primary-800 transition">
+                        Lihat Plans
+                    </a>
+                </div>
+            {% endif %}
+            <!-- Subscription History -->
+            {% if history %}
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="p-6 border-b border-stone-100">
+                        <h3 class="font-semibold text-lg text-stone-900">Riwayat Subscription</h3>
+                    </div>
+                    <div class="divide-y divide-stone-100">
+                        {% for sub in history %}
+                            <div class="p-4 flex items-center justify-between">
+                                <div>
+                                    <p class="font-medium text-stone-900">{{ sub.plan.name }}</p>
+                                    <p class="text-sm text-stone-500">{{ sub.started_at|date:"d M Y" }} - {{ sub.current_period_end|date:"d M Y" }}</p>
+                                </div>
+                                <span class="px-3 py-1 rounded-full text-sm {% if sub.status == 'active' %}bg-green-100 text-green-700 {% elif sub.status == 'trial' %}bg-purple-100 text-purple-700 {% elif sub.status == 'cancelled' %}bg-gray-100 text-gray-700 {% else %}bg-red-100 text-red-700{% endif %}">
+                                    {{ sub.get_status_display }}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
