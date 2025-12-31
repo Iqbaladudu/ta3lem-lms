@@ -104,4 +104,3 @@ EMBED_VIDEO_BACKENDS = (
     'embed_video.backends.VimeoBackend',
     'embed_video.backends.SoundCloudBackend',
 )
-
