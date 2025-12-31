@@ -20,6 +20,7 @@ db.sqlite3
 .env.*.local
 .env.production
 .env.development
+.env.staging
 
 # Logs
 logs/
@@ -71,3 +72,6 @@ dump.rdb
 *.tmp
 *.swp
 *.bak
+
+# Security keys
+*.pem
