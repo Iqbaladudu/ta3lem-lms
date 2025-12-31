@@ -291,11 +291,38 @@
         <!-- Scripts -->
         {% block extra_js %}{% endblock %}
         <script>
+        // Get CSRF token from cookie
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        // Configure HTMX to send CSRF token with every request
         document.addEventListener('DOMContentLoaded', function () {
+            // HTMX configuration
             htmx.config.defaultSwapStyle = 'innerHTML';
             htmx.config.defaultSwapDelay = 0;
             htmx.config.defaultSettleDelay = 100;
             
+            // Add CSRF token to all HTMX requests
+            document.body.addEventListener('htmx:configRequest', function(event) {
+                const csrfToken = getCookie('csrftoken');
+                if (csrfToken) {
+                    event.detail.headers['X-CSRFToken'] = csrfToken;
+                }
+            });
+            
+            // Scroll to top after swap
             document.body.addEventListener('htmx:afterSwap', function (event) {
                 if (event.detail.target.id === 'main-content' || event.detail.target.tagName === 'MAIN') {
                     window.scrollTo({top: 0, behavior: 'smooth'});
