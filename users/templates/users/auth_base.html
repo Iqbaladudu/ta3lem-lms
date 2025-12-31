@@ -2,88 +2,86 @@
 {% load vite %}
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Ta3lem - Learning Management System{% endblock %}</title>
-    {% enable_vite %}
-    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 min-h-screen font-['Inter'] antialiased"
-      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-
-<!-- Background Pattern -->
-<div class="absolute inset-0 z-0 opacity-30">
-    <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:40px_40px]"></div>
-</div>
-
-<!-- Main Content -->
-<div class="relative z-10 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-
-    <!-- Logo/Brand -->
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="flex justify-center mb-8">
-            <a href="{% url 'course_list' %}" class="inline-flex items-center space-x-3 group">
-                <div class="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 rounded-2xl shadow-2xl transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                    <i class="fas fa-graduation-cap text-2xl text-white"></i>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            {% block title %}Ta3lem - Learning Management System{% endblock %}
+        </title>
+        {% enable_vite %}
+        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body class="bg-primary-50 min-h-screen antialiased"
+          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 z-0 opacity-5">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#57534e_1px,transparent_1px),linear-gradient(to_bottom,#57534e_1px,transparent_1px)] bg-[size:40px_40px]">
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="relative z-10 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <!-- Logo/Brand -->
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="flex justify-center mb-8">
+                    <a href="{% url 'course_list' %}"
+                       class="inline-flex items-center space-x-3 group">
+                        <div class="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-primary-900 to-primary-800 rounded-2xl shadow-xl transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <span class="text-4xl font-bold text-primary-900">Ta3lem</span>
+                    </a>
                 </div>
-                <span class="text-4xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent">Ta3lem</span>
-            </a>
-        </div>
-        <h2 class="text-center text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            {% block heading %}{% endblock %}
-        </h2>
-        <p class="text-center text-base text-gray-600">
-            {% block subheading %}{% endblock %}
-        </p>
-    </div>
-
-    <!-- Form Container -->
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div class="bg-white/90 backdrop-blur-md py-8 px-6 shadow-2xl sm:rounded-2xl sm:px-10 border border-gray-200">
-            {% block content %}{% endblock %}
-        </div>
-
-        <!-- Footer Links -->
-        <div class="mt-6 text-center">
-            {% block footer_links %}{% endblock %}
-        </div>
-    </div>
-</div>
-
-<!-- Toast Notification Container -->
-<div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2">
-    {% if messages %}
-        {% for message in messages %}
-            <div class="bg-white rounded-xl shadow-2xl border-l-4 {% if message.tags == 'error' %}border-red-500{% elif message.tags == 'success' %}border-green-500{% elif message.tags == 'warning' %}border-yellow-500{% else %}border-blue-500{% endif %} p-4 max-w-sm animate-slide-in">
-                <div class="flex items-start">
-                    <div class="flex-shrink-0">
-                        {% if message.tags == 'error' %}
-                            <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-times-circle text-red-500"></i>
-                            </div>
-                        {% elif message.tags == 'success' %}
-                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-check-circle text-green-500"></i>
-                            </div>
-                        {% else %}
-                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-info-circle text-blue-500"></i>
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div class="ml-3 flex-1">
-                        <p class="text-sm font-semibold text-gray-900">{{ message }}</p>
-                    </div>
+                <h2 class="text-center text-3xl sm:text-4xl font-bold text-primary-900 mb-3">
+                    {% block heading %}{% endblock %}
+                </h2>
+                <p class="text-center text-base text-primary-600">
+                    {% block subheading %}{% endblock %}
+                </p>
+            </div>
+            <!-- Form Container -->
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <div class="bg-white py-8 px-6 shadow-xl sm:rounded-2xl sm:px-10 border border-primary-200">
+                    {% block content %}{% endblock %}
+                </div>
+                <!-- Footer Links -->
+                <div class="mt-6 text-center">
+                    {% block footer_links %}{% endblock %}
                 </div>
             </div>
-        {% endfor %}
-    {% endif %}
-</div>
-
-<style>
+        </div>
+        <!-- Toast Notification Container -->
+        <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="bg-white rounded-xl shadow-xl border-l-4 {% if message.tags == 'error' %}border-error-600{% elif message.tags == 'success' %}border-success-600{% elif message.tags == 'warning' %}border-warning-600{% else %}border-info-600{% endif %} p-4 max-w-sm animate-slide-in">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                {% if message.tags == 'error' %}
+                                    <div class="w-8 h-8 bg-error-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-times-circle text-error-600"></i>
+                                    </div>
+                                {% elif message.tags == 'success' %}
+                                    <div class="w-8 h-8 bg-success-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-check-circle text-success-600"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="w-8 h-8 bg-info-100 rounded-lg flex items-center justify-center">
+                                        <i class="fas fa-info-circle text-info-600"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="ml-3 flex-1">
+                                <p class="text-sm font-semibold text-primary-900">{{ message }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <style>
     @keyframes slide-in {
         from {
             transform: translateX(100%);
@@ -122,9 +120,8 @@
     .animate-shake {
         animation: shake 0.5s;
     }
-</style>
-
-<script>
+        </style>
+        <script>
     function togglePassword(inputId, iconId) {
         const input = document.getElementById(inputId);
         const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -141,8 +138,8 @@
             setTimeout(() => toast.remove(), 300);
         });
     }, 5000);
-</script>
-
-{% block extra_js %}{% endblock %}
-</body>
+        </script>
+        {% block extra_js %}
+        {% endblock %}
+    </body>
 </html>

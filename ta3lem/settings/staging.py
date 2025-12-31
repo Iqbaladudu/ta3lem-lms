@@ -4,7 +4,20 @@ Settings untuk environment staging - mirip production tapi dengan beberapa tools
 """
 
 import os
+from pathlib import Path
 from .base import *
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+] + MIDDLEWARE
+
+
 
 # SECRET_KEY dari environment variable
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-staging-key-change-this')
@@ -12,12 +25,19 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-staging-key-ch
 # DEBUG mode - False untuk keamanan, tapi bisa diaktifkan sementara untuk debugging
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'staging.ta3lem.com').split(',')
+# ALLOWED_HOSTS dari environment variable + local development hosts
+_env_hosts = os.environ.get('DJANGO_ALLOWED_HOSTS', 'staging.ta3lem.com').split(',')
+_local_hosts = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = list(set(_env_hosts + _local_hosts))  # Merge and deduplicate
 
-# Staging-specific apps (opsional: tambahkan debug_toolbar jika perlu)
-# INSTALLED_APPS += [
-#     'debug_toolbar',
-# ]
+INSTALLED_APPS = INSTALLED_APPS + [
+    'debug_toolbar',
+    'redisboard',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 # Database - PostgreSQL (disarankan)
 DATABASES = {
@@ -50,7 +70,26 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@ta3lem.com')
 
 # Static files
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [
+    BASE_DIR / 'vite' / 'static' / 'dist',
+]
+
+# WhiteNoise configuration for staging
+# Allow serving from STATICFILES_DIRS without collectstatic in staging
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
+# Vite configuration
+VITE_DEV_MODE = False  # Use production build in staging
 
 # Security settings - Medium level
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'False') == 'True'

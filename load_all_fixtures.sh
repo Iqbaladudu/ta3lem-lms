@@ -32,7 +32,7 @@ FIXTURES=(
 for fixture in "${FIXTURES[@]}"; do
     echo ""
     echo "--- Loading $fixture ---"
-    uv run manage.py loaddata "courses/fixtures/$fixture" --settings=ta3lem.settings.development
+    uv run manage.py loaddata "courses/fixtures/$fixture" --settings=ta3lem.settings.staging
     if [ $? -ne 0 ]; then
         echo "✗ Error loading $fixture"
         exit 1
@@ -46,7 +46,7 @@ echo "✓ Semua fixtures berhasil di-load!"
 echo "================================================"
 echo ""
 echo "Ringkasan:"
-uv run manage.py shell --settings=ta3lem.settings.development -c "
+uv run manage.py shell --settings=ta3lem.settings.staging -c "
 from users.models import User
 from courses.models import Subject, Course, Module, Content, ContentItem, Text, Video, CourseEnrollment, ContentProgress, LearningSession
 print(f'  - Users: {User.objects.count()}')

@@ -11,6 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ta3lem.settings')
+env = os.environ.get('DJANGO_ENV', 'development')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'ta3lem.settings.staging')
 
 application = get_wsgi_application()

@@ -62,13 +62,26 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@ta3lem.com')
 SERVER_EMAIL = os.environ.get('SERVER_EMAIL', 'server@ta3lem.com')
 
+# VITE
+VITE_DEV_MODE = False
+
 # Static files - Untuk production gunakan whitenoise atau S3
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [
+    BASE_DIR / 'vite' / 'static' / 'dist',
+]
 
-# WhiteNoise untuk serving static files (opsional)
-# MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Storage configuration with WhiteNoise and Vite manifest
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
 
 # Media files - Disarankan gunakan S3 atau cloud storage
 # Untuk sementara gunakan local storage

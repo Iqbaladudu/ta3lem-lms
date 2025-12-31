@@ -3,7 +3,6 @@ import subprocess
 
 from django.conf import settings
 
-
 def get_config(setting_name):
     vite_dev_server_url = getattr(settings, "VITE_DEV_SERVER_URL", "http://localhost:5173")
     config = {

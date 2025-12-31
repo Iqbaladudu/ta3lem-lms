@@ -13,8 +13,15 @@ Contoh:
 
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Default ke development jika tidak diset
 env = os.environ.get('DJANGO_ENV', 'development')
+
+print(f"INFO Using environment: {env}")
+
 
 if env == 'production':
     from .production import *

@@ -23,6 +23,10 @@ dependencies = [
     "markdown-emdash>=0.2.0",
     "mdx-unimoji>=1.1",
     "djlint>=1.36.4",
+    "gunicorn>=23.0.0",
+    "uvicorn>=0.40.0",
+    "python-dotenv>=1.2.1",
+    "whitenoise>=6.11.0",
 ]
 
 [tool.uv.sources]
