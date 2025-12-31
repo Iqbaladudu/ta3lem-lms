@@ -4,7 +4,8 @@ FROM python:3.13-slim
 WORKDIR /app
 
 # Install Node.js for Vite build
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+RUN apt-get update && apt-get install -y curl gnupg git && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
@@ -23,7 +24,7 @@ ENV VIRTUAL_ENV=/app/.venv \
     PATH="/app/.venv/bin:$PATH"
 
 # Verify critical dependencies are installed
-RUN python -c "import psycopg; print(f'✅ psycopg {psycopg.__version__} installed')" && \
+RUN python -c "import psycopg2; print(f'✅ psycopg2 {psycopg2.__version__} installed')" && \
     python -c "import django; print(f'✅ Django {django.__version__} installed')" && \
     python -c "import uvicorn; print(f'✅ uvicorn installed')"
 
@@ -33,6 +34,7 @@ RUN npm ci && npm run build
 
 # Return to app directory
 WORKDIR /app
+RUN mkdir -p logs
 
 # Run uvicorn directly from virtual environment
-CMD ["uvicorn", "kmm_web_backend.asgi:application", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["gunicorn", "ta3lem.wsgi:application", "--bind", "0.0.0.0:8000"]

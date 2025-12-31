@@ -48,6 +48,3 @@
 // document.body.addEventListener("contentDeleted", () => {
 //     NotifyX.success("Konten berhasil dihapus");
 // })
-
-import "video.js"
-import "videojs-youtube"
