@@ -36,5 +36,8 @@ RUN npm ci && npm run build
 WORKDIR /app
 RUN mkdir -p logs
 
+# Collect static files
+RUN uv run python manage.py collectstatic --noinput --settings=ta3lem.settings.staging
+
 # Run uvicorn directly from virtual environment
 CMD ["gunicorn", "ta3lem.wsgi:application", "--bind", "0.0.0.0:8000"]
