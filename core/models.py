@@ -70,6 +70,21 @@ class GlobalSettings(models.Model):
         help_text='Enable earnings system for instructors'
     )
     
+    # Instructor Mode Configuration
+    instructor_mode = models.CharField(
+        max_length=20,
+        choices=[
+            ('single', 'Single Instructor per Course'),
+            ('multiple', 'Multiple Instructors per Course'),
+        ],
+        default='single',
+        help_text='single: 1 owner per course. multiple: courses can have co-instructors'
+    )
+    allow_instructor_registration = models.BooleanField(
+        default=True,
+        help_text='Allow users to self-register as instructors'
+    )
+    
     # Enrollment Settings
     require_email_verification = models.BooleanField(
         default=True,
@@ -333,5 +348,11 @@ class GlobalSettings(models.Model):
             'forums': self.enable_discussion_forums,
             'waitlist': self.enable_waitlist,
             'earnings': self.enable_instructor_earnings,
+            'instructor_registration': self.allow_instructor_registration,
         }
         return feature_map.get(feature_name, False)
+    
+    def is_multiple_instructor_mode(self):
+        """Check if multiple instructors per course is enabled"""
+        return self.instructor_mode == 'multiple'
+

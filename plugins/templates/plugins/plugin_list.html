@@ -1,0 +1,14 @@
+<!-- Template for show_enabled_plugins tag -->
+<div class="plugin-list">
+    <h4>Enabled Plugins</h4>
+    <ul>
+        {% for plugin in plugins %}
+            <li>
+                <strong>{{ plugin.name }}</strong> v{{ plugin.version }}
+                <small>- {{ plugin.description }}</small>
+            </li>
+        {% empty %}
+            <li>No plugins enabled</li>
+        {% endfor %}
+    </ul>
+</div>

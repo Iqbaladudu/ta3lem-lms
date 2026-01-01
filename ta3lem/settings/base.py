@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'plugins.apps.PluginsConfig',  # Plugin system - must be before other apps
     'core.apps.CoreConfig',  # Global settings and utilities
     'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.global_settings',  # Global settings
                 'subscriptions.context_processors.subscription_context',
+                'plugins.context_processors.plugins_context',  # Plugin hooks
             ],
         },
     },
@@ -104,3 +106,17 @@ EMBED_VIDEO_BACKENDS = (
     'embed_video.backends.VimeoBackend',
     'embed_video.backends.SoundCloudBackend',
 )
+
+# Plugin System Configuration
+PLUGINS = {
+    # List of plugin names to enable (can also be managed via admin)
+    'ENABLED_PLUGINS': [],
+    
+    # Additional directories to search for plugins
+    'PLUGIN_DIRS': [
+        BASE_DIR / 'plugins_available',
+    ],
+    
+    # Auto-discover plugins from INSTALLED_APPS
+    'AUTO_DISCOVER': True,
+}

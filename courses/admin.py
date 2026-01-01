@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subject, Course, Module, Text, File, Image, Video, Content, ContentItem, CourseEnrollment, ContentProgress, ModuleProgress, LearningSession
+from .models import Subject, Course, Module, Text, File, Image, Video, Content, ContentItem, CourseEnrollment, ContentProgress, ModuleProgress, LearningSession, CourseInstructor
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
@@ -9,13 +9,34 @@ class SubjectAdmin(admin.ModelAdmin):
 class ModuleInline(admin.StackedInline):
     model = Module
 
+
+class CourseInstructorInline(admin.TabularInline):
+    """Inline admin for managing course instructors (multiple mode only)"""
+    model = CourseInstructor
+    extra = 1
+    fields = ['user', 'role', 'can_edit_content', 'can_manage_students', 'can_view_analytics', 'accepted_at']
+    readonly_fields = ['accepted_at']
+    autocomplete_fields = ['user']
+    
+    def has_add_permission(self, request, obj=None):
+        """Only show in multiple instructor mode"""
+        from core.models import GlobalSettings
+        settings = GlobalSettings.get_settings()
+        return settings.instructor_mode == 'multiple'
+    
+    def has_change_permission(self, request, obj=None):
+        from core.models import GlobalSettings
+        settings = GlobalSettings.get_settings()
+        return settings.instructor_mode == 'multiple'
+
+
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'subject', 'created']
-    list_filter = ['created', 'subject']
+    list_display = ['title', 'subject', 'owner', 'status', 'pricing_type', 'created']
+    list_filter = ['created', 'subject', 'status', 'pricing_type']
     search_fields = ['title', 'overview']
     prepopulated_fields = {'slug': ('title',)}
-    inlines = [ModuleInline]
+    inlines = [ModuleInline, CourseInstructorInline]
 
 @admin.register(Text)
 class TextAdmin(admin.ModelAdmin):

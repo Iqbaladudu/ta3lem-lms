@@ -502,6 +502,189 @@ class Course(models.Model):
             from django.utils import timezone
             self.published_at = timezone.now()
         super().save(*args, **kwargs)
+    
+    def get_all_instructors(self):
+        """
+        Get all instructors for this course based on instructor mode.
+        Returns QuerySet of User objects.
+        """
+        from core.models import GlobalSettings
+        settings = GlobalSettings.get_settings()
+        
+        if settings.instructor_mode == 'single':
+            # Single mode: only the owner
+            return User.objects.filter(id=self.owner.id)
+        else:
+            # Multiple mode: owner + accepted co-instructors
+            instructor_ids = list(
+                self.course_instructors.filter(
+                    accepted_at__isnull=False
+                ).values_list('user_id', flat=True)
+            )
+            # Always include owner
+            if self.owner.id not in instructor_ids:
+                instructor_ids.insert(0, self.owner.id)
+            
+            return User.objects.filter(id__in=instructor_ids)
+    
+    def user_can_edit(self, user):
+        """Check if user can edit this course (content, settings, etc.)"""
+        if not user or not user.is_authenticated:
+            return False
+        
+        # Owner always can edit
+        if user == self.owner:
+            return True
+        
+        # Staff/admin can edit
+        if user.is_staff or user.is_superuser:
+            return True
+        
+        # Check multiple instructor mode
+        from core.models import GlobalSettings
+        settings = GlobalSettings.get_settings()
+        
+        if settings.instructor_mode == 'multiple':
+            return self.course_instructors.filter(
+                user=user, 
+                accepted_at__isnull=False,
+                can_edit_content=True
+            ).exists()
+        
+        return False
+    
+    def user_can_manage_students(self, user):
+        """Check if user can manage students in this course"""
+        if not user or not user.is_authenticated:
+            return False
+        
+        if user == self.owner or user.is_staff or user.is_superuser:
+            return True
+        
+        from core.models import GlobalSettings
+        settings = GlobalSettings.get_settings()
+        
+        if settings.instructor_mode == 'multiple':
+            return self.course_instructors.filter(
+                user=user,
+                accepted_at__isnull=False,
+                can_manage_students=True
+            ).exists()
+        
+        return False
+    
+    def add_instructor(self, user, role='co_instructor', invited_by=None):
+        """
+        Add a co-instructor to this course (only works in multiple mode).
+        Returns the CourseInstructor instance or None if not allowed.
+        """
+        from core.models import GlobalSettings
+        settings = GlobalSettings.get_settings()
+        
+        if settings.instructor_mode != 'multiple':
+            return None
+        
+        if user == self.owner:
+            return None  # Owner is not added as co-instructor
+        
+        instructor, created = CourseInstructor.objects.get_or_create(
+            course=self,
+            user=user,
+            defaults={'role': role}
+        )
+        return instructor
+
+
+class CourseInstructor(models.Model):
+    """
+    Co-instructor relationship for courses.
+    Only used when GlobalSettings.instructor_mode is 'multiple'.
+    """
+    
+    ROLE_CHOICES = [
+        ('owner', 'Course Owner'),
+        ('co_instructor', 'Co-Instructor'),
+        ('assistant', 'Teaching Assistant'),
+    ]
+    
+    course = models.ForeignKey(
+        Course, 
+        on_delete=models.CASCADE, 
+        related_name='course_instructors'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='instructor_courses'
+    )
+    role = models.CharField(
+        max_length=20, 
+        choices=ROLE_CHOICES, 
+        default='co_instructor'
+    )
+    
+    # Permissions
+    can_edit_content = models.BooleanField(
+        default=True,
+        help_text='Can create/edit/delete course content'
+    )
+    can_manage_students = models.BooleanField(
+        default=True,
+        help_text='Can approve enrollments, view student progress'
+    )
+    can_view_analytics = models.BooleanField(
+        default=True,
+        help_text='Can view course analytics and earnings'
+    )
+    
+    # Invitation workflow
+    invited_at = models.DateTimeField(auto_now_add=True)
+    invited_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='sent_instructor_invites'
+    )
+    accepted_at = models.DateTimeField(null=True, blank=True)
+    declined_at = models.DateTimeField(null=True, blank=True)
+    
+    class Meta:
+        unique_together = ['course', 'user']
+        ordering = ['role', 'invited_at']
+        verbose_name = 'Course Instructor'
+        verbose_name_plural = 'Course Instructors'
+        indexes = [
+            models.Index(fields=['course', 'user']),
+            models.Index(fields=['user', 'accepted_at']),
+        ]
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.course.title} ({self.get_role_display()})"
+    
+    def accept(self):
+        """Accept the instructor invitation"""
+        from django.utils import timezone
+        self.accepted_at = timezone.now()
+        self.declined_at = None
+        self.save()
+    
+    def decline(self):
+        """Decline the instructor invitation"""
+        from django.utils import timezone
+        self.declined_at = timezone.now()
+        self.accepted_at = None
+        self.save()
+    
+    @property
+    def is_pending(self):
+        """Check if invitation is pending"""
+        return self.accepted_at is None and self.declined_at is None
+    
+    @property
+    def is_active(self):
+        """Check if instructor is active (accepted and not declined)"""
+        return self.accepted_at is not None and self.declined_at is None
 
 
 class Module(models.Model):
