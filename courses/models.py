@@ -439,8 +439,8 @@ class Course(models.Model):
         # Check subscription access for subscription-enabled courses
         if self.supports_subscription():
             try:
-                from subscriptions.services import SubscriptionService
-                if SubscriptionService.user_has_active_subscription(user):
+                from plugins_available.commerce.facades.subscriptions import has_active_subscription
+                if has_active_subscription(user):
                     return True
             except ImportError:
                 pass
@@ -481,8 +481,8 @@ class Course(models.Model):
             # Check if access is via subscription
             if not options['access_type'] and self.supports_subscription():
                 try:
-                    from subscriptions.services import SubscriptionService
-                    if SubscriptionService.user_has_active_subscription(user):
+                    from plugins_available.commerce.facades.subscriptions import has_active_subscription
+                    if has_active_subscription(user):
                         options['access_type'] = 'subscription'
                 except ImportError:
                     pass
@@ -1003,8 +1003,8 @@ class CourseEnrollment(models.Model):
         course_pricing_type = self.course.pricing_type
         if course_pricing_type in ['subscription_only', 'both', 'free']:
             try:
-                from subscriptions.services import SubscriptionService
-                if SubscriptionService.user_has_active_subscription(self.student):
+                from plugins_available.commerce.facades.subscriptions import has_active_subscription
+                if has_active_subscription(self.student):
                     return True
             except ImportError:
                 # subscriptions app not installed

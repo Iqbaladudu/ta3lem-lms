@@ -4,6 +4,7 @@ from typing import Optional, TYPE_CHECKING
 from django.db import transaction
 from django.utils import timezone
 
+from plugins.hooks import CoreHooks, trigger_hook
 from .models import SubscriptionPlan, UserSubscription
 
 if TYPE_CHECKING:
@@ -81,6 +82,9 @@ class SubscriptionService:
             order=order,
         )
 
+        # Trigger plugin hook
+        trigger_hook(CoreHooks.SUBSCRIPTION_CREATED, subscription=subscription, user=user)
+
         return subscription
 
     @classmethod
@@ -111,6 +115,10 @@ class SubscriptionService:
             reason: Optional cancellation reason
         """
         subscription.cancel(immediately=immediately, reason=reason)
+        
+        # Trigger plugin hook
+        trigger_hook(CoreHooks.SUBSCRIPTION_CANCELLED, subscription=subscription, user=subscription.user)
+        
         return subscription
 
     @classmethod

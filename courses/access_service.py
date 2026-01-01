@@ -66,12 +66,14 @@ class CourseAccessService:
                     return False, 'subscription_expired'
             else:
                 # Check if user has any active subscription
-                from subscriptions.services import SubscriptionService
-                has_active = SubscriptionService.user_has_active_subscription(user)
-                if has_active:
-                    return True, 'subscription_active'
-                else:
-                    return False, 'subscription_expired'
+                try:
+                    from plugins_available.commerce.facades.subscriptions import has_active_subscription
+                    if has_active_subscription(user):
+                        return True, 'subscription_active'
+                except ImportError:
+                    pass
+                
+                return False, 'subscription_expired'
         
         elif enrollment.access_type == 'free':
             return True, 'free'

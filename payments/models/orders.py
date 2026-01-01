@@ -7,6 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils import timezone
 
+from plugins.hooks import CoreHooks, trigger_hook
 from .providers import PaymentProvider, BankAccount
 
 
@@ -180,6 +181,9 @@ class Order(models.Model):
         if gateway_payment_id:
             self.gateway_payment_id = gateway_payment_id
         self.save()  # Signal will be emitted by save() if status changed
+        
+        # Trigger plugin hook
+        trigger_hook(CoreHooks.PAYMENT_COMPLETED, order=self, user=self.user)
 
     def mark_failed(self, reason=''):
         """Mark order as failed and trigger signals"""

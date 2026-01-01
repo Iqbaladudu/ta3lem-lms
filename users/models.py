@@ -61,10 +61,16 @@ class User(AbstractUser):
     def has_active_subscription(self):
         """Check if user has an active subscription"""
         try:
-            from subscriptions.services import SubscriptionService
-            return SubscriptionService.user_has_active_subscription(self)
+            # Use commerce facade for graceful degradation
+            from plugins_available.commerce.facades.subscriptions import has_active_subscription
+            return has_active_subscription(self)
         except ImportError:
-            return False
+            # Fallback to direct import if plugin not available
+            try:
+                from subscriptions.services import SubscriptionService
+                return SubscriptionService.user_has_active_subscription(self)
+            except ImportError:
+                return False
 
     def is_staff_member(self):
         return self.is_staff

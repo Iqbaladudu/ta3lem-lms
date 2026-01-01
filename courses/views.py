@@ -51,11 +51,12 @@ class LandingPageView(TemplateResponseMixin, View):
 
         # Get subscription plans for pricing section (only if enabled)
         subscription_plans = []
-        if is_feature_enabled('subscriptions') and get_setting('show_pricing', True):
-            from subscriptions.models import SubscriptionPlan
-            subscription_plans = SubscriptionPlan.objects.filter(
-                is_active=True
-            ).order_by('display_order', 'price')[:3]  # Show top 3 plans
+        try:
+            from plugins_available.commerce.facades.subscriptions import get_available_plans, is_subscriptions_enabled
+            if is_subscriptions_enabled() and get_setting('show_pricing', True):
+                subscription_plans = get_available_plans(active_only=True)[:3]  # Show top 3 plans
+        except ImportError:
+            pass
 
         context = {
             'featured_courses': featured_courses,
@@ -156,14 +157,13 @@ class CourseDetailView(DetailView):
             ).first()
             
             # Check subscription status
-            from subscriptions.models import UserSubscription
-            active_sub = UserSubscription.objects.filter(
-                user=self.request.user,
-                status__in=['active', 'trial'],
-                current_period_end__gt=timezone.now()
-            ).first()
-            context['has_active_subscription'] = active_sub is not None
-            context['user_subscription'] = active_sub
+            try:
+                from plugins_available.commerce.facades.subscriptions import get_active_subscription
+                active_sub = get_active_subscription(self.request.user)
+                context['has_active_subscription'] = active_sub is not None
+                context['user_subscription'] = active_sub
+            except ImportError:
+                context['has_active_subscription'] = False
         return context
 
 
@@ -660,45 +660,49 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
                     return redirect('course_detail', slug=course.slug)
                 
                 # Check if user has active subscription
-                from subscriptions.services import SubscriptionService
-                if SubscriptionService.user_has_active_subscription(user):
-                    # User has subscription, determine enrollment status based on enrollment_type
-                    enrollment_status = 'enrolled' if course.enrollment_type == 'open' else 'pending'
-                    
-                    enrollment_data = {
-                        'student': user,
-                        'course': course,
-                        'status': enrollment_status,
-                        'payment_status': 'subscription',
-                        'access_type': 'subscription',
-                    }
-                    
-                    if course.enrollment_type in ['approval', 'restricted']:
-                        enrollment_data['approval_requested_at'] = timezone.now()
-                    
-                    enrollment = CourseEnrollment.objects.create(**enrollment_data)
-                    
-                    if course.enrollment_type == 'open':
-                        course.students.add(user)
-                        # Create initial module progress
-                        first_module = course.modules.order_by('order').first()
-                        if first_module:
-                            ModuleProgress.objects.create(
-                                enrollment=enrollment,
-                                module=first_module
-                            )
-                        messages.success(request, 
-                            f'Selamat! Anda dapat mengakses "{course.title}" dengan subscription Anda!')
-                        return redirect('student_course_detail', pk=course.pk)
+                try:
+                    from plugins_available.commerce.facades.subscriptions import has_active_subscription
+                    if has_active_subscription(user):
+                        # User has subscription, determine enrollment status based on enrollment_type
+                        enrollment_status = 'enrolled' if course.enrollment_type == 'open' else 'pending'
+                        
+                        enrollment_data = {
+                            'student': user,
+                            'course': course,
+                            'status': enrollment_status,
+                            'payment_status': 'subscription',
+                            'access_type': 'subscription',
+                        }
+                        
+                        if course.enrollment_type in ['approval', 'restricted']:
+                            enrollment_data['approval_requested_at'] = timezone.now()
+                        
+                        enrollment = CourseEnrollment.objects.create(**enrollment_data)
+                        
+                        if course.enrollment_type == 'open':
+                            course.students.add(user)
+                            # Create initial module progress
+                            first_module = course.modules.order_by('order').first()
+                            if first_module:
+                                ModuleProgress.objects.create(
+                                    enrollment=enrollment,
+                                    module=first_module
+                                )
+                            messages.success(request, 
+                                f'Selamat! Anda dapat mengakses "{course.title}" dengan subscription Anda!')
+                            return redirect('student_course_detail', pk=course.pk)
+                        else:
+                            messages.info(request,
+                                f'Permintaan pendaftaran Anda untuk kursus "{course.title}" telah dikirim.')
+                            return redirect('course_detail', slug=course.slug)
                     else:
-                        messages.info(request,
-                            f'Permintaan pendaftaran Anda untuk kursus "{course.title}" telah dikirim.')
-                        return redirect('course_detail', slug=course.slug)
-                else:
-                    # User needs to subscribe first
-                    messages.info(request, 
-                        f'Kursus "{course.title}" memerlukan subscription aktif. Silakan berlangganan terlebih dahulu.')
-                    return redirect('subscriptions:plans')
+                        # User needs to subscribe first
+                        messages.info(request, 
+                            f'Kursus "{course.title}" memerlukan subscription aktif. Silakan berlangganan terlebih dahulu.')
+                        return redirect('subscriptions:plans')
+                except ImportError:
+                    # subscriptions app not installed or facade not available
+                    pass
             
             # ONE-TIME PURCHASE ONLY  
             elif pricing_type == 'one_time':
@@ -714,10 +718,16 @@ class StudentEnrollCourseView(LoginRequiredMixin, View):
             # BOTH (Subscription OR One-Time)
             elif pricing_type == 'both':
                 # Check if user already has subscription
-                from subscriptions.services import SubscriptionService
                 from core.utils import is_feature_enabled
                 
-                if is_feature_enabled('subscriptions') and SubscriptionService.user_has_active_subscription(user):
+                has_active = False
+                try:
+                    from plugins_available.commerce.facades.subscriptions import has_active_subscription
+                    has_active = has_active_subscription(user)
+                except ImportError:
+                    pass
+
+                if is_feature_enabled('subscriptions') and has_active:
                     # User has subscription, determine enrollment status based on enrollment_type
                     enrollment_status = 'enrolled' if course.enrollment_type == 'open' else 'pending'
                     
