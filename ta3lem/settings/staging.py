@@ -13,6 +13,7 @@ load_dotenv()
 
 
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware') 
+MIDDLEWARE.insert(2, 'ta3lem.middleware.SecurityHeadersMiddleware')  # CSP and security headers
 
 
 # SECRET_KEY dari environment variable
@@ -67,20 +68,25 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@ta3lem.com')
 # Static files
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'vite' / 'static' / 'dist',
+    BASE_DIR / 'vite' / 'static',  # Contains /dist/assets/ for Vite builds
 ]
 
 # WhiteNoise configuration for staging
-# Allow serving from STATICFILES_DIRS without collectstatic in staging
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = True
+# IMPORTANT: WHITENOISE_USE_FINDERS must be False to serve pre-compressed files
+# Run `python manage.py collectstatic` after building Vite assets
+WHITENOISE_USE_FINDERS = False  # Must be False to use pre-compressed files
+WHITENOISE_AUTOREFRESH = True   # Refresh on file changes in staging
 
 # Cache
 WHITENOISE_MAX_AGE = 31557600
 
+# Use CompressedManifestStaticFilesStorage to serve .br and .gz files
 STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 
@@ -128,3 +134,55 @@ CSRF_TRUSTED_ORIGINS = os.environ.get(
     'DJANGO_CSRF_TRUSTED_ORIGINS',
     'https://ta3lem-staging.zeabur.app,http://localhost:8000,http://127.0.0.1:8000'
 ).split(',')
+
+# Enable HSTS
+SECURE_HSTS_SECONDS = 31536000  
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Content Security Policy (CSP)
+# Using django-csp or custom middleware would be ideal, but we can use 
+# SecurityMiddleware settings or add CSP via custom middleware
+CSP_DEFAULT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = (
+    "'self'",
+    "'unsafe-inline'",  # Required for Alpine.js and inline scripts
+    "'unsafe-eval'",    # Required for HTMX and Alpine.js
+)
+CSP_STYLE_SRC = (
+    "'self'",
+    "'unsafe-inline'",  # Required for inline styles and Tailwind
+)
+CSP_IMG_SRC = (
+    "'self'",
+    "data:",
+    "https://images.unsplash.com",  # Hero images
+    "https://*.unsplash.com",
+)
+CSP_FONT_SRC = (
+    "'self'",
+    "data:",
+)
+CSP_CONNECT_SRC = (
+    "'self'",
+)
+CSP_FRAME_ANCESTORS = ("'none'",)
+CSP_FORM_ACTION = ("'self'",)
+CSP_BASE_URI = ("'self'",)
+
+# Generate CSP header string for middleware
+def get_csp_header():
+    policies = [
+        f"default-src {' '.join(CSP_DEFAULT_SRC)}",
+        f"script-src {' '.join(CSP_SCRIPT_SRC)}",
+        f"style-src {' '.join(CSP_STYLE_SRC)}",
+        f"img-src {' '.join(CSP_IMG_SRC)}",
+        f"font-src {' '.join(CSP_FONT_SRC)}",
+        f"connect-src {' '.join(CSP_CONNECT_SRC)}",
+        f"frame-ancestors {' '.join(CSP_FRAME_ANCESTORS)}",
+        f"form-action {' '.join(CSP_FORM_ACTION)}",
+        f"base-uri {' '.join(CSP_BASE_URI)}",
+    ]
+    return "; ".join(policies)
+
+CSP_HEADER = get_csp_header()

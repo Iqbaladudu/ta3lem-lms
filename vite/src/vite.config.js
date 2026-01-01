@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
+import compression from 'vite-plugin-compression'
 
 export default defineConfig({
+    base: '/static/dist/',
     build: {
         outDir: "../static/dist",
         emptyOutDir: true,
@@ -18,5 +20,7 @@ export default defineConfig({
     },
     plugins: [
         tailwindcss(),
+        compression({ algorithm: 'gzip' }),      // Creates .gz files
+        compression({ algorithm: 'brotliCompress', ext: '.br' })  // Creates .br files
     ],
 })

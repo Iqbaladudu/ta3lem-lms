@@ -1,6 +1,5 @@
 {% load static %}
 {% load vite %}
-{% load django_htmx %}
 <!DOCTYPE html>
 <html lang="id" class="h-full bg-primary-50">
     <head>
@@ -25,13 +24,8 @@
             .htmx-indicator { display: none; }
             .htmx-request .htmx-indicator { display: flex; }
         </style>
-        <!-- Vite assets -->
+        <!-- Vite assets (includes Alpine.js, FontAwesome, and HTMX) -->
         {% enable_vite %}
-        <!-- Deferred scripts for non-critical functionality -->
-        {% htmx_script %}
-        <script src="https://kit.fontawesome.com/7d2035fc97.js"
-                crossorigin="anonymous"
-                async></script>
     </head>
     <body class="min-h-full antialiased text-primary-900 bg-primary-50"
           hx-ext="preload"

@@ -9,10 +9,8 @@
         <title>
             {% block title %}Ta3lem - Learning Management System{% endblock %}
         </title>
+        <!-- Vite assets (includes Alpine.js, FontAwesome, and HTMX) -->
         {% enable_vite %}
-        <script src="https://unpkg.com/htmx.org@1.9.10"></script>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
     <body class="bg-primary-50 min-h-screen antialiased"
           hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
