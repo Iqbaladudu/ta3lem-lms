@@ -12,11 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-] + MIDDLEWARE
-
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware') 
 
 
 # SECRET_KEY dari environment variable
@@ -31,13 +27,13 @@ _local_hosts = ['localhost', '127.0.0.1', '0.0.0.0']
 ALLOWED_HOSTS = list(set(_env_hosts + _local_hosts))  # Merge and deduplicate
 
 INSTALLED_APPS = INSTALLED_APPS + [
-    'debug_toolbar',
+    # 'debug_toolbar',
     'redisboard',
 ]
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+# INTERNAL_IPS = [
+#     '127.0.0.1',
+# ]
 
 # Database - PostgreSQL (disarankan)
 DATABASES = {
@@ -79,10 +75,10 @@ STATICFILES_DIRS = [
 WHITENOISE_USE_FINDERS = True
 WHITENOISE_AUTOREFRESH = True
 
+# Cache
+WHITENOISE_MAX_AGE = 31557600
+
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
