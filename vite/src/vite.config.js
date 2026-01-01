@@ -6,9 +6,13 @@ export default defineConfig({
         outDir: "../static/dist",
         emptyOutDir: true,
         manifest: true,
-        rollupOptions: {
-            input: {
-                main: './src/index.js'
+        minify: 'terser',
+        cssMinify: true,
+        cssCodeSplit: true,
+        terserOptions: {
+            compress: {
+                drop_console: true, // Remove console.logs in production
+                passes: 2
             }
         }
     },
