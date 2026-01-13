@@ -23,6 +23,10 @@ from django.urls import path, include
 from courses.views import CourseListView, LandingPageView
 
 urlpatterns = [
+    # API endpoints (versioned)
+    path('api/', include('ta3lem.api_urls', namespace='api')),
+    
+    # Web application routes
     path('accounts/', include('users.urls')),
     path('admin/', admin.site.urls),
     path('course/', include('courses.urls')),
@@ -35,6 +39,6 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if settings.DEBUG:
+if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
     urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
