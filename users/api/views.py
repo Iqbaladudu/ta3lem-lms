@@ -100,13 +100,24 @@ class LogoutView(SuccessResponseMixin, APIView):
         description='Logout the user by blacklisting their refresh token.'
     )
     def post(self, request):
+        from rest_framework_simplejwt.exceptions import TokenError
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
         try:
             refresh_token = request.data.get('refresh')
             if refresh_token:
                 token = RefreshToken(refresh_token)
                 token.blacklist()
             return self.success_response(message='Successfully logged out.')
-        except Exception:
+        except TokenError as e:
+            # Token was invalid or already blacklisted - still considered successful logout
+            logger.debug(f'Token error during logout: {e}')
+            return self.success_response(message='Successfully logged out.')
+        except Exception as e:
+            # Log unexpected errors but still return success for better UX
+            logger.warning(f'Unexpected error during logout: {e}')
             return self.success_response(message='Successfully logged out.')
 
 

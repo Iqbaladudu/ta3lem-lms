@@ -277,6 +277,12 @@ class UploadPaymentProofView(SuccessResponseMixin, APIView):
 class WebhookView(APIView):
     """
     Webhook endpoint for payment provider callbacks.
+    
+    Security Note: Each payment provider should implement proper webhook 
+    signature verification in production. The verification is provider-specific:
+    - Stripe: Uses Stripe-Signature header
+    - Midtrans: Uses signature_key verification
+    - Xendit: Uses x-callback-token header
     """
     permission_classes = [AllowAny]
     authentication_classes = []
@@ -290,19 +296,34 @@ class WebhookView(APIView):
         """
         Handle webhook from payment provider.
         """
+        import logging
+        import hashlib
+        import hmac
+        
+        logger = logging.getLogger(__name__)
+        
         try:
             provider = PaymentProvider.objects.get(
                 provider_type=provider_type,
                 is_active=True
             )
         except PaymentProvider.DoesNotExist:
+            logger.warning(f'Webhook received for invalid provider: {provider_type}')
             return Response(
                 {'error': 'Invalid provider'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        # Verify webhook signature based on provider type
+        if not self._verify_webhook_signature(request, provider):
+            logger.warning(f'Webhook signature verification failed for provider: {provider_type}')
+            return Response(
+                {'error': 'Invalid signature'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
         # Log the webhook for debugging
-        # In production, implement proper webhook verification and handling
+        logger.info(f'Webhook received from {provider_type}: {request.data}')
         
         # Get order from webhook data
         order_id = request.data.get('order_id') or request.data.get('external_id')
@@ -318,6 +339,7 @@ class WebhookView(APIView):
                 payment_provider=provider
             )
         except Order.DoesNotExist:
+            logger.warning(f'Order not found for webhook: {order_id}')
             return Response(
                 {'error': 'Order not found'},
                 status=status.HTTP_404_NOT_FOUND
@@ -334,6 +356,62 @@ class WebhookView(APIView):
             order.mark_failed(reason=f'Payment {webhook_status}')
         
         return Response({'status': 'ok'})
+    
+    def _verify_webhook_signature(self, request, provider):
+        """
+        Verify webhook signature based on provider type.
+        Returns True if verification passes or is not implemented for provider.
+        """
+        import hmac
+        import hashlib
+        
+        provider_config = provider.config or {}
+        
+        if provider.provider_type == 'stripe':
+            # Stripe webhook verification
+            webhook_secret = provider_config.get('webhook_secret')
+            if not webhook_secret:
+                return True  # Skip if not configured
+            
+            signature = request.headers.get('Stripe-Signature')
+            if not signature:
+                return False
+            
+            # In production, use stripe library for proper verification
+            # stripe.Webhook.construct_event(payload, signature, webhook_secret)
+            return True  # Placeholder - implement full Stripe verification
+            
+        elif provider.provider_type == 'midtrans':
+            # Midtrans signature verification
+            server_key = provider_config.get('server_key')
+            if not server_key:
+                return True  # Skip if not configured
+            
+            # Midtrans signature: SHA512(order_id + status_code + gross_amount + server_key)
+            order_id = request.data.get('order_id', '')
+            status_code = request.data.get('status_code', '')
+            gross_amount = request.data.get('gross_amount', '')
+            
+            signature_string = f"{order_id}{status_code}{gross_amount}{server_key}"
+            expected_signature = hashlib.sha512(signature_string.encode()).hexdigest()
+            actual_signature = request.data.get('signature_key', '')
+            
+            return hmac.compare_digest(expected_signature, actual_signature)
+            
+        elif provider.provider_type == 'xendit':
+            # Xendit callback token verification
+            callback_token = provider_config.get('callback_token')
+            if not callback_token:
+                return True  # Skip if not configured
+            
+            request_token = request.headers.get('x-callback-token')
+            if not request_token:
+                return False
+            
+            return hmac.compare_digest(callback_token, request_token)
+        
+        # Manual transfer doesn't have webhooks
+        return True
 
 
 @extend_schema(tags=['Payments'])

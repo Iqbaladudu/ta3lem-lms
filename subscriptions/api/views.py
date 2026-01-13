@@ -250,16 +250,29 @@ class StartTrialView(SuccessResponseMixin, APIView):
         plan_slug = serializer.validated_data['plan_slug']
         plan = get_object_or_404(SubscriptionPlan, slug=plan_slug, is_active=True)
         
-        # Check if user already has/had a trial
-        existing_trial = UserSubscription.objects.filter(
+        # Check if user has an active subscription (prevents duplicate active subscriptions)
+        has_active_subscription = UserSubscription.objects.filter(
             user=request.user,
-            status__in=['trial', 'active', 'cancelled', 'expired']
+            status__in=['trial', 'active'],
+            current_period_end__gt=timezone.now()
         ).exists()
         
-        if existing_trial:
+        if has_active_subscription:
             return Response({
                 'success': False,
-                'message': 'You have already used your trial or have an active subscription.'
+                'message': 'You already have an active subscription.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Check if user has used a trial before (only count previous trials, not paid subscriptions)
+        has_used_trial = UserSubscription.objects.filter(
+            user=request.user,
+            status='trial'  # Only check trial usage, not cancelled/expired paid subscriptions
+        ).exists()
+        
+        if has_used_trial:
+            return Response({
+                'success': False,
+                'message': 'You have already used your free trial. Please subscribe to a paid plan.'
             }, status=status.HTTP_400_BAD_REQUEST)
         
         # Create trial subscription

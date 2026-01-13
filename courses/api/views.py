@@ -148,9 +148,11 @@ class CourseViewSet(MultiSerializerMixin, OwnerMixin, viewsets.ModelViewSet):
         if self.action == 'list':
             if self.request.user.is_authenticated:
                 # Show published + own courses for authenticated users
+                # Using Q objects for better query optimization
+                from django.db.models import Q
                 queryset = queryset.filter(
-                    status='published'
-                ) | queryset.filter(owner=self.request.user)
+                    Q(status='published') | Q(owner=self.request.user)
+                )
             else:
                 queryset = queryset.filter(status='published')
         
@@ -435,11 +437,17 @@ class EnrollmentViewSet(SuccessResponseMixin, viewsets.ReadOnlyModelViewSet):
             )
         
         # For paid courses, redirect to payment
+        from django.urls import reverse
+        checkout_url = reverse('api:v1:api_checkout')
         return Response({
             'success': False,
             'message': 'This course requires payment.',
             'payment_required': True,
-            'checkout_url': f'/api/v1/payments/checkout/course/{course.id}/'
+            'checkout_url': checkout_url,
+            'checkout_data': {
+                'order_type': 'course',
+                'item_id': course.id
+            }
         }, status=status.HTTP_402_PAYMENT_REQUIRED)
     
     @extend_schema(
