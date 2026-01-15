@@ -101,16 +101,26 @@ class Video(ItemBase):
         ]
 
     def save(self, *args, **kwargs):
-        # Auto-detect video platform from URL
+        # Auto-detect video platform from URL using proper URL parsing
         if self.url and not self.video_platform:
-            url_str = str(self.url).lower()
-            if 'youtube.com' in url_str or 'youtu.be' in url_str:
-                self.video_platform = 'youtube'
-            elif 'vimeo.com' in url_str:
-                self.video_platform = 'vimeo'
-            elif 'dailymotion.com' in url_str:
-                self.video_platform = 'dailymotion'
-            else:
+            from urllib.parse import urlparse
+            try:
+                parsed = urlparse(str(self.url))
+                hostname = parsed.netloc.lower()
+                # Remove 'www.' prefix if present
+                if hostname.startswith('www.'):
+                    hostname = hostname[4:]
+                
+                # Check hostname against known video platforms
+                if hostname in ('youtube.com', 'youtu.be') or hostname.endswith('.youtube.com'):
+                    self.video_platform = 'youtube'
+                elif hostname == 'vimeo.com' or hostname.endswith('.vimeo.com'):
+                    self.video_platform = 'vimeo'
+                elif hostname == 'dailymotion.com' or hostname.endswith('.dailymotion.com'):
+                    self.video_platform = 'dailymotion'
+                else:
+                    self.video_platform = 'other'
+            except (ValueError, AttributeError):
                 self.video_platform = 'other'
         elif self.file and not self.video_platform:
             self.video_platform = 'uploaded'
