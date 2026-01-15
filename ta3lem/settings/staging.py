@@ -67,20 +67,12 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'noreply@ta3lem.com')
 
 # Static files
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'vite' / 'static',  # Contains /dist/assets/ for Vite builds
-]
 
 # WhiteNoise configuration for staging
-# IMPORTANT: WHITENOISE_USE_FINDERS must be False to serve pre-compressed files
-# Run `python manage.py collectstatic` after building Vite assets
-WHITENOISE_USE_FINDERS = False  # Must be False to use pre-compressed files
-WHITENOISE_AUTOREFRESH = True   # Refresh on file changes in staging
-
-# Cache
+WHITENOISE_USE_FINDERS = False
+WHITENOISE_AUTOREFRESH = True
 WHITENOISE_MAX_AGE = 31557600
 
-# Use CompressedManifestStaticFilesStorage to serve .br and .gz files
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -89,9 +81,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-
-# Vite configuration
-VITE_DEV_MODE = False  # Use production build in staging
 
 # Security settings - Medium level
 SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT', 'False') == 'True'
@@ -140,32 +129,13 @@ SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
-# Content Security Policy (CSP)
-# Using django-csp or custom middleware would be ideal, but we can use 
-# SecurityMiddleware settings or add CSP via custom middleware
+# Content Security Policy (CSP) for API-only
 CSP_DEFAULT_SRC = ("'self'",)
-CSP_SCRIPT_SRC = (
-    "'self'",
-    "'unsafe-inline'",  # Required for Alpine.js and inline scripts
-    "'unsafe-eval'",    # Required for HTMX and Alpine.js
-)
-CSP_STYLE_SRC = (
-    "'self'",
-    "'unsafe-inline'",  # Required for inline styles and Tailwind
-)
-CSP_IMG_SRC = (
-    "'self'",
-    "data:",
-    "https://images.unsplash.com",  # Hero images
-    "https://*.unsplash.com",
-)
-CSP_FONT_SRC = (
-    "'self'",
-    "data:",
-)
-CSP_CONNECT_SRC = (
-    "'self'",
-)
+CSP_SCRIPT_SRC = ("'self'",)
+CSP_STYLE_SRC = ("'self'",)
+CSP_IMG_SRC = ("'self'", "data:",)
+CSP_FONT_SRC = ("'self'", "data:",)
+CSP_CONNECT_SRC = ("'self'",)
 CSP_FRAME_ANCESTORS = ("'none'",)
 CSP_FORM_ACTION = ("'self'",)
 CSP_BASE_URI = ("'self'",)

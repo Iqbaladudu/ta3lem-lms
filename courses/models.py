@@ -4,9 +4,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.template.loader import render_to_string
 from django.utils import timezone
-from embed_video.fields import EmbedVideoField
 
 from users.models import User
 from .fields import OrderField
@@ -33,12 +31,6 @@ class ItemBase(models.Model):
         """Return the content type based on the model name"""
         return self._meta.model_name
 
-    def render(self):
-        return render_to_string(
-            f'courses/content/{self._meta.model_name}.html',
-            {'item': self}
-        )
-
 
 class Text(ItemBase):
     content = models.TextField()
@@ -54,8 +46,12 @@ class Image(ItemBase):
 
 class Video(ItemBase):
     """Enhanced video model with multiple platform support and metadata"""
-    url = EmbedVideoField(blank=True, null=True,
-                          help_text='Video URL from YouTube, Vimeo, Dailymotion, or other platforms')
+    url = models.URLField(
+        max_length=500,
+        blank=True,
+        null=True,
+        help_text='Video URL from YouTube, Vimeo, Dailymotion, or other platforms'
+    )
     file = models.FileField(upload_to='videos', blank=True, null=True, help_text='Upload video file directly')
 
     # Enhanced video metadata
@@ -107,10 +103,15 @@ class Video(ItemBase):
     def save(self, *args, **kwargs):
         # Auto-detect video platform from URL
         if self.url and not self.video_platform:
-            from .templatetags.course import extract_video_id
-            platform, video_id = extract_video_id(str(self.url))
-            if platform:
-                self.video_platform = platform
+            url_str = str(self.url).lower()
+            if 'youtube.com' in url_str or 'youtu.be' in url_str:
+                self.video_platform = 'youtube'
+            elif 'vimeo.com' in url_str:
+                self.video_platform = 'vimeo'
+            elif 'dailymotion.com' in url_str:
+                self.video_platform = 'dailymotion'
+            else:
+                self.video_platform = 'other'
         elif self.file and not self.video_platform:
             self.video_platform = 'uploaded'
 
@@ -118,20 +119,17 @@ class Video(ItemBase):
 
     def get_thumbnail_url(self):
         """Get video thumbnail URL"""
-        if self.url and self.video_platform:
-            from .templatetags.course import video_thumbnail
-            return video_thumbnail(str(self.url))
-        return None
-
-    def get_embed_code(self, **kwargs):
-        """Get video embed HTML"""
-        if self.url:
-            from .templatetags.course import video_player
-            return video_player(
-                str(self.url),
-                autoplay=self.auto_play,
-                **kwargs
-            )
+        if self.url and self.video_platform == 'youtube':
+            # Extract YouTube video ID and generate thumbnail URL
+            import re
+            patterns = [
+                r'(?:youtube\.com/watch\?v=|youtu\.be/)([^&\n?#]+)',
+            ]
+            for pattern in patterns:
+                match = re.search(pattern, str(self.url))
+                if match:
+                    video_id = match.group(1)
+                    return f'https://img.youtube.com/vi/{video_id}/hqdefault.jpg'
         return None
 
     def clean(self):

@@ -17,23 +17,14 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 from django.urls import path, include
-
-from courses.views import CourseListView, LandingPageView
 
 urlpatterns = [
     # API endpoints (versioned)
     path('api/', include('ta3lem.api_urls', namespace='api')),
     
-    # Web application routes
-    path('accounts/', include('users.urls')),
+    # Admin interface
     path('admin/', admin.site.urls),
-    path('course/', include('courses.urls')),
-    path('courses/', CourseListView.as_view(), name='course_list'),
-    path('payments/', include('payments.urls', namespace='payments')),
-    path('subscriptions/', include('subscriptions.urls', namespace='subscriptions')),
-    path('', LandingPageView.as_view(), name='landing'),
 ]
 
 if settings.DEBUG:

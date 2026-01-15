@@ -1,10 +1,10 @@
 """
 Base settings untuk ta3lem project.
 Settings umum yang digunakan di semua environment.
+API-only configuration.
 """
 
 from pathlib import Path
-from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -16,10 +16,6 @@ AUTH_USER_MODEL = 'users.User'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Login/Logout redirects
-LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
-LOGOUT_REDIRECT_URL = None  # Gunakan template logged_out.html
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -28,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Third-party apps
+    # Third-party apps - API
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
@@ -40,9 +36,6 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'payments.apps.PaymentsConfig',
     'subscriptions.apps.SubscriptionsConfig',
-    'vite.apps.ViteConfig',
-    'embed_video',
-    'django_htmx',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +46,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = 'ta3lem.urls'
@@ -68,8 +60,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.context_processors.global_settings',  # Global settings
-                'subscriptions.context_processors.subscription_context',
             ],
         },
     },

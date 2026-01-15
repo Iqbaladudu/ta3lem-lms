@@ -1,20 +1,18 @@
 [project]
 name = "ta3lem"
 version = "0.1.0"
-description = "Add your description here"
+description = "Ta3lem LMS - API-only Learning Management System"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "django-braces>=1.17.0",
     "django>=5.2.6",
-    "django-embed-video>=1.4.10",
     "pymemcache>=4.0.0",
     "django-debug-toolbar>=6.0.0",
     "redis>=6.4.0",
     "django-redisboard>=9.0.0",
     "pillow>=11.3.0",
     "honcho>=2.0.0",
-    "django-htmx>=1.26.0",
     "psycopg2-binary>=2.9.11",
     "nh3>=0.3.2",
     "markdown>=3.10",
@@ -22,7 +20,6 @@ dependencies = [
     "mdx-cite",
     "markdown-emdash>=0.2.0",
     "mdx-unimoji>=1.1",
-    "djlint>=1.36.4",
     "gunicorn>=23.0.0",
     "uvicorn>=0.40.0",
     "python-dotenv>=1.2.1",
