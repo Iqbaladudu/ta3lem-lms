@@ -199,3 +199,19 @@ MANAGERS = ADMINS
 # Performance optimization
 CONN_MAX_AGE = 600
 
+# ============================================================================
+# JWT Settings Override for Production
+# ============================================================================
+
+SIMPLE_JWT['SIGNING_KEY'] = SECRET_KEY
+
+# REST Framework settings for production
+REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
+    'rest_framework.renderers.JSONRenderer',
+]
+
+# Tighter throttling for production
+REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
+    'anon': '60/hour',
+    'user': '500/hour',
+}
