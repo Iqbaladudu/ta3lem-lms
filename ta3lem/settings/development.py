@@ -52,9 +52,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static files
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'vite' / 'static' / 'dist',
-]
 
 # Storage configuration
 STORAGES = {
